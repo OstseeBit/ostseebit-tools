@@ -21,8 +21,8 @@ documentation, and moved the four inherited GitHub Actions workflows from
 This prevents inherited CI, scheduled publishing and release jobs from running
 on the working main branch before a dedicated review.
 
-Application branding, runtime source, dependencies and lockfile are unchanged.
-This is not yet a rebranded or validated release. No endorsement by upstream is implied.
+The initial import left application branding, runtime source, dependencies and
+lockfile unchanged. This repository is not a validated release. No endorsement by upstream is implied.
 
 Original Git history was not imported. The exact upstream commit and tree identify
 the source and its original history. See docs/BASELINE.md for verification and recovery.
@@ -30,3 +30,16 @@ the source and its original history. See docs/BASELINE.md for verification and r
 Future modifications must retain applicable notices and clearly identify changes
 and dates. Before distributing built artifacts, provide their corresponding source,
 build materials and applicable license notices as required by GPLv3.
+
+## Rebranding changes made on 2026-10-03
+
+Introduced the OstseeBit Tools product identity, centralized operational repository
+links, replaced logo/favicon/PWA assets with an original wave symbol, and revised
+metadata, navigation, theme colors and all nine About translations. Removed the
+Plausible runtime integration, tracking settings, sponsorship and upstream social
+links. Retained original-author credits, LICENSE, upstream history references,
+algorithm behavior, dependency versions and lockfile. Updated affected page-title
+expectations in the existing E2E tests and tool generator.
+
+This modified source is distributed under the same GNU GPLv3 license as upstream.
+Build and runtime checks remain outstanding; see docs/REBRANDING-VALIDATION.md.

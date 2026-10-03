@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { useHead } from '@vueuse/head';
+import { brand } from '@/branding';
 
-useHead({ title: 'Page not found - IT Tools' });
+useHead({ title: `Page not found - ${brand.name}` });
 </script>
 
 <template>

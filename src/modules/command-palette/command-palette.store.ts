@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import _ from 'lodash';
 import type { PaletteOption } from './command-palette.types';
+import { brand } from '@/branding';
 import { useToolStore } from '@/tools/tools.store';
 import { useFuzzySearch } from '@/composable/fuzzySearch';
 import { useStyleStore } from '@/stores/style.store';
@@ -48,23 +49,23 @@ export const useCommandPaletteStore = defineStore('command-palette', () => {
     },
     {
       name: 'Github repository',
-      href: 'https://github.com/CorentinTh/it-tools',
+      href: brand.repositoryUrl,
       category: 'External',
-      description: 'View the source code of it-tools on Github.',
+      description: `View the source code of ${brand.name} on GitHub.`,
       keywords: ['github', 'repo', 'repository', 'source', 'code'],
       icon: GithubIcon,
     },
     {
       name: 'Report a bug or an issue',
-      description: 'Report a bug or an issue to help improve it-tools.',
-      href: 'https://github.com/CorentinTh/it-tools/issues/new/choose',
+      description: `Report a bug or an issue to help improve ${brand.name}.`,
+      href: brand.issuesUrl,
       category: 'Actions',
       keywords: ['report', 'issue', 'bug', 'problem', 'error'],
       icon: BugIcon,
     },
     {
       name: 'About',
-      description: 'Learn more about IT-Tools.',
+      description: `Learn more about ${brand.name}.`,
       to: '/about',
       category: 'Pages',
       keywords: ['about', 'learn', 'more', 'info', 'information'],

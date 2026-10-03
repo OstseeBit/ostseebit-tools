@@ -1,133 +1,73 @@
 <picture>
-    <source srcset="./.github/logo-dark.png" media="(prefers-color-scheme: light)">
-    <source srcset="./.github/logo-white.png" media="(prefers-color-scheme: dark)">
-    <img src="./.github/logo-dark.png" alt="logo">
+  <source srcset="./.github/logo-white.svg" media="(prefers-color-scheme: dark)">
+  <img src="./.github/logo-dark.svg" alt="OstseeBit Tools" width="640">
 </picture>
 
-<p align="center">
-Useful tools for developer and people working in IT. <a href="https://it-tools.tech">Try it!</a>
-</p>
+Handy online tools for developers and IT professionals, maintained by **OstseeBit**.
 
-## Functionalities and roadmap
+This is an independent continuation of [IT-Tools](https://github.com/CorentinTh/it-tools),
+originally created by **Corentin Thomasset and the IT-Tools contributors**.
+Their authorship and contributions are preserved. See [NOTICE.md](NOTICE.md)
+and the [baseline report](docs/BASELINE.md) for source provenance.
 
-Please check the [issues](https://github.com/CorentinTh/it-tools/issues) to see if some feature listed to be implemented.
+## Status
 
-You have an idea of a tool? Submit a [feature request](https://github.com/CorentinTh/it-tools/issues/new/choose)!
+The application is being rebranded as OstseeBit Tools. The imported source baseline,
+LICENSE and dependency lockfile are preserved. The rebranding PR remains a draft
+until build and runtime validation is complete. No OstseeBit container image or
+production deployment is currently advertised.
 
-## Self host
+- [Report a bug or request a tool](https://github.com/OstseeBit/ostseebit-tools/issues/new/choose)
+- [Rebranding inventory](docs/REBRANDING-INVENTORY.md)
+- [Validation report](docs/REBRANDING-VALIDATION.md)
 
-Self host solutions for your homelab
+## Development
 
-**From docker hub:**
-
-```sh
-docker run -d --name it-tools --restart unless-stopped -p 8080:80 corentinth/it-tools:latest
-```
-
-**From github packages:**
-
-```sh
-docker run -d --name it-tools --restart unless-stopped -p 8080:80 ghcr.io/corentinth/it-tools:latest
-```
-
-**Other solutions:**
-
-- [Cloudron](https://www.cloudron.io/store/tech.ittools.cloudron.html)
-- [Tipi](https://www.runtipi.io/docs/apps-available)
-- [Unraid](https://unraid.net/community/apps?q=it-tools)
-
-## Contribute
-
-### Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) with the following extensions:
-
-- [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur)
-- [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
-- [i18n Ally](https://marketplace.visualstudio.com/items?itemName=lokalise.i18n-ally)
-
-with the following settings:
-
-```json
-{
-  "editor.formatOnSave": false,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  },
-  "i18n-ally.localesPaths": ["locales", "src/tools/*/locales"],
-  "i18n-ally.keystyle": "nested"
-}
-```
-
-### Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-### Project Setup
+The upstream manifest specifies pnpm **9.11.0**. The baseline uses Node 18.18.2 in
+.nvmrc and Node 20 in its inherited CI; selecting a consistent supported toolchain
+is a separate modernization change. Use an isolated environment and the preserved
+lockfile. Do not run unrestricted upgrades to resolve a build failure.
 
 ```sh
-pnpm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
+corepack enable
+pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-### Type-Check, Compile and Minify for Production
-
-```sh
-pnpm build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-pnpm test
-```
-
-### Lint with [ESLint](https://eslint.org/)
+Checks after installing dependencies:
 
 ```sh
 pnpm lint
+pnpm typecheck
+pnpm exec vitest run --environment jsdom
+pnpm build
+pnpm test:e2e
 ```
 
-### Create a new tool
+The inherited build script uses POSIX environment-variable syntax; use a Linux
+environment for that script or invoke its two build steps explicitly on Windows.
 
-To create a new tool, there is a script that generate the boilerplate of the new tool, simply run:
+Create a tool with `pnpm run script:create:tool my-tool-name`.
+Vue 3, TypeScript, Naive UI, Vite, Vitest and Playwright are used by the project.
 
-```sh
-pnpm run script:create:tool my-tool-name
-```
+## Self-hosting and privacy
 
-It will create a directory in `src/tools` with the correct files, and a the import in `src/tools/index.ts`. You will just need to add the imported tool in the proper category and develop the tool.
+The existing Dockerfile builds a static application served by nginx. Its floating
+base images and unpinned global pnpm installation need review before release.
+Inherited CI and publication workflows remain in `.github/workflows-disabled/`.
+They must be reviewed before activation, including all registry destinations.
 
-## Contributors
+The Plausible integration, tracking configuration, social links and sponsorship UI
+have been removed from the application. An unused `plausible-tracker` dependency
+remains in the preserved manifest/lockfile until a separate dependency cleanup.
+No production URL or analytics endpoint is configured by this rebranding.
 
-Big thanks to all the people who have already contributed!
+## Attribution and license
 
-[![contributors](https://contrib.rocks/image?repo=corentinth/it-tools&refresh=1)](https://github.com/corentinth/it-tools/graphs/contributors)
+Original project: [CorentinTh/it-tools](https://github.com/CorentinTh/it-tools).
+Thanks to [its contributors](https://github.com/CorentinTh/it-tools/graphs/contributors).
+Continuation maintainer: [OstseeBit](https://github.com/OstseeBit).
 
-## Credits
-
-Coded with ❤️ by [Corentin Thomasset](https://corentin.tech?utm_source=it-tools&utm_medium=readme).
-
-This project is continuously deployed using [vercel.com](https://vercel.com).
-
-Contributor graph is generated using [contrib.rocks](https://contrib.rocks/preview?repo=corentinth/it-tools).
-
-<a href="https://www.producthunt.com/posts/it-tools?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-it&#0045;tools" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=345793&theme=light" alt="IT&#0032;Tools - Collection&#0032;of&#0032;handy&#0032;online&#0032;tools&#0032;for&#0032;devs&#0044;&#0032;with&#0032;great&#0032;UX | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
-<a href="https://www.producthunt.com/posts/it-tools?utm_source=badge-top-post-badge&utm_medium=badge&utm_souce=badge-it&#0045;tools" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=345793&theme=light&period=daily" alt="IT&#0032;Tools - Collection&#0032;of&#0032;handy&#0032;online&#0032;tools&#0032;for&#0032;devs&#0044;&#0032;with&#0032;great&#0032;UX | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
-
-## License
-
-This project is under the [GNU GPLv3](LICENSE).
+This project is distributed under [GNU GPLv3](LICENSE), without warranty.
+Existing copyright and third-party notices remain applicable. Before distributing
+built artifacts, provide their corresponding source and applicable license notices.

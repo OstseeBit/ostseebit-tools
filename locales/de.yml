@@ -15,63 +15,27 @@ home:
   toggleMenu: Menü umschalten
   home: Startseite
   uiLib: UI-Bibliothek
-  support: Unterstütze die Entwicklung von IT-Tools
-  buyMeACoffee: Kauf mir einen Kaffee
-  follow:
-    title: Magst du IT-Tools?
-    p1: Gib uns einen Stern auf
-    githubRepository: IT-Tools GitHub-Repository
-    p2: oder folge uns auf
-    twitterXAccount: IT-Tools X-Konto
-    thankYou: Vielen Dank!
   nav:
     github: GitHub-Repository
-    githubRepository: IT-Tools GitHub-Repository
-    twitterX: X-Konto
-    twitterXAccount: IT-Tools X-Konto
-    about: Über IT-Tools
+    githubRepository: OstseeBit Tools GitHub-Repository
+    about: Über OstseeBit Tools
     aboutLabel: Über
     darkMode: Dunkelmodus
     lightMode: Hellmodus
     mode: Wechseln zwischen dunklem/hellem Modus
 about:
   content: >
-    # Über IT-Tools
+    # Über OstseeBit Tools
 
-    Diese wunderbare Website, erstellt mit ❤ von [Corentin
-    Thomasset](https://corentin.tech?utm_source=it-tools&utm_medium=about), sammelt nützliche Tools für
-    Entwickler und Menschen, die in der IT arbeiten. Wenn du sie nützlich
-    findest, teile sie gerne mit Personen, von denen du denkst, dass sie sie
-    ebenfalls nützlich finden könnten, und vergiss nicht, sie in deiner
-    Lesezeichenleiste zu speichern!
+    OstseeBit Tools ist eine eigenständige Weiterentwicklung von IT-Tools, gepflegt von OstseeBit. Die Sammlung bietet praktische Tools für Entwickler und Menschen, die in der IT arbeiten.
 
-    IT-Tools ist Open Source (unter der GPL-3.0-Lizenz) und kostenlos und wird es
-    immer sein, aber es kostet mich Geld, die Website zu hosten und den
-    Domainnamen zu erneuern. Wenn du meine Arbeit unterstützen möchtest und mich
-    ermutigen möchtest, mehr Tools hinzuzufügen, überlege bitte, mich durch
-    [Sponsoring](https://www.buymeacoffee.com/cthmsst) zu unterstützen.
+    IT-Tools wurde von Corentin Thomasset und den IT-Tools-Mitwirkenden entwickelt. Ihre Urheberschaft und Beiträge bleiben erhalten.
 
-    ## Technologien
+    Der Quellcode steht unter GNU GPLv3. Es besteht keine Gewährleistung. Lizenz und Herkunftshinweise sind im Repository verfügbar.
 
-    IT-Tools wurde mit Vue.js (Vue 3) und der Naive UI-Komponentenbibliothek
-    erstellt und wird von Vercel gehostet und kontinuierlich bereitgestellt. In
-    einigen Tools werden Drittanbieter-Open-Source-Bibliotheken verwendet. Du
-    findest die vollständige Liste in der
-    [package.json](https://github.com/CorentinTh/it-tools/blob/main/package.json)-Datei
-    des Repositorys.
+    Die Anwendung verwendet Vue 3, Naive UI und weitere Open-Source-Bibliotheken. Fehler und Vorschläge bitte im Repository melden.
 
-    ## Einen Fehler gefunden? Ein Tool fehlt?
-
-    Wenn du ein Tool benötigst, das hier noch nicht vorhanden ist, und du
-    denkst, dass es nützlich sein könnte, bist du herzlich eingeladen, einen
-    Feature-Request im
-    [Issues-Bereich](https://github.com/CorentinTh/it-tools/issues/new/choose)
-    im GitHub-Repository einzureichen.
-
-    Und wenn du einen Fehler gefunden hast oder etwas nicht wie erwartet
-    funktioniert, melde bitte einen Fehler im
-    [Issues-Bereich](https://github.com/CorentinTh/it-tools/issues/new/choose)
-    im GitHub-Repository.
+    [GitHub](https://github.com/OstseeBit/ostseebit-tools) · [LICENSE](https://github.com/OstseeBit/ostseebit-tools/blob/main/LICENSE) · [NOTICE](https://github.com/OstseeBit/ostseebit-tools/blob/main/NOTICE.md) · [IT-Tools](https://github.com/CorentinTh/it-tools)
 favoriteButton:
   remove: Aus Favoriten entfernen
   add: Zu Favoriten hinzufügen
