@@ -1,40 +1,42 @@
-<picture>
-  <source srcset="./.github/logo-white.svg" media="(prefers-color-scheme: dark)">
-  <img src="./.github/logo-dark.svg" alt="OstseeBit Tools" width="640">
-</picture>
+<div align="center">
 
-# OstseeBit Tools
+![Header](https://capsule-render.vercel.app/api?type=waving&color=0:0F52BA,100:00A9A5&height=190&section=header&text=OstseeBit%20Tools&fontSize=38&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=Open-Source-Werkzeuge%20f%C3%BCr%20Entwicklung%20%C2%B7%20Administration%20%C2%B7%20Netzwerk%20%C2%B7%20IT&descAlignY=55&descSize=16)
+
+[![Lizenz](https://img.shields.io/badge/Lizenz-GPLv3-0F52BA?style=for-the-badge)](LICENSE)
+[![Sprache](https://img.shields.io/badge/Sprache-Deutsch-0F52BA?style=for-the-badge)](#projektsprache)
+![Version](https://img.shields.io/badge/Version-0.1.0-00A9A5?style=for-the-badge)
+[![OstseeBit](https://img.shields.io/badge/by-OstseeBit-00A9A5?style=for-the-badge)](https://github.com/OstseeBit)
+
+</div>
+
+<br>
 
 **OstseeBit Tools** ist eine von **OstseeBit** gepflegte Open-Source-Werkzeugsammlung für Entwicklung, Administration, Netzwerk und IT.
 
-## Projektidentität
+Das Projekt basiert auf dem Open-Source-Projekt **it-tools** und wird als eigenständige OstseeBit-Fortführung weiterentwickelt. Herkunft, ursprüngliche Urheberschaft und übernommene Quellbasis bleiben transparent dokumentiert.
 
-- **Projektname:** OstseeBit Tools
-- **Maintainer der Fortführung:** [OstseeBit](https://github.com/OstseeBit)
-- **Repository:** [OstseeBit/ostseebit-tools](https://github.com/OstseeBit/ostseebit-tools)
-- **Lizenz:** GNU GPLv3
-- **Schreibweise:** `OstseeBit` und `OstseeBit Tools`
+<div align="center">
 
-Die OstseeBit-Schreibweise wird in Repository-Dokumentation, Vorlagen und Projektmetadaten einheitlich verwendet. Diese Dokumentationsbereinigung verändert weder die Anwendungsoberfläche noch bestehende OstseeBit-Logos, Bilder oder Designelemente.
+![Divider](https://capsule-render.vercel.app/api?type=rect&color=0:0F52BA,100:00A9A5&height=3&width=100%25)
 
-OstseeBit Tools basiert auf dem Open-Source-Projekt **it-tools**. Herkunft, ursprüngliche Urheberschaft und die übernommene Ausgangsbasis sind in [NOTICE.md](NOTICE.md) und im [Baseline-Bericht](docs/BASELINE.md) dokumentiert.
+</div>
 
-## Projektstatus
+## 📌 Projektstatus
 
-Der aktuelle OstseeBit-Stand verwendet die Paketversion `0.1.0` und wurde lokal mit dem vorhandenen Lockfile geprüft:
+Der aktuelle OstseeBit-Stand verwendet die Paketversion `0.1.0`.
 
-- Installation mit `corepack pnpm install --frozen-lockfile` erfolgreich
-- TypeScript-Typecheck erfolgreich
-- ESLint: 0 Fehler, 6 Warnungen
-- Produktions-Build erfolgreich
-- 33 Testdateien erfolgreich
-- 138 Unit-Tests erfolgreich
-- Tracking- und Sponsoring-Komponenten aus der Anwendung entfernt
-- OstseeBit-Projektidentität integriert
+Lokal erfolgreich geprüft:
 
-Noch nicht als vollständige Freigabe geprüft sind insbesondere Playwright-E2E, Browser-/PWA-Verhalten, ein produktives Deployment sowie die spätere Veröffentlichungs-Pipeline.
+- Installation mit eingefrorenem Lockfile
+- TypeScript-Typecheck
+- ESLint mit 0 Fehlern und 6 Warnungen
+- Produktions-Build
+- 33 Vitest-Testdateien
+- 138 erfolgreiche Unit-Tests
 
-## Entwicklung
+Noch offen sind insbesondere Playwright-E2E, vollständige Browser-/PWA-Prüfung, produktive Veröffentlichung und die spätere Plattformmodernisierung.
+
+## 🧰 Technische Basis
 
 Das Projekt verwendet aktuell unter anderem:
 
@@ -47,27 +49,37 @@ Das Projekt verwendet aktuell unter anderem:
 - Playwright
 - pnpm
 
+Die übernommene Toolchain ist noch nicht vollständig vereinheitlicht:
+
+- `.nvmrc`: Node.js 18.18.2
+- geerbte CI-Konfiguration: Node.js 20
+- `packageManager`: pnpm 9.11.0
+
+Die lokale Baseline-Validierung wurde mit Node.js 24.18.1 durchgeführt. Die Festlegung einer einheitlichen Zielplattform erfolgt in einem getrennten Modernisierungsschritt.
+
+## ⚡ Schnellstart
+
 Abhängigkeiten installieren:
 
-```sh
+```bash
 corepack pnpm install --frozen-lockfile
 ```
 
 Entwicklungsserver starten:
 
-```sh
+```bash
 corepack pnpm dev
 ```
 
 Produktions-Build erstellen:
 
-```sh
+```bash
 corepack pnpm build
 ```
 
 Wichtige Prüfungen:
 
-```sh
+```bash
 corepack pnpm typecheck
 corepack pnpm lint
 corepack pnpm exec vitest run --environment jsdom
@@ -76,27 +88,15 @@ corepack pnpm build
 
 Ein neues Tool kann über das vorhandene Generator-Skript angelegt werden:
 
-```sh
+```bash
 corepack pnpm run script:create:tool my-tool-name
 ```
 
-## Toolchain
-
-Die übernommene Ausgangsbasis enthält noch unterschiedliche Toolchain-Vorgaben:
-
-- `.nvmrc`: Node.js 18.18.2
-- übernommene CI-Konfiguration: Node.js 20
-- `packageManager`: pnpm 9.11.0
-
-Die lokale Baseline-Validierung wurde mit Node.js 24.18.1 durchgeführt. Eine einheitliche, offiziell unterstützte Ziel-Toolchain wird in einem getrennten Modernisierungsschritt festgelegt.
-
-Abhängigkeiten werden nicht pauschal mit `--latest`, `--force` oder vergleichbaren Verfahren aktualisiert.
-
-## Self-Hosting
+## 🐳 Self-Hosting
 
 Der vorhandene Docker-Build erzeugt eine statische Webanwendung, die über nginx bereitgestellt wird.
 
-Container-, CI/CD- und Release-Konfigurationen werden vor einer offiziellen OstseeBit-Veröffentlichung separat geprüft. Dazu gehören insbesondere:
+Vor einer offiziellen OstseeBit-Veröffentlichung werden Container-, CI/CD- und Release-Konfigurationen separat geprüft. Dazu gehören insbesondere:
 
 - Basis-Images und Versionierung
 - pnpm-Installation im Container
@@ -108,7 +108,7 @@ Container-, CI/CD- und Release-Konfigurationen werden vor einer offiziellen Osts
 
 Aktuell wird kein offizielles OstseeBit-Container-Image veröffentlicht.
 
-## Datenschutz
+## 🔒 Datenschutz
 
 Im Rahmen der OstseeBit-Fortführung wurden aus der Anwendung unter anderem entfernt:
 
@@ -117,9 +117,11 @@ Im Rahmen der OstseeBit-Fortführung wurden aus der Anwendung unter anderem entf
 - Social-Media-Verknüpfungen
 - Sponsoring-Oberflächen
 
-Die ältere Abhängigkeit `plausible-tracker` ist in der übernommenen Dependency-Basis noch vorhanden und wird in einem separaten Dependency-Cleanup behandelt. Für den aktuellen Stand ist kein produktiver Analytics-Endpunkt konfiguriert.
+Die ältere Abhängigkeit `plausible-tracker` ist in der übernommenen Dependency-Basis noch vorhanden und wird in einem separaten Dependency-Cleanup behandelt.
 
-## Fehler melden und neue Tools vorschlagen
+Für den aktuellen Stand ist kein produktiver Analytics-Endpunkt konfiguriert.
+
+## 🐞 Fehler melden und Tools vorschlagen
 
 Fehler, Verbesserungsvorschläge und neue Tool-Ideen können über die GitHub-Issues eingereicht werden:
 
@@ -132,18 +134,51 @@ Weitere Projektdokumentation:
 - [Baseline-Bericht](docs/BASELINE.md)
 - [Urheberschaft und Herkunft](NOTICE.md)
 
-## Herkunft und Weiterentwicklung
+## 🌊 OstseeBit-Projektidentität
+
+Für dieses Repository gelten verbindlich:
+
+- **Marke / Maintainer:** OstseeBit
+- **Produktname:** OstseeBit Tools
+- **Schreibweise:** `OstseeBit` und `OstseeBit Tools`
+- **Repository:** `OstseeBit/ostseebit-tools`
+- **Lizenz:** GNU GPLv3
+
+Die visuelle Repository-Darstellung folgt derselben OstseeBit-Grundlinie wie die übrigen OstseeBit-Repositories: Deutsch als Projektsprache sowie die OstseeBit-Farben **#0F52BA** und **#00A9A5**.
+
+Logo-, Bild- oder UI-Änderungen erfolgen nicht beiläufig, sondern nur als ausdrücklich eigener Change.
+
+## 🌍 Projektsprache
+
+Die verbindliche Projektsprache der OstseeBit-Fortführung ist Deutsch.
+
+Produktnamen, Bibliotheksnamen, API-Bezeichnungen, technische Standarddateien und historische Upstream-Inhalte bleiben unverändert, wenn Genauigkeit, Kompatibilität oder Herkunft dies erfordern.
+
+## 📜 Herkunft und Weiterentwicklung
 
 OstseeBit Tools ist eine eigenständig von OstseeBit gepflegte Fortführung auf Basis des Open-Source-Projekts **it-tools** von Corentin Thomasset und den dortigen Mitwirkenden.
 
-OstseeBit beansprucht nicht die Urheberschaft am übernommenen Upstream-Code. Die genaue Quellbasis und die ursprüngliche Projektgeschichte bleiben nachvollziehbar dokumentiert.
+OstseeBit beansprucht nicht die Urheberschaft am übernommenen Upstream-Code.
 
-## Historischer Changelog
+Die genaue Quellbasis und Herkunft sind dokumentiert in:
 
-[CHANGELOG.md](CHANGELOG.md) enthält den übernommenen historischen Changelog des ursprünglichen Projekts. Die historischen Einträge werden nicht rückwirkend umbenannt. Neue OstseeBit-Änderungen werden ab der eigenen Versionslinie dokumentiert.
+- [NOTICE.md](NOTICE.md)
+- [docs/BASELINE.md](docs/BASELINE.md)
 
-## Lizenz
+Der [CHANGELOG.md](CHANGELOG.md) enthält den übernommenen historischen Changelog des ursprünglichen Projekts. Historische Einträge werden nicht rückwirkend umbenannt.
 
-Dieses Projekt wird unter der [GNU General Public License Version 3](LICENSE) bereitgestellt.
+## 📄 Lizenz
 
-Bestehende Copyright-, Lizenz- und Drittanbieterhinweise bleiben gültig. Bei der Weitergabe kompilierter oder anderweitig verteilter Versionen sind die Bedingungen der GPLv3 einschließlich der Bereitstellung des entsprechenden Quellcodes und der erforderlichen Lizenzhinweise zu beachten.
+Dieses Projekt steht unter der [GNU General Public License Version 3](LICENSE).
+
+Bestehende Copyright-, Lizenz- und Drittanbieterhinweise bleiben gültig. Bei der Weitergabe gebauter Artefakte sind die Bedingungen der GPLv3 einschließlich der Bereitstellung des entsprechenden Quellcodes und der erforderlichen Lizenzhinweise zu beachten.
+
+<br>
+
+<div align="center">
+
+![Footer](https://capsule-render.vercel.app/api?type=waving&color=0:00A9A5,100:0F52BA&height=100&section=footer)
+
+**OstseeBit**
+
+</div>
