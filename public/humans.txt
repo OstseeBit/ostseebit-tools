@@ -1,4 +1,8 @@
-/* TEAM */
-Developer: Corentin Thomasset
-Site: https://github.com/CorentinTh
-Twitter: @cthmsst
+/* CONTINUATION */
+Maintainer: OstseeBit
+Repository: https://github.com/OstseeBit/ostseebit-tools
+
+/* ORIGINAL PROJECT */
+IT-Tools, created by Corentin Thomasset and developed with its contributors.
+Upstream: https://github.com/CorentinTh/it-tools
+License: GNU GPLv3; see LICENSE and NOTICE.md in the source repository.

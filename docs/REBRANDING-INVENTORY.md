@@ -1,15 +1,17 @@
 # OstseeBit rebranding inventory
 
 Prepared 2026-10-03 against upstream d505845f918e946ec300af7b36efc107e2f66e9e.
-This draft prepares phase 2; it does not implement application rebranding.
+The draft PR now implements phase 2 source rebranding. Build and runtime validation
+remain outstanding; see [validation](REBRANDING-VALIDATION.md).
 See [baseline](BASELINE.md) and [attribution](../NOTICE.md).
 
 ## Decisions
 
-Working product name: OstseeBit Tools (ASSUMPTION; final display name TBD).
+Working product name: OstseeBit Tools (used for this continuation).
 Repository: https://github.com/OstseeBit/ostseebit-tools.
 Intended GHCR namespace: ghcr.io/ostseebit/ostseebit-tools (not yet published).
-Production URL, logo, social accounts and Docker Hub destination: TBD.
+Original blue wave artwork is supplied for the wordmark, icons and banner.
+Production URL, social accounts and Docker Hub destination remain TBD.
 Do not invent destinations or preserve upstream hosting claims as our own.
 
 ## File-level worklist
@@ -46,6 +48,28 @@ Do not invent destinations or preserve upstream hosting claims as our own.
 - Historical changelog, source provenance, recovery refs and generic test input
   strings must not be rewritten just to eliminate every upstream-name match.
 - No major dependency upgrade is part of this PR.
+
+## Implementation status — 2026-10-03
+
+Implemented: centralized display name/repository links, package identity, README,
+original brand assets, browser/PWA metadata, page titles, navigation, footer,
+credits and About content in all nine locales, issue templates, neutral example
+URLs, theme colors, removal of runtime tracking/social/sponsorship integration,
+and matching existing E2E title expectations and tool-generator output.
+
+The inherited application version, dependency versions and lockfile are unchanged.
+The unused plausible-tracker package remains until a separate dependency cleanup.
+Inherited workflows remain unchanged and inactive. The OTP issuer default and
+its tests remain unchanged to avoid altering existing exported OTP identities.
+Internal Monaco theme keys and historical changelog entries are also preserved.
+
+Deferred: consistent supported build toolchain, full type checking/lint/build/unit
+and browser tests, production URL, publishing workflow and registry configuration,
+third-party license review, release tooling and dependency modernization.
+
+Source commit display now accepts VITE_GIT_COMMIT_SHA; no nonexistent version tag
+is linked. When a commit is unavailable, the footer still identifies the inherited
+application version without claiming a published OstseeBit release.
 
 ## Completion criteria for a later rebranding implementation
 

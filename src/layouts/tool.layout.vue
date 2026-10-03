@@ -5,12 +5,13 @@ import type { HeadObject } from '@vueuse/head';
 
 import BaseLayout from './base.layout.vue';
 import FavoriteButton from '@/components/FavoriteButton.vue';
+import { brand } from '@/branding';
 import type { Tool } from '@/tools/tools.types';
 
 const route = useRoute();
 
 const head = computed<HeadObject>(() => ({
-  title: `${route.meta.name} - IT Tools`,
+  title: `${route.meta.name} - ${brand.name}`,
   meta: [
     {
       name: 'description',

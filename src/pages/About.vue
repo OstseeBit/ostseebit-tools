@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { useHead } from '@vueuse/head';
+import { brand } from '@/branding';
 
-useHead({ title: 'About - IT Tools' });
+useHead({ title: `About - ${brand.name}` });
 </script>
 
 <template>
