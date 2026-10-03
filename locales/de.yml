@@ -27,15 +27,13 @@ about:
   content: >
     # Über OstseeBit Tools
 
-    OstseeBit Tools ist eine eigenständige Weiterentwicklung von IT-Tools, gepflegt von OstseeBit. Die Sammlung bietet praktische Tools für Entwickler und Menschen, die in der IT arbeiten.
-
-    IT-Tools wurde von Corentin Thomasset und den IT-Tools-Mitwirkenden entwickelt. Ihre Urheberschaft und Beiträge bleiben erhalten.
+    OstseeBit Tools wird von OstseeBit gepflegt. Die Sammlung bietet praktische Tools für Entwickler und Menschen, die in der IT arbeiten.
 
     Der Quellcode steht unter GNU GPLv3. Es besteht keine Gewährleistung. Lizenz und Herkunftshinweise sind im Repository verfügbar.
 
     Die Anwendung verwendet Vue 3, Naive UI und weitere Open-Source-Bibliotheken. Fehler und Vorschläge bitte im Repository melden.
 
-    [GitHub](https://github.com/OstseeBit/ostseebit-tools) · [LICENSE](https://github.com/OstseeBit/ostseebit-tools/blob/main/LICENSE) · [NOTICE](https://github.com/OstseeBit/ostseebit-tools/blob/main/NOTICE.md) · [IT-Tools](https://github.com/CorentinTh/it-tools)
+    [GitHub](https://github.com/OstseeBit/ostseebit-tools) · [LICENSE](https://github.com/OstseeBit/ostseebit-tools/blob/main/LICENSE) · [NOTICE](https://github.com/OstseeBit/ostseebit-tools/blob/main/NOTICE.md)
 favoriteButton:
   remove: Aus Favoriten entfernen
   add: Zu Favoriten hinzufügen

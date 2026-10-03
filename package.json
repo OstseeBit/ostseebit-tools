@@ -4,7 +4,7 @@
   "version": "2024.10.22-7ca5933",
   "packageManager": "pnpm@9.11.0",
   "description": "Handy online tools for developers and IT professionals, maintained by OstseeBit.",
-  "author": "Corentin Th <corentin.thomasset74+it-tools@gmail.com> (https://corentin.tech)",
+  "author": "OstseeBit (https://github.com/OstseeBit)",
   "license": "GNU GPLv3",
   "repository": {
     "type": "git",

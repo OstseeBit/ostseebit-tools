@@ -24,14 +24,14 @@ Do not invent destinations or preserve upstream hosting claims as our own.
 | Browser/SEO metadata | index.html:7-48 | Update title, descriptions, canonical, OG and Twitter metadata. Remove unsupported upstream social/hosting claims. Hostname remains TBD. |
 | PWA | vite.config.ts:60 onwards | Product name, description, language, icon set, theme and start URL. Review service-worker/cache upgrade behavior and base-path handling. |
 | Logo and images | .github/logo-dark.png; .github/logo-white.png; public/banner.png; public/favicon.ico; public/favicon-{16x16,32x32}.png; public/apple-touch-icon.png; public/android-chrome-{192x192,512x512}.png; public/mstile-*.png; public/safari-pinned-tab.svg; public/browserconfig.xml | Supply consistent OstseeBit assets and inspect every format/size, dark/light mode and install icon. Preserve archived upstream snapshot. |
-| Layout and credits | src/layouts/base.layout.vue:64-126 | Product heading, version/commit source links, footer author presentation and sponsorship. Keep explicit IT-Tools/Corentin/contributor credit in About/NOTICE. Version links must resolve against actual refs. |
+| Layout and credits | src/layouts/base.layout.vue:64-126 | Product heading, version/commit source links, footer author presentation and sponsorship. Keep original-author credit in NOTICE and link to it from About. Version links must resolve against actual refs. |
 | Navigation | src/components/NavbarButtons.vue:14; src/modules/command-palette/command-palette.store.ts:51-67; src/pages/Home.page.vue:31 | Repository, issue and About navigation must point to this continuation. |
 | Page titles | src/layouts/tool.layout.vue:13; src/pages/Home.page.vue:13; src/pages/About.vue:4; src/pages/404.page.vue:4 | Centralize display name so individual pages do not drift. |
 | Translations | locales/{de,en,es,fr,no,pt,uk,vi,zh}.yml | Review home/navigation/About, donation links, authorship, hosting claims and package/issue links in all nine locales. German already says GPL-3.0; do not claim a current MIT defect. Preserve locale keys and tool descriptions. |
 | Human credits | public/humans.txt | Distinguish original authors from continuation maintainers; preserve provenance. |
 | Tracking | src/config.ts:31 onwards; src/plugins/plausible.plugin.ts; src/modules/tracker/tracker.services.ts; src/main.ts; env.d.ts; package.json | Decide removal vs explicitly opt-in operation. Keep default off and test browser requests. Do not remove dependency without updating lockfile and consumers together. |
 | Sponsorship | src/config.ts showBanner/showSponsorBanner; src/layouts/base.layout.vue; locale support/buyMeACoffee strings | Remove upstream promotional paths as a scoped UI change; preserve historical attribution. |
-| CI and publishing | .github/workflows-disabled/{ci,e2e-tests,docker-nightly-release,releases}.yml | Currently inactive. Review least-privilege permissions, explicit toolchain/lockfile use, cache version lookup, registry paths and release artifacts before reactivation. Do not publish to corentinth namespaces. |
+| CI and publishing | .github/workflows-disabled/{ci,e2e-tests,docker-nightly-release,releases}.yml | Currently inactive. Review least-privilege permissions, explicit toolchain/lockfile use, cache version lookup, registry paths and release artifacts before reactivation. Remove inherited publishing jobs; publication requires a separate reviewed OstseeBit workflow. |
 | Release tooling | scripts/release.mjs; scripts/getLatestChangelog.mjs; .versionrc; CHANGELOG.md | Review version/tag and generated release references. Preserve historical changelog entries as history. |
 | Generated tests | scripts/create-tool.mjs:88; src/tools/**/*.e2e.spec.ts | Update title expectations and generator consistently with central product name. Existing test sample strings need not be globally renamed. |
 | OTP default issuer | src/tools/otp-code-generator-and-validator/otp.service.ts:110 and otp.service.test.ts:111 | Deliberate behavior change: update issuer default and matching test together, while retaining explicit custom issuer behavior. |
@@ -59,9 +59,11 @@ and matching existing E2E title expectations and tool-generator output.
 
 The inherited application version, dependency versions and lockfile are unchanged.
 The unused plausible-tracker package remains until a separate dependency cleanup.
-Inherited workflows remain unchanged and inactive. The OTP issuer default and
-its tests remain unchanged to avoid altering existing exported OTP identities.
-Internal Monaco theme keys and historical changelog entries are also preserved.
+Inherited CI/test workflows remain unchanged and inactive; inherited nightly/release
+workflows were removed. New OTP setup URIs use the centralized OstseeBit Tools issuer
+by default; the matching test is updated and explicit custom issuer behavior remains.
+Internal Monaco theme keys now use OstseeBit. Historical changelog entries are preserved.
+Original-project attribution is consolidated in NOTICE and provenance documentation.
 
 Deferred: consistent supported build toolchain, full type checking/lint/build/unit
 and browser tests, production URL, publishing workflow and registry configuration,

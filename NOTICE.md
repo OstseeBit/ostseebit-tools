@@ -43,3 +43,21 @@ expectations in the existing E2E tests and tool generator.
 
 This modified source is distributed under the same GNU GPLv3 license as upstream.
 Build and runtime checks remain outstanding; see docs/REBRANDING-VALIDATION.md.
+
+## Repository identity cleanup made on 2026-10-03
+
+OstseeBit is now the package author/maintainer for this modified continuation.
+The original upstream package author entry was:
+`Corentin Th <corentin.thomasset74+it-tools@gmail.com> (https://corentin.tech)`.
+This record preserves original authorship rather than claiming the upstream work.
+
+Consolidated original-project credits and provenance in this notice and BASELINE.md.
+Removed original contact/product links from README, package metadata, browser
+metadata, human-readable maintenance information and all nine About translations.
+The application still links to this repository’s license and attribution notices.
+Removed inherited nightly/release publishing workflows; CI/test templates remain
+inactive. Renamed internal editor theme identifiers consistently. New OTP setup
+URIs now default to the OstseeBit Tools issuer; explicit custom issuers, secret
+handling, existing imported OTP accounts and cryptographic algorithms are unchanged.
+Original LICENSE, historical changelog, dependency versions and lockfile remain
+unchanged. The original source snapshot and earlier changes remain recoverable.

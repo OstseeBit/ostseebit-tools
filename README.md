@@ -5,10 +5,8 @@
 
 Handy online tools for developers and IT professionals, maintained by **OstseeBit**.
 
-This is an independent continuation of [IT-Tools](https://github.com/CorentinTh/it-tools),
-originally created by **Corentin Thomasset and the IT-Tools contributors**.
-Their authorship and contributions are preserved. See [NOTICE.md](NOTICE.md)
-and the [baseline report](docs/BASELINE.md) for source provenance.
+Source provenance and original-author attribution are documented in
+[NOTICE.md](NOTICE.md) and the [baseline report](docs/BASELINE.md).
 
 ## Status
 
@@ -54,8 +52,9 @@ Vue 3, TypeScript, Naive UI, Vite, Vitest and Playwright are used by the project
 
 The existing Dockerfile builds a static application served by nginx. Its floating
 base images and unpinned global pnpm installation need review before release.
-Inherited CI and publication workflows remain in `.github/workflows-disabled/`.
-They must be reviewed before activation, including all registry destinations.
+Inherited CI and test workflows remain in `.github/workflows-disabled/`.
+Inherited release and nightly publishing workflows have been removed. Publishing
+requires a separate review and an OstseeBit-owned registry destination.
 
 The Plausible integration, tracking configuration, social links and sponsorship UI
 have been removed from the application. An unused `plausible-tracker` dependency
@@ -64,8 +63,7 @@ No production URL or analytics endpoint is configured by this rebranding.
 
 ## Attribution and license
 
-Original project: [CorentinTh/it-tools](https://github.com/CorentinTh/it-tools).
-Thanks to [its contributors](https://github.com/CorentinTh/it-tools/graphs/contributors).
+Original-author attribution and source provenance: [NOTICE.md](NOTICE.md).
 Continuation maintainer: [OstseeBit](https://github.com/OstseeBit).
 
 This project is distributed under [GNU GPLv3](LICENSE), without warranty.

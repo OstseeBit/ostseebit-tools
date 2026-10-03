@@ -22,12 +22,12 @@ merge or release until build and runtime checks have completed.
 - pnpm-lock.yaml, dependency/devDependency constraints, package manager, application
   version and build/test scripts are unchanged.
 - All nine locales retain their complete tool sections byte-for-byte. Their About
-  sections retain original-author attribution and GNU GPLv3 information. Removed
+  sections link to this repository’s attribution notice and retain GNU GPLv3 information. Removed
   promotional/social locale keys have no remaining source consumers.
-- Node 24.19.0 syntax checks passed for 43 modified script sources, including script
+- Node 24.19.0 syntax checks passed for 46 modified script sources, including script
   blocks extracted from Vue components. These are syntax checks, not TypeScript
   type checking. Declaration files were excluded from this check.
-- Template tag-balance checks passed for nine modified Vue components. This is not
+- Template tag-balance checks passed for ten modified Vue components. This is not
   a Vue compilation or an accessibility/browser test.
 - SVG/XML assets parse successfully; PNG dimensions and decoding were checked;
   the ICO contains 16/32/48/64-pixel variants. The wordmark and banner were visually
@@ -36,9 +36,10 @@ merge or release until build and runtime checks have completed.
 - No Plausible imports, tracking configuration, social accounts or upstream
   sponsorship URLs remain in the application source. The unused plausible-tracker
   dependency is retained to avoid changing dependency resolution in this PR.
-- The four inherited workflows remain unchanged in .github/workflows-disabled/;
-  no active workflow was created. LICENSE, historic changelog and OTP issuer behavior
-  remain unchanged.
+- The inherited CI/test workflows remain unchanged and inactive. The inherited
+  nightly/release publication workflows were removed during identity cleanup.
+  LICENSE and historic changelog remain unchanged. New OTP setup URIs default to
+  OstseeBit Tools; the existing custom-issuer regression expectation is preserved.
 
 ## Build and test blocker
 
@@ -72,3 +73,18 @@ can be measured.
 
 Recovery: close the draft without merging, or revert subsequent commits through a
 PR. Keep baseline and recovery refs. Do not force-push or restore unreviewed workflows.
+
+## Repository identity cleanup verification
+
+Recovery before cleanup: recovery/pre-identity-cleanup-2026-10-03 at
+04a311484a30516a5cf9c1225885704e20f94e23. Package maintenance identity, README,
+footer, About translations and browser metadata now present OstseeBit. Original
+author attribution is retained in NOTICE.md and immutable source provenance.
+Real @it-tools dependency names and neutral historic test inputs are retained.
+Focused isolated checks exercise the actual OTP URI function with the default
+brand, a custom issuer and special-character encoding. They do not replace Vitest,
+full type checking, a Vue build or browser checks, which remain outstanding.
+
+The GitHub connector exposes no repository-settings update operation. The existing
+public repository description already identifies OstseeBit; no homepage is configured.
+README and source presentation changes remain in draft PR #3 until validation.
