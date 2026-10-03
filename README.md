@@ -11,9 +11,9 @@
 
 <br>
 
-**OstseeBit Tools** ist eine von **OstseeBit** gepflegte Open-Source-Werkzeugsammlung für Entwicklung, Administration, Netzwerk und IT.
+**OstseeBit Tools** ist eine von **OstseeBit** gepflegte und weiterentwickelte Open-Source-Werkzeugsammlung für Entwicklung, Administration, Netzwerk und IT.
 
-Das Projekt basiert auf dem Open-Source-Projekt **it-tools** und wird als eigenständige OstseeBit-Fortführung weiterentwickelt. Herkunft, ursprüngliche Urheberschaft und übernommene Quellbasis bleiben transparent dokumentiert.
+Die Codebasis basiert auf dem Open-Source-Projekt **it-tools**. Herkunft und ursprüngliche Urheberschaft bleiben in [NOTICE.md](NOTICE.md) und [docs/BASELINE.md](docs/BASELINE.md) nachvollziehbar dokumentiert.
 
 <div align="center">
 
@@ -23,7 +23,7 @@ Das Projekt basiert auf dem Open-Source-Projekt **it-tools** und wird als eigens
 
 ## 📌 Projektstatus
 
-Der aktuelle OstseeBit-Stand verwendet die Paketversion `0.1.0`.
+Aktuelle Paketversion: `0.1.0`
 
 Lokal erfolgreich geprüft:
 
@@ -34,7 +34,7 @@ Lokal erfolgreich geprüft:
 - 33 Vitest-Testdateien
 - 138 erfolgreiche Unit-Tests
 
-Noch offen sind insbesondere Playwright-E2E, vollständige Browser-/PWA-Prüfung, produktive Veröffentlichung und die spätere Plattformmodernisierung.
+Noch offen sind insbesondere Playwright-E2E, vollständige Browser-/PWA-Prüfung, Toolchain- und Dependency-Modernisierung sowie die Containerbereitstellung.
 
 ## 🧰 Technische Basis
 
@@ -49,13 +49,13 @@ Das Projekt verwendet aktuell unter anderem:
 - Playwright
 - pnpm
 
-Die übernommene Toolchain ist noch nicht vollständig vereinheitlicht:
+Die vorhandene Toolchain ist noch nicht vollständig vereinheitlicht:
 
 - `.nvmrc`: Node.js 18.18.2
-- geerbte CI-Konfiguration: Node.js 20
+- vorhandene CI-Konfiguration: Node.js 20
 - `packageManager`: pnpm 9.11.0
 
-Die lokale Baseline-Validierung wurde mit Node.js 24.18.1 durchgeführt. Die Festlegung einer einheitlichen Zielplattform erfolgt in einem getrennten Modernisierungsschritt.
+Die lokale Baseline-Validierung wurde mit Node.js 24.18.1 durchgeführt. Eine einheitliche Zielplattform wird in einem getrennten Modernisierungsschritt festgelegt.
 
 ## ⚡ Schnellstart
 
@@ -92,80 +92,63 @@ Ein neues Tool kann über das vorhandene Generator-Skript angelegt werden:
 corepack pnpm run script:create:tool my-tool-name
 ```
 
-## 🐳 Self-Hosting
+## 🐳 Self-Hosting und Container
 
-Der vorhandene Docker-Build erzeugt eine statische Webanwendung, die über nginx bereitgestellt wird.
+Ein Dockerfile für den statischen Betrieb über nginx ist bereits vorhanden. Die Containerbereitstellung ist jedoch noch **nicht abgeschlossen** und gehört ausdrücklich zum weiteren Projektplan.
 
-Vor einer offiziellen OstseeBit-Veröffentlichung werden Container-, CI/CD- und Release-Konfigurationen separat geprüft. Dazu gehören insbesondere:
+Vor einer offiziellen Bereitstellung werden mindestens folgende Punkte bearbeitet:
 
-- Basis-Images und Versionierung
-- pnpm-Installation im Container
-- CI/CD-Workflows
-- Release-Prozess
-- Registry-Ziel
-- reproduzierbare Builds
-- Security- und Dependency-Prüfungen
+- Dockerfile technisch modernisieren und härten
+- Basis-Images bewusst versionieren
+- pnpm-/Node-Build reproduzierbar festlegen
+- Container lokal bauen und testen
+- Laufzeitverhalten und statische Auslieferung prüfen
+- Image-Tags und Release-Schema definieren
+- Registry-Ziel festlegen
+- anschließend ein offizielles Container-Image bereitstellen
 
-Aktuell wird kein offizielles OstseeBit-Container-Image veröffentlicht.
+Bis diese Arbeiten abgeschlossen und validiert sind, wird kein offizielles Container-Image als fertig bereitgestellt bezeichnet.
+
+Siehe auch [Roadmap](docs/ROADMAP.md).
 
 ## 🔒 Datenschutz
 
-Im Rahmen der OstseeBit-Fortführung wurden aus der Anwendung unter anderem entfernt:
+Aus der Anwendung wurden unter anderem entfernt:
 
 - Plausible-Laufzeitintegration
 - Analytics-Konfiguration
 - Social-Media-Verknüpfungen
 - Sponsoring-Oberflächen
 
-Die ältere Abhängigkeit `plausible-tracker` ist in der übernommenen Dependency-Basis noch vorhanden und wird in einem separaten Dependency-Cleanup behandelt.
+Die ältere Abhängigkeit `plausible-tracker` ist in der übernommenen Dependency-Basis noch vorhanden und wird im späteren Dependency-Cleanup behandelt.
 
 Für den aktuellen Stand ist kein produktiver Analytics-Endpunkt konfiguriert.
 
 ## 🐞 Fehler melden und Tools vorschlagen
 
-Fehler, Verbesserungsvorschläge und neue Tool-Ideen können über die GitHub-Issues eingereicht werden:
-
 [Issue erstellen](https://github.com/OstseeBit/ostseebit-tools/issues/new/choose)
 
-Weitere Projektdokumentation:
+## 📚 Dokumentation
 
-- [Rebranding-Inventar](docs/REBRANDING-INVENTORY.md)
-- [Validierungsbericht](docs/REBRANDING-VALIDATION.md)
-- [Baseline-Bericht](docs/BASELINE.md)
-- [Urheberschaft und Herkunft](NOTICE.md)
-
-## 🌊 OstseeBit-Projektidentität
-
-Für dieses Repository gelten verbindlich:
-
-- **Marke / Maintainer:** OstseeBit
-- **Produktname:** OstseeBit Tools
-- **Schreibweise:** `OstseeBit` und `OstseeBit Tools`
-- **Repository:** `OstseeBit/ostseebit-tools`
-- **Lizenz:** GNU GPLv3
-
-Die visuelle Repository-Darstellung folgt derselben OstseeBit-Grundlinie wie die übrigen OstseeBit-Repositories: Deutsch als Projektsprache sowie die OstseeBit-Farben **#0F52BA** und **#00A9A5**.
-
-Logo-, Bild- oder UI-Änderungen erfolgen nicht beiläufig, sondern nur als ausdrücklich eigener Change.
+- [Projektstatus](docs/PROJECT-STATUS.md)
+- [Validierungsstand](docs/VALIDATION.md)
+- [Roadmap](docs/ROADMAP.md)
+- [Technische Baseline](docs/BASELINE.md)
+- [Herkunft und Urheberschaft](NOTICE.md)
 
 ## 🌍 Projektsprache
 
-Die verbindliche Projektsprache der OstseeBit-Fortführung ist Deutsch.
+Die verbindliche Projektsprache ist Deutsch.
 
 Produktnamen, Bibliotheksnamen, API-Bezeichnungen, technische Standarddateien und historische Upstream-Inhalte bleiben unverändert, wenn Genauigkeit, Kompatibilität oder Herkunft dies erfordern.
 
-## 📜 Herkunft und Weiterentwicklung
+## 📜 Herkunft
 
-OstseeBit Tools ist eine eigenständig von OstseeBit gepflegte Fortführung auf Basis des Open-Source-Projekts **it-tools** von Corentin Thomasset und den dortigen Mitwirkenden.
+Die Codebasis basiert auf dem Open-Source-Projekt **it-tools** von Corentin Thomasset und weiteren Mitwirkenden.
 
-OstseeBit beansprucht nicht die Urheberschaft am übernommenen Upstream-Code.
+OstseeBit beansprucht nicht die Urheberschaft am übernommenen Upstream-Code. Die genaue Quellbasis ist in [NOTICE.md](NOTICE.md) und [docs/BASELINE.md](docs/BASELINE.md) dokumentiert.
 
-Die genaue Quellbasis und Herkunft sind dokumentiert in:
-
-- [NOTICE.md](NOTICE.md)
-- [docs/BASELINE.md](docs/BASELINE.md)
-
-Der [CHANGELOG.md](CHANGELOG.md) enthält den übernommenen historischen Changelog des ursprünglichen Projekts. Historische Einträge werden nicht rückwirkend umbenannt.
+Der [CHANGELOG.md](CHANGELOG.md) enthält den übernommenen historischen Changelog des ursprünglichen Projekts. Historische Einträge werden nicht rückwirkend verändert.
 
 ## 📄 Lizenz
 
