@@ -5,10 +5,13 @@ merge or release until build and runtime checks have completed.
 
 ## Baseline and recovery
 
-- Main remains at 6fad823cce4f2ec7a1c15304ec090925c5fa9f06.
+- Main at the start of this task: 6fad823cce4f2ec7a1c15304ec090925c5fa9f06.
 - Rebranding started from 79a61055a4d22f654728f56063edd251f8f04300.
 - Recovery branch: recovery/pre-rebranding-2026-10-03, pointing to that starting commit.
 - The original upstream tree and source provenance remain documented in BASELINE.md.
+- During implementation, inventory-only PR #1 was merged outside this task. Main
+  advanced to 2883b12319194d3e3915de938ac0dea1fb70ab61, whose tree is identical to
+  the starting rebranding commit. The application changes are submitted separately.
 - Repository reads and writes use the GitHub connector; the local verification copy
   was materialized from 501 connector-fetched blobs, checking every Git blob hash.
 
