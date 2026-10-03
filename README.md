@@ -5,26 +5,34 @@
 
 # OstseeBit Tools
 
-OstseeBit Tools ist eine Sammlung praktischer Werkzeuge für Entwicklung, Administration, Netzwerk und IT.
+**OstseeBit Tools** ist eine von **OstseeBit** gepflegte Open-Source-Werkzeugsammlung für Entwicklung, Administration, Netzwerk und IT.
 
-Das Projekt wird von **OstseeBit** weitergeführt und basiert auf dem Open-Source-Projekt **it-tools**. Herkunft, ursprüngliche Urheberschaft und die übernommene Ausgangsbasis sind in [NOTICE.md](NOTICE.md) und im [Baseline-Bericht](docs/BASELINE.md) dokumentiert.
+## Projektidentität
+
+- **Projektname:** OstseeBit Tools
+- **Maintainer der Fortführung:** [OstseeBit](https://github.com/OstseeBit)
+- **Repository:** [OstseeBit/ostseebit-tools](https://github.com/OstseeBit/ostseebit-tools)
+- **Lizenz:** GNU GPLv3
+- **Schreibweise:** `OstseeBit` und `OstseeBit Tools`
+
+Die OstseeBit-Schreibweise wird in Repository-Dokumentation, Vorlagen und Projektmetadaten einheitlich verwendet. Diese Dokumentationsbereinigung verändert weder die Anwendungsoberfläche noch bestehende OstseeBit-Logos, Bilder oder Designelemente.
+
+OstseeBit Tools basiert auf dem Open-Source-Projekt **it-tools**. Herkunft, ursprüngliche Urheberschaft und die übernommene Ausgangsbasis sind in [NOTICE.md](NOTICE.md) und im [Baseline-Bericht](docs/BASELINE.md) dokumentiert.
 
 ## Projektstatus
 
-OstseeBit Tools befindet sich im kontrollierten Umbau von der übernommenen Ausgangsbasis zu einer eigenständig gepflegten OstseeBit-Version.
+Der aktuelle OstseeBit-Stand verwendet die Paketversion `0.1.0` und wurde lokal mit dem vorhandenen Lockfile geprüft:
 
-Der aktuelle Stand wurde lokal erfolgreich geprüft:
-
+- Installation mit `corepack pnpm install --frozen-lockfile` erfolgreich
 - TypeScript-Typecheck erfolgreich
-- ESLint ohne Fehler
+- ESLint: 0 Fehler, 6 Warnungen
 - Produktions-Build erfolgreich
 - 33 Testdateien erfolgreich
 - 138 Unit-Tests erfolgreich
 - Tracking- und Sponsoring-Komponenten aus der Anwendung entfernt
-- OstseeBit-Branding integriert
-- Projektversion auf `0.1.0` umgestellt
+- OstseeBit-Projektidentität integriert
 
-Die technische Plattform und die Abhängigkeiten werden anschließend schrittweise modernisiert. Größere Versionssprünge erfolgen bewusst getrennt und werden jeweils einzeln validiert.
+Noch nicht als vollständige Freigabe geprüft sind insbesondere Playwright-E2E, Browser-/PWA-Verhalten, ein produktives Deployment sowie die spätere Veröffentlichungs-Pipeline.
 
 ## Entwicklung
 
@@ -74,25 +82,23 @@ corepack pnpm run script:create:tool my-tool-name
 
 ## Toolchain
 
-Die übernommene Ausgangsbasis enthält derzeit noch unterschiedliche Toolchain-Vorgaben:
+Die übernommene Ausgangsbasis enthält noch unterschiedliche Toolchain-Vorgaben:
 
 - `.nvmrc`: Node.js 18.18.2
-- bisherige CI-Konfiguration: Node.js 20
+- übernommene CI-Konfiguration: Node.js 20
 - `packageManager`: pnpm 9.11.0
 
-Diese Unterschiede werden im Rahmen der geplanten Plattformmodernisierung kontrolliert bereinigt.
+Die lokale Baseline-Validierung wurde mit Node.js 24.18.1 durchgeführt. Eine einheitliche, offiziell unterstützte Ziel-Toolchain wird in einem getrennten Modernisierungsschritt festgelegt.
 
-Abhängigkeiten sollten bis dahin nicht pauschal mit `--latest`, `--force` oder vergleichbaren Verfahren aktualisiert werden.
+Abhängigkeiten werden nicht pauschal mit `--latest`, `--force` oder vergleichbaren Verfahren aktualisiert.
 
 ## Self-Hosting
 
 Der vorhandene Docker-Build erzeugt eine statische Webanwendung, die über nginx bereitgestellt wird.
 
-Die Container- und CI-Konfiguration stammt teilweise noch aus der übernommenen Ausgangsbasis und wird vor einer offiziellen OstseeBit-Veröffentlichung separat überarbeitet.
+Container-, CI/CD- und Release-Konfigurationen werden vor einer offiziellen OstseeBit-Veröffentlichung separat geprüft. Dazu gehören insbesondere:
 
-Insbesondere werden noch geprüft:
-
-- Basis-Images und deren Versionierung
+- Basis-Images und Versionierung
 - pnpm-Installation im Container
 - CI/CD-Workflows
 - Release-Prozess
@@ -104,16 +110,14 @@ Aktuell wird kein offizielles OstseeBit-Container-Image veröffentlicht.
 
 ## Datenschutz
 
-Im Rahmen des OstseeBit-Rebrandings wurden unter anderem entfernt:
+Im Rahmen der OstseeBit-Fortführung wurden aus der Anwendung unter anderem entfernt:
 
-- Plausible-Integration in der Anwendung
+- Plausible-Laufzeitintegration
 - Analytics-Konfiguration
 - Social-Media-Verknüpfungen
 - Sponsoring-Oberflächen
 
-Eine ältere `plausible-tracker`-Abhängigkeit kann in der übernommenen Dependency-Basis noch vorhanden sein und wird im Rahmen der geplanten Abhängigkeitsbereinigung separat behandelt.
-
-Für den aktuellen Stand ist kein produktiver Analytics-Endpunkt konfiguriert.
+Die ältere Abhängigkeit `plausible-tracker` ist in der übernommenen Dependency-Basis noch vorhanden und wird in einem separaten Dependency-Cleanup behandelt. Für den aktuellen Stand ist kein produktiver Analytics-Endpunkt konfiguriert.
 
 ## Fehler melden und neue Tools vorschlagen
 
@@ -130,21 +134,16 @@ Weitere Projektdokumentation:
 
 ## Herkunft und Weiterentwicklung
 
-OstseeBit Tools ist keine Neuentwicklung des ursprünglichen Projekts.
+OstseeBit Tools ist eine eigenständig von OstseeBit gepflegte Fortführung auf Basis des Open-Source-Projekts **it-tools** von Corentin Thomasset und den dortigen Mitwirkenden.
 
-Die Codebasis basiert auf dem Open-Source-Projekt:
+OstseeBit beansprucht nicht die Urheberschaft am übernommenen Upstream-Code. Die genaue Quellbasis und die ursprüngliche Projektgeschichte bleiben nachvollziehbar dokumentiert.
 
-**it-tools**
-Originalprojekt: `CorentinTh/it-tools`
+## Historischer Changelog
 
-OstseeBit führt diese Codebasis unter Einhaltung der bestehenden Lizenz weiter, passt sie an und entwickelt darauf aufbauend eigene Änderungen und Erweiterungen.
-
-Die genaue übernommene Ausgangsbasis und weitere Herkunftsinformationen sind in [NOTICE.md](NOTICE.md) und [docs/BASELINE.md](docs/BASELINE.md) dokumentiert.
+[CHANGELOG.md](CHANGELOG.md) enthält den übernommenen historischen Changelog des ursprünglichen Projekts. Die historischen Einträge werden nicht rückwirkend umbenannt. Neue OstseeBit-Änderungen werden ab der eigenen Versionslinie dokumentiert.
 
 ## Lizenz
 
 Dieses Projekt wird unter der [GNU General Public License Version 3](LICENSE) bereitgestellt.
 
-Bestehende Copyright-, Lizenz- und Drittanbieterhinweise bleiben gültig.
-
-Bei der Weitergabe kompilierter oder anderweitig verteilter Versionen sind die Bedingungen der GPLv3 einschließlich der Bereitstellung des entsprechenden Quellcodes und der erforderlichen Lizenzhinweise zu beachten.
+Bestehende Copyright-, Lizenz- und Drittanbieterhinweise bleiben gültig. Bei der Weitergabe kompilierter oder anderweitig verteilter Versionen sind die Bedingungen der GPLv3 einschließlich der Bereitstellung des entsprechenden Quellcodes und der erforderlichen Lizenzhinweise zu beachten.

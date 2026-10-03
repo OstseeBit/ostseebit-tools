@@ -1,63 +1,46 @@
-# Upstream notice and attribution
+# Hinweis zu Herkunft und Urheberschaft
 
-OstseeBit Tools is an independent continuation of IT-Tools, originally created by
-Corentin Thomasset and developed with the IT-Tools contributors.
+**OstseeBit Tools** ist eine eigenständig von **OstseeBit** gepflegte Fortführung des Open-Source-Projekts **it-tools**, das ursprünglich von Corentin Thomasset erstellt und gemeinsam mit weiteren Mitwirkenden entwickelt wurde.
 
-- Original project: https://github.com/CorentinTh/it-tools
-- Original authors and contributions: https://github.com/CorentinTh/it-tools/graphs/contributors
-- Source baseline: https://github.com/CorentinTh/it-tools/commit/d505845f918e946ec300af7b36efc107e2f66e9e
-- Continuation maintained by OstseeBit: https://github.com/OstseeBit/ostseebit-tools
+- Ursprüngliches Projekt: https://github.com/CorentinTh/it-tools
+- Ursprüngliche Mitwirkende: https://github.com/CorentinTh/it-tools/graphs/contributors
+- Übernommene Quellbasis: https://github.com/CorentinTh/it-tools/commit/d505845f918e946ec300af7b36efc107e2f66e9e
+- OstseeBit-Fortführung: https://github.com/OstseeBit/ostseebit-tools
 
-The upstream project is distributed under GNU GPL version 3. The original LICENSE
-is retained without modification. Existing copyright, attribution and third-party
-license notices remain applicable; OstseeBit does not claim authorship of the
-upstream work. This notice does not replace LICENSE or third-party license terms.
+Das ursprüngliche Projekt steht unter der GNU GPL Version 3. Die vorhandene [LICENSE](LICENSE) bleibt unverändert. Bestehende Copyright-, Urheber-, Namens- und Drittanbieterhinweise gelten weiter.
 
-## Changes made on 2026-10-03
+**OstseeBit beansprucht nicht die Urheberschaft am übernommenen Upstream-Code.** Diese Datei dient dazu, Herkunft, Weiterentwicklung und Verantwortungsgrenzen transparent zu dokumentieren. Sie ersetzt weder die LICENSE noch Lizenzbedingungen Dritter.
 
-Imported the exact upstream source snapshot, added provenance and phase 0/1
-documentation, and moved the four inherited GitHub Actions workflows from
-.github/workflows/ to .github/workflows-disabled/ without changing their contents.
-This prevents inherited CI, scheduled publishing and release jobs from running
-on the working main branch before a dedicated review.
+## Übernahme der Ausgangsbasis am 2026-10-03
 
-The initial import left application branding, runtime source, dependencies and
-lockfile unchanged. This repository is not a validated release. No endorsement by upstream is implied.
+Die definierte Upstream-Quellbasis wurde in das Repository übernommen und mit einer nachvollziehbaren Baseline dokumentiert. Die ursprüngliche Git-Historie wurde nicht importiert; stattdessen identifizieren Commit- und Tree-Hash die verwendete Quelle eindeutig.
 
-Original Git history was not imported. The exact upstream commit and tree identify
-the source and its original history. See docs/BASELINE.md for verification and recovery.
+Die vier übernommenen GitHub-Actions-Workflows wurden zunächst aus `.github/workflows/` nach `.github/workflows-disabled/` verschoben, damit keine geerbten CI-, Release- oder Publishing-Abläufe unbeabsichtigt ausgeführt werden.
 
-Future modifications must retain applicable notices and clearly identify changes
-and dates. Before distributing built artifacts, provide their corresponding source,
-build materials and applicable license notices as required by GPLv3.
+Details zur Quellidentität und Wiederherstellung stehen in [docs/BASELINE.md](docs/BASELINE.md).
 
-## Rebranding changes made on 2026-10-03
+## OstseeBit-Projektidentität am 2026-10-03
 
-Introduced the OstseeBit Tools product identity, centralized operational repository
-links, replaced logo/favicon/PWA assets with an original wave symbol, and revised
-metadata, navigation, theme colors and all nine About translations. Removed the
-Plausible runtime integration, tracking settings, sponsorship and upstream social
-links. Retained original-author credits, LICENSE, upstream history references,
-algorithm behavior, dependency versions and lockfile. Updated affected page-title
-expectations in the existing E2E tests and tool generator.
+Die Fortführung wurde auf die Projektidentität **OstseeBit Tools** ausgerichtet. Dazu gehören unter anderem Repository-Verweise, Metadaten, Navigation, Texte, Paket-Maintainer und die OstseeBit-Darstellung innerhalb des Projekts.
 
-This modified source is distributed under the same GNU GPLv3 license as upstream.
-Build and runtime checks remain outstanding; see docs/REBRANDING-VALIDATION.md.
+Nicht übernommen wurden fremde Sponsoring-, Social-Media- oder Tracking-Ziele. Die geerbten Nightly- und Release-Publishing-Workflows wurden entfernt. CI-/Testvorlagen bleiben bis zu einer separaten Prüfung inaktiv.
 
-## Repository identity cleanup made on 2026-10-03
+Die ursprüngliche LICENSE, die historische Upstream-Herkunft und reale Drittanbieter-Paketnamen bleiben erhalten. Historische Einträge werden nicht rückwirkend in OstseeBit umbenannt.
 
-OstseeBit is now the package author/maintainer for this modified continuation.
-The original upstream package author entry was:
-`Corentin Th <corentin.thomasset74+it-tools@gmail.com> (https://corentin.tech)`.
-This record preserves original authorship rather than claiming the upstream work.
+## Aktueller Validierungsstand
 
-Consolidated original-project credits and provenance in this notice and BASELINE.md.
-Removed original contact/product links from README, package metadata, browser
-metadata, human-readable maintenance information and all nine About translations.
-The application still links to this repository’s license and attribution notices.
-Removed inherited nightly/release publishing workflows; CI/test templates remain
-inactive. Renamed internal editor theme identifiers consistently. New OTP setup
-URIs now default to the OstseeBit Tools issuer; explicit custom issuers, secret
-handling, existing imported OTP accounts and cryptographic algorithms are unchanged.
-Original LICENSE, historical changelog, dependency versions and lockfile remain
-unchanged. The original source snapshot and earlier changes remain recoverable.
+Für den aktuellen OstseeBit-Stand wurden lokal erfolgreich ausgeführt:
+
+- Installation mit eingefrorenem Lockfile
+- TypeScript-Typecheck
+- ESLint mit 0 Fehlern und 6 Warnungen
+- Produktions-Build
+- Vitest: 33 Testdateien und 138 Tests erfolgreich
+
+Playwright-E2E, vollständige Browser-/PWA-Prüfung und produktive Veröffentlichung sind weiterhin offen. Der genaue Nachweis steht in [docs/REBRANDING-VALIDATION.md](docs/REBRANDING-VALIDATION.md).
+
+## Weiterentwicklung
+
+Zukünftige Änderungen müssen anwendbare Lizenz- und Herkunftshinweise erhalten. Bei der Weitergabe gebauter Artefakte sind die GPLv3-Anforderungen an korrespondierenden Quellcode und Lizenzhinweise zu beachten.
+
+OstseeBit ist Maintainer der Fortführung **OstseeBit Tools**. Eine Unterstützung oder Billigung durch das ursprüngliche Upstream-Projekt wird nicht behauptet.

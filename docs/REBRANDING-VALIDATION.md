@@ -1,90 +1,112 @@
-# Rebranding validation — 2026-10-03
+# Validierung der OstseeBit-Fortführung — 2026-10-03
 
-This draft implements the OstseeBit Tools source rebranding. It is not ready for
-merge or release until build and runtime checks have completed.
+Dieses Dokument hält den nachweisbaren Validierungsstand des Rebranding-Branches **OstseeBit Tools** fest.
 
-## Baseline and recovery
+## Scope
 
-- Main at the start of this task: 6fad823cce4f2ec7a1c15304ec090925c5fa9f06.
-- Rebranding started from 79a61055a4d22f654728f56063edd251f8f04300.
-- Recovery branch: recovery/pre-rebranding-2026-10-03, pointing to that starting commit.
-- The original upstream tree and source provenance remain documented in BASELINE.md.
-- During implementation, inventory-only PR #1 was merged outside this task. Main
-  advanced to 2883b12319194d3e3915de938ac0dea1fb70ab61, whose tree is identical to
-  the starting rebranding commit. The application changes are submitted separately.
-- Repository reads and writes use the GitHub connector; the local verification copy
-  was materialized from 501 connector-fetched blobs, checking every Git blob hash.
+Geprüft wird der Rebranding- und Baseline-Stand. Eine vollständige Produktionsfreigabe ist damit nicht verbunden.
 
-## Completed checks
+Nicht Bestandteil dieser Validierung sind eine allgemeine Abhängigkeitsmodernisierung, produktive Veröffentlichung oder ein neues UI-/Bilddesign.
 
-- LICENSE remains byte-identical to upstream blob
-  e72bfddabc15be5718a7cc061ac10e47741d8219.
-- pnpm-lock.yaml, dependency/devDependency constraints, package manager, application
-  version and build/test scripts are unchanged.
-- All nine locales retain their complete tool sections byte-for-byte. Their About
-  sections link to this repository’s attribution notice and retain GNU GPLv3 information. Removed
-  promotional/social locale keys have no remaining source consumers.
-- Node 24.19.0 syntax checks passed for 46 modified script sources, including script
-  blocks extracted from Vue components. These are syntax checks, not TypeScript
-  type checking. Declaration files were excluded from this check.
-- Template tag-balance checks passed for ten modified Vue components. This is not
-  a Vue compilation or an accessibility/browser test.
-- SVG/XML assets parse successfully; PNG dimensions and decoding were checked;
-  the ICO contains 16/32/48/64-pixel variants. The wordmark and banner were visually
-  inspected. New artwork is original wave geometry, with a generation script in
-  scripts/generate-brand-assets.py (requires Pillow and a listed system font).
-- No Plausible imports, tracking configuration, social accounts or upstream
-  sponsorship URLs remain in the application source. The unused plausible-tracker
-  dependency is retained to avoid changing dependency resolution in this PR.
-- The inherited CI/test workflows remain unchanged and inactive. The inherited
-  nightly/release publication workflows were removed during identity cleanup.
-  LICENSE and historic changelog remain unchanged. New OTP setup URIs default to
-  OstseeBit Tools; the existing custom-issuer regression expectation is preserved.
+## Herkunft und Recovery
 
-## Build and test blocker
+- ursprüngliche Quellbasis: siehe [BASELINE.md](BASELINE.md)
+- Upstream-Snapshot: `upstream/baseline-2026-10-03`
+- Recovery vor Rebranding: `recovery/pre-rebranding-2026-10-03`
+- Recovery vor Identity-Cleanup: `recovery/pre-identity-cleanup-2026-10-03`
+- Arbeitsbranch: `chore/ostseebit-rebranding`
 
-A frozen-lockfile install was attempted with the available pnpm 11.19.0 runtime;
-registry requests failed with EACCES in the sandbox. That incomplete process was
-stopped. It did not change the lockfile.
+Diese Branches sind Sicherungs- bzw. Referenzstände und keine verschiedenen Produktversionen.
 
-A request to download the manifest-pinned pnpm 9.11.0 and frozen dependencies with
-install scripts disabled was rejected by the user. It did not execute. No further
-package-download attempt or remote CI workaround was made.
+## Erfolgreich ausgeführte lokale Prüfungen
 
-Baseline build, ESLint, vue-tsc, Vitest, application build, Playwright and browser
-network/PWA tests have therefore NOT RUN. Static checks do not demonstrate release
-readiness. The PR remains a draft; major upgrades are deferred until the baseline
-can be measured.
+### Dependency-Installation
 
-## Remaining acceptance checks
+```sh
+corepack pnpm install --frozen-lockfile
+```
 
-1. Install dependencies with pnpm 9.11.0 and the frozen lockfile in an isolated,
-   agreed toolchain. Review and run required dependency build scripts explicitly.
-2. Run lint, type checking, non-watch unit tests, production build and E2E against
-   both the imported baseline and the modified branch; record inherited failures.
-3. Inspect home/About/tool/404 pages, nine locales, narrow/wide screens and both
-   color themes. Confirm updated page-title expectations pass.
-4. Inspect PWA installation/update and a nested base URL. Verify icon requests and
-   confirm no tracking/sponsorship network requests. Review production CSP separately.
-5. Decide the deployment hostname before adding canonical or absolute social-image
-   URLs. No placeholder production hostname is advertised.
-6. Review corresponding-source/third-party licensing and publication workflow before
-   distributing containers or release artifacts.
+Ergebnis: erfolgreich.
 
-Recovery: close the draft without merging, or revert subsequent commits through a
-PR. Keep baseline and recovery refs. Do not force-push or restore unreviewed workflows.
+### TypeScript-Typecheck
 
-## Repository identity cleanup verification
+```sh
+corepack pnpm typecheck
+```
 
-Recovery before cleanup: recovery/pre-identity-cleanup-2026-10-03 at
-04a311484a30516a5cf9c1225885704e20f94e23. Package maintenance identity, README,
-footer, About translations and browser metadata now present OstseeBit. Original
-author attribution is retained in NOTICE.md and immutable source provenance.
-Real @it-tools dependency names and neutral historic test inputs are retained.
-Focused isolated checks exercise the actual OTP URI function with the default
-brand, a custom issuer and special-character encoding. They do not replace Vitest,
-full type checking, a Vue build or browser checks, which remain outstanding.
+Ergebnis: erfolgreich.
 
-The GitHub connector exposes no repository-settings update operation. The existing
-public repository description already identifies OstseeBit; no homepage is configured.
-README and source presentation changes remain in draft PR #3 until validation.
+### ESLint
+
+```sh
+corepack pnpm lint
+```
+
+Ergebnis: 0 Fehler, 6 Warnungen.
+
+Bekannte Warnungen betreffen unter anderem die alte TypeScript-/typescript-estree-Kompatibilitätsgrenze sowie Format-/UnoCSS-Hinweise. Diese Punkte sind Modernisierungsthemen und blockieren die Baseline nicht.
+
+### Unit-Tests
+
+```sh
+corepack pnpm exec vitest run --environment jsdom
+```
+
+Ergebnis:
+
+- 33 Testdateien erfolgreich
+- 138 Tests erfolgreich
+
+### Produktions-Build
+
+```sh
+corepack pnpm build
+```
+
+Ergebnis: erfolgreich.
+
+Der Build meldet unter anderem große Chunks sowie Hinweise zu älteren Toolchain-Komponenten und Browserdaten. Diese Befunde werden in der späteren Performance- und Plattformmodernisierung behandelt.
+
+## Bereits im Rebranding nachgewiesene Punkte
+
+- LICENSE und Upstream-Herkunft bleiben dokumentiert.
+- OstseeBit Tools wird als aktuelle Projektidentität verwendet.
+- Tracking-, Sponsoring- und fremde Social-Verweise wurden aus der Anwendung entfernt.
+- geerbte Nightly-/Release-Publishing-Workflows wurden entfernt.
+- CI-/Testvorlagen bleiben inaktiv, bis sie separat geprüft werden.
+- reale Drittanbieter-Paketnamen werden nicht als Branding-Strings umbenannt.
+- historischer Changelog bleibt als Historie erhalten.
+- OTP-Standard-Issuer wurde im Rebranding auf OstseeBit Tools umgestellt; explizite Custom-Issuer bleiben davon getrennt.
+
+## Noch nicht abgeschlossen
+
+Folgende Prüfungen sind noch offen und werden nicht als bestanden dargestellt:
+
+1. Playwright-E2E-Suite
+2. vollständiger Browser-Test über repräsentative Tools
+3. PWA-Installation und Updateverhalten
+4. Verhalten unter verschachteltem Base-Path
+5. gezielte Browser-Netzwerkprüfung auf unerwünschte externe Requests
+6. produktive CSP-/Security-Header-Prüfung
+7. Container-/Release-Pipeline und Registry-Publishing
+8. vollständige Drittanbieter-Lizenzprüfung für veröffentlichte Artefakte
+
+## Toolchain-Hinweis
+
+Die lokale Baseline wurde mit Node.js 24.18.1 ausgeführt. Die Repository-Vorgaben sind noch uneinheitlich:
+
+- `.nvmrc`: Node.js 18.18.2
+- geerbte CI: Node.js 20
+- pnpm: 9.11.0 im Manifest
+
+Die Festlegung einer einheitlichen Zielplattform ist ein eigener Modernisierungs-Change.
+
+## Bewertung des aktuellen Zustands
+
+Der aktuelle Stand ist als **lokal build- und unit-testfähige OstseeBit-Baseline** nachgewiesen. Eine vollständige Release- oder Produktionsfreigabe wird daraus nicht abgeleitet.
+
+Vor dem Merge werden Repository-Dokumentation und GitHub-Vorlagen konsistent auf OstseeBit ausgerichtet. Danach kann der Rebranding-Branch kontrolliert nach `main` übernommen werden.
+
+## Recovery
+
+Bei Problemen den Rebranding-PR nicht mergen bzw. spätere Änderungen über einen Revert zurücknehmen. Recovery- und Baseline-Branches bleiben bis zum Abschluss der Umstellung erhalten. Kein Force-Push auf `main`.

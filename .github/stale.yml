@@ -1,17 +1,18 @@
-# Number of days of inactivity before an issue becomes stale
+# Anzahl der Tage ohne Aktivität, bevor ein Issue als veraltet markiert wird
 daysUntilStale: 60
-# Number of days of inactivity before a stale issue is closed
+# Anzahl der Tage bis zum automatischen Schließen eines als veraltet markierten Issues
 daysUntilClose: 7
-# Issues with these labels will never be considered stale
+# Issues mit diesen Labels werden nicht automatisch als veraltet markiert
 exemptLabels:
   - pinned
   - security
-# Label to use when marking an issue as stale
+# Label für als veraltet markierte Issues
 staleLabel: wontfix
-# Comment to post when marking an issue as stale. Set to `false` to disable
+# Kommentar beim Markieren als veraltet
 markComment: >
-  This issue has been automatically marked as stale because it has not had
-  recent activity. It will be closed if no further activity occurs. Thank you
-  for your contributions.
-# Comment to post when closing a stale issue. Set to `false` to disable
+  Dieses Issue wurde automatisch als veraltet markiert, weil über einen längeren
+  Zeitraum keine Aktivität stattgefunden hat. Wenn keine weitere Aktivität erfolgt,
+  wird es geschlossen. Falls das Thema weiterhin relevant ist, ergänze bitte einen
+  aktuellen Kommentar. Danke für deinen Beitrag zu OstseeBit Tools.
+# Kein automatischer Abschlusskommentar
 closeComment: false
