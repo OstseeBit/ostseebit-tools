@@ -84,7 +84,6 @@ const tools = computed<ToolCategory[]>(() => [
             </c-link>
           </div>
           <div>
-            IT-Tools · Corentin Thomasset &amp; contributors
             <RouterLink to="/about">{{ $t('home.nav.aboutLabel') }}</RouterLink>
           </div>
         </div>

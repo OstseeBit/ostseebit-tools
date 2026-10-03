@@ -1,73 +1,167 @@
-<picture>
-  <source srcset="./.github/logo-white.svg" media="(prefers-color-scheme: dark)">
-  <img src="./.github/logo-dark.svg" alt="OstseeBit Tools" width="640">
-</picture>
+<div align="center">
 
-Handy online tools for developers and IT professionals, maintained by **OstseeBit**.
+![Header](https://capsule-render.vercel.app/api?type=waving&color=0:0F52BA,100:00A9A5&height=190&section=header&text=OstseeBit%20Tools&fontSize=38&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=Open-Source-Werkzeuge%20f%C3%BCr%20Entwicklung%20%C2%B7%20Administration%20%C2%B7%20Netzwerk%20%C2%B7%20IT&descAlignY=55&descSize=16)
 
-This is an independent continuation of [IT-Tools](https://github.com/CorentinTh/it-tools),
-originally created by **Corentin Thomasset and the IT-Tools contributors**.
-Their authorship and contributions are preserved. See [NOTICE.md](NOTICE.md)
-and the [baseline report](docs/BASELINE.md) for source provenance.
+[![Lizenz](https://img.shields.io/badge/Lizenz-GPLv3-0F52BA?style=for-the-badge)](LICENSE)
+[![Sprache](https://img.shields.io/badge/Sprache-Deutsch-0F52BA?style=for-the-badge)](#projektsprache)
+![Version](https://img.shields.io/badge/Version-0.1.0-00A9A5?style=for-the-badge)
+[![OstseeBit](https://img.shields.io/badge/by-OstseeBit-00A9A5?style=for-the-badge)](https://github.com/OstseeBit)
 
-## Status
+</div>
 
-The application is being rebranded as OstseeBit Tools. The imported source baseline,
-LICENSE and dependency lockfile are preserved. The rebranding PR remains a draft
-until build and runtime validation is complete. No OstseeBit container image or
-production deployment is currently advertised.
+<br>
 
-- [Report a bug or request a tool](https://github.com/OstseeBit/ostseebit-tools/issues/new/choose)
-- [Rebranding inventory](docs/REBRANDING-INVENTORY.md)
-- [Validation report](docs/REBRANDING-VALIDATION.md)
+**OstseeBit Tools** ist eine von **OstseeBit** gepflegte und weiterentwickelte Open-Source-Werkzeugsammlung für Entwicklung, Administration, Netzwerk und IT.
 
-## Development
+Die Codebasis basiert auf dem Open-Source-Projekt **it-tools**. Herkunft und ursprüngliche Urheberschaft bleiben in [NOTICE.md](NOTICE.md) und [docs/BASELINE.md](docs/BASELINE.md) nachvollziehbar dokumentiert.
 
-The upstream manifest specifies pnpm **9.11.0**. The baseline uses Node 18.18.2 in
-.nvmrc and Node 20 in its inherited CI; selecting a consistent supported toolchain
-is a separate modernization change. Use an isolated environment and the preserved
-lockfile. Do not run unrestricted upgrades to resolve a build failure.
+<div align="center">
 
-```sh
-corepack enable
-pnpm install --frozen-lockfile
-pnpm dev
+![Divider](https://capsule-render.vercel.app/api?type=rect&color=0:0F52BA,100:00A9A5&height=3&width=100%25)
+
+</div>
+
+## 📌 Projektstatus
+
+Aktuelle Paketversion: `0.1.0`
+
+Lokal erfolgreich geprüft:
+
+- Installation mit eingefrorenem Lockfile
+- TypeScript-Typecheck
+- ESLint mit 0 Fehlern und 6 Warnungen
+- Produktions-Build
+- 33 Vitest-Testdateien
+- 138 erfolgreiche Unit-Tests
+
+Noch offen sind insbesondere Playwright-E2E, vollständige Browser-/PWA-Prüfung, Toolchain- und Dependency-Modernisierung sowie die Containerbereitstellung.
+
+## 🧰 Technische Basis
+
+Das Projekt verwendet aktuell unter anderem:
+
+- Vue 3
+- TypeScript
+- Vite
+- Naive UI
+- UnoCSS
+- Vitest
+- Playwright
+- pnpm
+
+Die vorhandene Toolchain ist noch nicht vollständig vereinheitlicht:
+
+- `.nvmrc`: Node.js 18.18.2
+- vorhandene CI-Konfiguration: Node.js 20
+- `packageManager`: pnpm 9.11.0
+
+Die lokale Baseline-Validierung wurde mit Node.js 24.18.1 durchgeführt. Eine einheitliche Zielplattform wird in einem getrennten Modernisierungsschritt festgelegt.
+
+## ⚡ Schnellstart
+
+Abhängigkeiten installieren:
+
+```bash
+corepack pnpm install --frozen-lockfile
 ```
 
-Checks after installing dependencies:
+Entwicklungsserver starten:
 
-```sh
-pnpm lint
-pnpm typecheck
-pnpm exec vitest run --environment jsdom
-pnpm build
-pnpm test:e2e
+```bash
+corepack pnpm dev
 ```
 
-The inherited build script uses POSIX environment-variable syntax; use a Linux
-environment for that script or invoke its two build steps explicitly on Windows.
+Produktions-Build erstellen:
 
-Create a tool with `pnpm run script:create:tool my-tool-name`.
-Vue 3, TypeScript, Naive UI, Vite, Vitest and Playwright are used by the project.
+```bash
+corepack pnpm build
+```
 
-## Self-hosting and privacy
+Wichtige Prüfungen:
 
-The existing Dockerfile builds a static application served by nginx. Its floating
-base images and unpinned global pnpm installation need review before release.
-Inherited CI and publication workflows remain in `.github/workflows-disabled/`.
-They must be reviewed before activation, including all registry destinations.
+```bash
+corepack pnpm typecheck
+corepack pnpm lint
+corepack pnpm exec vitest run --environment jsdom
+corepack pnpm build
+```
 
-The Plausible integration, tracking configuration, social links and sponsorship UI
-have been removed from the application. An unused `plausible-tracker` dependency
-remains in the preserved manifest/lockfile until a separate dependency cleanup.
-No production URL or analytics endpoint is configured by this rebranding.
+Ein neues Tool kann über das vorhandene Generator-Skript angelegt werden:
 
-## Attribution and license
+```bash
+corepack pnpm run script:create:tool my-tool-name
+```
 
-Original project: [CorentinTh/it-tools](https://github.com/CorentinTh/it-tools).
-Thanks to [its contributors](https://github.com/CorentinTh/it-tools/graphs/contributors).
-Continuation maintainer: [OstseeBit](https://github.com/OstseeBit).
+## 🐳 Self-Hosting und Container
 
-This project is distributed under [GNU GPLv3](LICENSE), without warranty.
-Existing copyright and third-party notices remain applicable. Before distributing
-built artifacts, provide their corresponding source and applicable license notices.
+Ein Dockerfile für den statischen Betrieb über nginx ist bereits vorhanden. Die Containerbereitstellung ist jedoch noch **nicht abgeschlossen** und gehört ausdrücklich zum weiteren Projektplan.
+
+Vor einer offiziellen Bereitstellung werden mindestens folgende Punkte bearbeitet:
+
+- Dockerfile technisch modernisieren und härten
+- Basis-Images bewusst versionieren
+- pnpm-/Node-Build reproduzierbar festlegen
+- Container lokal bauen und testen
+- Laufzeitverhalten und statische Auslieferung prüfen
+- Image-Tags und Release-Schema definieren
+- Registry-Ziel festlegen
+- anschließend ein offizielles Container-Image bereitstellen
+
+Bis diese Arbeiten abgeschlossen und validiert sind, wird kein offizielles Container-Image als fertig bereitgestellt bezeichnet.
+
+Siehe auch [Roadmap](docs/ROADMAP.md).
+
+## 🔒 Datenschutz
+
+Aus der Anwendung wurden unter anderem entfernt:
+
+- Plausible-Laufzeitintegration
+- Analytics-Konfiguration
+- Social-Media-Verknüpfungen
+- Sponsoring-Oberflächen
+
+Die ältere Abhängigkeit `plausible-tracker` ist in der übernommenen Dependency-Basis noch vorhanden und wird im späteren Dependency-Cleanup behandelt.
+
+Für den aktuellen Stand ist kein produktiver Analytics-Endpunkt konfiguriert.
+
+## 🐞 Fehler melden und Tools vorschlagen
+
+[Issue erstellen](https://github.com/OstseeBit/ostseebit-tools/issues/new/choose)
+
+## 📚 Dokumentation
+
+- [Projektstatus](docs/PROJECT-STATUS.md)
+- [Validierungsstand](docs/VALIDATION.md)
+- [Roadmap](docs/ROADMAP.md)
+- [Technische Baseline](docs/BASELINE.md)
+- [Herkunft und Urheberschaft](NOTICE.md)
+
+## 🌍 Projektsprache
+
+Die verbindliche Projektsprache ist Deutsch.
+
+Produktnamen, Bibliotheksnamen, API-Bezeichnungen, technische Standarddateien und historische Upstream-Inhalte bleiben unverändert, wenn Genauigkeit, Kompatibilität oder Herkunft dies erfordern.
+
+## 📜 Herkunft
+
+Die Codebasis basiert auf dem Open-Source-Projekt **it-tools** von Corentin Thomasset und weiteren Mitwirkenden.
+
+OstseeBit beansprucht nicht die Urheberschaft am übernommenen Upstream-Code. Die genaue Quellbasis ist in [NOTICE.md](NOTICE.md) und [docs/BASELINE.md](docs/BASELINE.md) dokumentiert.
+
+Der [CHANGELOG.md](CHANGELOG.md) enthält den übernommenen historischen Changelog des ursprünglichen Projekts. Historische Einträge werden nicht rückwirkend verändert.
+
+## 📄 Lizenz
+
+Dieses Projekt steht unter der [GNU General Public License Version 3](LICENSE).
+
+Bestehende Copyright-, Lizenz- und Drittanbieterhinweise bleiben gültig. Bei der Weitergabe gebauter Artefakte sind die Bedingungen der GPLv3 einschließlich der Bereitstellung des entsprechenden Quellcodes und der erforderlichen Lizenzhinweise zu beachten.
+
+<br>
+
+<div align="center">
+
+![Footer](https://capsule-render.vercel.app/api?type=waving&color=0:00A9A5,100:0F52BA&height=100&section=footer)
+
+**OstseeBit**
+
+</div>

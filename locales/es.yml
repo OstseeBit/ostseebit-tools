@@ -20,15 +20,13 @@ about:
   content: >
     # Acerca de OstseeBit Tools
 
-    OstseeBit Tools es una continuación independiente de IT-Tools, mantenida por OstseeBit. Ofrece herramientas útiles para desarrolladores y profesionales de TI.
-
-    IT-Tools fue creado por Corentin Thomasset junto con sus colaboradores. Se conserva el reconocimiento de su autoría y sus contribuciones.
+    OstseeBit Tools es mantenido por OstseeBit. Ofrece herramientas útiles para desarrolladores y profesionales de TI.
 
     El código fuente se distribuye bajo GNU GPLv3, sin garantía. La licencia y los avisos de atribución están disponibles en el repositorio.
 
     La aplicación utiliza Vue 3, Naive UI y otras bibliotecas de código abierto. Comunica errores y sugerencias en el repositorio.
 
-    [GitHub](https://github.com/OstseeBit/ostseebit-tools) · [LICENSE](https://github.com/OstseeBit/ostseebit-tools/blob/main/LICENSE) · [NOTICE](https://github.com/OstseeBit/ostseebit-tools/blob/main/NOTICE.md) · [IT-Tools](https://github.com/CorentinTh/it-tools)
+    [GitHub](https://github.com/OstseeBit/ostseebit-tools) · [LICENSE](https://github.com/OstseeBit/ostseebit-tools/blob/main/LICENSE) · [NOTICE](https://github.com/OstseeBit/ostseebit-tools/blob/main/NOTICE.md)
 404:
   notFound: '404 Not Found'
   sorry: 'Lo sentimos, esta página no parece existir'

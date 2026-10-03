@@ -1,5 +1,7 @@
 # Changelog
 
+> **Historischer Hinweis für OstseeBit Tools:** Die folgenden Einträge stammen aus dem übernommenen Changelog des ursprünglichen Projekts und bleiben als historische Dokumentation unverändert. OstseeBit Tools führt ab der eigenen Versionslinie `0.1.0` neue Änderungen fort. Frühere Projektnamen, Commit-Referenzen und Formulierungen werden nicht rückwirkend umbenannt.
+
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
 ## Version 2024.10.22-7ca5933

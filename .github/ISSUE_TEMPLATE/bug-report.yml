@@ -1,46 +1,45 @@
-name: 🐞 Bug Report
-description: File a bug report.
+name: 🐞 Fehler melden
+description: Einen Fehler in OstseeBit Tools melden.
 labels: ['bug', 'triage']
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to fill out this bug report!
+        Danke, dass du dir die Zeit nimmst, einen Fehler in OstseeBit Tools zu melden.
 
   - type: textarea
     id: bug-description
     attributes:
-      label: Describe the bug
-      description: A clear and concise description of what the bug is. If you intend to submit a PR for this issue, tell us in the description. Thanks!
-      placeholder: Bug description
+      label: Fehlerbeschreibung
+      description: Beschreibe den Fehler kurz und eindeutig. Falls du bereits einen Pull Request dazu planst, kannst du das hier ebenfalls angeben.
+      placeholder: Was funktioniert nicht wie erwartet?
     validations:
       required: true
 
   - type: textarea
     id: what-happened
     attributes:
-      label: What happened?
-      description: Also tell us, what did you expect to happen? If you have a screenshot, you can paste it here.
-      placeholder: Tell us what you see!
-      value: 'A bug happened!'
+      label: Tatsächliches und erwartetes Verhalten
+      description: Beschreibe, was passiert ist und welches Verhalten du erwartet hast. Screenshots können hier eingefügt werden.
+      placeholder: Tatsächliches Verhalten und erwartetes Ergebnis
     validations:
       required: true
 
   - type: textarea
     id: version
     attributes:
-      label: System information
-      description: What is you environment? You can use the `npx envinfo --system --browsers` command to get this information.
+      label: System- und Versionsinformationen
+      description: Gib Browser, Betriebssystem und nach Möglichkeit die verwendete OstseeBit-Tools-Version bzw. den Commit an. Für Systeminformationen kann optional `npx envinfo --system --browsers` verwendet werden.
     validations:
       required: true
 
   - type: dropdown
     id: app-type
     attributes:
-      label: Where did you encounter the bug?
+      label: Wo tritt der Fehler auf?
       options:
-        - OstseeBit Tools installation
-        - A self hosted
-        - Other (installations, docker, etc.)
+        - OstseeBit Tools
+        - Self-Hosting
+        - Andere Installation oder Umgebung
     validations:
       required: true

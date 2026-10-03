@@ -1,56 +1,57 @@
-name: 🚀 New feature proposal
-description: Propose a new feature/enhancement or tool idea for OstseeBit Tools
+name: 🚀 Verbesserung oder neues Tool
+description: Eine neue Funktion, Verbesserung oder Tool-Idee für OstseeBit Tools vorschlagen.
 labels: ['enhancement', 'triage']
 
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for your interest in the project and taking the time to fill out this feature report!
+        Danke für dein Interesse an OstseeBit Tools und deinen Vorschlag.
 
   - type: dropdown
     id: request-type
     attributes:
-      label: What type of request is this?
+      label: Um welche Art von Vorschlag handelt es sich?
       options:
-        - New tool idea
-        - New feature for an existing tool
-        - Deployment or CI/CD improvement
-        - Self-hosting improvement
-        - Other
+        - Neues Tool
+        - Neue Funktion für ein bestehendes Tool
+        - Verbesserung an Deployment oder CI/CD
+        - Verbesserung für Self-Hosting
+        - Dokumentation
+        - Sonstiges
     validations:
       required: true
 
   - type: textarea
     id: feature-description
     attributes:
-      label: Clear and concise description of the feature you are proposing
-      description: A clear and concise description of what the feature is.
-      placeholder: 'Example: a token generator tool'
+      label: Beschreibung
+      description: Beschreibe die gewünschte Funktion oder das neue Tool möglichst klar und konkret.
+      placeholder: Beispiel: Ein zusätzliches Werkzeug für ...
     validations:
       required: true
 
   - type: textarea
     id: alternative
     attributes:
-      label: Is their example of this tool in the wild?
-      description: Provide link to already existing tool (like websites, apps, cli, ...) or npm packages that could be used or provide inspiration for the feature.
+      label: Vergleichbare Lösungen oder Referenzen
+      description: Falls es bereits ähnliche Webseiten, Anwendungen, CLI-Tools oder Bibliotheken gibt, können sie hier als Referenz verlinkt werden.
 
   - type: textarea
     id: additional-context
     attributes:
-      label: Additional context
-      description: Any other context or screenshots about the feature request here.
+      label: Zusätzlicher Kontext
+      description: Weitere Informationen, Screenshots oder technische Hinweise.
 
   - type: checkboxes
     id: checkboxes
     attributes:
-      label: Validations
-      description: Before submitting the issue, please make sure you do the following
+      label: Vor dem Absenden
+      description: Bitte prüfe die folgenden Punkte.
       options:
-        - label: Check the feature is not already implemented in the project.
+        - label: Die gewünschte Funktion ist noch nicht in OstseeBit Tools vorhanden.
           required: true
-        - label: Check that there isn't already an issue that request the same feature to avoid creating a duplicate.
+        - label: Es gibt noch kein offenes Issue mit demselben Vorschlag.
           required: true
-        - label: Check that the feature can be implemented in a client side only app (OstseeBit Tools is client side only, no server).
+        - label: Die Funktion kann grundsätzlich in einer clientseitigen Anwendung umgesetzt werden oder beschreibt ausdrücklich eine Änderung an Self-Hosting, Build oder Deployment.
           required: true

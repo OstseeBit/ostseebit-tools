@@ -1,8 +1,7 @@
-/* CONTINUATION */
+/* MAINTENANCE */
 Maintainer: OstseeBit
 Repository: https://github.com/OstseeBit/ostseebit-tools
 
-/* ORIGINAL PROJECT */
-IT-Tools, created by Corentin Thomasset and developed with its contributors.
-Upstream: https://github.com/CorentinTh/it-tools
-License: GNU GPLv3; see LICENSE and NOTICE.md in the source repository.
+/* LICENSE AND ATTRIBUTION */
+License: GNU GPLv3
+Original authors and source provenance: https://github.com/OstseeBit/ostseebit-tools/blob/main/NOTICE.md

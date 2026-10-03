@@ -1,25 +1,45 @@
-<!-- Thank you for contributing! -->
+<!-- Danke für deinen Beitrag zu OstseeBit Tools. -->
 
-### Description
+## Beschreibung
 
-<!-- Please insert your description here and provide especially info about the "what" this PR is solving -->
+<!-- Was wird mit diesem Pull Request geändert und warum? -->
 
-### Additional context
+## Bezug zu Issues
 
-<!-- e.g. is there anything you'd like reviewers to focus on? -->
+<!-- Optional: z. B. "Fixes #123" oder "Related to #123" -->
+
+## Zusätzlicher Kontext
+
+<!-- Gibt es Risiken, Abhängigkeiten oder Punkte, auf die beim Review besonders geachtet werden soll? -->
 
 ---
 
-### What is the purpose of this pull request? <!-- (put an "X" next to an item) -->
+## Art der Änderung
 
-- [ ] Bug fix
-- [ ] New Feature
-- [ ] Documentation update
-- [ ] Other
+- [ ] Fehlerbehebung
+- [ ] Neue Funktion oder neues Tool
+- [ ] Dokumentation
+- [ ] Refactoring / Wartung
+- [ ] Build / CI/CD / Self-Hosting
+- [ ] Sonstiges
 
-### Before submitting the PR, please make sure you do the following
+## Prüfung vor dem Absenden
 
-- [ ] Submit the PR against the `dev` branch.
-- [ ] Check that there isn't already a PR that solves the problem the same way to avoid creating a duplicate.
-- [ ] Provide a description in this PR that addresses **what** the PR is solving, or reference the issue that it solves (e.g. `fixes #123`).
-- [ ] Ideally, include relevant tests that fail without this PR but pass with it.
+- [ ] Der Pull Request richtet sich gegen den Branch `main`.
+- [ ] Es gibt keinen bereits offenen Pull Request mit derselben Änderung.
+- [ ] Die Beschreibung erklärt nachvollziehbar, was geändert wird und warum.
+- [ ] Relevante Tests wurden ergänzt oder bestehende Tests wurden ausgeführt.
+- [ ] `OstseeBit` und `OstseeBit Tools` werden konsistent geschrieben.
+- [ ] Bestehende Herkunfts-, Lizenz- und Drittanbieterhinweise wurden nicht verfälscht.
+- [ ] Logo, Bildmaterial oder UI-Design wurden nur verändert, wenn dies ausdrücklich Bestandteil dieses Pull Requests ist.
+
+## Durchgeführte Prüfungen
+
+<!-- Zutreffendes ankreuzen bzw. ergänzen. -->
+
+- [ ] Typecheck
+- [ ] Lint
+- [ ] Unit-Tests
+- [ ] Produktions-Build
+- [ ] E2E-/Browser-Test
+- [ ] Nicht erforderlich / Begründung angegeben
