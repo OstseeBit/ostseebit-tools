@@ -3,69 +3,148 @@
   <img src="./.github/logo-dark.svg" alt="OstseeBit Tools" width="640">
 </picture>
 
-Handy online tools for developers and IT professionals, maintained by **OstseeBit**.
+# OstseeBit Tools
 
-Source provenance and original-author attribution are documented in
-[NOTICE.md](NOTICE.md) and the [baseline report](docs/BASELINE.md).
+OstseeBit Tools ist eine Sammlung praktischer Werkzeuge für Entwicklung, Administration, Netzwerk und IT.
 
-## Status
+Das Projekt wird von **OstseeBit** weitergeführt und basiert auf dem Open-Source-Projekt **it-tools**. Herkunft, ursprüngliche Urheberschaft und die übernommene Ausgangsbasis sind in [NOTICE.md](NOTICE.md) und im [Baseline-Bericht](docs/BASELINE.md) dokumentiert.
 
-The application is being rebranded as OstseeBit Tools. The imported source baseline,
-LICENSE and dependency lockfile are preserved. The rebranding PR remains a draft
-until build and runtime validation is complete. No OstseeBit container image or
-production deployment is currently advertised.
+## Projektstatus
 
-- [Report a bug or request a tool](https://github.com/OstseeBit/ostseebit-tools/issues/new/choose)
-- [Rebranding inventory](docs/REBRANDING-INVENTORY.md)
-- [Validation report](docs/REBRANDING-VALIDATION.md)
+OstseeBit Tools befindet sich im kontrollierten Umbau von der übernommenen Ausgangsbasis zu einer eigenständig gepflegten OstseeBit-Version.
 
-## Development
+Der aktuelle Stand wurde lokal erfolgreich geprüft:
 
-The upstream manifest specifies pnpm **9.11.0**. The baseline uses Node 18.18.2 in
-.nvmrc and Node 20 in its inherited CI; selecting a consistent supported toolchain
-is a separate modernization change. Use an isolated environment and the preserved
-lockfile. Do not run unrestricted upgrades to resolve a build failure.
+- TypeScript-Typecheck erfolgreich
+- ESLint ohne Fehler
+- Produktions-Build erfolgreich
+- 33 Testdateien erfolgreich
+- 138 Unit-Tests erfolgreich
+- Tracking- und Sponsoring-Komponenten aus der Anwendung entfernt
+- OstseeBit-Branding integriert
+- Projektversion auf `0.1.0` umgestellt
+
+Die technische Plattform und die Abhängigkeiten werden anschließend schrittweise modernisiert. Größere Versionssprünge erfolgen bewusst getrennt und werden jeweils einzeln validiert.
+
+## Entwicklung
+
+Das Projekt verwendet aktuell unter anderem:
+
+- Vue 3
+- TypeScript
+- Vite
+- Naive UI
+- UnoCSS
+- Vitest
+- Playwright
+- pnpm
+
+Abhängigkeiten installieren:
 
 ```sh
-corepack enable
-pnpm install --frozen-lockfile
-pnpm dev
+corepack pnpm install --frozen-lockfile
 ```
 
-Checks after installing dependencies:
+Entwicklungsserver starten:
 
 ```sh
-pnpm lint
-pnpm typecheck
-pnpm exec vitest run --environment jsdom
-pnpm build
-pnpm test:e2e
+corepack pnpm dev
 ```
 
-The inherited build script uses POSIX environment-variable syntax; use a Linux
-environment for that script or invoke its two build steps explicitly on Windows.
+Produktions-Build erstellen:
 
-Create a tool with `pnpm run script:create:tool my-tool-name`.
-Vue 3, TypeScript, Naive UI, Vite, Vitest and Playwright are used by the project.
+```sh
+corepack pnpm build
+```
 
-## Self-hosting and privacy
+Wichtige Prüfungen:
 
-The existing Dockerfile builds a static application served by nginx. Its floating
-base images and unpinned global pnpm installation need review before release.
-Inherited CI and test workflows remain in `.github/workflows-disabled/`.
-Inherited release and nightly publishing workflows have been removed. Publishing
-requires a separate review and an OstseeBit-owned registry destination.
+```sh
+corepack pnpm typecheck
+corepack pnpm lint
+corepack pnpm exec vitest run --environment jsdom
+corepack pnpm build
+```
 
-The Plausible integration, tracking configuration, social links and sponsorship UI
-have been removed from the application. An unused `plausible-tracker` dependency
-remains in the preserved manifest/lockfile until a separate dependency cleanup.
-No production URL or analytics endpoint is configured by this rebranding.
+Ein neues Tool kann über das vorhandene Generator-Skript angelegt werden:
 
-## Attribution and license
+```sh
+corepack pnpm run script:create:tool my-tool-name
+```
 
-Original-author attribution and source provenance: [NOTICE.md](NOTICE.md).
-Continuation maintainer: [OstseeBit](https://github.com/OstseeBit).
+## Toolchain
 
-This project is distributed under [GNU GPLv3](LICENSE), without warranty.
-Existing copyright and third-party notices remain applicable. Before distributing
-built artifacts, provide their corresponding source and applicable license notices.
+Die übernommene Ausgangsbasis enthält derzeit noch unterschiedliche Toolchain-Vorgaben:
+
+- `.nvmrc`: Node.js 18.18.2
+- bisherige CI-Konfiguration: Node.js 20
+- `packageManager`: pnpm 9.11.0
+
+Diese Unterschiede werden im Rahmen der geplanten Plattformmodernisierung kontrolliert bereinigt.
+
+Abhängigkeiten sollten bis dahin nicht pauschal mit `--latest`, `--force` oder vergleichbaren Verfahren aktualisiert werden.
+
+## Self-Hosting
+
+Der vorhandene Docker-Build erzeugt eine statische Webanwendung, die über nginx bereitgestellt wird.
+
+Die Container- und CI-Konfiguration stammt teilweise noch aus der übernommenen Ausgangsbasis und wird vor einer offiziellen OstseeBit-Veröffentlichung separat überarbeitet.
+
+Insbesondere werden noch geprüft:
+
+- Basis-Images und deren Versionierung
+- pnpm-Installation im Container
+- CI/CD-Workflows
+- Release-Prozess
+- Registry-Ziel
+- reproduzierbare Builds
+- Security- und Dependency-Prüfungen
+
+Aktuell wird kein offizielles OstseeBit-Container-Image veröffentlicht.
+
+## Datenschutz
+
+Im Rahmen des OstseeBit-Rebrandings wurden unter anderem entfernt:
+
+- Plausible-Integration in der Anwendung
+- Analytics-Konfiguration
+- Social-Media-Verknüpfungen
+- Sponsoring-Oberflächen
+
+Eine ältere `plausible-tracker`-Abhängigkeit kann in der übernommenen Dependency-Basis noch vorhanden sein und wird im Rahmen der geplanten Abhängigkeitsbereinigung separat behandelt.
+
+Für den aktuellen Stand ist kein produktiver Analytics-Endpunkt konfiguriert.
+
+## Fehler melden und neue Tools vorschlagen
+
+Fehler, Verbesserungsvorschläge und neue Tool-Ideen können über die GitHub-Issues eingereicht werden:
+
+[Issue erstellen](https://github.com/OstseeBit/ostseebit-tools/issues/new/choose)
+
+Weitere Projektdokumentation:
+
+- [Rebranding-Inventar](docs/REBRANDING-INVENTORY.md)
+- [Validierungsbericht](docs/REBRANDING-VALIDATION.md)
+- [Baseline-Bericht](docs/BASELINE.md)
+- [Urheberschaft und Herkunft](NOTICE.md)
+
+## Herkunft und Weiterentwicklung
+
+OstseeBit Tools ist keine Neuentwicklung des ursprünglichen Projekts.
+
+Die Codebasis basiert auf dem Open-Source-Projekt:
+
+**it-tools**
+Originalprojekt: `CorentinTh/it-tools`
+
+OstseeBit führt diese Codebasis unter Einhaltung der bestehenden Lizenz weiter, passt sie an und entwickelt darauf aufbauend eigene Änderungen und Erweiterungen.
+
+Die genaue übernommene Ausgangsbasis und weitere Herkunftsinformationen sind in [NOTICE.md](NOTICE.md) und [docs/BASELINE.md](docs/BASELINE.md) dokumentiert.
+
+## Lizenz
+
+Dieses Projekt wird unter der [GNU General Public License Version 3](LICENSE) bereitgestellt.
+
+Bestehende Copyright-, Lizenz- und Drittanbieterhinweise bleiben gültig.
+
+Bei der Weitergabe kompilierter oder anderweitig verteilter Versionen sind die Bedingungen der GPLv3 einschließlich der Bereitstellung des entsprechenden Quellcodes und der erforderlichen Lizenzhinweise zu beachten.
