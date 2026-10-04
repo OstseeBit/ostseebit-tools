@@ -13,6 +13,7 @@ const props = withDefaults(
     href?: string
     to?: RouteLocationRaw
     size?: 'small' | 'medium' | 'large'
+    testId?: string
   }>(),
   {
     type: 'default',
@@ -23,11 +24,12 @@ const props = withDefaults(
     href: undefined,
     to: undefined,
     size: 'medium',
+    testId: undefined,
   },
 );
 const emits = defineEmits(['click']);
 
-const { variant, disabled, round, circle, href, type, to, size: sizeName } = toRefs(props);
+const { variant, disabled, round, circle, href, type, to, size: sizeName, testId } = toRefs(props);
 
 function handleClick(event: MouseEvent) {
   if (!disabled.value) {
@@ -58,6 +60,7 @@ const size = computed(() => theme.value.size[sizeName.value]);
     class="c-button"
     :class="{ disabled, round, circle }"
     :to="to"
+    :data-test-id="testId"
     @click="handleClick"
   >
     <slot />

@@ -1,8 +1,8 @@
-import { HttpRound } from '@vicons/material';
-import { defineTool } from '../tool';
-
-import { codesByCategories } from './http-status-codes.constants';
+import HttpRound from '@vicons/material/es/HttpRound';
 import { translate } from '@/plugins/i18n.plugin';
+
+import { defineTool } from '../tool';
+import { codesByCategories } from './http-status-codes.constants';
 
 export const tool = defineTool({
   name: translate('tools.http-status-codes.title'),

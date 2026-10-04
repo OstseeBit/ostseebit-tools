@@ -1,31 +1,29 @@
 <script setup lang="ts">
 import type { Editor } from '@tiptap/vue-3';
-import {
-  ArrowBack,
-  ArrowForwardUp,
-  Blockquote,
-  Bold,
-  ClearFormatting,
-  Code,
-  CodePlus,
-  H1,
-  H2,
-  H3,
-  H4,
-  Italic,
-  List,
-  ListNumbers,
-  Strikethrough,
-  TextWrap,
-} from '@vicons/tabler';
 import type { Component } from 'vue';
+import ArrowBack from '@vicons/tabler/es/ArrowBack';
+import ArrowForwardUp from '@vicons/tabler/es/ArrowForwardUp';
+import Blockquote from '@vicons/tabler/es/Blockquote';
+import Bold from '@vicons/tabler/es/Bold';
+import ClearFormatting from '@vicons/tabler/es/ClearFormatting';
+import Code from '@vicons/tabler/es/Code';
+import CodePlus from '@vicons/tabler/es/CodePlus';
+import H1 from '@vicons/tabler/es/H1';
+import H2 from '@vicons/tabler/es/H2';
+import H3 from '@vicons/tabler/es/H3';
+import H4 from '@vicons/tabler/es/H4';
+import Italic from '@vicons/tabler/es/Italic';
+import List from '@vicons/tabler/es/List';
+import ListNumbers from '@vicons/tabler/es/ListNumbers';
+import Strikethrough from '@vicons/tabler/es/Strikethrough';
+import TextWrap from '@vicons/tabler/es/TextWrap';
 import MenuBarItem from './menu-bar-item.vue';
 
 const props = defineProps<{ editor: Editor }>();
 const { editor } = toRefs(props);
 
-type MenuItem =
-  | {
+type MenuItem
+  = | {
     icon: Component
     title: string
     action: () => void

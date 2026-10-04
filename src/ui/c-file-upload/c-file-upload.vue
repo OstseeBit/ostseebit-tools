@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import _ from 'lodash';
+import { useAppTheme } from '../theme/themes';
 
 const props = withDefaults(defineProps<{
   multiple?: boolean
@@ -15,6 +16,8 @@ const emit = defineEmits<{
   (event: 'filesUpload', files: File[]): void
   (event: 'fileUpload', file: File): void
 }>();
+
+const appTheme = useAppTheme();
 
 const { multiple } = toRefs(props);
 
@@ -55,7 +58,7 @@ function handleUpload(files: FileList | null | undefined) {
 
 <template>
   <div
-    class="flex flex-col cursor-pointer items-center justify-center border-2px border-gray-300 border-opacity-50 rounded-lg border-dashed p-8 transition-colors"
+    class="upload-zone flex flex-col cursor-pointer items-center justify-center border-2px rounded-lg border-dashed p-8 transition-colors"
     :class="{
       'border-primary border-opacity-100': isOverDropZone,
     }"
@@ -80,11 +83,11 @@ function handleUpload(files: FileList | null | undefined) {
 
       <!-- separator -->
       <div my-4 w-full flex items-center justify-center op-70>
-        <div class="h-1px max-w-100px flex-1 bg-gray-300 op-50" />
-        <div class="mx-2 text-gray-400">
+        <div class="separator-line h-1px max-w-100px flex-1 op-50" />
+        <div class="separator-text mx-2">
           or
         </div>
-        <div class="h-1px max-w-100px flex-1 bg-gray-300 op-50" />
+        <div class="separator-line h-1px max-w-100px flex-1 op-50" />
       </div>
 
       <c-button>
@@ -93,3 +96,17 @@ function handleUpload(files: FileList | null | undefined) {
     </slot>
   </div>
 </template>
+
+<style lang="less" scoped>
+.upload-zone {
+  border-color: v-bind('appTheme.text.mutedColor');
+}
+
+.separator-line {
+  background-color: v-bind('appTheme.text.mutedColor');
+}
+
+.separator-text {
+  color: v-bind('appTheme.text.mutedColor');
+}
+</style>

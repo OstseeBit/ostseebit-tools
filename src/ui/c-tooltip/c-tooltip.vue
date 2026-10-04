@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const props = withDefaults(defineProps<{ tooltip?: string; position?: 'top' | 'bottom' | 'left' | 'right' }>(), {
+const props = withDefaults(defineProps<{ tooltip?: string, position?: 'top' | 'bottom' | 'left' | 'right' }>(), {
   tooltip: undefined,
   position: 'top',
 });
@@ -17,7 +17,7 @@ const isTargetHovered = useElementHover(targetRef);
 
     <div
       v-if="tooltip || $slots.tooltip"
-      class="absolute z-10 whitespace-nowrap rounded bg-black px-12px py-6px text-sm text-white shadow-lg transition transition transition-duration-0.2s"
+      class="absolute z-10 whitespace-nowrap rounded bg-black px-12px py-6px text-sm text-white shadow-lg transition transition-duration-0.2s"
       :class="{
         'op-0 scale-0': isTargetHovered === false,
         'op-100 scale-100': isTargetHovered,

@@ -1,6 +1,6 @@
-import { AbcRound } from '@vicons/material';
-import { defineTool } from '../tool';
+import AbcRound from '@vicons/material/es/AbcRound';
 import { translate } from '@/plugins/i18n.plugin';
+import { defineTool } from '../tool';
 
 export const tool = defineTool({
   name: translate('tools.slugify-string.title'),

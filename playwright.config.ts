@@ -9,19 +9,24 @@ const useWebServer = process.env.NO_WEB_SERVER !== 'true';
  */
 export default defineConfig({
   testDir: './src',
+  testIgnore: '**/pwa.e2e.spec.ts',
+  outputDir: './test-results/production',
   testMatch: /\.e2e\.(spec\.)?ts$/,
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: isCI,
+  failOnFlakyTests: true,
   /* Retry on CI only */
   retries: isCI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: isCI ? 1 : undefined,
+  workers: isCI ? 1 : 2,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
+    // Functional tests isolate background caching; test:pwa verifies offline operation.
+    serviceWorkers: 'block',
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: baseUrl,
 
@@ -56,9 +61,10 @@ export default defineConfig({
   ...(useWebServer
     && {
       webServer: {
-        command: 'npm run preview',
-        url: 'http://localhost:5050',
-        reuseExistingServer: !isCI,
+        command: 'corepack pnpm preview --host 127.0.0.1 --strictPort',
+        url: baseUrl,
+        reuseExistingServer: false,
+        timeout: 120000,
       },
     }
   ),

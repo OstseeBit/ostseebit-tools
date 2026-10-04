@@ -1,13 +1,13 @@
 <script setup lang="ts">
+import type { OGSchemaType, OGSchemaTypeElementSelect } from './OGSchemaType.type';
 import { generateMeta } from '@it-tools/oggen';
 import _ from 'lodash';
-import { image, ogSchemas, twitter, website } from './og-schemas';
-import type { OGSchemaType, OGSchemaTypeElementSelect } from './OGSchemaType.type';
 import TextareaCopyable from '@/components/TextareaCopyable.vue';
+import { image, ogSchemas, twitter, website } from './og-schemas';
 
 // Since type guards do not work in template
 
-const metadata = ref<{ type: string; [k: string]: any }>({
+const metadata = ref<{ type: string, [k: string]: any }>({
   'type': 'website',
   'twitter:card': 'summary_large_image',
 });
@@ -72,7 +72,7 @@ const metaTags = computed(() => {
           :show-sort-button="true"
         />
 
-        <c-select
+        <n-select
           v-else-if="type === 'select'"
           v-model:value="metadata[key]"
           w-full

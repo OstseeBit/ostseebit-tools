@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { Plus, Trash } from '@vicons/tabler';
+import Plus from '@vicons/tabler/es/Plus';
+import Trash from '@vicons/tabler/es/Trash';
 import { useStorage } from '@vueuse/core';
 import _ from 'lodash';
 
-import { arrayToMarkdownTable, computeAverage, computeVariance } from './benchmark-builder.models';
-import DynamicValues from './dynamic-values.vue';
 import { useCopy } from '@/composable/copy';
+import { arrayToMarkdownTable, computeAverage, computeVariance } from './benchmark-builder.service';
+import DynamicValues from './dynamic-values.vue';
 
 const suites = useStorage('benchmark-builder:suites', [
   { title: 'Suite 1', data: [5, 10] },

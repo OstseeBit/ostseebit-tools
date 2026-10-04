@@ -15,10 +15,6 @@ interface GroupCapture {
 };
 
 export function matchRegex(regex: string, text: string, flags: string) {
-  // if (regex === '' || text === '') {
-  //   return [];
-  // }
-
   let lastIndex = -1;
   const re = new RegExp(regex, flags);
   const results = [];
@@ -30,7 +26,7 @@ export function matchRegex(regex: string, text: string, flags: string) {
     const indices = match.indices;
     const captures: Array<GroupCapture> = [];
     Object.entries(match).forEach(([captureName, captureValue]) => {
-      if (captureName !== '0' && captureName.match(/\d+/)) {
+      if (captureName !== '0' && /\d+/.test(captureName)) {
         captures.push({
           name: captureName,
           value: captureValue,

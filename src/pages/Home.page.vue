@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { IconDragDrop } from '@tabler/icons-vue';
+import IconDragDrop from '@tabler/icons-vue/dist/esm/icons/IconDragDrop.mjs';
 import { useHead } from '@vueuse/head';
 import { computed } from 'vue';
 import Draggable from 'vuedraggable';
-import ToolCard from '../components/ToolCard.vue';
-import { useToolStore } from '@/tools/tools.store';
 import { brand } from '@/branding';
+import { useToolStore } from '@/tools/tools.store';
+import ToolCard from '../components/ToolCard.vue';
 
 const toolStore = useToolStore();
 
-useHead({ title: `${brand.name} - Handy online tools for developers` });
+useHead({ title: `${brand.name} - ${brand.description}` });
 const { t } = useI18n();
 
 const favoriteTools = computed(() => toolStore.favoriteTools);

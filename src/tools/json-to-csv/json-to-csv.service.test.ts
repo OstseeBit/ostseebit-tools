@@ -69,21 +69,15 @@ describe('json-to-csv service', () => {
         { a: 'hello, world', b: 2 },
       ];
 
-      expect(convertArrayToCsv({ array })).toMatchInlineSnapshot(`
-        "a,b
-        \\"hello, world\\",2"
-      `);
+      expect(convertArrayToCsv({ array })).toBe('a,b\n"hello, world",2');
     });
 
-    it('when a value contains a double quote, it is escaped with another double quote', () => {
+    it('preserves the existing backslash escaping for double quotes', () => {
       const array = [
         { a: 'hello "world"', b: 2 },
       ];
 
-      expect(convertArrayToCsv({ array })).toMatchInlineSnapshot(`
-        "a,b
-        hello \\\\\\"world\\\\\\",2"
-      `);
+      expect(convertArrayToCsv({ array })).toBe('a,b\nhello \\"world\\",2');
     });
   });
 });

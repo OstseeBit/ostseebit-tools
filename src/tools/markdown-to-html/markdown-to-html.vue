@@ -1,15 +1,19 @@
 <script setup lang="ts">
+import DomPurify from 'dompurify';
 import markdownit from 'markdown-it';
 import TextareaCopyable from '@/components/TextareaCopyable.vue';
 
 const inputMarkdown = ref('');
 const outputHtml = computed(() => {
   const md = markdownit();
-  return md.render(inputMarkdown.value);
+  // Sanitized even though markdown-it's defaults already escape raw HTML —
+  // this is the only line of defense if that ever changes (e.g. an html-passthrough
+  // plugin or `html: true` gets added later), matching the c-markdown component.
+  return DomPurify.sanitize(md.render(inputMarkdown.value));
 });
 
 function printHtml() {
-  const w = window.open();
+  const w = window.open(undefined, undefined, 'noopener');
   if (w === null) {
     return;
   }

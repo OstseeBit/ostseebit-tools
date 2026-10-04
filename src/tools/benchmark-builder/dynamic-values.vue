@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { Plus, Trash } from '@vicons/tabler';
+import Plus from '@vicons/tabler/es/Plus';
+import Trash from '@vicons/tabler/es/Trash';
 import { useTemplateRefsList, useVModel } from '@vueuse/core';
 import { NInputNumber } from 'naive-ui';
 import { nextTick } from 'vue';

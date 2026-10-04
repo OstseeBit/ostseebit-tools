@@ -1,19 +1,14 @@
 <script setup lang="ts">
-import { stringify as stringifyToml } from 'iarna-toml-esm';
+import { stringify as stringifyToml } from 'smol-toml';
 import { parse as parseYaml } from 'yaml';
+import { createParseValidationRule } from '@/composable/validation';
 import { withDefaultOnError } from '../../utils/defaults';
-import type { UseValidationRule } from '@/composable/validation';
 
 const convertYamlToToml = (value: string) => [stringifyToml(parseYaml(value))].flat().join('\n').trim();
 
 const transformer = (value: string) => value.trim() === '' ? '' : withDefaultOnError(() => convertYamlToToml(value), '');
 
-const rules: UseValidationRule<string>[] = [
-  {
-    validator: (v: string) => v === '' || parseYaml(v),
-    message: 'Provided JSON is not valid.',
-  },
-];
+const rules = [createParseValidationRule(v => parseYaml(v), 'YAML')];
 </script>
 
 <template>

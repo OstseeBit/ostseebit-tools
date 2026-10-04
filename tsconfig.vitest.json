@@ -1,9 +1,8 @@
 {
   "extends": "./tsconfig.app.json",
-  "exclude": [],
   "compilerOptions": {
     "composite": true,
-    "lib": [],
-    "types": ["node", "jsdom", "unplugin-icons/types/vue"]
-  }
+    "types": ["node", "jsdom", "naive-ui/volar", "@intlify/unplugin-vue-i18n/messages", "unplugin-icons/types/vue"]
+  },
+  "exclude": []
 }

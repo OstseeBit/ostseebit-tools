@@ -1,6 +1,6 @@
-import { Braces } from '@vicons/tabler';
-import { defineTool } from '../tool';
+import Braces from '@vicons/tabler/es/Braces';
 import { translate } from '@/plugins/i18n.plugin';
+import { defineTool } from '../tool';
 
 export const tool = defineTool({
   name: translate('tools.json-minify.title'),

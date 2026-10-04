@@ -15,7 +15,7 @@ import {
 import InputCopyable from '../../components/InputCopyable.vue';
 
 const baseConfig = {
-  stripRegexp: /[^A-Za-zÀ-ÖØ-öø-ÿ]+/gi,
+  stripRegexp: /[^a-z\xDF-\xF6\xF8-\xFF]+/gi,
 };
 
 const input = ref('lorem ipsum dolor sit amet');
@@ -86,7 +86,7 @@ const inputLabelAlignmentConfig = {
   labelPosition: 'left',
   labelWidth: '120px',
   labelAlign: 'right',
-};
+} as const;
 </script>
 
 <template>

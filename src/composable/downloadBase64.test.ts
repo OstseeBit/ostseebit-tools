@@ -1,32 +1,45 @@
-import { describe, expect, it } from 'vitest';
-import { getMimeTypeFromBase64 } from './downloadBase64';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { ref } from 'vue';
+import { getExtensionFromMimeType, getMimeTypeFromBase64, getMimeTypeFromExtension, previewImageFromBase64, useDownloadFileFromBase64 } from './downloadBase64';
 
-describe('downloadBase64', () => {
-  describe('getMimeTypeFromBase64', () => {
-    it('when the base64 string has a data URI, it returns the mime type', () => {
-      expect(getMimeTypeFromBase64({ base64String: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA' })).to.deep.equal({ mimeType: 'image/png' });
-      expect(getMimeTypeFromBase64({ base64String: 'data:image/jpg;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA' })).to.deep.equal({ mimeType: 'image/jpg' });
+afterEach(() => {
+  vi.restoreAllMocks();
+  document.body.replaceChildren();
+});
+
+describe('base64 file downloads', () => {
+  it.each([
+    ['SGVsbG8=', undefined, undefined, 'data:text/plain;base64,SGVsbG8=', 'file.txt'],
+    ['SGVsbG8=', 'report', 'txt', 'data:text/plain;base64,SGVsbG8=', 'report.txt'],
+    ['SGVsbG8=', 'report.txt', '.txt', 'data:text/plain;base64,SGVsbG8=', 'report.txt'],
+    ['SGVsbG8=', 'report', 'unknown-extension', 'data:application/octet-stream;base64,SGVsbG8=', 'report.unknown-extension'],
+    ['iVBORw0KGgo=', undefined, '', 'data:image/png;base64,iVBORw0KGgo=', 'file.png'],
+    ['data:image/png;base64,iVBORw0KGgo=', undefined, undefined, 'data:image/png;base64,iVBORw0KGgo=', 'file.png'],
+    ['data:application/x-custom;base64,SGVsbG8=', undefined, undefined, 'data:application/x-custom;base64,SGVsbG8=', 'file.txt'],
+  ])('downloads %s with the correct data URL and filename', (source, filename, extension, url, expectedName) => {
+    let anchor: { href: string, download: string } | undefined;
+    vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(function (this: HTMLAnchorElement) {
+      anchor = { href: this.href, download: this.download };
     });
+    useDownloadFileFromBase64({ source: ref(source), filename, extension }).download();
+    expect(anchor?.href).toBe(url);
+    expect(anchor?.download).toBe(expectedName);
+  });
 
-    it('when the base64 string has no data URI, it try to infer the mime type from the signature', () => {
-      // https://en.wikipedia.org/wiki/List_of_file_signatures
+  it('rejects an empty download', () => {
+    expect(() => useDownloadFileFromBase64({ source: ref('') }).download()).toThrow('Base64 string is empty');
+  });
 
-      // PNG
-      expect(getMimeTypeFromBase64({ base64String: 'iVBORw0KGgoAAAANSUhEUgAAAAUA' })).to.deep.equal({ mimeType: 'image/png' });
+  it('resolves both MIME lookup directions and JPEG signatures', () => {
+    expect(getMimeTypeFromExtension('txt')).toBe('text/plain');
+    expect(getExtensionFromMimeType('text/plain')).toBe('txt');
+    expect(getMimeTypeFromBase64({ base64String: '/9j/AAAA' }).mimeType).toBe('image/jpeg');
+  });
 
-      // GIF
-      expect(getMimeTypeFromBase64({ base64String: 'R0lGODdh' })).to.deep.equal({ mimeType: 'image/gif' });
-      expect(getMimeTypeFromBase64({ base64String: 'R0lGODlh' })).to.deep.equal({ mimeType: 'image/gif' });
-
-      // JPG
-      expect(getMimeTypeFromBase64({ base64String: '/9j/' })).to.deep.equal({ mimeType: 'image/jpg' });
-
-      // PDF
-      expect(getMimeTypeFromBase64({ base64String: 'JVBERi0' })).to.deep.equal({ mimeType: 'application/pdf' });
-    });
-
-    it('when the base64 string has no data URI and no signature, it returns an undefined mimeType', () => {
-      expect(getMimeTypeFromBase64({ base64String: 'JVBERi' })).to.deep.equal({ mimeType: undefined });
-    });
+  it('previews raw image bytes with a data URL', () => {
+    const container = document.createElement('div');
+    container.id = 'previewContainer';
+    document.body.append(container);
+    expect(previewImageFromBase64('iVBORw0KGgo=').src).toBe('data:image/png;base64,iVBORw0KGgo=');
   });
 });

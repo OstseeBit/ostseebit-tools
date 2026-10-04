@@ -1,4 +1,4 @@
-import { Mailbox } from '@vicons/tabler';
+import Mailbox from '@vicons/tabler/es/Mailbox';
 import { defineTool } from '../tool';
 
 export const tool = defineTool({

@@ -12,10 +12,10 @@ import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
 import Components from 'unplugin-vue-components/vite';
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
-import markdown from 'vite-plugin-vue-markdown';
+import markdown from 'unplugin-vue-markdown/vite';
 import svgLoader from 'vite-svg-loader';
 import { configDefaults } from 'vitest/config';
-import { brand } from './src/branding';
+import { brand } from './src/branding.ts';
 
 const baseUrl = process.env.BASE_URL ?? '/';
 
@@ -24,12 +24,11 @@ export default defineConfig({
   plugins: [
     VueI18n({
       runtimeOnly: true,
-      jitCompilation: true,
       compositionOnly: true,
       fullInstall: true,
       strictMessage: false,
       include: [
-        resolve(__dirname, 'locales/**'),
+        resolve(import.meta.dirname, 'locales/**'),
       ],
     }),
     AutoImport({
@@ -52,16 +51,21 @@ export default defineConfig({
       include: [/\.vue$/, /\.md$/],
     }),
     vueJsx(),
-    markdown(),
+    markdown({}),
     svgLoader(),
     VitePWA({
       registerType: 'autoUpdate',
       strategies: 'generateSW',
+      workbox: {
+        // Include the existing Monaco editor and MAC vendor database in offline precaching.
+        // Keep a bounded limit; bundle splitting is tracked separately in the roadmap.
+        maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
+      },
       manifest: {
         name: brand.name,
         description: brand.description,
         display: 'standalone',
-        lang: 'en',
+        lang: 'de',
         start_url: baseUrl,
         orientation: 'any',
         theme_color: brand.themeColor,
@@ -92,6 +96,8 @@ export default defineConfig({
       },
     }),
     Components({
+      // TSX components use explicit imports; dotted Vue filenames are not valid globals.
+      dtsTsx: false,
       dirs: ['src/'],
       extensions: ['vue', 'md'],
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
@@ -99,10 +105,20 @@ export default defineConfig({
     }),
     Unocss(),
   ],
+  // Auto-registered components and lazy tools must be scanned before the first navigation.
+  optimizeDeps: {
+    entries: ['index.html', 'src/**/*.vue'],
+  },
   base: baseUrl,
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
+      // sax (via xml-js) extends Node's `stream` module for its SAXStream
+      // class; Vite replaces unaliased Node builtins with an empty
+      // browser-external stub, which makes that class definition crash with
+      // "Cannot read properties of undefined (reading 'prototype')" the
+      // moment xml-js is imported, regardless of which part of it is used.
+      stream: 'stream-browserify',
     },
   },
   define: {

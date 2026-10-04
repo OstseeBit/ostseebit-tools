@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { types as extensionToMimeType, extensions as mimeTypeToExtension } from 'mime-types';
+import { extensionToMimeType, mimeTypeToExtension } from './mime-types.service';
 
 const mimeInfos = Object.entries(mimeTypeToExtension).map(([mimeType, extensions]) => ({ mimeType, extensions }));
 

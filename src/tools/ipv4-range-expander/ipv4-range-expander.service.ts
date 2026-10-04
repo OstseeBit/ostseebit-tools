@@ -1,12 +1,8 @@
-import { convertBase } from '../integer-base-converter/integer-base-converter.model';
-import { ipv4ToInt } from '../ipv4-address-converter/ipv4-address-converter.service';
 import type { Ipv4RangeExpanderResult } from './ipv4-range-expander.types';
+import { convertBase } from '../integer-base-converter/integer-base-converter.service';
+import { intToIpv4, ipv4ToInt } from '../ipv4-address-converter/ipv4-address-converter.service';
 
 export { calculateCidr };
-
-function bits2ip(ipInt: number) {
-  return `${ipInt >>> 24}.${(ipInt >> 16) & 255}.${(ipInt >> 8) & 255}.${ipInt & 255}`;
-}
 
 function getRangesize(start: string, end: string) {
   if (start == null || end == null) {
@@ -40,7 +36,7 @@ function getCidr(start: string, end: string) {
   return { start: newStart, end: newEnd, mask };
 }
 
-function calculateCidr({ startIp, endIp }: { startIp: string; endIp: string }) {
+function calculateCidr({ startIp, endIp }: { startIp: string, endIp: string }) {
   const start = convertBase({
     value: ipv4ToInt({ ip: startIp }).toString(),
     fromBase: 10,
@@ -55,8 +51,8 @@ function calculateCidr({ startIp, endIp }: { startIp: string; endIp: string }) {
   const cidr = getCidr(start, end);
   if (cidr != null) {
     const result: Ipv4RangeExpanderResult = {};
-    result.newEnd = bits2ip(Number.parseInt(cidr.end, 2));
-    result.newStart = bits2ip(Number.parseInt(cidr.start, 2));
+    result.newEnd = intToIpv4(Number.parseInt(cidr.end, 2));
+    result.newStart = intToIpv4(Number.parseInt(cidr.start, 2));
     result.newCidr = `${result.newStart}/${cidr.mask}`;
     result.newSize = getRangesize(cidr.start, cidr.end);
 

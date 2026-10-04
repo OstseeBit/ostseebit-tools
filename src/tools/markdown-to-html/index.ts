@@ -1,4 +1,4 @@
-import { Markdown } from '@vicons/tabler';
+import Markdown from '@vicons/tabler/es/Markdown';
 import { defineTool } from '../tool';
 
 export const tool = defineTool({
