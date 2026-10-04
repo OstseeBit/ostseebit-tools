@@ -1,30 +1,22 @@
 <script setup lang="ts">
-import * as monaco from 'monaco-editor';
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
+import EditorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker';
 import { useStyleStore } from '@/stores/style.store';
+import { defineDiffEditorThemes } from './c-diff-editor.theme';
+import 'monaco-editor/esm/vs/editor/edcore.main';
 
 const props = withDefaults(defineProps<{ options?: monaco.editor.IDiffEditorOptions }>(), { options: () => ({}) });
+
+globalThis.window.MonacoEnvironment = {
+  getWorker: () => new EditorWorker(),
+};
+
 const { options } = toRefs(props);
 
 const editorContainer = ref<HTMLElement | null>(null);
 let editor: monaco.editor.IStandaloneDiffEditor | null = null;
 
-monaco.editor.defineTheme('ostseebit-tools-dark', {
-  base: 'vs-dark',
-  inherit: true,
-  rules: [],
-  colors: {
-    'editor.background': '#00000000',
-  },
-});
-
-monaco.editor.defineTheme('ostseebit-tools-light', {
-  base: 'vs',
-  inherit: true,
-  rules: [],
-  colors: {
-    'editor.background': '#00000000',
-  },
-});
+defineDiffEditorThemes();
 
 const styleStore = useStyleStore();
 
@@ -57,9 +49,15 @@ onMounted(() => {
   });
 
   editor.setModel({
-    original: monaco.editor.createModel('original text', 'txt'),
-    modified: monaco.editor.createModel('modified text', 'txt'),
+    original: monaco.editor.createModel('original text', 'plaintext'),
+    modified: monaco.editor.createModel('modified text', 'plaintext'),
   });
+});
+onBeforeUnmount(() => {
+  const models = editor?.getModel();
+  editor?.dispose();
+  models?.original.dispose();
+  models?.modified.dispose();
 });
 </script>
 

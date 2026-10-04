@@ -25,16 +25,17 @@ Die Codebasis basiert auf dem Open-Source-Projekt **it-tools**. Herkunft und urs
 
 Aktuelle Paketversion: `0.1.0`
 
-Lokal erfolgreich geprüft:
+Lokal erfolgreich geprüft am 2026-10-04:
 
 - Installation mit eingefrorenem Lockfile
-- TypeScript-Typecheck
-- ESLint mit 0 Fehlern und 6 Warnungen
-- Produktions-Build
-- 33 Vitest-Testdateien
-- 138 erfolgreiche Unit-Tests
+- Typprüfung von Anwendung, Tests und Build-/Testkonfiguration
+- ESLint: 0 Fehler, 0 Warnungen
+- 36 Vitest-Testdateien mit 173 erfolgreichen Unit-Tests
+- Produktions-Build einschließlich Service Worker
+- 154 Browserprüfungen gegen den Entwicklungsserver nach einem Kaltstart
+- 462 Browserprüfungen gegen den Produktions-Build in Chromium, Firefox und WebKit
 
-Noch offen sind insbesondere Playwright-E2E, vollständige Browser-/PWA-Prüfung, Toolchain- und Dependency-Modernisierung sowie die Containerbereitstellung.
+Alle 86 Werkzeugseiten sind im Seitenaufruf-Test enthalten. Prüfgrenzen, verbleibende Drittanbieterwarnungen und offene Sicherheits-, PWA- und Containerarbeiten stehen in [docs/VALIDATION.md](docs/VALIDATION.md). Die weitere modulare Modernisierung beschreibt [docs/PROJECT-STATUS.md](docs/PROJECT-STATUS.md).
 
 ## 🧰 Technische Basis
 
@@ -49,13 +50,7 @@ Das Projekt verwendet aktuell unter anderem:
 - Playwright
 - pnpm
 
-Die vorhandene Toolchain ist noch nicht vollständig vereinheitlicht:
-
-- `.nvmrc`: Node.js 18.18.2
-- vorhandene CI-Konfiguration: Node.js 20
-- `packageManager`: pnpm 9.11.0
-
-Die lokale Baseline-Validierung wurde mit Node.js 24.18.1 durchgeführt. Eine einheitliche Zielplattform wird in einem getrennten Modernisierungsschritt festgelegt.
+Die lokale Toolchain verwendet Node.js **24.18.1** (`.nvmrc`) und pnpm **12.8.1** (`packageManager`). Die neue CI-Prüfkette liest dieselbe Node-Vorgabe und ist für Windows und Linux vorbereitet. Historische deaktivierte Workflow-Dateien bestimmen nicht mehr die Zielversion.
 
 ## ⚡ Schnellstart
 
@@ -82,9 +77,18 @@ Wichtige Prüfungen:
 ```bash
 corepack pnpm typecheck
 corepack pnpm lint
-corepack pnpm exec vitest run --environment jsdom
+corepack pnpm test:unit
 corepack pnpm build
 ```
+
+Gesamte lokale Prüfkette einschließlich echter Browser:
+
+```bash
+corepack pnpm exec playwright install
+corepack pnpm check:all
+```
+
+Für die Browserprüfungen müssen die lokalen Ports 5173 und 5050 frei sein. Ein bereits laufender Entwicklungsserver sollte vorher beendet werden.
 
 Ein neues Tool kann über das vorhandene Generator-Skript angelegt werden:
 
@@ -120,7 +124,7 @@ Aus der Anwendung wurden unter anderem entfernt:
 - Social-Media-Verknüpfungen
 - Sponsoring-Oberflächen
 
-Die ältere Abhängigkeit `plausible-tracker` ist in der übernommenen Dependency-Basis noch vorhanden und wird im späteren Dependency-Cleanup behandelt.
+Die ältere Abhängigkeit `plausible-tracker` wurde entfernt (keine Verwendung im Quellcode).
 
 Für den aktuellen Stand ist kein produktiver Analytics-Endpunkt konfiguriert.
 
@@ -134,6 +138,7 @@ Für den aktuellen Stand ist kein produktiver Analytics-Endpunkt konfiguriert.
 - [Validierungsstand](docs/VALIDATION.md)
 - [Roadmap](docs/ROADMAP.md)
 - [Technische Baseline](docs/BASELINE.md)
+- [Barrierefreiheit](docs/ACCESSIBILITY.md)
 - [Herkunft und Urheberschaft](NOTICE.md)
 
 ## 🌍 Projektsprache

@@ -14,7 +14,8 @@ import {
   portugueseWordList,
   spanishWordList,
 } from '@it-tools/bip39';
-import { Copy, Refresh } from '@vicons/tabler';
+import Copy from '@vicons/tabler/es/Copy';
+import Refresh from '@vicons/tabler/es/Refresh';
 
 import { useCopy } from '@/composable/copy';
 import { useValidation } from '@/composable/validation';
@@ -56,7 +57,7 @@ const entropyValidation = useValidation({
       message: 'Entropy length should be >= 16, <= 32 and be a multiple of 4',
     },
     {
-      validator: value => /^[a-fA-F0-9]*$/.test(value),
+      validator: value => /^[a-f0-9]*$/i.test(value),
       message: 'Entropy should be an hexadecimal string',
     },
   ],

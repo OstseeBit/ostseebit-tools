@@ -1,6 +1,6 @@
-import { DeviceMobile } from '@vicons/tabler';
-import { defineTool } from '../tool';
+import DeviceMobile from '@vicons/tabler/es/DeviceMobile';
 import { translate } from '@/plugins/i18n.plugin';
+import { defineTool } from '../tool';
 
 export const tool = defineTool({
   name: translate('tools.otp-generator.title'),

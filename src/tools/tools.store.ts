@@ -1,13 +1,14 @@
-import { type MaybeRef, get, useStorage } from '@vueuse/core';
-import { defineStore } from 'pinia';
-import type { Ref } from 'vue';
-import _ from 'lodash';
+import type { MaybeRef, Ref } from 'vue';
+
 import type { Tool, ToolCategory, ToolWithCategory } from './tools.types';
+import { get, useStorage } from '@vueuse/core';
+import _ from 'lodash';
+import { defineStore } from 'pinia';
 import { toolsWithCategory } from './index';
 
 export const useToolStore = defineStore('tools', () => {
   const favoriteToolsName = useStorage('favoriteToolsName', []) as Ref<string[]>;
-  const { t } = useI18n();
+  const { t, te } = useI18n();
 
   const tools = computed<ToolWithCategory[]>(() => toolsWithCategory.map((tool) => {
     const toolI18nKey = tool.path.replace(/\//g, '');
@@ -15,8 +16,8 @@ export const useToolStore = defineStore('tools', () => {
     return ({
       ...tool,
       path: tool.path,
-      name: t(`tools.${toolI18nKey}.title`, tool.name),
-      description: t(`tools.${toolI18nKey}.description`, tool.description),
+      name: te(`tools.${toolI18nKey}.title`) ? t(`tools.${toolI18nKey}.title`) : tool.name,
+      description: te(`tools.${toolI18nKey}.description`) ? t(`tools.${toolI18nKey}.description`) : tool.description,
       category: t(`tools.categories.${tool.category.toLowerCase()}`, tool.category),
     });
   }));

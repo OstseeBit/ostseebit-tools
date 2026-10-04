@@ -1,8 +1,9 @@
 <script lang="ts" setup>
+import type { UseValidationRule } from '@/composable/validation';
+import { useValidation } from '@/composable/validation';
+import { generateRandomId } from '@/utils/random';
 import { useAppTheme } from '../theme/themes';
 import { useTheme } from './c-input-text.theme';
-import { generateRandomId } from '@/utils/random';
-import { type UseValidationRule, useValidation } from '@/composable/validation';
 
 const props = withDefaults(
   defineProps<{
@@ -68,11 +69,11 @@ const { id, placeholder, label, validationRules, labelPosition, labelWidth, labe
 
 const validation
   = props.validation
-  ?? useValidation({
-    rules: validationRules,
-    source: value,
-    watch: props.validationWatch,
-  });
+    ?? useValidation({
+      rules: validationRules,
+      source: value,
+      watch: props.validationWatch,
+    });
 
 const theme = useTheme();
 const appTheme = useAppTheme();
@@ -263,10 +264,15 @@ defineExpose({
     .multiline& {
       resize: vertical;
       overflow: hidden;
+      // Caps how tall an autosized box can grow from a huge paste. A CSS cap
+      // (rather than reading window.innerHeight in JS) avoids depending on the
+      // viewport size being accurate at the exact moment resizeTextarea() runs.
+      max-height: 70vh;
 
       & > textarea {
         height: 100%;
         resize: none;
+        overflow-y: auto;
         word-break: break-word;
         white-space: pre-wrap;
         overflow-wrap: break-word;

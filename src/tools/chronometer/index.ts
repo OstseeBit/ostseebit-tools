@@ -1,6 +1,6 @@
-import { TimerOutlined } from '@vicons/material';
-import { defineTool } from '../tool';
+import TimerOutlined from '@vicons/material/es/TimerOutlined';
 import { translate } from '@/plugins/i18n.plugin';
+import { defineTool } from '../tool';
 
 export const tool = defineTool({
   name: translate('tools.chronometer.title'),

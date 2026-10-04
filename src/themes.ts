@@ -1,11 +1,15 @@
 import type { GlobalThemeOverrides } from 'naive-ui';
 
+// Akzentfarbe aus ostseebit-app (static/css/core/_neomorphic-tokens.css, --color-accent),
+// dort bereits auf WCAG-AA-Kontrast (~5.25:1 auf #e0e0e0) geprüft.
 export const lightThemeOverrides: GlobalThemeOverrides = {
   common: {
-    primaryColor: '#075985',
-    primaryColorHover: '#0369a1',
-    primaryColorPressed: '#0c4a6e',
-    primaryColorSuppl: '#0369a1',
+    fontFamily: 'var(--font-sans)',
+    fontFamilyMono: 'var(--font-mono)',
+    primaryColor: '#086278',
+    primaryColorHover: '#0a7a94',
+    primaryColorPressed: '#054a5c',
+    primaryColorSuppl: '#0a7a94',
   },
   Menu: {
     itemHeight: '32px',
@@ -20,12 +24,15 @@ export const lightThemeOverrides: GlobalThemeOverrides = {
   },
 };
 
+// Dark-Mode-Akzent aus ostseebit-app (--color-accent / --color-accent-light / --color-accent-dark).
 export const darkThemeOverrides: GlobalThemeOverrides = {
   common: {
-    primaryColor: '#38bdf8',
-    primaryColorHover: '#7dd3fc',
-    primaryColorPressed: '#0ea5e9',
-    primaryColorSuppl: '#7dd3fc',
+    fontFamily: 'var(--font-sans)',
+    fontFamilyMono: 'var(--font-mono)',
+    primaryColor: '#22d3ee',
+    primaryColorHover: '#67e8f9',
+    primaryColorPressed: '#0891b2',
+    primaryColorSuppl: '#67e8f9',
   },
 
   Notification: {

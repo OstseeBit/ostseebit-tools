@@ -1,20 +1,25 @@
-import { extension as getExtensionFromMimeType, extension as getMimeTypeFromExtension } from 'mime-types';
 import type { Ref } from 'vue';
 import _ from 'lodash';
+import mime from 'mime';
 
 export {
+  getExtensionFromMimeType,
   getMimeTypeFromBase64,
-  getMimeTypeFromExtension, getExtensionFromMimeType,
-  useDownloadFileFromBase64, useDownloadFileFromBase64Refs,
+  getMimeTypeFromExtension,
   previewImageFromBase64,
+  useDownloadFileFromBase64,
+  useDownloadFileFromBase64Refs,
 };
+
+const getExtensionFromMimeType = (type: string) => mime.getExtension(type);
+const getMimeTypeFromExtension = (extension: string) => mime.getType(extension);
 
 const commonMimeTypesSignatures = {
   'JVBERi0': 'application/pdf',
   'R0lGODdh': 'image/gif',
   'R0lGODlh': 'image/gif',
   'iVBORw0KGgo': 'image/png',
-  '/9j/': 'image/jpg',
+  '/9j/': 'image/jpeg',
 };
 
 function getMimeTypeFromBase64({ base64String }: { base64String: string }) {
@@ -47,24 +52,27 @@ function getFileExtensionFromMimeType({
   return defaultExtension;
 }
 
+function toDataUrl(source: string, fallbackMimeType = 'application/octet-stream') {
+  const value = source.trim();
+  if (/^data:[^,]*;base64,/iu.test(value)) {
+    return value;
+  }
+  const { mimeType } = getMimeTypeFromBase64({ base64String: value });
+  return `data:${mimeType ?? fallbackMimeType};base64,${value}`;
+}
+
 function downloadFromBase64({ sourceValue, filename, extension, fileMimeType }:
-{ sourceValue: string; filename?: string; extension?: string; fileMimeType?: string }) {
+{ sourceValue: string, filename?: string, extension?: string, fileMimeType?: string }) {
   if (sourceValue === '') {
     throw new Error('Base64 string is empty');
   }
 
-  const defaultExtension = extension ?? 'txt';
-  const { mimeType } = getMimeTypeFromBase64({ base64String: sourceValue });
-  let base64String = sourceValue;
-  if (!mimeType) {
-    const targetMimeType = fileMimeType ?? getMimeTypeFromExtension(defaultExtension);
-    base64String = `data:${targetMimeType};base64,${sourceValue}`;
-  }
-
-  const cleanExtension = extension ?? getFileExtensionFromMimeType(
-    { mimeType, defaultExtension });
-  let cleanFileName = filename ?? `file.${cleanExtension}`;
-  if (extension && !cleanFileName.endsWith(`.${extension}`)) {
+  const explicitExtension = extension?.trim().replace(/^\./u, '') || undefined;
+  const { mimeType } = getMimeTypeFromBase64({ base64String: sourceValue.trim() });
+  const cleanExtension = explicitExtension ?? getFileExtensionFromMimeType({ mimeType });
+  const base64String = toDataUrl(sourceValue, fileMimeType ?? getMimeTypeFromExtension(cleanExtension) ?? 'application/octet-stream');
+  let cleanFileName = filename || `file.${cleanExtension}`;
+  if (!cleanFileName.toLowerCase().endsWith(`.${cleanExtension.toLowerCase()}`)) {
     cleanFileName = `${cleanFileName}.${cleanExtension}`;
   }
 
@@ -76,7 +84,8 @@ function downloadFromBase64({ sourceValue, filename, extension, fileMimeType }:
 
 function useDownloadFileFromBase64(
   { source, filename, extension, fileMimeType }:
-  { source: Ref<string>; filename?: string; extension?: string; fileMimeType?: string }) {
+  { source: Ref<string>, filename?: string, extension?: string, fileMimeType?: string },
+) {
   return {
     download() {
       downloadFromBase64({ sourceValue: source.value, filename, extension, fileMimeType });
@@ -86,7 +95,8 @@ function useDownloadFileFromBase64(
 
 function useDownloadFileFromBase64Refs(
   { source, filename, extension }:
-  { source: Ref<string>; filename?: Ref<string>; extension?: Ref<string> }) {
+  { source: Ref<string>, filename?: Ref<string>, extension?: Ref<string> },
+) {
   return {
     download() {
       downloadFromBase64({ sourceValue: source.value, filename: filename?.value, extension: extension?.value });
@@ -100,7 +110,7 @@ function previewImageFromBase64(base64String: string): HTMLImageElement {
   }
 
   const img = document.createElement('img');
-  img.src = base64String;
+  img.src = toDataUrl(base64String);
 
   const container = document.createElement('div');
   container.appendChild(img);

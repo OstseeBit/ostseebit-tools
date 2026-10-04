@@ -1,6 +1,6 @@
-import { EyeOff } from '@vicons/tabler';
-import { defineTool } from '../tool';
+import EyeOff from '@vicons/tabler/es/EyeOff';
 import { translate } from '@/plugins/i18n.plugin';
+import { defineTool } from '../tool';
 
 export const tool = defineTool({
   name: translate('tools.string-obfuscator.title'),

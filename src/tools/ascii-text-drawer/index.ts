@@ -1,4 +1,4 @@
-import { Artboard } from '@vicons/tabler';
+import Artboard from '@vicons/tabler/es/Artboard';
 import { defineTool } from '../tool';
 
 export const tool = defineTool({

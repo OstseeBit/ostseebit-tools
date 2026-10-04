@@ -1,19 +1,20 @@
 <script lang="ts" setup>
+import type { ToolCategory } from '@/tools/tools.types';
+
+import Home2 from '@vicons/tabler/es/Home2';
+import Menu2 from '@vicons/tabler/es/Menu2';
 import { NIcon, useThemeVars } from 'naive-ui';
 
-import { RouterLink } from 'vue-router';
-import { Home2, Menu2 } from '@vicons/tabler';
-
 import { storeToRefs } from 'pinia';
+import { RouterLink } from 'vue-router';
+import { brand } from '@/branding';
+import CollapsibleToolMenu from '@/components/CollapsibleToolMenu.vue';
+import { config } from '@/config';
+import { useStyleStore } from '@/stores/style.store';
+import { useToolStore } from '@/tools/tools.store';
 import HeroGradient from '../assets/hero-gradient.svg?component';
 import MenuLayout from '../components/MenuLayout.vue';
 import NavbarButtons from '../components/NavbarButtons.vue';
-import { useStyleStore } from '@/stores/style.store';
-import { config } from '@/config';
-import { brand } from '@/branding';
-import type { ToolCategory } from '@/tools/tools.types';
-import { useToolStore } from '@/tools/tools.store';
-import CollapsibleToolMenu from '@/components/CollapsibleToolMenu.vue';
 
 const themeVars = useThemeVars();
 const styleStore = useStyleStore();
@@ -33,6 +34,8 @@ const tools = computed<ToolCategory[]>(() => [
 </script>
 
 <template>
+  <a href="#main-content" class="skip-link">Zum Hauptinhalt springen</a>
+
   <MenuLayout class="menu-layout" :class="{ isSmallScreen: styleStore.isSmallScreen }">
     <template #sider>
       <RouterLink to="/" class="hero-wrapper">
@@ -57,7 +60,9 @@ const tools = computed<ToolCategory[]>(() => [
           </div>
         </div>
 
-        <CollapsibleToolMenu :tools-by-category="tools" />
+        <nav aria-label="Werkzeuge">
+          <CollapsibleToolMenu :tools-by-category="tools" />
+        </nav>
 
         <div class="footer">
           <div>
@@ -84,14 +89,16 @@ const tools = computed<ToolCategory[]>(() => [
             </c-link>
           </div>
           <div>
-            <RouterLink to="/about">{{ $t('home.nav.aboutLabel') }}</RouterLink>
+            <RouterLink to="/about">
+              {{ $t('home.nav.aboutLabel') }}
+            </RouterLink>
           </div>
         </div>
       </div>
     </template>
 
     <template #content>
-      <div flex items-center justify-center gap-2>
+      <div flex items-center justify-center gap-2 role="toolbar" aria-label="Werkzeugleiste">
         <c-button
           circle
           variant="text"
@@ -120,25 +127,15 @@ const tools = computed<ToolCategory[]>(() => [
         <div>
           <NavbarButtons v-if="!styleStore.isSmallScreen" />
         </div>
-
       </div>
-      <slot />
+      <main id="main-content">
+        <slot />
+      </main>
     </template>
   </MenuLayout>
 </template>
 
 <style lang="less" scoped>
-// ::v-deep(.n-layout-scroll-container) {
-//     @percent: 4%;
-//     @position: 25px;
-//     @size: 50px;
-//     @color: #eeeeee25;
-//     background-image: radial-gradient(@color @percent, transparent @percent),
-//         radial-gradient(@color @percent, transparent @percent);
-//     background-position: 0 0, @position @position;
-//     background-size: @size @size;
-// }
-
 .footer {
   text-align: center;
   color: #838587;

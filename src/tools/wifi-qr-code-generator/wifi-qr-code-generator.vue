@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import { useDownloadFileFromBase64 } from '@/composable/downloadBase64';
 import {
   EAPMethods,
   EAPPhase2Methods,
   useWifiQRCode,
 } from './useQRCode';
-import { useDownloadFileFromBase64 } from '@/composable/downloadBase64';
 
 const foreground = ref('#000000ff');
 const background = ref('#ffffffff');
@@ -53,7 +53,7 @@ const { download } = useDownloadFileFromBase64({ source: qrcode, filename: 'qr-c
               value: 'nopass',
             },
             {
-              label: 'WPA/WPA2',
+              label: 'WPA/WPA2/WPA3',
               value: 'WPA',
             },
             {

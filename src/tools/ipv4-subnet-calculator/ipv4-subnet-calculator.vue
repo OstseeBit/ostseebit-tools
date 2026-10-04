@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { Netmask } from 'netmask';
+import ArrowLeft from '@vicons/tabler/es/ArrowLeft';
+import ArrowRight from '@vicons/tabler/es/ArrowRight';
 import { useStorage } from '@vueuse/core';
-import { ArrowLeft, ArrowRight } from '@vicons/tabler';
-import { getIPClass } from './ipv4-subnet-calculator.models';
-import { withDefaultOnError } from '@/utils/defaults';
+import { Netmask } from 'netmask';
 import { isNotThrowing } from '@/utils/boolean';
-import SpanCopyable from '@/components/SpanCopyable.vue';
+import { withDefaultOnError } from '@/utils/defaults';
+import { getIPClass } from './ipv4-subnet-calculator.service';
 
 const ip = useStorage('ipv4-subnet-calculator:ip', '192.168.0.1/24');
 
@@ -100,7 +100,7 @@ function switchToBlock({ count = 1 }: { count?: number }) {
               {{ label }}
             </td>
             <td>
-              <SpanCopyable v-if="getValue(networkInfo)" :value="getValue(networkInfo)" />
+              <c-text-copyable v-if="getValue(networkInfo)" :value="getValue(networkInfo)" monospace :show-icon="false" />
               <span v-else op-70>
                 {{ undefinedFallback }}
               </span>

@@ -1,6 +1,6 @@
-import { Code } from '@vicons/tabler';
-import { defineTool } from '../tool';
+import Code from '@vicons/tabler/es/Code';
 import { translate } from '@/plugins/i18n.plugin';
+import { defineTool } from '../tool';
 
 export const tool = defineTool({
   name: translate('tools.xml-formatter.title'),

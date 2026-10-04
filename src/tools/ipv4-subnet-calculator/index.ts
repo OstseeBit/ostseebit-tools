@@ -1,6 +1,6 @@
-import { RouterOutlined } from '@vicons/material';
-import { defineTool } from '../tool';
+import RouterOutlined from '@vicons/material/es/RouterOutlined';
 import { translate } from '@/plugins/i18n.plugin';
+import { defineTool } from '../tool';
 
 export const tool = defineTool({
   name: translate('tools.ipv4-subnet-calculator.title'),

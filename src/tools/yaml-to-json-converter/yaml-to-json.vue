@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { parse as parseYaml } from 'yaml';
-import type { UseValidationRule } from '@/composable/validation';
-import { isNotThrowing } from '@/utils/boolean';
+import { createParseValidationRule } from '@/composable/validation';
 import { withDefaultOnError } from '@/utils/defaults';
 
 function transformer(value: string) {
@@ -11,12 +10,7 @@ function transformer(value: string) {
   }, '');
 }
 
-const rules: UseValidationRule<string>[] = [
-  {
-    validator: (value: string) => isNotThrowing(() => parseYaml(value)),
-    message: 'Provided YAML is not valid.',
-  },
-];
+const rules = [createParseValidationRule(v => parseYaml(v), 'YAML')];
 </script>
 
 <template>

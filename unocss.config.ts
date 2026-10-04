@@ -10,12 +10,12 @@ import {
 import { presetScrollbar } from 'unocss-preset-scrollbar';
 
 export default defineConfig({
-  presets: [presetUno(), presetAttributify({ ignoreAttributes: ['size'] }), presetTypography(), presetScrollbar()],
+  presets: [presetUno(), presetAttributify({ ignoreAttributes: ['size'] }), presetTypography(), presetScrollbar({ compatible: true })],
   transformers: [transformerDirectives(), transformerVariantGroup()],
   theme: {
     colors: {
-      primary: '#1ea54c',
-
+      // Angeglichen an ostseebit-app (_neomorphic-tokens.css, --color-accent).
+      primary: '#086278',
     },
   },
   shortcuts: {

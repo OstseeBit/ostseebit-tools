@@ -1,6 +1,6 @@
-import { PasswordRound } from '@vicons/material';
-import { defineTool } from '../tool';
+import PasswordRound from '@vicons/material/es/PasswordRound';
 import { translate } from '@/plugins/i18n.plugin';
+import { defineTool } from '../tool';
 
 export const tool = defineTool({
   name: translate('tools.basic-auth-generator.title'),

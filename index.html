@@ -1,24 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>OstseeBit Tools - Handy online tools for developers</title>
-    <meta name="description" content="Handy online tools for developers and IT professionals, maintained by OstseeBit." />
+    <title>OstseeBit Tools - Praktische Online-Werkzeuge für Entwicklung und IT</title>
+    <meta name="description" content="Praktische Online-Werkzeuge für Entwicklung, Administration und IT, gepflegt von OstseeBit." />
+    <!--
+      Baseline CSP for any hosting path that doesn't set its own HTTP headers
+      (plain `vite preview`, an unconfigured static host, ...). `frame-ancestors`
+      is intentionally omitted here — browsers ignore it in a <meta> CSP, it only
+      works as a real HTTP header (see nginx.conf / netlify.toml / vercel.json).
+    -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self' blob:" />
     <link rel="author" href="humans.txt" />
-    <link rel="icon" href="favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
-    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#075985" />
-    <meta name="msapplication-TileColor" content="#075985" />
-    <meta name="theme-color" content="#075985" />
+    <meta name="theme-color" content="#086278" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="OstseeBit Tools - Handy online tools for developers" />
-    <meta property="og:description" content="Handy online tools for developers and IT professionals, maintained by OstseeBit." />
+    <meta property="og:title" content="OstseeBit Tools - Praktische Online-Werkzeuge für Entwicklung und IT" />
+    <meta property="og:description" content="Praktische Online-Werkzeuge für Entwicklung, Administration und IT, gepflegt von OstseeBit." />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="OstseeBit Tools" />
-    <meta name="twitter:description" content="Handy online tools for developers and IT professionals, maintained by OstseeBit." />
+    <meta name="twitter:description" content="Praktische Online-Werkzeuge für Entwicklung, Administration und IT, gepflegt von OstseeBit." />
   </head>
   <body>
     <div id="app"></div>

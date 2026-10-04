@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import RandExp from 'randexp';
-import { render } from '@regexper/render';
 import type { ShadowRootExpose } from 'vue-shadow-dom';
-import { matchRegex } from './regex-tester.service';
-import { useValidation } from '@/composable/validation';
+import { render } from '@regexper/render';
 import { useQueryParamOrStorage } from '@/composable/queryParams';
+import { useValidation } from '@/composable/validation';
+import { matchRegex } from './regex-tester.service';
 
 const regex = useQueryParamOrStorage({ name: 'regex', storageName: 'regex-tester:regex', defaultValue: '' });
 const text = ref('');
@@ -29,44 +28,127 @@ const regexValidation = useValidation({
     },
   ],
 });
-const results = computed(() => {
-  let flags = 'd';
+const flags = computed(() => {
+  let value = 'd';
   if (global.value) {
-    flags += 'g';
+    value += 'g';
   }
   if (ignoreCase.value) {
-    flags += 'i';
+    value += 'i';
   }
   if (multiline.value) {
-    flags += 'm';
+    value += 'm';
   }
   if (dotAll.value) {
-    flags += 's';
+    value += 's';
   }
   if (unicode.value) {
-    flags += 'u';
+    value += 'u';
   }
   else if (unicodeSets.value) {
-    flags += 'v';
+    value += 'v';
   }
-
-  try {
-    return matchRegex(regex.value, text.value, flags);
-  }
-  catch (_) {
-    return [];
-  }
+  return value;
 });
 
-const sample = computed(() => {
+// Matching runs in a Web Worker with a timeout: the pattern is restorable from a
+// shared `?regex=` link, so an unguarded main-thread catastrophic-backtracking
+// regex would freeze the tab for anyone opening such a link (not just the author).
+const results = ref<ReturnType<typeof matchRegex>>([]);
+const resultsError = ref('');
+
+watch([regex, text, flags], ([pattern, textValue, flagsValue], _previous, onCleanup) => {
+  resultsError.value = '';
+  let worker: Worker | undefined;
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  let active = true;
+  const stop = () => {
+    active = false;
+    clearTimeout(timer);
+    worker?.terminate();
+  };
+  onCleanup(stop);
   try {
-    const randexp = new RandExp(new RegExp(regex.value.replace(/\(\?\<[^\>]*\>/g, '(?:')));
-    return randexp.gen();
+    worker = new Worker(new URL('./regex-match.worker.ts', import.meta.url), { type: 'module' });
+    worker.onmessage = (event: MessageEvent<{ results: ReturnType<typeof matchRegex>, error: string }>) => {
+      if (!active) {
+        return;
+      }
+      results.value = event.data.results;
+      resultsError.value = event.data.error;
+      stop();
+    };
+    worker.onerror = () => {
+      results.value = [];
+      resultsError.value = 'Matching failed.';
+      stop();
+    };
+    timer = setTimeout(() => {
+      results.value = [];
+      resultsError.value = 'Matching timed out. Simplify the expression.';
+      stop();
+    }, 1000);
+    worker.postMessage({ regex: pattern, text: textValue, flags: flagsValue });
   }
-  catch (_) {
-    return '';
+  catch {
+    // No Worker support in this environment: fall back to inline matching
+    // (still try/catch-guarded, just without the hang-protection timeout).
+    try {
+      results.value = matchRegex(pattern, textValue, flagsValue);
+    }
+    catch {
+      results.value = [];
+    }
+    stop();
   }
-});
+}, { immediate: true });
+
+const sample = ref('');
+const sampleError = ref('');
+const samplePending = ref(false);
+
+watch(regex, (pattern, _previous, onCleanup) => {
+  sample.value = '';
+  sampleError.value = '';
+  samplePending.value = true;
+  let worker: Worker | undefined;
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  let active = true;
+  const stop = () => {
+    active = false;
+    clearTimeout(timer);
+    worker?.terminate();
+  };
+  onCleanup(stop);
+  try {
+    worker = new Worker(new URL('./regex-sample.worker.ts', import.meta.url), { type: 'module' });
+    worker.onmessage = (event: MessageEvent<{ sample: string, error: string }>) => {
+      if (!active) {
+        return;
+      }
+      sample.value = event.data.sample;
+      sampleError.value = event.data.error;
+      samplePending.value = false;
+      stop();
+    };
+    worker.onerror = () => {
+      sampleError.value = 'Sample generation failed.';
+      samplePending.value = false;
+      stop();
+    };
+    timer = setTimeout(() => {
+      sampleError.value = 'Sample generation timed out. Simplify the expression.';
+      samplePending.value = false;
+      stop();
+    }, 1000);
+    worker.postMessage(pattern);
+  }
+  catch {
+    sampleError.value = 'Sample generation is unavailable in this browser.';
+    samplePending.value = false;
+    stop();
+  }
+}, { immediate: true });
 
 watchEffect(
   async () => {
@@ -80,9 +162,14 @@ watchEffect(
       }
       const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
       try {
-        await render(regexValue, svg);
+        // A pathological pattern can make @regexper/render hang; race it against
+        // a timeout so opening a shared link alone can't freeze the page.
+        await Promise.race([
+          render(regexValue, svg),
+          new Promise((_resolve, reject) => setTimeout(() => reject(new Error('timeout')), 1000)),
+        ]);
       }
-      catch (_) {
+      catch {
       }
       visualizer.appendChild(svg);
     }
@@ -137,7 +224,10 @@ watchEffect(
     </c-card>
 
     <c-card title="Matches" mb-1 mt-3>
-      <n-table v-if="results?.length > 0">
+      <c-alert v-if="resultsError" type="error">
+        {{ resultsError }}
+      </c-alert>
+      <n-table v-else-if="results?.length > 0">
         <thead>
           <tr>
             <th scope="col">
@@ -181,7 +271,13 @@ watchEffect(
     </c-card>
 
     <c-card title="Sample matching text" mt-3>
-      <pre style="white-space: pre-wrap; word-break: break-all;">{{ sample }}</pre>
+      <div aria-live="polite" data-test-id="regex-sample">
+        <c-alert v-if="sampleError" type="error">
+          {{ sampleError }}
+        </c-alert>
+        <span v-else-if="samplePending">Generating sample…</span>
+        <pre v-else style="white-space: pre-wrap; word-break: break-all;">{{ sample }}</pre>
+      </div>
     </c-card>
 
     <c-card title="Regex Diagram" style="overflow-x: scroll;" mt-3>

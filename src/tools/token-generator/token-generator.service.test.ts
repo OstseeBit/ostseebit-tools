@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest';
-import { createToken } from './token-generator.service';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { createToken, normalizeTokenLength } from './token-generator.service';
 
 describe('token-generator', () => {
   describe('createToken', () => {
@@ -66,7 +66,7 @@ describe('token-generator', () => {
       });
 
       expect(token).toHaveLength(256);
-      expect(token).toMatch(/^[0-9]+$/);
+      expect(token).toMatch(/^\d+$/);
     });
 
     it('should generate a random string with just symbols if only withSymbols is set', () => {
@@ -79,7 +79,8 @@ describe('token-generator', () => {
       });
 
       expect(token).toHaveLength(256);
-      expect(token).toMatch(/^[.,;:!?./\-"'#{([-|\\@)\]=}*+]+$/);
+      const symbols = new Set('.,;:!?./-"\'#{([-|\\@)]=}*+');
+      expect([...token].every(character => symbols.has(character))).toBe(true);
     });
 
     it('should generate a random string with just letters (case incensitive) with withLowercase and withUppercase', () => {
@@ -92,7 +93,45 @@ describe('token-generator', () => {
       });
 
       expect(token).toHaveLength(256);
-      expect(token).toMatch(/^[a-zA-Z]+$/);
+      expect(token).toMatch(/^[a-z]+$/i);
     });
+  });
+});
+
+describe('secure token generation', () => {
+  afterEach(() => vi.restoreAllMocks());
+
+  it.each([0, -1, 513, 10000000, 1.5, Number.NaN, Number.POSITIVE_INFINITY])('rejects invalid length %s before requesting randomness', (length) => {
+    const random = vi.spyOn(globalThis.crypto, 'getRandomValues');
+    expect(() => createToken({ length })).toThrow(RangeError);
+    expect(random).not.toHaveBeenCalled();
+    expect(normalizeTokenLength(length)).toBe(64);
+  });
+
+  it('rejects biased bytes and preserves all alphabet characters', () => {
+    const random = vi.spyOn(globalThis.crypto, 'getRandomValues');
+    random.mockImplementationOnce((array) => {
+      (array as Uint8Array).set([255, 0, 1]);
+      return array;
+    });
+    random.mockImplementationOnce((array) => {
+      (array as Uint8Array).set([2, 0, 0]);
+      return array;
+    });
+    expect(createToken({ alphabet: 'abc', length: 3 })).toBe('abc');
+    expect(random).toHaveBeenCalledTimes(2);
+  });
+
+  it('fails closed when secure randomness fails', () => {
+    vi.spyOn(globalThis.crypto, 'getRandomValues').mockImplementation(() => {
+      throw new Error('Unavailable');
+    });
+    expect(() => createToken({})).toThrow('Unavailable');
+  });
+
+  it('accepts the boundary lengths', () => {
+    expect(createToken({ length: 1 })).toHaveLength(1);
+    expect(createToken({ length: 512 })).toHaveLength(512);
+    expect(normalizeTokenLength(512)).toBe(512);
   });
 });

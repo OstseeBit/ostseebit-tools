@@ -61,10 +61,10 @@ Ziel: ein reproduzierbar gebautes und getestetes Container-Image für den Self-H
 Arbeitspunkte:
 
 1. vorhandenes Dockerfile prüfen
-2. Node- und nginx-Basis-Images bewusst versionieren
+2. ✅ Node- und nginx-Basis-Images bewusst versionieren (2026-10-04: `node:24.18.1-alpine`, `nginx:1.27-alpine` statt `lts`/`stable`)
 3. Buildstufe reproduzierbar gestalten
-4. Runtime-Image minimieren und härten
-5. Container lokal bauen
+4. Runtime-Image minimieren und härten (2026-10-04: nginx-Stage läuft als Benutzer `nginx` statt root; Sicherheits-Header in nginx.conf ergänzt — Rest des Punktes offen)
+5. Container lokal bauen (noch offen — kein Docker in der Entwicklungsumgebung verfügbar, daher ungetestet)
 6. statische Auslieferung über nginx testen
 7. Health-/HTTP-Verhalten prüfen
 8. Multi-Arch-Bedarf bewerten

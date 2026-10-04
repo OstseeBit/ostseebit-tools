@@ -25,71 +25,71 @@ const certs = computed(() => signature.value.meta.certs.map((certificate, index)
 <template>
   <div flex flex-col gap-2>
     <c-table :data="certs" :headers="tableHeaders">
-      <template #validityPeriod="{ value }">
+      <template #validityPeriod="{ row }">
         <c-key-value-list
           :items="[{
             label: 'Not before',
-            value: value.notBefore,
+            value: row.validityPeriod.notBefore,
           }, {
             label: 'Not after',
-            value: value.notAfter,
+            value: row.validityPeriod.notAfter,
           }]"
         />
       </template>
 
-      <template #issuedBy="{ value }">
+      <template #issuedBy="{ row }">
         <c-key-value-list
           :items="[{
             label: 'Common name',
-            value: value.commonName,
+            value: row.issuedBy.commonName,
           }, {
             label: 'Organization name',
-            value: value.organizationName,
+            value: row.issuedBy.organizationName,
           }, {
             label: 'Country name',
-            value: value.countryName,
+            value: row.issuedBy.countryName,
           }, {
             label: 'Locality name',
-            value: value.localityName,
+            value: row.issuedBy.localityName,
           }, {
             label: 'Organizational unit name',
-            value: value.organizationalUnitName,
+            value: row.issuedBy.organizationalUnitName,
           }, {
             label: 'State or province name',
-            value: value.stateOrProvinceName,
+            value: row.issuedBy.stateOrProvinceName,
           }]"
         />
       </template>
 
-      <template #issuedTo="{ value }">
+      <template #issuedTo="{ row }">
         <c-key-value-list
           :items="[{
             label: 'Common name',
-            value: value.commonName,
+            value: row.issuedTo.commonName,
           }, {
             label: 'Organization name',
-            value: value.organizationName,
+            value: row.issuedTo.organizationName,
           }, {
             label: 'Country name',
-            value: value.countryName,
+            value: row.issuedTo.countryName,
           }, {
             label: 'Locality name',
-            value: value.localityName,
+            value: row.issuedTo.localityName,
           }, {
             label: 'Organizational unit name',
-            value: value.organizationalUnitName,
+            value: row.issuedTo.organizationalUnitName,
           }, {
             label: 'State or province name',
-            value: value.stateOrProvinceName,
+            value: row.issuedTo.stateOrProvinceName,
           }]"
         />
       </template>
 
-      <template #pemCertificate="{ value }">
-        <c-modal-value :value="value" label="View PEM cert">
+      <template #pemCertificate="{ row }">
+        <c-modal-value :value="row.pemCertificate" label="View PEM cert">
           <template #value>
             <div break-all text-xs>
-              {{ value }}
+              {{ row.pemCertificate }}
             </div>
           </template>
         </c-modal-value>

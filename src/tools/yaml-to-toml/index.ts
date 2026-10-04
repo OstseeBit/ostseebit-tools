@@ -1,6 +1,6 @@
-import { AlignJustified } from '@vicons/tabler';
-import { defineTool } from '../tool';
+import AlignJustified from '@vicons/tabler/es/AlignJustified';
 import { translate } from '@/plugins/i18n.plugin';
+import { defineTool } from '../tool';
 
 export const tool = defineTool({
   name: translate('tools.yaml-to-toml.title'),

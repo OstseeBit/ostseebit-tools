@@ -1,4 +1,4 @@
-import { Language } from '@vicons/tabler';
+import Language from '@vicons/tabler/es/Language';
 import { defineTool } from '../tool';
 
 export const tool = defineTool({

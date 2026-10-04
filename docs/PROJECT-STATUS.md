@@ -1,62 +1,113 @@
 # Projektstatus
 
-Stand: 2026-10-03
+Stand: 2026-10-04. Paketversion: `0.1.0`. Arbeitsbranch: `chore/plattform-modernisierung`.
 
-## Aktueller Zustand
+## Lokal nachgewiesen
 
-- Paketversion: `0.1.0`
-- Arbeitsbranch für die aktuelle Bereinigung: `chore/ostseebit-rebranding`
-- Zielbranch: `main`
-- Repository: öffentlich
-- Lizenz: GNU GPLv3
-- Projektsprache: Deutsch
+Der Entwicklungsstart und Produktions-Build sind wieder lauffähig. Die gemeinsame Basis umfasst Node.js 24.18.1, pnpm 12.8.1, die neue ESLint Flat Config, erweiterte Typprüfung und aktuelle Browserprüfungen. Lint und Typcheck sind erfolgreich, 173 Unit-Tests sowie 154 Entwicklungs- und 462 Produktions-Browserprüfungen bestehen. Alle 86 Werkzeugseiten werden in den Browserläufen geöffnet.
 
-## Erfolgreich validiert
+Ursachen, Prüfgrenzen, Befehle und Sicherung stehen in [VALIDATION.md](VALIDATION.md). Frühere Zahlen im historischen Bericht [TOOLCHAIN-MODERNISIERUNG.md](TOOLCHAIN-MODERNISIERUNG.md) beschreiben den damaligen Zwischenstand.
 
-- Dependency-Installation mit eingefrorenem Lockfile
-- TypeScript-Typecheck
-- ESLint: 0 Fehler, 6 Warnungen
-- Produktions-Build
-- Vitest: 33 Testdateien, 138 Tests
+Ein neuer CI-Workflow für Windows und Linux ist lokal vorbereitet und syntaktisch geprüft. Er wurde noch nicht remote ausgeführt. Keine Commits, Pushes oder Veröffentlichungen wurden vorgenommen. LICENSE, NOTICE.md und docs/BASELINE.md bleiben unverändert.
 
-## Bekannte offene Punkte
+## Umgesetzt am 2026-10-04 (Design-/A11y-/Härtungs-Durchgang)
 
-### Plattform und Abhängigkeiten
+Konservativer, nicht-funktionsändernder Durchgang über Modul 1 (Teilmenge), 2 (Teilmenge) und 3:
 
-- Node-/pnpm-Zielversion vereinheitlichen
-- veraltete Toolchain-Komponenten kontrolliert modernisieren
-- Dependencies gruppenweise aktualisieren
-- nach jeder Gruppe Typecheck, Lint, Tests und Build wiederholen
+- **Aufräumen:** `plausible-tracker` (unbenutzte Abhängigkeit) entfernt, veraltete `.eslintrc.cjs` (durch `eslint.config.mjs` ersetzt) und ungenutzte `.prettierrc` gelöscht, stillgelegte `.github/workflows-disabled/*` entfernt.
+- **Sprachkonsistenz:** `index.html` (`lang="de"`, deutsche Meta-/OG-Tags), `src/branding.ts`, Home-Seiten-Titel und die Standard-UI-Sprache (`src/plugins/i18n.plugin.ts`, vorher `en`) auf Deutsch vereinheitlicht — vorher Widerspruch zwischen `lang`-Attribut und tatsächlich gerenderter Sprache.
+- **Design-Angleichung an `ostseebit-app`:** Akzentfarbe (`#086278` hell / `#22d3ee` dunkel) aus `_neomorphic-tokens.css` in `src/themes.ts`, `src/ui/theme/themes.ts`, `unocss.config.ts`, `index.html` und `branding.ts` vereinheitlicht (vorher drei verschiedene Farbfamilien parallel). IBM Plex Sans/Mono selbst gehostet übernommen (`public/fonts/`, `src/assets/fonts.css`). Leuchtturm-Logo aus `ostseebit-app` im Header ergänzt (`public/img/brand/leuchtturm-mark.png`).
+- **Barrierefreiheit:** Skip-Link, globaler Fokus-Ring, `.sr-only`, `prefers-reduced-motion` ergänzt (`src/assets/a11y.css`, vorher nicht vorhanden); `main`-/`nav`-/`toolbar`-Landmarks in `base.layout.vue` ergänzt.
+- **Grundhärtung (Container, noch ungetestet):** Dockerfile-Basis-Images gepinnt (`node:24.18.1-alpine`, `nginx:1.27-alpine`), nginx-Stage läuft als Non-Root-User `nginx`, grundlegende Sicherheits-Header (CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy) in `nginx.conf` ergänzt.
+- Details und WCAG-Einordnung in [ACCESSIBILITY.md](ACCESSIBILITY.md).
+- Verifiziert: `pnpm lint` (0 Fehler), `pnpm test:unit` (173/173), `pnpm build` (erfolgreich), manuelle Browserprüfung (Light/Dark, Tastaturfokus auf Skip-Link, Startseite + JWT-Parser-Tool) über `pnpm dev`.
+- **Nicht gemacht** (bewusst außerhalb dieses Durchgangs): Konsolidierung der vier parallelen Icon-Bibliotheken, Entscheidung Netlify/Vercel/Docker als Deployment-Ziel, vollständiger Security-Audit der Krypto-/PDF-Abhängigkeiten, Container-Build-/Laufzeittest (kein Docker in der Entwicklungsumgebung verfügbar).
 
-### Performance
+## Umgesetzt am 2026-10-04 (Sicherheits-/Layout-/Dependency-Durchgang)
 
-- große Chunks analysieren
-- Lazy Loading / Code Splitting prüfen
-- besonders große Tool-Abhängigkeiten untersuchen
-- PWA-Precache und Build-Ausgabe bewerten
+Zweiter Durchgang desselben Tages, auf ausdrücklichen Wunsch *vor* weiterer Design-Arbeit: drei parallele Recherchen (Architektur-Gesundheit, Layout-Proportionen, Sicherheitsaudit), danach gezielte Fixes.
 
-### Container
+- **Sicherheit:**
+  - `src/tools/bcrypt/bcrypt.vue`: Salt-Runden-Obergrenze von 100 auf 17 gesenkt — vorher konnte eine normale Eingabe den Tab stundenlang einfrieren.
+  - `src/tools/regex-tester/`: Matching läuft jetzt in einem Web Worker mit 1s-Timeout (`regex-match.worker.ts`, neu, nach dem Muster von `regex-sample.worker.ts`); das Pattern ist per `?regex=`-Link teilbar, ein katastrophal rückverfolgender Regex konnte vorher die Seite für jeden einfrieren, der den Link öffnet. `@regexper/render`-Diagrammaufruf zusätzlich mit `Promise.race`-Timeout abgesichert.
+  - `src/tools/math-evaluator/`: `mathjs` von `11.9.1` auf `15.2.0` angehoben (mehrere Majors veraltet), `evaluate()` bekommt jetzt einen leeren Scope pro Aufruf, Eingabe auf 1000 Zeichen begrenzt.
+  - `src/tools/markdown-to-html/`: Ausgabe wird jetzt mit `DOMPurify.sanitize()` bereinigt (wie `c-markdown.vue`), `window.open()` mit `noopener`.
+  - Sicherheits-Header (CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy) jetzt auch in `netlify.toml` und `vercel.json`, nicht mehr nur in `nginx.conf`; zusätzlich ein CSP-`<meta>`-Fallback in `index.html` für jeden sonstigen Hosting-Weg (auch `pnpm dev`/`vite preview`).
+  - **Dabei gefunden und korrigiert:** die erste CSP-Fassung hatte `worker-src 'self'` ohne `blob:` — das hätte im Dev-Modus (Vite nutzt dort `blob:`-URLs für Worker) die Web Worker blockiert. Live im Browser aufgefallen, nicht nur am Build. Jetzt `worker-src 'self' blob:` an allen vier Stellen.
+- **Layout-Bug behoben:** `src/components/TextareaCopyable.vue` hatte einen nicht-reaktiven Ref (`followHeightOf.value ? useElementSize(...) : { height: ref(null) }`), der die Höhen-Synchronisation zwischen Eingabe- und Ausgabefeld nie auslöste — betraf 15 Tools gleichzeitig (u.a. XML-Formatter, JSON/YAML/TOML-Konverter, SQL-Formatter). Ein-Zeilen-Fix behebt alle auf einmal. Zusätzlich beide Boxen auf `max-height: 70vh` mit internem Scroll begrenzt (`src/ui/c-input-text/c-input-text.vue`, `TextareaCopyable.vue`), damit sehr große Eingaben nicht die ganze Seite endlos lang machen. Stichprobenartig in 8 der 15 betroffenen Tools visuell + per Messung nachgewiesen (xml-formatter, json-to-csv, sql-prettify, json-viewer, yaml-to-json-converter, yaml-to-toml, json-to-yaml-converter, json-minify).
+- **Schwerwiegenderer Bug gefunden und behoben, beim Nachprüfen der Proportionen:** `xml-to-json` und `json-to-xml` waren **komplett funktionsunfähig** (leere Seite, kein Proportionsproblem) — sowohl im Dev-Server als auch im Produktions-Build. Ursache: `xml-js` nutzt intern `sax`, das Node's `stream`-Modul erweitert (`SAXStream.prototype = Object.create(Stream.prototype, ...)`); Vite ersetzt nicht aliaste Node-Built-ins durch einen leeren Stub, wodurch `Stream` beim Modulladen `undefined` war und der Prototyp-Zugriff sofort crashte — reproduzierbar bei jedem Seitenaufruf, nicht nur bei Benutzung. Fix: `stream` → `stream-browserify` als Alias in `vite.config.ts` (`resolve.alias`). Zusätzlich defensiv `src/polyfills.ts` ergänzt (stellt `globalThis.Buffer` bereit, falls xml-js' `json2xml`-Pfad `instanceof Buffer` prüft), in `src/main.ts` vor allen App-Imports eingebunden. Verifiziert in `pnpm dev`, `pnpm build` + `vite preview` (beide Konvertierrichtungen, Rundweg XML→JSON→XML identisch).
+- **Breiten-Bug gefunden und behoben (Nutzer-Screenshot bei breitem Fenster):** `src/layouts/tool.layout.vue`s Regel `::v-deep(& > *) { flex: 0 1 600px; }` (Less-Verschachtelung + `&` innerhalb `::v-deep()`) kompilierte zu `[data-v-xxx] .tool-content > *` statt `.tool-content[data-v-xxx] > *` — ein Selektor, der strukturell nie matchen konnte, da `.tool-content` selbst das Attribut trägt statt ein Nachfahre davon zu sein. Dadurch bekamen Eingabe- und Ausgabefeld nie die vorgesehene 600px-Breitenbegrenzung und liefen auf breiten Bildschirmen beliebig unterschiedlich breit auseinander — betrifft praktisch jedes Tool mit dieser zweispaltigen Struktur, nicht nur die 15 `TextareaCopyable`-Tools. Fix: Syntax auf `> :deep(*) { flex: 0 1 600px; }` geändert (kompiliert korrekt zu `.tool-content[data-v-xxx] > *`). Live bei 1872px Breite nachgewiesen (xml-formatter, json-to-csv, sql-prettify) — Eingabe/Ausgabe jetzt beide exakt 600px, mittig, gleich hoch.
+- **Gezielte Dependency-Swaps** (jeweils kleiner Blast-Radius, einzeln verifiziert):
+  - `iarna-toml-esm` → `smol-toml` (entfernt die dokumentierte, ungeklärte `eval`-Warnung aus dem Build). Betraf `toml-to-json`, `toml-to-yaml`, `yaml-to-toml`, `json-to-toml` + `toml.services.ts`.
+  - `jwt-decode` `3.1.2` → `^4.0.0` (jetzt benannter statt Default-Export).
+  - `vue-router` `4.1.6` → `4.6.4` (war trotz `^4.1.6`-Range im Lockfile eingefroren).
+  - `uuid` `^9.0.0` → `^14.0.2` (ein Typ-Fix in `uuid-generator.vue` nötig: `node`-Option erwartet jetzt `Uint8Array` statt `number[]`).
+- Verifiziert: `pnpm typecheck`, `pnpm lint`, `pnpm test:unit` (173/173), `pnpm build` — jeweils nach jedem Swap einzeln; zusätzlich manuelle Browserprüfung aller geänderten Tools (bcrypt-Grenze, regex-tester mit `(a+)+$` gegen langen String, math-evaluator, TOML-Hin-und-Rück-Konvertierung, UUID v1/v4, XML-Formatter-Proportionen, JWT-Parser).
+- **Nicht gemacht** (bewusst zurückgestellt): Icon-Bibliotheken-Konsolidierung, `pdf-signature-reader`-Alternative, vollständiger Security-Audit der übrigen Krypto-Abhängigkeiten, Container-Build-/Laufzeittest (weiterhin kein Docker in der Entwicklungsumgebung verfügbar). Design (neumorphe `c-card`/`c-button`-Schatten, animierte Wellen im Sidebar-Hero) ist der nächste, separate Schritt.
 
-Die Containerbereitstellung ist noch nicht abgeschlossen und bleibt ein fester Arbeitspunkt.
+## Umgesetzt am 2026-10-04 (Codebase-Audit: Aufräumen, Dokumentieren, Konsistenz)
 
-Offen:
+Auf Wunsch des Nutzers ein strukturierter Audit der gesamten Codebasis (geteilte Kernschicht, repräsentative Stichprobe über die ~90 Einzel-Tools, Doku-/Config-Abgleich gegen die Realität) mit drei parallelen Recherchen. Gesamtbefund: keine strukturelle Fäulnis, Composition API durchgängig modern, der `::v-deep(&…)`-Selektor-Bug (siehe oben) kommt sonst nirgends im Repo vor. Rund 30 konkrete Einzelpunkte gefunden, davon die risikoarmen jetzt umgesetzt (Phase A) — größere Folgearbeiten (Komponenten-Konsolidierung, Namenskonvention über alle Tools, i18n-Rollout) bewusst als eigene, spätere Schritte zurückgestellt.
 
-- Dockerfile modernisieren und härten
-- Basis-Images bewusst pinnen
-- reproduzierbaren Build herstellen
-- Container lokal bauen
-- Container-Laufzeit prüfen
-- Registry und Tagging festlegen
-- offizielles Image bereitstellen
+- **Doku-Korrekturen:** `docs/VALIDATION.md` korrigiert (behauptete fälschlich, `workflows-disabled/*` bleibe bestehen — widersprach dem gleichen Tag in dieser Datei; `iarna-toml-esm`-eval-Hinweis als erledigt vermerkt). `docs/ACCESSIBILITY.md` "~90" → "86" Tool-Seiten vereinheitlicht. `renovate.json` auf den aktuellen Preset-Namen `config:recommended` aktualisiert.
+- **Ausgelieferter Bug behoben:** `src/tools/yaml-to-toml/yaml-to-toml.vue` zeigte bei ungültiger Eingabe "Provided JSON is not valid" statt "YAML" — Copy-Paste-Rest aus einem JSON-Sibling-Tool.
+- **Toter Code entfernt:** `src/components/ColoredCard.vue` (0 Verwendungen), drei unbenutzte Exporte aus `src/utils/random.ts` (`shuffleArray`, `shuffleArrayMutate`, `shuffleString`), ein auskommentierter CSS-Block in `base.layout.vue`, auskommentierter toter Code in `regex-tester.service.ts`, eine doppelte `transition`-Klasse in `c-tooltip.vue`.
+- **Verwaiste Skripte entfernt:** `scripts/build-locales-files.mjs` (nutzte `bun`, das sonst nirgends im Projekt vorkommt, und zielte auf eine nicht mehr existierende Verzeichnisstruktur — wäre beim Ausführen sofort gescheitert), `scripts/generate-brand-assets.py` + seine seit der Leuchtturm-Logo-Entscheidung ungenutzten Ausgabedateien (`public/brand-mark.svg`, `public/banner.png`, `.github/logo-dark.{png,svg}`, `.github/logo-white.{png,svg}`), `scripts/getLatestChangelog.mjs` (nirgends eingebunden).
+- **`c-button` `testId`-Prop ergänzt** (fehlte bisher komplett) — `src/ui/c-buttons-select/c-buttons-select.vue` reichte `test-id` bisher nur zufällig über Attribut-Fallthrough durch statt über die `data-test-id`-Konvention, die der Rest des Kits (`c-input-text`) nutzt. **Dabei gefunden:** die neue, strikt typisierte Prop deckte einen echten Typfehler auf (`option.value` ist generisch `T`, nicht zwangsläufig `string`) — mit `String(option.value)` behoben, live im `/c-lib`-Showcase verifiziert (`data-test-id` landet jetzt korrekt im DOM).
+- `src/composable/validation.ts`: `catch (e: any)` → `catch (e: unknown)` mit `String(e)` (robuster als das vorherige `e.toString()`, das bei `null`/`undefined` geworfenen Werten fehlgeschlagen wäre).
+- `tsconfig.app.json`: totes `exclude`-Pattern `src/**/__tests__/*` entfernt (Tests liegen colocated, kein `__tests__`-Ordner existiert).
+- Verifiziert: `pnpm typecheck`, `pnpm lint`, `pnpm test:unit` (173/173), `pnpm build`, plus Live-Prüfung im Browser (`yaml-to-toml`-Fehlermeldung, `/c-lib`-Showcase inkl. `c-buttons-select`).
+- **Nicht gemacht, bewusst zurückgestellt** (siehe Audit-Ergebnis für Details): einheitliche Namenskonvention für Tool-Logikdateien (`.service.ts` vs. `.models.ts` vs. `.model.ts`) durchziehen, gemeinsames IPv4-Utility-Modul extrahieren, gemeinsamen Validierungs-Helfer für die Format-Konverter-Familie extrahieren, und — größtes Einzelthema — i18n-Rollout: nur `token-generator` ist tatsächlich über `$t()` übersetzt, alle anderen ~89 Tools haben vollständig englische Oberflächen trotz der "Deutsch zuerst"-Projektregel (Startseiten-Karten sind übersetzt, die Tools selbst nicht).
 
-### CI/CD
+## Umgesetzt am 2026-10-04 (Codebase-Audit Phase B: Komponenten-Konsolidierung)
 
-- inaktive CI-/Testvorlagen prüfen
-- Least-Privilege-Berechtigungen festlegen
-- Toolchain konsistent definieren
-- automatisierte Validierung wieder aktivieren
-- Publishing erst nach separater Freigabe einführen
+- **`tsconfig.vitest.json`**: `types`-Array mit `tsconfig.app.json` zusammengeführt (vorher gingen `naive-ui/volar`- und i18n-Typen für Tests stillschweigend verloren, da TS-`extends` Arrays nicht zusammenführt, sondern überschreibt).
+- **`c-file-upload.vue`**: hartkodierte Graufarben (`border-gray-300`, `bg-gray-300`, `text-gray-400`) auf das Theme-System (`appTheme.text.mutedColor`) umgestellt — reagiert jetzt korrekt auf Light/Dark, live in beiden Modi geprüft (`base64-file-converter`-Tool).
+- **Dabei gefunden und mitkorrigiert:** `c-input-text.theme.ts` und `c-select.theme.ts` hatten beide noch die alte grüne Akzentfarbe (`#1ea54c`) hartkodiert im Fokus-Hintergrund — ein Rest von vor der Farbvereinheitlichung heute früh, der nicht mitgezogen wurde, weil er nicht über `appThemes`, sondern direkt als Literal gesetzt war. Auf die aktuelle Teal-Akzentfarbe aktualisiert (bei `c-select.theme.ts` jetzt dynamisch von `appThemes.dark.primary.color` abgeleitet statt erneut als Literal dupliziert, damit das nicht wieder auseinanderlaufen kann).
+- **`c-diff-editor`**: die zwei inline definierten Monaco-Themes (nur ein transparenter Editor-Hintergrund, keine echte Farbpalette) in eine eigene `c-diff-editor.theme.ts` ausgelagert, plus `c-diff-editor.demo.vue` ergänzt — taucht jetzt im `/c-lib`-Showcase auf, vorher unsichtbar. Live geprüft, Diff-Editor rendert korrekt.
+- **Copy-Button-Konsolidierung:** `SpanCopyable.vue` (3 Einsatzstellen, immer monospace, kein Icon) in `c-text-copyable` aufgehen lassen — neue `monospace`-Prop ergänzt, beide Aufrufstellen (`ipv4-subnet-calculator`, `ipv4-range-expander/result-row.vue`) umgestellt, `SpanCopyable.vue` gelöscht. Live geprüft (Monospace-Schrift korrekt übernommen, keine Konsolenfehler). `InputCopyable.vue` bewusst **nicht** angefasst — anders als ursprünglich im Audit vermutet, ist das kein redundantes Duplikat, sondern ein eigenständiges Widget (editierbares Eingabefeld mit Copy-Button in der Suffix-Slot, nicht nur reine Textanzeige) mit 9+ aktiven Einsatzstellen.
+- Verifiziert: `pnpm typecheck`, `pnpm lint`, `pnpm test:unit` (173/173), `pnpm build`, Live-Prüfung im Browser für jede geänderte Komponente.
+- **Nicht gemacht**: Phase C (Tool-Namenskonvention, IPv4-/Validierungs-Utilities) und Phase D (i18n) weiterhin zurückgestellt, siehe oben.
 
-## Nächster geplanter Schritt
+## Umgesetzt am 2026-10-04 (Codebase-Audit Phase C: Tool-Ebene vereinheitlichen)
 
-Nach Abschluss und Merge des aktuellen Repository-Cleanups beginnt die kontrollierte Plattformmodernisierung. Die Reihenfolge ist in [ROADMAP.md](ROADMAP.md) festgelegt.
+- **Namenskonvention für Logik-Dateien vereinheitlicht**: 14 Tool-Dateien von `.models.ts`/`.model.ts` auf `.service.ts` umbenannt (per `git mv`, Historie bleibt erhalten), alle Importpfade angepasst — betrifft `benchmark-builder`, `color-converter`, `date-time-converter`, `integer-base-converter`, `ipv4-subnet-calculator`, `json-diff`, `json-viewer` (dabei auch `json.models.ts` → `json-viewer.service.ts`, Dateiname an Tool-Ordner angeglichen), `list-converter`, `mac-address-generator` (dabei auch den Tippfehler `mac-adress-generator` behoben), `phone-parser-and-formatter`, `random-port-generator`, `string-obfuscator`, `temperature-converter`, `text-to-binary`. Vorab stichprobenartig geprüft, dass diese Dateien wirklich Business-Logik-Funktionen enthalten (nicht reine Typ-/Interface-Definitionen) — die Aufteilung war rein historisch, keine echte semantische Trennung. `src/tools/json-diff/diff-viewer/diff-viewer.models.tsx` bewusst **nicht** umbenannt — enthält JSX-Render-Funktionen, kein "Service" im Sinne der Konvention.
+- **Weitere Namens-Ausreißer behoben**: `token-generator.tool.vue` → `token-generator.vue`, `toml.services.ts` → `toml-to-json.service.ts` (plus Importpfade in `toml-to-yaml.vue`).
+- **Cross-Tool-Abhängigkeiten dabei entdeckt und mitgezogen**: `ipv4-address-converter.vue` und `ipv4-range-expander.service.ts` importieren beide aus `integer-base-converter.service.ts` — wäre bei einer unvollständigen Umbenennung sofort kaputt gegangen, beide Stellen korrekt mit aktualisiert und live geprüft.
+- **IPv4-Hilfsfunktion konsolidiert**: `ipv4-range-expander.service.ts` baute die Umkehrung von `ipv4ToInt` lokal als `bits2ip` nach, obwohl es `ipv4ToInt` bereits aus `ipv4-address-converter.service.ts` importierte. Symmetrische `intToIpv4`-Funktion dort ergänzt, lokale Kopie entfernt. (Kein komplett neues Utility-Modul nötig — die beiden Tools teilten sich die Kernfunktionen über Cross-Import bereits korrekt, nur die Rückrichtung fehlte.)
+- **Validierungs-Helfer extrahiert, dabei einen zweiten Fall desselben Bug-Musters gefunden**: 7 der 11 Format-Konverter-Tools (`json-minify`, `json-to-csv`, `json-to-toml`, `json-to-xml`, `json-to-yaml-converter`, `yaml-to-json-converter`, `yaml-to-toml`) validierten ihre Eingabe jeweils inline, teils über die Wahrhaftigkeit des Parse-Ergebnisses statt über einen expliziten Boolean — das heißt, Eingaben wie `false` oder `0` wurden als "ungültig" markiert, obwohl sie syntaktisch korrektes JSON sind (`isFalsyOrHasThrown` in `useValidation` behandelt einen falsy Rückgabewert genauso wie einen Validierungsfehler). Neuer `createParseValidationRule(parser, formatName)`-Helfer in `src/composable/validation.ts` behebt das strukturell für alle 7 auf einmal und baut die Nachricht (`Provided X is not valid.`) aus dem übergebenen Formatnamen statt sie per Hand zu wiederholen — genau die Fehlerquelle, die vorhin zum yaml-to-toml-Bug geführt hat. `toml-to-json.vue`/`toml-to-yaml.vue` und `xml-to-json.vue`/`xml-formatter.vue` bewusst **nicht** umgestellt — die nutzen bereits korrekt eine geteilte, benannte Funktion (`isValidToml`/`isValidXML`) statt dupliziertem Code.
+- Verifiziert: `pnpm typecheck`, `pnpm lint`, `pnpm test:unit` (173/173), `pnpm build`. Live im Browser geprüft: `token-generator`, `ipv4-address-converter`, `mac-address-generator`, `json-diff` (alle Umbenennungen), `ipv4-range-expander` (identisches Ergebnis vor/nach der IPv4-Konsolidierung), `json-minify` mit Eingabe `false` (bestätigt: wird jetzt korrekt als gültig erkannt) und mit ungültigem JSON (Fehlermeldung erscheint weiterhin korrekt), `yaml-to-json-converter`.
+- **Nicht gemacht**: Phase D (i18n-Rollout über ~89 Tools) weiterhin zurückgestellt — größtes Einzelthema, braucht einen eigenen, in Batches aufgeteilten Anlauf.
+
+## Umgesetzt am 2026-10-04 (WLAN-QR-Code: WPA3-Beschriftung)
+
+Nutzer-Hinweis: WPA3 taucht in `wifi-qr-code-generator` nirgends auf. Vor der Änderung verifiziert (Websuche, ZXing-Spezifikation): der QR-Code-Standard (`WIFI:T:...;`) kennt keinen eigenen `WPA3`/`SAE`-Typ — `T:WPA` deckt WPA/WPA2/WPA3-Personal bereits ab, da das QR-Feld nur "verbinde mit diesem Passwort" bedeutet, das tatsächliche Protokoll handelt der Access Point aus. Mehrere andere QR-Generatoren schreiben fälschlich `T:SAE`/`T:WPA3`, was auf echten Geräten nicht erkannt wird und die Verbindung scheitern lässt.
+
+- `src/tools/wifi-qr-code-generator/wifi-qr-code-generator.vue`: Label "WPA/WPA2" → "WPA/WPA2/WPA3" (reine Beschriftung, der generierte QR-Code war schon immer korrekt für WPA3-Netzwerke nutzbar).
+- `src/tools/wifi-qr-code-generator/useQRCode.ts`: Kommentar ergänzt, der erklärt, warum bewusst kein eigener WPA3-Typ existiert — verhindert, dass das später versehentlich "repariert" und dadurch kaputt gemacht wird.
+- Verifiziert: `pnpm typecheck`, `pnpm lint`, Live-Test im Browser (QR-Code wird mit neuem Label weiterhin korrekt erzeugt). `pnpm test:unit`/`pnpm build` bei dieser reinen Label-/Kommentar-Änderung bewusst ausgelassen, um Zeit zu sparen.
+
+## Umgesetzt am 2026-10-04 (Sidebar-Hero: Logo entfernt)
+
+Nutzer-Hinweis (per Screenshot): der Leuchtturm-Mark in der Sidebar-Hero (über "OstseeBit Tools") wirkte zusammen mit Titel und Untertitel überladen.
+
+- `src/layouts/base.layout.vue`: `<img class="brand-mark" src="/img/brand/leuchtturm-mark.png">` aus dem `.text-wrapper`-Template entfernt sowie die zugehörige `.brand-mark`-CSS-Regel aus dem scoped `<style lang="less">`-Block. Die Hero-Fläche zeigt jetzt nur noch Titel, Trennlinie und Untertitel auf dem Verlaufshintergrund.
+- Verifiziert: `pnpm lint`, Live-Test im Browser (Hero-Bereich ohne Logo, keine Konsolenfehler).
+
+## Weitere Modernisierung in Modulen
+
+1. **Abhängigkeiten und Sicherheit:** die konkret gefundenen Freeze-/Injection-Risiken (bcrypt, regex-tester, math-evaluator, markdown-to-html) sind behoben, `iarna-toml-esm`/`jwt-decode`/`vue-router`/`uuid` sind aktualisiert (siehe oben). Offen bleiben: verbleibende Browser-/Buildwarnungen bei `bcryptjs`/`pdf-signature-reader`, belastbare Behandlung der übrigen kryptografischen Funktionen, und die Konsolidierung von vier parallel genutzten Icon-Bibliotheken.
+2. **Öffentliches Webangebot und Self-Hosting:** Basis-Images sind inzwischen gepinnt und die nginx-Stage läuft als Non-Root-User (siehe oben); offen bleiben reproduzierbarer Container-Build, Laufzeit-, Offline-/PWA- und Updateprüfungen einschließlich Recovery, sowie die Entscheidung zwischen Docker/Netlify/Vercel als tatsächlichem Auslieferungsweg.
+3. **Design und Barrierefreiheit:** Farb-/Typografie-/Fokus-Angleichung an `ostseebit-app` ist umgesetzt (siehe oben); offen bleiben ein echter Screenreader-Testlauf und die visuelle Detailabstimmung einzelner Tool-Seiten.
+4. **Audit und Betrieb:** konkrete Anforderungen und Nachweise, Abhängigkeits-/Lizenzinventar, Wartungsprozess, Release- und Rollback-Verfahren. Normkonformität wird erst nach überprüften Anforderungen und Nachweisen bewertet.
+
+## Gelesene Referenz aus ostseebit-app
+
+Das benachbarte Repository wurde ausschließlich gelesen. Für den Abgleich sind insbesondere folgende Dateien erfasst:
+
+- `docs/redesign-v2-nachweis.md` (2026-08-02): flacher Ruhezustand, einheitlicher Hover, vier Bedeutungsfarben für Klickzustände, Glaskacheln für klickbare Vorschauen, lokal gehostete IBM-Plex-Schriften und reduzierte Bewegung.
+- `static/css/core/_neomorphic-tokens.css`: aktuelle zentrale Werte für Farben, Abstände, Typografie, Light-/Dark-Modus und Komponenten. Die konkrete Übertragung nach Vue/UnoCSS braucht eigene visuelle und Bedienungsprüfungen.
+- `docs/compliance-checklist.md` und `docs/production-checklist.md`: lokale Ressourcen, Datenschutz, Barrierefreiheit, TLS, Header und Betriebsnachweise als Prüffelder. Die dortigen OK-Markierungen sind keine Nachweise für dieses Repository.
+- `docs/SECURITY.md`: enthält noch eine CDN-Ausnahme, während die anderen Dokumente CDN-Freiheit beschreiben. Diese Abweichung ist vor der Übernahme gegen den tatsächlichen Code aufzulösen. API-, Datenbank- und Authentifizierungsregeln sind auf die jeweilige Architektur zu beziehen.
+
+Der nächste technische Schwerpunkt ist Modul 1. Eine allgemeine Aussage, dass das gesamte Produkt fehlerfrei oder vollständig modernisiert sei, lässt sich aus einem erfolgreichen Build und Browserlauf nicht ableiten.

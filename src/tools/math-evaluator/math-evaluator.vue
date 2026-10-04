@@ -3,9 +3,20 @@ import { evaluate } from 'mathjs';
 
 import { withDefaultOnError } from '@/utils/defaults';
 
+// Expressions are capped to keep pathological input (e.g. huge factorials or
+// power towers like `9^9^9^9`) from locking up the tab for a long time.
+const MAX_EXPRESSION_LENGTH = 1000;
+
 const expression = ref('');
 
-const result = computed(() => withDefaultOnError(() => evaluate(expression.value) ?? '', ''));
+const result = computed(() => withDefaultOnError(() => {
+  if (expression.value.length > MAX_EXPRESSION_LENGTH) {
+    throw new Error('Expression too long');
+  }
+  // A fresh scope per evaluation avoids state (variable assignments) leaking
+  // between calls.
+  return evaluate(expression.value, {}) ?? '';
+}, ''));
 </script>
 
 <template>

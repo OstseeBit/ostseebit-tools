@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import _ from 'lodash';
-import SpanCopyable from '@/components/SpanCopyable.vue';
 
-const props = withDefaults(defineProps<{ label: string; oldValue?: string; newValue?: string }>(), {
+const props = withDefaults(defineProps<{ label?: string, oldValue?: string, newValue?: string }>(), {
   label: '',
   oldValue: '',
   newValue: '',
@@ -18,10 +17,10 @@ const testId = computed(() => _.kebabCase(label.value));
       {{ label }}
     </td>
     <td :data-test-id="`${testId}.old`">
-      <SpanCopyable :value="oldValue" class="monospace" />
+      <c-text-copyable :value="oldValue" monospace :show-icon="false" />
     </td>
     <td :data-test-id="`${testId}.new`">
-      <SpanCopyable :value="newValue" />
+      <c-text-copyable :value="newValue" monospace :show-icon="false" />
     </td>
   </tr>
 </template>

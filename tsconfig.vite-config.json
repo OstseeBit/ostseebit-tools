@@ -1,8 +1,16 @@
 {
-  "extends": "@tsconfig/node18/tsconfig.json",
-  "include": ["vite.config.*"],
+  "extends": "@tsconfig/node24/tsconfig.json",
   "compilerOptions": {
     "composite": true,
-    "types": ["node", "vitest"]
-  }
+    "types": [
+      "node",
+      "vitest"
+    ],
+    "allowImportingTsExtensions": true
+  },
+  "include": [
+    "vite.config.ts",
+    "unocss.config.ts",
+    "playwright*.config.ts"
+  ]
 }

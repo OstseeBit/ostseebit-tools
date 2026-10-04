@@ -1,4 +1,4 @@
-import { BrandJavascript } from '@vicons/tabler';
+import BrandJavascript from '@vicons/tabler/es/BrandJavascript';
 import { defineTool } from '../tool';
 
 export const tool = defineTool({

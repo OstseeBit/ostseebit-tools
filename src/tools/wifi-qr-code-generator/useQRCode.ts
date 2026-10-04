@@ -1,7 +1,14 @@
-import { type MaybeRef, get } from '@vueuse/core';
-import QRCode, { type QRCodeToDataURLOptions } from 'qrcode';
+import type { QRCodeToDataURLOptions } from 'qrcode';
+import type { MaybeRef } from 'vue';
+import { get } from '@vueuse/core';
+import QRCode from 'qrcode';
 import { isRef, ref, watch } from 'vue';
 
+// No separate "WPA3" entry on purpose: the WIFI: QR spec's `T:WPA` value
+// already covers WPA/WPA2/WPA3-Personal — the QR only tells the scanner
+// "connect with this password", the actual protocol is negotiated by the AP.
+// Some generators wrongly emit `T:SAE`/`T:WPA3`, which real phones don't
+// recognize and fails to connect. Don't "fix" this by adding one.
 export const wifiEncryptions = ['WEP', 'WPA', 'nopass', 'WPA2-EAP'] as const;
 export type WifiEncryption = typeof wifiEncryptions[number];
 
@@ -42,7 +49,7 @@ interface IWifiQRCodeOptions {
   eapAnonymous: MaybeRef<boolean>
   eapIdentity: MaybeRef<string>
   eapPhase2Method: MaybeRef<EAPPhase2Method>
-  color: { foreground: MaybeRef<string>; background: MaybeRef<string> }
+  color: { foreground: MaybeRef<string>, background: MaybeRef<string> }
   options?: QRCodeToDataURLOptions
 }
 
