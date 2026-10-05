@@ -43,6 +43,8 @@ search:
   label: Suche
 validation:
   providedFormatInvalid: '{format} ist nicht gültig.'
+copy:
+  defaultMessage: In die Zwischenablage kopiert
 tools:
   categories:
     favorite-tools: Deine Lieblingstools
@@ -189,6 +191,19 @@ tools:
       Zahlen.
   hmac-generator:
     title: HMAC-Generator
+    plainTextLabel: Klartext für die Hash-Berechnung
+    plainTextPlaceholder: Klartext für die Hash-Berechnung ...
+    secretKeyLabel: Geheimer Schlüssel
+    secretKeyPlaceholder: Gib den geheimen Schlüssel ein ...
+    hashFunctionLabel: Hash-Funktion
+    hashFunctionPlaceholder: Wähle eine Hash-Funktion ...
+    outputEncodingLabel: Ausgabe-Kodierung
+    outputEncodingPlaceholder: Wähle die Ergebnis-Kodierung ...
+    binary: Binär (Basis 2)
+    hexadecimal: Hexadezimal (Basis 16)
+    outputLabel: HMAC deines Textes
+    outputPlaceholder: Das Ergebnis des HMAC ...
+    copyButton: HMAC kopieren
     description: >-
       Berechnet einen hashbasierten Nachrichtenauthentifizierungscode (HMAC)
       unter Verwendung eines geheimen Schlüssels und deiner bevorzugten
@@ -254,6 +269,17 @@ tools:
       aus.
   html-entities:
     title: HTML-Entity-Escape
+    escapeTitle: HTML-Entitäten escapen
+    escapeInputLabel: 'Dein String:'
+    escapeInputPlaceholder: Der zu escapende String
+    escapeOutputLabel: 'Dein escapter String:'
+    escapeOutputPlaceholder: Dein escapter String
+    unescapeTitle: HTML-Entitäten unescapen
+    unescapeInputLabel: 'Dein escapter String:'
+    unescapeInputPlaceholder: Der zu unescapende String
+    unescapeOutputLabel: 'Dein unescapter String:'
+    unescapeOutputPlaceholder: Dein unescapter String
+    copyButton: Kopieren
     description: >-
       Escape oder unescape HTML-Entitäten (ersetze <, >, &, " und ' durch ihre
       HTML-Version).
@@ -402,6 +428,11 @@ tools:
       Identifier (ULID).
   string-obfuscator:
     title: String-Verschleierer
+    inputLabel: 'String zum Verschleiern:'
+    inputPlaceholder: Zu verschleiernden String eingeben
+    keepFirstLabel: 'Erste behalten:'
+    keepLastLabel: 'Letzte behalten:'
+    keepSpacesLabel: 'Leerzeichen behalten:'
     description: >-
       Verschleiere einen String (wie ein Secret, eine IBAN oder ein Token), um
       ihn weitergeben zu können und identifizierbar zu machen, ohne seinen
@@ -451,6 +482,18 @@ tools:
       Passwort.
   text-to-unicode:
     title: Text zu Unicode
+    textToUnicodeTitle: Text zu Unicode
+    textInputLabel: Gib Text ein, der in Unicode umgewandelt werden soll
+    textInputPlaceholder: "z. B.: 'Hello Avengers'"
+    unicodeOutputLabel: Unicode aus deinem Text
+    unicodeOutputPlaceholder: Die Unicode-Darstellung deines Textes erscheint hier
+    copyUnicodeButton: Unicode in die Zwischenablage kopieren
+    unicodeToTextTitle: Unicode zu Text
+    unicodeInputLabel: Gib Unicode ein, das in Text umgewandelt werden soll
+    unicodeInputPlaceholder: Unicode-Eingabe
+    textOutputLabel: Text aus deinem Unicode
+    textOutputPlaceholder: Die Textdarstellung deines Unicodes erscheint hier
+    copyTextButton: Text in die Zwischenablage kopieren
     description: Parse und konvertiere Text in Unicode und umgekehrt.
   ipv4-range-expander:
     title: IPv4-Bereichserweiterer
@@ -472,4 +515,17 @@ tools:
       decodiere es.
   text-to-binary:
     title: Text zu ASCII-Binär
+    textToBinaryTitle: Text zu ASCII-Binär
+    textInputLabel: Gib Text ein, der in Binär umgewandelt werden soll
+    textInputPlaceholder: "z. B.: 'Hello world'"
+    binaryOutputLabel: Binär aus deinem Text
+    binaryOutputPlaceholder: Die Binärdarstellung deines Textes erscheint hier
+    copyBinaryButton: Binär in die Zwischenablage kopieren
+    binaryToTextTitle: ASCII-Binär zu Text
+    binaryInputLabel: Gib Binär ein, das in Text umgewandelt werden soll
+    binaryInputPlaceholder: "z. B.: '01001000 01100101 01101100 01101100 01101111'"
+    invalidBinaryMessage: Binär sollte ein gültiger ASCII-Binärstring mit Vielfachen von 8 Bit sein
+    textOutputLabel: Text aus deinem Binär
+    textOutputPlaceholder: Die Textdarstellung deines Binärs erscheint hier
+    copyTextButton: Text in die Zwischenablage kopieren
     description: Konvertiere Text in seine ASCII-Binärrepräsentation und umgekehrt.

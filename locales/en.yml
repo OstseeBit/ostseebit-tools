@@ -41,6 +41,8 @@ search:
   label: Search
 validation:
   providedFormatInvalid: 'Provided {format} is not valid.'
+copy:
+  defaultMessage: Copied to the clipboard
 tools:
   categories:
     favorite-tools: 'Your favorite tools'
@@ -176,6 +178,19 @@ tools:
 
   hmac-generator:
     title: Hmac generator
+    plainTextLabel: Plain text to compute the hash
+    plainTextPlaceholder: Plain text to compute the hash...
+    secretKeyLabel: Secret key
+    secretKeyPlaceholder: Enter the secret key...
+    hashFunctionLabel: Hashing function
+    hashFunctionPlaceholder: Select an hashing function...
+    outputEncodingLabel: Output encoding
+    outputEncodingPlaceholder: Select the result encoding...
+    binary: Binary (base 2)
+    hexadecimal: Hexadecimal (base 16)
+    outputLabel: HMAC of your text
+    outputPlaceholder: The result of the HMAC...
+    copyButton: Copy HMAC
     description: Computes a hash-based message authentication code (HMAC) using a secret key and your favorite hashing function.
 
   bip39-generator:
@@ -230,6 +245,17 @@ tools:
 
   html-entities:
     title: Escape HTML entities
+    escapeTitle: Escape html entities
+    escapeInputLabel: 'Your string :'
+    escapeInputPlaceholder: The string to escape
+    escapeOutputLabel: 'Your string escaped :'
+    escapeOutputPlaceholder: Your string escaped
+    unescapeTitle: Unescape html entities
+    unescapeInputLabel: 'Your escaped string :'
+    unescapeInputPlaceholder: The string to unescape
+    unescapeOutputLabel: 'Your string unescaped :'
+    unescapeOutputPlaceholder: Your string unescaped
+    copyButton: Copy
     description: Escape or unescape HTML entities (replace characters like <,>, &, " and \' with their HTML version)
 
   json-prettify:
@@ -370,6 +396,11 @@ tools:
 
   string-obfuscator:
     title: String obfuscator
+    inputLabel: 'String to obfuscate:'
+    inputPlaceholder: Enter string to obfuscate
+    keepFirstLabel: 'Keep first:'
+    keepLastLabel: 'Keep last:'
+    keepSpacesLabel: 'Keep spaces:'
     description: Obfuscate a string (like a secret, an IBAN, or a token) to make it shareable and identifiable without revealing its content.
 
   base-converter:
@@ -410,6 +441,18 @@ tools:
 
   text-to-unicode:
     title: Text to Unicode
+    textToUnicodeTitle: Text to Unicode
+    textInputLabel: Enter text to convert to unicode
+    textInputPlaceholder: "e.g. 'Hello Avengers'"
+    unicodeOutputLabel: Unicode from your text
+    unicodeOutputPlaceholder: The unicode representation of your text will be here
+    copyUnicodeButton: Copy unicode to clipboard
+    unicodeToTextTitle: Unicode to Text
+    unicodeInputLabel: Enter unicode to convert to text
+    unicodeInputPlaceholder: Input Unicode
+    textOutputLabel: Text from your Unicode
+    textOutputPlaceholder: The text representation of your unicode will be here
+    copyTextButton: Copy text to clipboard
     description: Parse and convert text to unicode and vice-versa
 
   ipv4-range-expander:
@@ -430,4 +473,17 @@ tools:
 
   text-to-binary:
     title: Text to ASCII binary
+    textToBinaryTitle: Text to ASCII binary
+    textInputLabel: Enter text to convert to binary
+    textInputPlaceholder: "e.g. 'Hello world'"
+    binaryOutputLabel: Binary from your text
+    binaryOutputPlaceholder: The binary representation of your text will be here
+    copyBinaryButton: Copy binary to clipboard
+    binaryToTextTitle: ASCII binary to text
+    binaryInputLabel: Enter binary to convert to text
+    binaryInputPlaceholder: "e.g. '01001000 01100101 01101100 01101100 01101111'"
+    invalidBinaryMessage: Binary should be a valid ASCII binary string with multiples of 8 bits
+    textOutputLabel: Text from your binary
+    textOutputPlaceholder: The text representation of your binary will be here
+    copyTextButton: Copy text to clipboard
     description: Convert text to its ASCII binary representation and vice-versa.
