@@ -97,6 +97,23 @@ tools:
 
   svg-placeholder-generator:
     title: SVG placeholder generator
+    widthLabel: Width (in px)
+    widthPlaceholder: SVG width...
+    backgroundLabel: Background
+    heightLabel: Height (in px)
+    heightPlaceholder: SVG height...
+    textColorLabel: Text color
+    fontSizeLabel: Font size
+    fontSizePlaceholder: Font size...
+    customTextLabel: Custom text
+    customTextPlaceholder: 'Default is {size}'
+    exactSizeLabel: Use exact size
+    svgElementLabel: SVG HTML element
+    svgBase64Label: SVG in Base64
+    copySvgButton: Copy svg
+    copyBase64Button: Copy base64
+    downloadButton: Download svg
+    imageAlt: Image
     description: Generate svg images to use as a placeholder in your applications.
 
   json-to-csv:
@@ -109,6 +126,17 @@ tools:
 
   keycode-info:
     title: Keycode info
+    pressKeyText: Press the key on your keyboard you want to get info about this key
+    keyLabel: 'Key :'
+    keyPlaceholder: Key name...
+    keycodeLabel: 'Keycode :'
+    keycodePlaceholder: Keycode...
+    codeLabel: 'Code :'
+    codePlaceholder: Code...
+    locationLabel: 'Location :'
+    locationPlaceholder: Code...
+    modifiersLabel: 'Modifiers :'
+    noneOption: 'None'
     description: Find the javascript keycode, code, location and modifiers of any pressed key.
 
   emoji-picker:
@@ -299,6 +327,17 @@ tools:
 
   mime-types:
     title: MIME types
+    mimeToExtensionTitle: Mime type to extension
+    mimeToExtensionSubtitle: Know which file extensions are associated to a mime-type
+    mimePlaceholder: "Select your mimetype here... (ex: application/pdf)"
+    extensionsOfLabel: 'Extensions of files with the'
+    mimeTypeSuffixLabel: 'mime-type:'
+    extensionToMimeTitle: File extension to mime type
+    extensionToMimeSubtitle: Know which mime type is associated to a file extension
+    mimeOfExtensionLabel: 'Mime type associated to the extension'
+    extensionSuffixLabel: 'file extension:'
+    tableMimeTypesHeader: Mime types
+    tableExtensionsHeader: Extensions
     description: Convert MIME types to file extensions and vice-versa.
 
   toml-to-json:
@@ -307,6 +346,15 @@ tools:
 
   lorem-ipsum-generator:
     title: Lorem ipsum generator
+    paragraphsLabel: Paragraphs
+    sentencesLabel: Sentences per paragraph
+    wordsLabel: Words per sentence
+    startWithLabel: Start with lorem ipsum ?
+    asHtmlLabel: As html ?
+    outputPlaceholder: Your lorem ipsum...
+    copyButton: Copy
+    refreshButton: Refresh
+    copiedMessage: Lorem ipsum copied to the clipboard
     description: Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content
 
   qrcode-generator:
@@ -524,6 +572,20 @@ tools:
 
   url-encoder:
     title: Encode/decode URL-formatted strings
+    encodeTitle: Encode
+    encodeInputLabel: 'Your string :'
+    encodeInputPlaceholder: The string to encode
+    encodeOutputLabel: 'Your string encoded :'
+    encodeOutputPlaceholder: Your string encoded
+    decodeTitle: Decode
+    decodeInputLabel: 'Your encoded string :'
+    decodeInputPlaceholder: The string to decode
+    decodeOutputLabel: 'Your string decoded :'
+    decodeOutputPlaceholder: Your string decoded
+    copyButton: Copy
+    encodedCopiedMessage: Encoded string copied to the clipboard
+    decodedCopiedMessage: Decoded string copied to the clipboard
+    parseErrorMessage: Impossible to parse this string
     description: Encode text to URL-encoded format (also known as "percent-encoded"), or decode from it.
 
   text-to-binary:

@@ -102,6 +102,23 @@ tools:
       von einem Prozentsatz zu einem Wert.
   svg-placeholder-generator:
     title: SVG-Platzhalter-Generator
+    widthLabel: Breite (in px)
+    widthPlaceholder: SVG-Breite ...
+    backgroundLabel: Hintergrund
+    heightLabel: Höhe (in px)
+    heightPlaceholder: SVG-Höhe ...
+    textColorLabel: Textfarbe
+    fontSizeLabel: Schriftgröße
+    fontSizePlaceholder: Schriftgröße ...
+    customTextLabel: Eigener Text
+    customTextPlaceholder: 'Standard ist {size}'
+    exactSizeLabel: Exakte Größe verwenden
+    svgElementLabel: SVG-HTML-Element
+    svgBase64Label: SVG in Base64
+    copySvgButton: SVG kopieren
+    copyBase64Button: Base64 kopieren
+    downloadButton: SVG herunterladen
+    imageAlt: Bild
     description: >-
       Generiere SVG-Bilder, die als Platzhalter in deinen Anwendungen verwendet
       werden können.
@@ -113,6 +130,17 @@ tools:
     description: Mache ein Foto oder nimm ein Video von deiner Webcam oder Kamera auf.
   keycode-info:
     title: Keycode-Info
+    pressKeyText: Drücke die Taste auf deiner Tastatur, über die du Informationen erhalten möchtest
+    keyLabel: 'Taste:'
+    keyPlaceholder: Tastenname ...
+    keycodeLabel: 'Keycode:'
+    keycodePlaceholder: Keycode ...
+    codeLabel: 'Code:'
+    codePlaceholder: Code ...
+    locationLabel: 'Standort:'
+    locationPlaceholder: Code ...
+    modifiersLabel: 'Modifikatoren:'
+    noneOption: Keine
     description: >-
       Finde den JavaScript-Keycode, den Code, den Standort und die Modifikatoren
       einer beliebigen gedrückten Taste.
@@ -321,12 +349,32 @@ tools:
     description: Finde den Anbieter und Hersteller eines Geräts anhand seiner MAC-Adresse.
   mime-types:
     title: MIME-Typen
+    mimeToExtensionTitle: MIME-Typ zu Dateiendung
+    mimeToExtensionSubtitle: Finde heraus, welche Dateiendungen zu einem MIME-Typ gehören
+    mimePlaceholder: "Wähle hier deinen MIME-Typ aus ... (z. B.: application/pdf)"
+    extensionsOfLabel: Dateiendungen des MIME-Typs
+    mimeTypeSuffixLabel: ':'
+    extensionToMimeTitle: Dateiendung zu MIME-Typ
+    extensionToMimeSubtitle: Finde heraus, welcher MIME-Typ zu einer Dateiendung gehört
+    mimeOfExtensionLabel: MIME-Typ für die Dateiendung
+    extensionSuffixLabel: ':'
+    tableMimeTypesHeader: MIME-Typen
+    tableExtensionsHeader: Dateiendungen
     description: Konvertiere MIME-Typen in Erweiterungen und umgekehrt.
   toml-to-json:
     title: TOML zu JSON
     description: Parse und konvertiere TOML zu JSON.
   lorem-ipsum-generator:
     title: Lorem Ipsum Generator
+    paragraphsLabel: Absätze
+    sentencesLabel: Sätze pro Absatz
+    wordsLabel: Wörter pro Satz
+    startWithLabel: Mit "Lorem ipsum" beginnen?
+    asHtmlLabel: Als HTML?
+    outputPlaceholder: Dein Lorem Ipsum ...
+    copyButton: Kopieren
+    refreshButton: Aktualisieren
+    copiedMessage: Lorem Ipsum in die Zwischenablage kopiert
     description: >-
       Lorem Ipsum ist ein Platzhaltertext, der häufig verwendet wird, um die
       visuelle Form eines Dokuments oder einer Schriftart ohne Verwendung von
@@ -568,6 +616,20 @@ tools:
       Multi-Faktor-Authentifizierung.
   url-encoder:
     title: Kodieren/Decodieren von URL-formatierten Zeichenfolgen
+    encodeTitle: Kodieren
+    encodeInputLabel: 'Dein String:'
+    encodeInputPlaceholder: Der zu kodierende String
+    encodeOutputLabel: 'Dein kodierter String:'
+    encodeOutputPlaceholder: Dein kodierter String
+    decodeTitle: Decodieren
+    decodeInputLabel: 'Dein kodierter String:'
+    decodeInputPlaceholder: Der zu decodierende String
+    decodeOutputLabel: 'Dein decodierter String:'
+    decodeOutputPlaceholder: Dein decodierter String
+    copyButton: Kopieren
+    encodedCopiedMessage: Kodierter String in die Zwischenablage kopiert
+    decodedCopiedMessage: Decodierter String in die Zwischenablage kopiert
+    parseErrorMessage: Dieser String kann nicht verarbeitet werden
     description: >-
       Kodiere zum URL-kodierten Format (auch als "prozentkodiert" bekannt) oder
       decodiere es.
