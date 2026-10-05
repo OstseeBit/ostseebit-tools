@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import IconBrandGithub from '@tabler/icons-vue/dist/esm/icons/IconBrandGithub.mjs';
-import IconInfoCircle from '@tabler/icons-vue/dist/esm/icons/IconInfoCircle.mjs';
-import IconMoon from '@tabler/icons-vue/dist/esm/icons/IconMoon.mjs';
-import IconSun from '@tabler/icons-vue/dist/esm/icons/IconSun.mjs';
+import BrandGithub from '@vicons/tabler/es/BrandGithub';
+import InfoCircle from '@vicons/tabler/es/InfoCircle';
+import Moon from '@vicons/tabler/es/Moon';
+import Sun from '@vicons/tabler/es/Sun';
 import { brand } from '@/branding';
 import { useStyleStore } from '@/stores/style.store';
 
@@ -20,27 +20,19 @@ const { isDarkTheme } = toRefs(styleStore);
       rel="noopener noreferrer"
       :aria-label="$t('home.nav.githubRepository')"
     >
-      <n-icon size="25">
-        <IconBrandGithub />
-      </n-icon>
+      <n-icon size="25" :component="BrandGithub" />
     </c-button>
   </c-tooltip>
 
   <c-tooltip :tooltip="$t('home.nav.about')" position="bottom">
     <c-button circle variant="text" to="/about" :aria-label="$t('home.nav.aboutLabel')">
-      <n-icon size="25">
-        <IconInfoCircle />
-      </n-icon>
+      <n-icon size="25" :component="InfoCircle" />
     </c-button>
   </c-tooltip>
   <c-tooltip :tooltip="isDarkTheme ? $t('home.nav.lightMode') : $t('home.nav.darkMode')" position="bottom">
     <c-button circle variant="text" :aria-label="$t('home.nav.mode')" @click="() => styleStore.toggleDark()">
-      <n-icon v-if="isDarkTheme" size="25">
-        <IconSun />
-      </n-icon>
-      <n-icon v-else size="25">
-        <IconMoon />
-      </n-icon>
+      <n-icon v-if="isDarkTheme" size="25" :component="Sun" />
+      <n-icon v-else size="25" :component="Moon" />
     </c-button>
   </c-tooltip>
 </template>
