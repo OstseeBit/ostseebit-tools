@@ -41,6 +41,8 @@ search:
   label: Search
 validation:
   providedFormatInvalid: 'Provided {format} is not valid.'
+  invalidMacAddress: Invalid MAC address
+  invalidPartialMacAddress: Invalid partial MAC address
 copy:
   defaultMessage: Copied to the clipboard
 tools:
@@ -252,6 +254,8 @@ tools:
 
   numeronym-generator:
     title: Numeronym generator
+    inputPlaceholder: "Enter a word, e.g. 'internationalization'"
+    outputPlaceholder: "Your numeronym will be here, e.g. 'i18n'"
     description: A numeronym is a word where a number is used to form an abbreviation. For example, "i18n" is a numeronym of "internationalization" where 18 stands for the number of letters between the first i and the last n in the word.
 
   case-converter:
@@ -285,6 +289,12 @@ tools:
 
   mac-address-lookup:
     title: MAC address lookup
+    macAddressLabel: 'MAC address:'
+    macAddressPlaceholder: Type a MAC address
+    vendorInfoLabel: 'Vendor info:'
+    unknownVendor: Unknown vendor for this address
+    copyButton: Copy vendor info
+    copiedMessage: Vendor info copied to the clipboard
     description: Find the vendor and manufacturer of a device by its MAC address.
 
   mime-types:
@@ -352,6 +362,15 @@ tools:
 
   mac-address-generator:
     title: MAC address generator
+    quantityLabel: 'Quantity:'
+    prefixLabel: 'MAC address prefix:'
+    prefixPlaceholder: 'Set a prefix, e.g. 64:16:7F'
+    caseLabel: 'Case:'
+    separatorLabel: 'Separator:'
+    noneOption: 'None'
+    refreshButton: Refresh
+    copyButton: Copy
+    copiedMessage: MAC addresses copied to the clipboard
     description: Enter the quantity and prefix. MAC addresses will be generated in your chosen case (uppercase or lowercase)
 
   json-diff:
@@ -380,6 +399,13 @@ tools:
 
   ipv6-ula-generator:
     title: IPv6 ULA generator
+    infoTitle: Info
+    infoText: This tool uses the first method suggested by IETF using the current timestamp plus the mac address, sha1 hashed, and the lower 40 bits to generate your random ULA.
+    macAddressLabel: 'MAC address:'
+    macAddressPlaceholder: Type a MAC address
+    ulaLabel: 'IPv6 ULA:'
+    firstBlockLabel: 'First routable block:'
+    lastBlockLabel: 'Last routable block:'
     description: Generate your own local, non-routable IP addresses for your network according to RFC4193.
 
   hash-text:
@@ -450,6 +476,11 @@ tools:
 
   text-to-nato-alphabet:
     title: Text to NATO alphabet
+    inputLabel: Your text to convert to NATO phonetic alphabet
+    inputPlaceholder: Put your text here...
+    outputLabel: Your text in NATO phonetic alphabet
+    copyButton: Copy NATO string
+    copiedMessage: NATO alphabet string copied.
     description: Transform text into the NATO phonetic alphabet for oral transmission.
 
   basic-auth-generator:

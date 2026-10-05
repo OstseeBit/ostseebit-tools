@@ -1,32 +1,39 @@
 import type { Ref } from 'vue';
+import { computed } from 'vue';
 import { useValidation } from '@/composable/validation';
 
-const macAddressValidationRules = [
-  {
-    message: 'Invalid MAC address',
-    validator: (value: string) => value.trim().match(/^([0-9A-F]{2}[:-]){2,5}([0-9A-F]{2})$/i),
-  },
-];
+type TranslateFn = (key: string) => string;
 
-function macAddressValidation(value: Ref) {
+function createMacAddressValidationRules(t: TranslateFn) {
+  return [
+    {
+      message: t('validation.invalidMacAddress'),
+      validator: (value: string) => value.trim().match(/^([0-9A-F]{2}[:-]){2,5}([0-9A-F]{2})$/i),
+    },
+  ];
+}
+
+function macAddressValidation(value: Ref, t: TranslateFn) {
   return useValidation({
     source: value,
-    rules: macAddressValidationRules,
+    rules: computed(() => createMacAddressValidationRules(t)),
   });
 }
 
-const partialMacAddressValidationRules = [
-  {
-    message: 'Invalid partial MAC address',
-    validator: (value: string) => value.trim().match(/^([0-9a-f]{2}[:\-. ]){0,5}([0-9a-f]{0,2})$/i),
-  },
-];
+function createPartialMacAddressValidationRules(t: TranslateFn) {
+  return [
+    {
+      message: t('validation.invalidPartialMacAddress'),
+      validator: (value: string) => value.trim().match(/^([0-9a-f]{2}[:\-. ]){0,5}([0-9a-f]{0,2})$/i),
+    },
+  ];
+}
 
-function usePartialMacAddressValidation(value: Ref) {
+function usePartialMacAddressValidation(value: Ref, t: TranslateFn) {
   return useValidation({
     source: value,
-    rules: partialMacAddressValidationRules,
+    rules: computed(() => createPartialMacAddressValidationRules(t)),
   });
 }
 
-export { macAddressValidation, macAddressValidationRules, partialMacAddressValidationRules, usePartialMacAddressValidation };
+export { createMacAddressValidationRules, createPartialMacAddressValidationRules, macAddressValidation, usePartialMacAddressValidation };

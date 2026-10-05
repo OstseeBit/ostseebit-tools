@@ -43,6 +43,8 @@ search:
   label: Suche
 validation:
   providedFormatInvalid: '{format} ist nicht gültig.'
+  invalidMacAddress: Ungültige MAC-Adresse
+  invalidPartialMacAddress: Ungültige partielle MAC-Adresse
 copy:
   defaultMessage: In die Zwischenablage kopiert
 tools:
@@ -272,6 +274,8 @@ tools:
       Gerätetyp/-modell aus einer User-Agent-Zeichenfolge.
   numeronym-generator:
     title: Numeronym-Generator
+    inputPlaceholder: "Gib ein Wort ein, z. B.: 'internationalization'"
+    outputPlaceholder: "Dein Numeronym erscheint hier, z. B.: 'i18n'"
     description: >-
       Ein Numeronym ist ein Wort, bei dem eine Zahl verwendet wird, um eine
       Abkürzung zu bilden. Zum Beispiel ist "i18n" ein Numeronym für
@@ -308,6 +312,12 @@ tools:
     description: Wandle docker run-Befehle in docker-compose-Dateien um!
   mac-address-lookup:
     title: MAC-Adressensuche
+    macAddressLabel: 'MAC-Adresse:'
+    macAddressPlaceholder: Gib eine MAC-Adresse ein
+    vendorInfoLabel: 'Anbieter-Info:'
+    unknownVendor: Unbekannter Anbieter für diese Adresse
+    copyButton: Anbieter-Info kopieren
+    copiedMessage: Anbieter-Info in die Zwischenablage kopiert
     description: Finde den Anbieter und Hersteller eines Geräts anhand seiner MAC-Adresse.
   mime-types:
     title: MIME-Typen
@@ -376,6 +386,15 @@ tools:
     outputLabel: TOML aus deinem YAML
   mac-address-generator:
     title: MAC-Adressen-Generator
+    quantityLabel: 'Anzahl:'
+    prefixLabel: 'MAC-Adress-Präfix:'
+    prefixPlaceholder: 'Präfix festlegen, z. B.: 64:16:7F'
+    caseLabel: 'Groß-/Kleinschreibung:'
+    separatorLabel: 'Trennzeichen:'
+    noneOption: Keins
+    refreshButton: Aktualisieren
+    copyButton: Kopieren
+    copiedMessage: MAC-Adressen in die Zwischenablage kopiert
     description: >-
       Gebe die Menge und das Präfix ein. MAC-Adressen werden in deiner gewählten
       Schreibweise (Groß- oder Kleinbuchstaben) generiert.
@@ -405,6 +424,16 @@ tools:
     description: Generiere Open Graph- und Social-HTML-Metatags für deine Website.
   ipv6-ula-generator:
     title: IPv6-ULA-Generator
+    infoTitle: Info
+    infoText: >-
+      Dieses Tool nutzt die von der IETF vorgeschlagene erste Methode: aktueller
+      Zeitstempel plus MAC-Adresse, SHA1-gehasht, und die unteren 40 Bit zur
+      Erzeugung deiner zufälligen ULA.
+    macAddressLabel: 'MAC-Adresse:'
+    macAddressPlaceholder: Gib eine MAC-Adresse ein
+    ulaLabel: 'IPv6-ULA:'
+    firstBlockLabel: 'Erster routbarer Block:'
+    lastBlockLabel: 'Letzter routbarer Block:'
     description: >-
       Generiere deine eigenen lokalen, nicht routbaren IP-Adressen in deinem
       Netzwerk gemäß RFC4193.
@@ -489,6 +518,11 @@ tools:
       Anzahl der Wörter, die Größe usw.
   text-to-nato-alphabet:
     title: Text zu NATO-Alphabet
+    inputLabel: Dein Text für das NATO-Phonetik-Alphabet
+    inputPlaceholder: Gib hier deinen Text ein ...
+    outputLabel: Dein Text im NATO-Phonetik-Alphabet
+    copyButton: NATO-String kopieren
+    copiedMessage: NATO-Alphabet-String kopiert.
     description: >-
       Wandle Text in das NATO-Phonetik-Alphabet für die mündliche Übermittlung
       um.
