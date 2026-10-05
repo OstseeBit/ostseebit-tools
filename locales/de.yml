@@ -117,6 +117,21 @@ tools:
     description: >-
       Hashen und Vergleichen von Strings mit bcrypt. Bcrypt ist eine auf der
       Blowfish-Chiffre basierende Hash-Funktion.
+    hashTitle: Hash
+    inputLabel: 'Dein String: '
+    inputPlaceholder: Dein String für bcrypt ...
+    saltCountLabel: 'Salt-Runden: '
+    saltCountPlaceholder: Salt-Runden ...
+    copyHash: Hash kopieren
+    compareTitle: String mit Hash vergleichen
+    compareStringLabel: 'Dein String: '
+    compareStringPlaceholder: Dein String zum Vergleichen ...
+    compareHashLabel: 'Dein Hash: '
+    compareHashPlaceholder: Dein Hash zum Vergleichen ...
+    matchLabel: 'Stimmen sie überein? '
+    'yes': Ja
+    'no': Nein
+    copiedMessage: Gehashter String in die Zwischenablage kopiert
   crontab-generator:
     title: Crontab-Generator
     description: >-
@@ -142,6 +157,12 @@ tools:
       Spickzettel hast du schnellen Zugriff auf die gängigsten Git-Befehle.
   slugify-string:
     title: Slugify String
+    inputLabel: Dein String zum Slugifizieren
+    inputPlaceholder: 'Gib hier deinen String ein (z. B.: Mein Dateipfad)'
+    outputLabel: Dein Slug
+    outputPlaceholder: 'Dein Slug wird hier generiert (z. B.: mein-dateipfad)'
+    copyButton: Slug kopieren
+    copiedMessage: Slug in die Zwischenablage kopiert
     description: Mache einen String URL-, Dateinamen- und ID-sicher.
   encryption:
     title: Text verschlüsseln / entschlüsseln
@@ -226,6 +247,8 @@ tools:
       dem ersten "i" und dem letzten "n" im Wort steht.
   case-converter:
     title: Fall-Konverter
+    inputLabel: 'Dein String:'
+    inputPlaceholder: Dein String ...
     description: >-
       Ändere den Fall eines Strings und wähle zwischen verschiedenen Formaten
       aus.
@@ -369,6 +392,11 @@ tools:
       werden.
   ulid-generator:
     title: ULID-Generator
+    quantityLabel: 'Anzahl:'
+    formatLabel: 'Format: '
+    refreshButton: Aktualisieren
+    copyButton: Kopieren
+    copiedMessage: ULIDs in die Zwischenablage kopiert
     description: >-
       Generiere zufällige Universally Unique Lexicographically Sortable
       Identifier (ULID).
@@ -388,6 +416,14 @@ tools:
     description: Konvertiere YAML einfach in JSON mit diesem Live-Online-Konverter.
   uuid-generator:
     title: UUID-Generator
+    versionLabel: UUID-Version
+    quantityLabel: 'Anzahl '
+    quantityPlaceholder: UUID-Anzahl
+    invalidUuidMessage: Ungültige UUID
+    uuidsPlaceholder: Deine UUIDs
+    copyButton: Kopieren
+    refreshButton: Aktualisieren
+    copiedMessage: UUIDs in die Zwischenablage kopiert
     description: >-
       Ein Universally Unique Identifier (UUID) ist eine 128-Bit-Nummer, die zur
       Identifizierung von Informationen in Computersystemen verwendet wird. Die

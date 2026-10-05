@@ -14,6 +14,8 @@ import {
 } from 'change-case';
 import InputCopyable from '../../components/InputCopyable.vue';
 
+const { t } = useI18n();
+
 const baseConfig = {
   stripRegexp: /[^a-z\xDF-\xF6\xF8-\xFF]+/gi,
 };
@@ -93,8 +95,8 @@ const inputLabelAlignmentConfig = {
   <c-card>
     <c-input-text
       v-model:value="input"
-      label="Your string:"
-      placeholder="Your string..."
+      :label="t('tools.case-converter.inputLabel')"
+      :placeholder="t('tools.case-converter.inputPlaceholder')"
       raw-text
       v-bind="inputLabelAlignmentConfig"
     />

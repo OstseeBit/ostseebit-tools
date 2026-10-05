@@ -108,6 +108,21 @@ tools:
   bcrypt:
     title: Bcrypt
     description: Hash and compare text string using bcrypt. Bcrypt is a password-hashing function based on the Blowfish cipher.
+    hashTitle: Hash
+    inputLabel: 'Your string: '
+    inputPlaceholder: Your string to bcrypt...
+    saltCountLabel: 'Salt count: '
+    saltCountPlaceholder: Salt rounds...
+    copyHash: Copy hash
+    compareTitle: Compare string with hash
+    compareStringLabel: 'Your string: '
+    compareStringPlaceholder: Your string to compare...
+    compareHashLabel: 'Your hash: '
+    compareHashPlaceholder: Your hash to compare...
+    matchLabel: 'Do they match ? '
+    'yes': 'Yes'
+    'no': 'No'
+    copiedMessage: Hashed string copied to the clipboard
 
   crontab-generator:
     title: Crontab generator
@@ -131,6 +146,12 @@ tools:
 
   slugify-string:
     title: Slugify string
+    inputLabel: Your string to slugify
+    inputPlaceholder: 'Put your string here (ex: My file path)'
+    outputLabel: Your slug
+    outputPlaceholder: 'You slug will be generated here (ex: my-file-path)'
+    copyButton: Copy slug
+    copiedMessage: Slug copied to clipboard
     description: Make a string url, filename and id safe.
 
   encryption:
@@ -203,6 +224,8 @@ tools:
 
   case-converter:
     title: Case converter
+    inputLabel: 'Your string:'
+    inputPlaceholder: Your string...
     description: Transform the case of a string and choose between different formats
 
   html-entities:
@@ -338,6 +361,11 @@ tools:
 
   ulid-generator:
     title: ULID generator
+    quantityLabel: 'Quantity:'
+    formatLabel: 'Format: '
+    refreshButton: Refresh
+    copyButton: Copy
+    copiedMessage: ULIDs copied to the clipboard
     description: Generate random Universally Unique Lexicographically Sortable Identifier (ULID).
 
   string-obfuscator:
@@ -354,6 +382,14 @@ tools:
 
   uuid-generator:
     title: UUIDs generator
+    versionLabel: UUID version
+    quantityLabel: 'Quantity '
+    quantityPlaceholder: UUID quantity
+    invalidUuidMessage: Invalid UUID
+    uuidsPlaceholder: Your uuids
+    copyButton: Copy
+    refreshButton: Refresh
+    copiedMessage: UUIDs copied to the clipboard
     description: A Universally Unique Identifier (UUID) is a 128-bit number used to identify information in computer systems. The number of possible UUIDs is 16^32, which is 2^128 or about 3.4x10^38 (which is a lot!).
 
   ipv4-address-converter:

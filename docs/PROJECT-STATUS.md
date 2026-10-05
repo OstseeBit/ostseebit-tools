@@ -129,6 +129,17 @@ Start von Phase D (i18n-Rollout über ~89 Tools, bisher nur `token-generator` ü
 - Verifiziert: `pnpm lint`, `pnpm typecheck`, `pnpm test:unit` (173/173), `pnpm build` — alle grün. Live im Browser: Sprachumschaltung auf `/wifi-qrcode-generator` während das Dropdown eine nicht-englische/nicht-deutsche Auswahl zeigt (Dropdown-Liste UND ausgewählter Wert übersetzen sofort korrekt mit), `/yaml-to-toml` mit ungültigem YAML (übersetzte Fehlermeldung, Sprachumschaltung währenddessen), `/json-minify` mit ungültigem JSON (geteilte Validierungsmeldung funktioniert auch in den nicht vollständig übersetzten Tools), EAP-Methode-Dropdown (nicht-übersetzte, durchsuchbare Optionsliste) weiterhin fehlerfrei. Keine Konsolenfehler in allen Fällen.
 - **Nicht gemacht**: die übrigen ~87 Tools bleiben unübersetzt — das war nie Ziel dieses Piloten. Nächster Schritt bei Bedarf: Batch-weise Fortsetzung mit der jetzt etablierten Konvention.
 
+## Umgesetzt am 2026-10-05 (i18n-Batch 2: bcrypt, uuid-generator, ulid-generator, case-converter, slugify-string)
+
+Fortsetzung des i18n-Rollouts nach der jetzt etablierten Konvention (`tools.<slug>.<key>`, `useI18n()`/`t()`), 5 weitere einfache, in sich geschlossene Tools vollständig übersetzt.
+
+- **`bcrypt.vue`**: Karten-Titel, alle Labels/Platzhalter, "Ja"/"Nein" im Vergleichsergebnis. `'yes'`/`'no'` als YAML-Schlüssel bewusst in Anführungszeichen gesetzt — unquoted wären sie in manchen YAML-Schemata als Booleans interpretierbar; empirisch mit dem Projekt-YAML-Parser geprüft, dass es auch unquoted sicher gewesen wäre, aber quoted lässt keinen Zweifel offen.
+- **`uuid-generator.vue`**: Versions-/Mengen-Label, Validierungsmeldung ("Ungültige UUID", dafür `validUuidRules` in ein `computed()` umgebaut, analog zum Validierungsmuster aus Batch 1), Platzhalter, Copy-/Refresh-Buttons. Namespace-Namen (DNS/URL/OID/X500) bewusst nicht übersetzt — feststehende technische Bezeichner.
+- **`ulid-generator.vue`**: Mengen-/Format-Label, Copy-/Refresh-Buttons.
+- **`case-converter.vue`**: Eingabe-Label/-Platzhalter übersetzt; die 14 Format-Labels (Lowercase, Camelcase, Pascalcase, Snakecase, …) bewusst **nicht** übersetzt — das sind Namen von Schreibweisen-Konventionen, in der deutschen Entwickler-Praxis durchgängig die englischen Begriffe (niemand sagt "Kamelschreibweise"), identisch zur bereits getroffenen Entscheidung bei EAP-Methodennamen.
+- **`slugify-string.vue`**: Beide Feld-Labels/-Platzhalter, Copy-Button.
+- Verifiziert: `pnpm lint`, `pnpm typecheck`, `pnpm test:unit` (173/173), `pnpm build` — alle grün. Live im Browser alle 5 Tools geprüft, inklusive UUID-Validierungsfehler (übersetzte Meldung erscheint korrekt) und Bcrypt-Vergleichsergebnis (korrektes "Nein" statt eines Boolean-Darstellungsfehlers). Keine Konsolenfehler.
+
 ## Weitere Modernisierung in Modulen
 
 1. **Abhängigkeiten und Sicherheit:** die konkret gefundenen Freeze-/Injection-Risiken (bcrypt, regex-tester, math-evaluator, markdown-to-html) sind behoben, `iarna-toml-esm`/`jwt-decode`/`vue-router`/`uuid` sind aktualisiert (siehe oben). Die Browser-/Buildwarnungen bei `bcryptjs`/`pdf-signature-reader` sind geprüft und als ungefährlich bestätigt (siehe oben). `@tabler/icons-vue` ist entfernt (siehe oben). Offen bleiben: belastbare Behandlung der übrigen kryptografischen Funktionen, und die Zusammenführung von `@vicons/material` (10 Verwendungen) und `unplugin-icons`/mdi (10) — braucht pro Icon einen bewussten visuellen Abgleich, kein mechanischer Umbau.
