@@ -6,13 +6,14 @@ import InputCopyable from '../../components/InputCopyable.vue';
 
 import { computeChmodOctalRepresentation, computeChmodSymbolicRepresentation } from './chmod-calculator.service';
 
+const { t } = useI18n();
 const themeVars = useThemeVars();
 
-const scopes: { scope: Scope, title: string }[] = [
-  { scope: 'read', title: 'Read (4)' },
-  { scope: 'write', title: 'Write (2)' },
-  { scope: 'execute', title: 'Execute (1)' },
-];
+const scopes = computed<{ scope: Scope, title: string }[]>(() => [
+  { scope: 'read', title: t('tools.chmod-calculator.readLabel') },
+  { scope: 'write', title: t('tools.chmod-calculator.writeLabel') },
+  { scope: 'execute', title: t('tools.chmod-calculator.executeLabel') },
+]);
 const groups: Group[] = ['owner', 'group', 'public'];
 
 const permissions = ref({
@@ -32,13 +33,13 @@ const symbolic = computed(() => computeChmodSymbolicRepresentation({ permissions
         <tr>
           <th class="text-center" scope="col" />
           <th class="text-center" scope="col">
-            Owner (u)
+            {{ t('tools.chmod-calculator.ownerHeader') }}
           </th>
           <th class="text-center" scope="col">
-            Group (g)
+            {{ t('tools.chmod-calculator.groupHeader') }}
           </th>
           <th class="text-center" scope="col">
-            Public (o)
+            {{ t('tools.chmod-calculator.publicHeader') }}
           </th>
         </tr>
       </thead>
@@ -48,7 +49,6 @@ const symbolic = computed(() => computeChmodSymbolicRepresentation({ permissions
             {{ title }}
           </td>
           <td v-for="group of groups" :key="group" class="text-center">
-            <!-- <n-switch v-model:value="permissions[group][scope]" /> -->
             <n-checkbox v-model:checked="permissions[group][scope]" size="large" />
           </td>
         </tr>

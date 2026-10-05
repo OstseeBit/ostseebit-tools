@@ -198,6 +198,19 @@ tools:
 
   encryption:
     title: Encrypt / decrypt text
+    encryptTitle: Encrypt
+    textLabel: 'Your text:'
+    textPlaceholder: The string to cypher
+    secretKeyLabel: 'Your secret key:'
+    algorithmLabel: 'Encryption algorithm:'
+    encryptedOutputLabel: 'Your text encrypted:'
+    outputPlaceholder: Your string hash
+    decryptTitle: Decrypt
+    encryptedTextLabel: 'Your encrypted text:'
+    encryptedTextPlaceholder: The string to cypher
+    decryptErrorTitle: Error while decrypting
+    decryptErrorMessage: Unable to decrypt your text
+    decryptedOutputLabel: 'Your decrypted text:'
     description: Encrypt clear text and decrypt ciphertext using crypto algorithms like AES, TripleDES, Rabbit or RC4.
 
   random-port-generator:
@@ -391,6 +404,12 @@ tools:
 
   chmod-calculator:
     title: Chmod calculator
+    ownerHeader: Owner (u)
+    groupHeader: Group (g)
+    publicHeader: Public (o)
+    readLabel: Read (4)
+    writeLabel: Write (2)
+    executeLabel: Execute (1)
     description: Compute your chmod permissions and commands with this online chmod calculator.
 
   rsa-key-pair-generator:
@@ -458,6 +477,11 @@ tools:
 
   hash-text:
     title: Hash text
+    inputLabel: 'Your text to hash:'
+    inputPlaceholder: Your string to hash...
+    encodingLabel: Digest encoding
+    binary: Binary (base 2)
+    hexadecimal: Hexadecimal (base 16)
     description: 'Hash a text string using the function you need : MD5, SHA1, SHA256, SHA224, SHA512, SHA384, SHA3 or RIPEMD160'
 
   json-to-toml:
@@ -466,6 +490,19 @@ tools:
 
   device-information:
     title: Device information
+    screenSection: Screen
+    screenSizeLabel: Screen size
+    orientationLabel: Orientation
+    orientationAngleLabel: Orientation angle
+    colorDepthLabel: Color depth
+    pixelRatioLabel: Pixel ratio
+    windowSizeLabel: Window size
+    deviceSection: Device
+    browserVendorLabel: Browser vendor
+    languagesLabel: Languages
+    platformLabel: Platform
+    userAgentLabel: User agent
+    unknownValue: unknown
     description: Get information about your current device (screen size, pixel-ratio, user agent, ...)
 
   pdf-signature-checker:
@@ -520,6 +557,11 @@ tools:
 
   text-statistics:
     title: Text statistics
+    inputPlaceholder: Your text...
+    characterCountLabel: Character count
+    wordCountLabel: Word count
+    lineCountLabel: Line count
+    byteSizeLabel: Byte size
     description: Get information about a text, the number of characters, the number of words, its size in bytes, ...
 
   text-to-nato-alphabet:

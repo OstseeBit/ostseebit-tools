@@ -208,6 +208,19 @@ tools:
     description: Mache einen String URL-, Dateinamen- und ID-sicher.
   encryption:
     title: Text verschlüsseln / entschlüsseln
+    encryptTitle: Verschlüsseln
+    textLabel: 'Dein Text:'
+    textPlaceholder: Der zu verschlüsselnde String
+    secretKeyLabel: 'Dein geheimer Schlüssel:'
+    algorithmLabel: 'Verschlüsselungsalgorithmus:'
+    encryptedOutputLabel: 'Dein verschlüsselter Text:'
+    outputPlaceholder: Dein String-Hash
+    decryptTitle: Entschlüsseln
+    encryptedTextLabel: 'Dein verschlüsselter Text:'
+    encryptedTextPlaceholder: Der zu verschlüsselnde String
+    decryptErrorTitle: Fehler beim Entschlüsseln
+    decryptErrorMessage: Dein Text kann nicht entschlüsselt werden
+    decryptedOutputLabel: 'Dein entschlüsselter Text:'
     description: >-
       Verschlüssele und entschlüssele Klartext mithilfe von Kryptoalgorithmen
       wie AES, TripleDES, Rabbit oder RC4.
@@ -415,6 +428,12 @@ tools:
       Delisle, Newton, Réaumur und Rømer.
   chmod-calculator:
     title: Chmod-Rechner
+    ownerHeader: Eigentümer (u)
+    groupHeader: Gruppe (g)
+    publicHeader: Öffentlich (o)
+    readLabel: Lesen (4)
+    writeLabel: Schreiben (2)
+    executeLabel: Ausführen (1)
     description: >-
       Berechne deine Chmod-Berechtigungen und -Befehle mit diesem
       Online-Chmod-Rechner.
@@ -487,6 +506,11 @@ tools:
       Netzwerk gemäß RFC4193.
   hash-text:
     title: Text hashen
+    inputLabel: 'Dein Text zum Hashen:'
+    inputPlaceholder: Dein String zum Hashen ...
+    encodingLabel: Digest-Kodierung
+    binary: Binär (Basis 2)
+    hexadecimal: Hexadezimal (Basis 16)
     description: >-
       Hashe einen Text-String mit der von dir benötigten Funktion: MD5, SHA1,
       SHA256, SHA224, SHA512, SHA384, SHA3 oder RIPEMD160
@@ -495,6 +519,19 @@ tools:
     description: Parse und konvertiere JSON zu TOML.
   device-information:
     title: Geräteinformationen
+    screenSection: Bildschirm
+    screenSizeLabel: Bildschirmgröße
+    orientationLabel: Ausrichtung
+    orientationAngleLabel: Ausrichtungswinkel
+    colorDepthLabel: Farbtiefe
+    pixelRatioLabel: Pixelverhältnis
+    windowSizeLabel: Fenstergröße
+    deviceSection: Gerät
+    browserVendorLabel: Browser-Anbieter
+    languagesLabel: Sprachen
+    platformLabel: Plattform
+    userAgentLabel: User-Agent
+    unknownValue: unbekannt
     description: >-
       Informationen zu deinem aktuellen Gerät (Bildschirmgröße, Pixelverhältnis,
       Benutzeragent, ...) erhalten.
@@ -561,6 +598,11 @@ tools:
       IPv6.
   text-statistics:
     title: Textstatistiken
+    inputPlaceholder: Dein Text ...
+    characterCountLabel: Zeichenanzahl
+    wordCountLabel: Wortanzahl
+    lineCountLabel: Zeilenanzahl
+    byteSizeLabel: Byte-Größe
     description: >-
       Informationen zu einem Text erhalten, wie die Anzahl der Zeichen, die
       Anzahl der Wörter, die Größe usw.
