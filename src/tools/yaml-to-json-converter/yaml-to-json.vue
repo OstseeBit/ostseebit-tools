@@ -3,6 +3,8 @@ import { parse as parseYaml } from 'yaml';
 import { createParseValidationRule } from '@/composable/validation';
 import { withDefaultOnError } from '@/utils/defaults';
 
+const { t } = useI18n();
+
 function transformer(value: string) {
   return withDefaultOnError(() => {
     const obj = parseYaml(value, { merge: true });
@@ -10,7 +12,7 @@ function transformer(value: string) {
   }, '');
 }
 
-const rules = [createParseValidationRule(v => parseYaml(v), 'YAML')];
+const rules = computed(() => [createParseValidationRule(v => parseYaml(v), 'YAML', t)]);
 </script>
 
 <template>

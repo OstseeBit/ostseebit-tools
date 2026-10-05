@@ -11,20 +11,26 @@ function useFuzzySearch<Data>({
   options = {},
 }: {
   search: MaybeRef<string>
-  data: Data[]
+  // MaybeRef so callers whose data can change after mount (e.g. a c-select
+  // with translated option labels) get a search index that stays in sync —
+  // a plain array still works exactly as before since get() on it is a
+  // no-op with no reactive dependency, so the Fuse instance below is still
+  // only ever built once for those callers.
+  data: MaybeRef<Data[]>
   options?: Fuse.IFuseOptions<Data> & { filterEmpty?: boolean }
 }) {
-  const fuse = new Fuse(data, options);
   const filterEmpty = options.filterEmpty ?? true;
+
+  const fuse = computed(() => new Fuse(get(data), options));
 
   const searchResult = computed<Data[]>(() => {
     const query = get(search);
 
     if (!filterEmpty && query === '') {
-      return data;
+      return get(data);
     }
 
-    return fuse.search(query).map(({ item }) => item);
+    return fuse.value.search(query).map(({ item }) => item);
   });
 
   return { searchResult };

@@ -4,6 +4,8 @@ import { createParseValidationRule } from '@/composable/validation';
 import { withDefaultOnError } from '@/utils/defaults';
 import { convertArrayToCsv } from './json-to-csv.service';
 
+const { t } = useI18n();
+
 function transformer(value: string) {
   return withDefaultOnError(() => {
     if (value === '') {
@@ -13,7 +15,7 @@ function transformer(value: string) {
   }, '');
 }
 
-const rules = [createParseValidationRule(v => JSON5.parse(v), 'JSON')];
+const rules = computed(() => [createParseValidationRule(v => JSON5.parse(v), 'JSON', t)]);
 </script>
 
 <template>

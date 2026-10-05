@@ -4,11 +4,13 @@ import { stringify as stringifyToml } from 'smol-toml';
 import { createParseValidationRule } from '@/composable/validation';
 import { withDefaultOnError } from '../../utils/defaults';
 
+const { t } = useI18n();
+
 const convertJsonToToml = (value: string) => [stringifyToml(JSON5.parse(value))].flat().join('\n').trim();
 
 const transformer = (value: string) => value.trim() === '' ? '' : withDefaultOnError(() => convertJsonToToml(value), '');
 
-const rules = [createParseValidationRule(v => JSON5.parse(v), 'JSON')];
+const rules = computed(() => [createParseValidationRule(v => JSON5.parse(v), 'JSON', t)]);
 </script>
 
 <template>

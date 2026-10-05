@@ -4,6 +4,8 @@ import convert from 'xml-js';
 import { createParseValidationRule } from '@/composable/validation';
 import { withDefaultOnError } from '@/utils/defaults';
 
+const { t } = useI18n();
+
 const defaultValue = '{"a":{"_attributes":{"x":"1.234","y":"It\'s"}}}';
 function transformer(value: string) {
   return withDefaultOnError(() => {
@@ -11,7 +13,7 @@ function transformer(value: string) {
   }, '');
 }
 
-const rules = [createParseValidationRule(v => JSON5.parse(v), 'JSON')];
+const rules = computed(() => [createParseValidationRule(v => JSON5.parse(v), 'JSON', t)]);
 </script>
 
 <template>

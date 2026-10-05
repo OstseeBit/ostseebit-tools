@@ -41,6 +41,8 @@ toolCard:
   new: Neu
 search:
   label: Suche
+validation:
+  providedFormatInvalid: '{format} ist nicht gültig.'
 tools:
   categories:
     favorite-tools: Deine Lieblingstools
@@ -263,6 +265,22 @@ tools:
     description: >-
       Generiere und lade QR-Codes für schnelle Verbindungen zu WLAN-Netzwerken
       herunter.
+    encryptionMethod: Verschlüsselungsmethode
+    noPassword: Kein Passwort
+    wep: WEP
+    ssidLabel: 'SSID:'
+    ssidPlaceholder: Deine WLAN-SSID ...
+    hiddenSsid: Versteckte SSID
+    passwordLabel: 'Passwort:'
+    passwordPlaceholder: Dein WLAN-Passwort ...
+    eapMethod: EAP-Methode
+    identityLabel: 'Identität:'
+    identityPlaceholder: Deine EAP-Identität ...
+    anonymous: Anonym?
+    eapPhase2Method: EAP-Phase-2-Methode
+    foregroundColor: 'Vordergrundfarbe:'
+    backgroundColor: 'Hintergrundfarbe:'
+    download: QR-Code herunterladen
   xml-formatter:
     title: XML-Formatter
     description: Verschönere deinen XML-String in ein menschenlesbares Format.
@@ -287,6 +305,9 @@ tools:
   yaml-to-toml:
     title: YAML zu TOML
     description: Parse und konvertiere YAML zu TOML.
+    inputLabel: Dein YAML
+    inputPlaceholder: Füge hier dein YAML ein ...
+    outputLabel: TOML aus deinem YAML
   mac-address-generator:
     title: MAC-Adressen-Generator
     description: >-

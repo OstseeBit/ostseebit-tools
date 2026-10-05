@@ -39,6 +39,8 @@ toolCard:
   new: New
 search:
   label: Search
+validation:
+  providedFormatInvalid: 'Provided {format} is not valid.'
 tools:
   categories:
     favorite-tools: 'Your favorite tools'
@@ -238,6 +240,22 @@ tools:
   wifi-qrcode-generator:
     title: WiFi QR Code generator
     description: Generate and download QR codes for quick connections to WiFi networks.
+    encryptionMethod: Encryption method
+    noPassword: No password
+    wep: WEP
+    ssidLabel: 'SSID:'
+    ssidPlaceholder: Your WiFi SSID...
+    hiddenSsid: Hidden SSID
+    passwordLabel: 'Password:'
+    passwordPlaceholder: Your WiFi Password...
+    eapMethod: EAP method
+    identityLabel: 'Identity:'
+    identityPlaceholder: Your EAP Identity...
+    anonymous: Anonymous?
+    eapPhase2Method: EAP Phase 2 method
+    foregroundColor: 'Foreground color:'
+    backgroundColor: 'Background color:'
+    download: Download qr-code
 
   xml-formatter:
     title: XML formatter
@@ -262,6 +280,9 @@ tools:
   yaml-to-toml:
     title: YAML to TOML
     description: Parse and convert YAML to TOML.
+    inputLabel: Your YAML
+    inputPlaceholder: Paste your YAML here...
+    outputLabel: TOML from your YAML
 
   mac-address-generator:
     title: MAC address generator

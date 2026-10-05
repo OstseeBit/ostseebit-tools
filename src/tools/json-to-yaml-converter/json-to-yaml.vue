@@ -4,9 +4,11 @@ import { stringify } from 'yaml';
 import { createParseValidationRule } from '@/composable/validation';
 import { withDefaultOnError } from '@/utils/defaults';
 
+const { t } = useI18n();
+
 const transformer = (value: string) => withDefaultOnError(() => stringify(JSON5.parse(value)), '');
 
-const rules = [createParseValidationRule(v => JSON5.parse(v), 'JSON')];
+const rules = computed(() => [createParseValidationRule(v => JSON5.parse(v), 'JSON', t)]);
 </script>
 
 <template>
