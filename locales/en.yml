@@ -63,6 +63,9 @@ tools:
 
   chronometer:
     title: Chronometer
+    startButton: Start
+    stopButton: Stop
+    resetButton: Reset
     description: Monitor the duration of a thing. Basically a chronometer with simple chronometer features.
 
   token-generator:
@@ -81,6 +84,13 @@ tools:
       refresh: Refresh
   percentage-calculator:
     title: Percentage calculator
+    whatIsLabel: What is
+    percentOfLabel: '% of'
+    isWhatPercentLabel: is what percent of
+    percentageChangeLabel: What is the percentage increase/decrease
+    resultPlaceholder: Result
+    fromPlaceholder: From
+    toPlaceholder: To
     description: Easily calculate percentages from a value to another value, or from a percentage to a value.
 
   svg-placeholder-generator:
@@ -174,6 +184,13 @@ tools:
 
   roman-numeral-converter:
     title: Roman numeral converter
+    arabicToRomanTitle: Arabic to roman
+    romanToArabicTitle: Roman to arabic
+    rangeMessage: 'We can only convert numbers between {min} and {max}'
+    invalidRomanMessage: The input you entered is not a valid roman number
+    copyButton: Copy
+    copiedRomanMessage: Roman number copied to the clipboard
+    copiedArabicMessage: Arabic number copied to the clipboard
     description: Convert Roman numerals to numbers and convert numbers to Roman numerals.
 
   hmac-generator:
@@ -437,6 +454,13 @@ tools:
 
   basic-auth-generator:
     title: Basic auth generator
+    usernameLabel: Username
+    usernamePlaceholder: Your username...
+    passwordLabel: Password
+    passwordPlaceholder: Your password...
+    headerLabel: 'Authorization header:'
+    copyButton: Copy header
+    copiedMessage: Header copied to the clipboard
     description: Generate a base64 basic auth header from a username and password.
 
   text-to-unicode:
@@ -487,3 +511,35 @@ tools:
     textOutputPlaceholder: The text representation of your binary will be here
     copyTextButton: Copy text to clipboard
     description: Convert text to its ASCII binary representation and vice-versa.
+  ascii-text-drawer:
+    title: ASCII Art Text Generator
+    description: Create ASCII art text with many fonts and styles.
+  json-to-xml:
+    title: JSON to XML
+    description: Convert JSON to XML
+  markdown-to-html:
+    title: Markdown to HTML
+    description: Convert Markdown to Html and allow to print (as PDF)
+  regex-memo:
+    title: Regex cheatsheet
+    description: Javascript Regex/Regular Expression cheatsheet
+  regex-tester:
+    title: Regex Tester
+    description: Test your regular expressions with sample text.
+  safelink-decoder:
+    title: Outlook Safelink decoder
+    description: Decode Outlook SafeLink links
+  xml-to-json:
+    title: XML to JSON
+    description: Convert XML to JSON
+  email-normalizer:
+    title: Email normalizer
+    description: Normalize email addresses to a standard format for easier comparison. Useful for deduplication and data cleaning.
+    rawLabel: 'Raw emails to normalize:'
+    rawPlaceholder: Put your emails here (one per line)...
+    normalizedLabel: 'Normalized emails:'
+    normalizedPlaceholder: Normalized emails will appear here...
+    clearButton: Clear emails
+    copyButton: Copy normalized emails
+    unableToParse: 'Unable to parse email: {email}'
+    copiedMessage: Normalized emails copied to the clipboard

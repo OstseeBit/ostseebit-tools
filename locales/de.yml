@@ -65,6 +65,9 @@ tools:
       Passwortstärken-Analysator und Tool zur Schätzung der Knackzeit.
   chronometer:
     title: Chronometer
+    startButton: Start
+    stopButton: Stopp
+    resetButton: Zurücksetzen
     description: >-
       Überwache die Dauer einer Sache. Im Grunde ein Chronometer mit einfachen
       Chronometerfunktionen.
@@ -85,6 +88,13 @@ tools:
       refresh: Aktualisieren
   percentage-calculator:
     title: Prozentrechner
+    whatIsLabel: Wie viel sind
+    percentOfLabel: '% von'
+    isWhatPercentLabel: ist wie viel Prozent von
+    percentageChangeLabel: Wie hoch ist die prozentuale Zu-/Abnahme
+    resultPlaceholder: Ergebnis
+    fromPlaceholder: Von
+    toPlaceholder: Bis
     description: >-
       Berechne einfach Prozentsätze von einem Wert zu einem anderen Wert oder
       von einem Prozentsatz zu einem Wert.
@@ -186,6 +196,13 @@ tools:
       einer Aufgabe zu erfahren, z. B. den Zeitpunkt des Endes eines Downloads.
   roman-numeral-converter:
     title: Römische Zahlen Konverter
+    arabicToRomanTitle: Arabisch zu Römisch
+    romanToArabicTitle: Römisch zu Arabisch
+    rangeMessage: 'Wir können nur Zahlen zwischen {min} und {max} konvertieren'
+    invalidRomanMessage: Die eingegebene Zahl ist keine gültige römische Zahl
+    copyButton: Kopieren
+    copiedRomanMessage: Römische Zahl in die Zwischenablage kopiert
+    copiedArabicMessage: Arabische Zahl in die Zwischenablage kopiert
     description: >-
       Konvertiere römische Zahlen in Dezimalzahlen und Dezimalzahlen in römische
       Zahlen.
@@ -477,6 +494,13 @@ tools:
       um.
   basic-auth-generator:
     title: Basic-Auth-Generator
+    usernameLabel: Benutzername
+    usernamePlaceholder: Dein Benutzername ...
+    passwordLabel: Passwort
+    passwordPlaceholder: Dein Passwort ...
+    headerLabel: 'Authorization-Header:'
+    copyButton: Header kopieren
+    copiedMessage: Header in die Zwischenablage kopiert
     description: >-
       Generiere einen Base64-Basic-Auth-Header aus einem Benutzernamen und einem
       Passwort.
@@ -529,3 +553,37 @@ tools:
     textOutputPlaceholder: Die Textdarstellung deines Binärs erscheint hier
     copyTextButton: Text in die Zwischenablage kopieren
     description: Konvertiere Text in seine ASCII-Binärrepräsentation und umgekehrt.
+  ascii-text-drawer:
+    title: ASCII-Art-Text-Generator
+    description: Erstelle ASCII-Art-Text mit vielen Schriftarten und Stilen.
+  json-to-xml:
+    title: JSON zu XML
+    description: Konvertiere JSON zu XML.
+  markdown-to-html:
+    title: Markdown zu HTML
+    description: Konvertiere Markdown zu HTML und ermögliche den Druck (als PDF).
+  regex-memo:
+    title: Regex-Spickzettel
+    description: JavaScript-Regex/Regulärer-Ausdruck-Spickzettel.
+  regex-tester:
+    title: Regex-Tester
+    description: Teste deine regulären Ausdrücke mit Beispieltext.
+  safelink-decoder:
+    title: Outlook-Safelink-Decoder
+    description: Dekodiere Outlook-SafeLink-Links.
+  xml-to-json:
+    title: XML zu JSON
+    description: Konvertiere XML zu JSON.
+  email-normalizer:
+    title: E-Mail-Normalisierer
+    description: >-
+      Normalisiere E-Mail-Adressen in ein Standardformat für einfacheren
+      Vergleich. Nützlich für Deduplizierung und Datenbereinigung.
+    rawLabel: 'Rohe E-Mails zum Normalisieren:'
+    rawPlaceholder: Gib hier deine E-Mails ein (eine pro Zeile) ...
+    normalizedLabel: 'Normalisierte E-Mails:'
+    normalizedPlaceholder: Normalisierte E-Mails erscheinen hier ...
+    clearButton: E-Mails leeren
+    copyButton: Normalisierte E-Mails kopieren
+    unableToParse: 'E-Mail konnte nicht verarbeitet werden: {email}'
+    copiedMessage: Normalisierte E-Mails in die Zwischenablage kopiert
