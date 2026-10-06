@@ -3,6 +3,8 @@ import { evaluate } from 'mathjs';
 
 import { withDefaultOnError } from '@/utils/defaults';
 
+const { t } = useI18n();
+
 // Expressions are capped to keep pathological input (e.g. huge factorials or
 // power towers like `9^9^9^9`) from locking up the tab for a long time.
 const MAX_EXPRESSION_LENGTH = 1000;
@@ -25,14 +27,14 @@ const result = computed(() => withDefaultOnError(() => {
       v-model:value="expression"
       rows="1"
       multiline
-      placeholder="Your math expression (ex: 2*sqrt(6) )..."
+      :placeholder="t('tools.math-evaluator.inputPlaceholder')"
       raw-text
       monospace
       autofocus
       autosize
     />
 
-    <c-card v-if="result !== ''" title="Result " mt-5>
+    <c-card v-if="result !== ''" :title="t('tools.math-evaluator.resultTitle')" mt-5>
       {{ result }}
     </c-card>
   </div>

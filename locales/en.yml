@@ -61,6 +61,36 @@ tools:
 
   password-strength-analyser:
     title: Password strength analyser
+    inputPlaceholder: Enter a password...
+    crackDurationLabel: Duration to crack this password with brute force
+    passwordLengthLabel: 'Password length:'
+    entropyLabel: 'Entropy:'
+    charsetLengthLabel: 'Character set size:'
+    scoreLabel: 'Score:'
+    noteLabel: 'Note: '
+    noteText: The computed strength is based on the time it would take to crack the password using a brute force approach, it does not take into account the possibility of a dictionary attack.
+    durationInstantly: Instantly
+    durationLessThanSecond: Less than a second
+    unitMillenniumSingular: millennium
+    unitMillenniumPlural: millennia
+    unitCenturySingular: century
+    unitCenturyPlural: centuries
+    unitDecadeSingular: decade
+    unitDecadePlural: decades
+    unitYearSingular: year
+    unitYearPlural: years
+    unitMonthSingular: month
+    unitMonthPlural: months
+    unitWeekSingular: week
+    unitWeekPlural: weeks
+    unitDaySingular: day
+    unitDayPlural: days
+    unitHourSingular: hour
+    unitHourPlural: hours
+    unitMinuteSingular: minute
+    unitMinutePlural: minutes
+    unitSecondSingular: second
+    unitSecondPlural: seconds
     description: Discover the strength of your password with this client-side-only password strength analyser and crack time estimation tool.
 
   chronometer:
@@ -176,6 +206,18 @@ tools:
 
   sql-prettify:
     title: SQL prettify and format
+    dialectLabel: Dialect
+    keywordCaseLabel: Keyword case
+    keywordUppercase: UPPERCASE
+    keywordLowercase: lowercase
+    keywordPreserve: Preserve
+    indentStyleLabel: Indent style
+    indentStandard: Standard
+    indentTabularLeft: Tabular left
+    indentTabularRight: Tabular right
+    inputLabel: Your SQL query
+    inputPlaceholder: Put your SQL query here...
+    outputLabel: Prettify version of your query
     description: Format and prettify your SQL queries online (it supports various SQL dialects).
 
   benchmark-builder:
@@ -215,6 +257,9 @@ tools:
 
   random-port-generator:
     title: Random port generator
+    copyButton: Copy
+    refreshButton: Refresh
+    copiedMessage: Port copied to the clipboard
     description: Generate random port numbers outside of the range of "known" ports (0-1023).
 
   yaml-prettify:
@@ -263,6 +308,24 @@ tools:
 
   list-converter:
     title: List converter
+    sortAscending: Sort ascending
+    sortDescending: Sort descending
+    trimItemsLabel: Trim list items
+    removeDuplicatesLabel: Remove duplicates
+    lowercaseLabel: Convert to lowercase
+    keepLineBreaksLabel: Keep line breaks
+    sortListLabel: Sort list
+    sortListPlaceholder: Sort alphabetically
+    separatorLabel: Separator
+    wrapItemLabel: Wrap item
+    itemPrefixPlaceholder: Item prefix
+    itemSuffixPlaceholder: Item suffix
+    wrapListLabel: Wrap list
+    listPrefixPlaceholder: List prefix
+    listSuffixPlaceholder: List suffix
+    inputLabel: Your input data
+    inputPlaceholder: Paste your input data here...
+    outputLabel: Your transformed data
     description: This tool can process column-based data and apply various changes (transpose, add prefix and suffix, reverse list, sort list, lowercase values, truncate values) to each row.
 
   base64-string-converter:
@@ -275,6 +338,8 @@ tools:
 
   math-evaluator:
     title: Math evaluator
+    inputPlaceholder: "Your math expression (ex: 2*sqrt(6) )..."
+    resultTitle: 'Result '
     description: A calculator for evaluating mathematical expressions. You can use functions like sqrt, cos, sin, abs, etc.
 
   json-to-yaml-converter:

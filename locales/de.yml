@@ -62,6 +62,39 @@ tools:
     data: Daten
   password-strength-analyser:
     title: Passwortstärken-Analysator
+    inputPlaceholder: Gib ein Passwort ein ...
+    crackDurationLabel: Dauer, um dieses Passwort per Brute-Force zu knacken
+    passwordLengthLabel: 'Passwortlänge:'
+    entropyLabel: 'Entropie:'
+    charsetLengthLabel: 'Zeichensatzgröße:'
+    scoreLabel: 'Bewertung:'
+    noteLabel: 'Hinweis: '
+    noteText: >-
+      Die berechnete Stärke basiert auf der Zeit, die ein Brute-Force-Ansatz
+      zum Knacken des Passworts benötigen würde; die Möglichkeit eines
+      Wörterbuchangriffs wird nicht berücksichtigt.
+    durationInstantly: Sofort
+    durationLessThanSecond: Weniger als eine Sekunde
+    unitMillenniumSingular: Jahrtausend
+    unitMillenniumPlural: Jahrtausende
+    unitCenturySingular: Jahrhundert
+    unitCenturyPlural: Jahrhunderte
+    unitDecadeSingular: Jahrzehnt
+    unitDecadePlural: Jahrzehnte
+    unitYearSingular: Jahr
+    unitYearPlural: Jahre
+    unitMonthSingular: Monat
+    unitMonthPlural: Monate
+    unitWeekSingular: Woche
+    unitWeekPlural: Wochen
+    unitDaySingular: Tag
+    unitDayPlural: Tage
+    unitHourSingular: Stunde
+    unitHourPlural: Stunden
+    unitMinuteSingular: Minute
+    unitMinutePlural: Minuten
+    unitSecondSingular: Sekunde
+    unitSecondPlural: Sekunden
     description: >-
       Ermittle die Stärke deines Passworts mit diesem Client-seitigen
       Passwortstärken-Analysator und Tool zur Schätzung der Knackzeit.
@@ -184,6 +217,18 @@ tools:
     description: Liste aller HTTP-Statuscodes, ihrer Namen und ihrer Bedeutung.
   sql-prettify:
     title: SQL verschönern und formatieren
+    dialectLabel: Dialekt
+    keywordCaseLabel: Schlüsselwort-Schreibweise
+    keywordUppercase: GROSSBUCHSTABEN
+    keywordLowercase: kleinbuchstaben
+    keywordPreserve: Beibehalten
+    indentStyleLabel: Einrückungsstil
+    indentStandard: Standard
+    indentTabularLeft: Tabellarisch links
+    indentTabularRight: Tabellarisch rechts
+    inputLabel: Deine SQL-Abfrage
+    inputPlaceholder: Füge hier deine SQL-Abfrage ein ...
+    outputLabel: Verschönerte Version deiner Abfrage
     description: >-
       Formatiere und verschönere deine SQL-Abfragen online (unterstützt
       verschiedene SQL-Dialekte).
@@ -226,6 +271,9 @@ tools:
       wie AES, TripleDES, Rabbit oder RC4.
   random-port-generator:
     title: Zufälliger Port-Generator
+    copyButton: Kopieren
+    refreshButton: Aktualisieren
+    copiedMessage: Port in die Zwischenablage kopiert
     description: >-
       Generiere zufällige Portnummern außerhalb des Bereichs der "bekannten"
       Ports (0-1023).
@@ -278,6 +326,24 @@ tools:
     description: Konvertiere Strings, Dateien oder Bilder in ihre Base64-Repräsentation.
   list-converter:
     title: Listenkonverter
+    sortAscending: Aufsteigend sortieren
+    sortDescending: Absteigend sortieren
+    trimItemsLabel: Listeneinträge trimmen
+    removeDuplicatesLabel: Duplikate entfernen
+    lowercaseLabel: In Kleinbuchstaben umwandeln
+    keepLineBreaksLabel: Zeilenumbrüche beibehalten
+    sortListLabel: Liste sortieren
+    sortListPlaceholder: Alphabetisch sortieren
+    separatorLabel: Trennzeichen
+    wrapItemLabel: Eintrag umschließen
+    itemPrefixPlaceholder: Eintrags-Präfix
+    itemSuffixPlaceholder: Eintrags-Suffix
+    wrapListLabel: Liste umschließen
+    listPrefixPlaceholder: Listen-Präfix
+    listSuffixPlaceholder: Listen-Suffix
+    inputLabel: Deine Eingabedaten
+    inputPlaceholder: Füge hier deine Eingabedaten ein ...
+    outputLabel: Deine transformierten Daten
     description: >-
       Dieses Tool kann spaltenbasierte Daten verarbeiten und verschiedene
       Änderungen (transponieren, Präfix und Suffix hinzufügen, Liste umkehren,
@@ -291,6 +357,8 @@ tools:
     description: Parse und konvertiere TOML zu YAML.
   math-evaluator:
     title: Mathematischer Auswerter
+    inputPlaceholder: "Dein mathematischer Ausdruck (z. B.: 2*sqrt(6) ) ..."
+    resultTitle: Ergebnis
     description: >-
       Ein Taschenrechner zum Auswerten mathematischer Ausdrücke. Du kannst
       Funktionen wie sqrt, cos, sin, abs usw. verwenden.
