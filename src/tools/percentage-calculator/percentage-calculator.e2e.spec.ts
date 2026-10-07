@@ -6,7 +6,7 @@ test.describe('Tool - Percentage calculator', () => {
   });
 
   test('Has correct title', async ({ page }) => {
-    await expect(page).toHaveTitle('Percentage calculator - OstseeBit Tools');
+    await expect(page).toHaveTitle('Prozentrechner - OstseeBit Tools');
   });
 
   test('Correctly works out percentages', async ({ page }) => {

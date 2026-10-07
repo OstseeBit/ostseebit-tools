@@ -8,7 +8,7 @@ test.describe('Tool - ULID generator', () => {
   });
 
   test('Has correct title', async ({ page }) => {
-    await expect(page).toHaveTitle('ULID generator - OstseeBit Tools');
+    await expect(page).toHaveTitle('ULID-Generator - OstseeBit Tools');
   });
 
   test('the refresh button generates a new ulid', async ({ page }) => {

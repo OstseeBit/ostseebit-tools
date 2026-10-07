@@ -6,6 +6,6 @@ test.describe('Tool - Pdf signature checker', () => {
   });
 
   test('Has correct title', async ({ page }) => {
-    await expect(page).toHaveTitle('PDF signature checker - OstseeBit Tools');
+    await expect(page).toHaveTitle('PDF-Signaturprüfer - OstseeBit Tools');
   });
 });
