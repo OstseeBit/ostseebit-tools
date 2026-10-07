@@ -9,7 +9,7 @@ const { item } = toRefs(props);
 <template>
   <div v-if="_.isArray(item.value)">
     <div v-for="value in item.value" :key="value">
-      <c-text-copyable :value="value" :show-icon="item.showCopyButton ?? true" />
+      <c-text-copyable :value="value" :show-icon="item.showCopyButton ?? true" />{{ ' ' }}
     </div>
   </div>
   <div v-else-if="_.isBoolean(item.value)">

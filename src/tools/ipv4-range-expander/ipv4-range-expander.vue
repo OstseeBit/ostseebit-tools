@@ -13,27 +13,35 @@ const rawEndAddress = useStorage('ipv4-range-expander:endAddress', '192.168.6.25
 
 const result = computed(() => calculateCidr({ startIp: rawStartAddress.value, endIp: rawEndAddress.value }));
 
+// `id` is a stable identifier for :key and data-test-id — must NOT be
+// derived from the translated `label`, which previously broke e2e
+// selectors (and silent `:key` churn) the moment the UI language changed.
 const calculatedValues = computed<{
+  id: string
   label: string
   getOldValue: (result: Ipv4RangeExpanderResult | undefined) => string | undefined
   getNewValue: (result: Ipv4RangeExpanderResult | undefined) => string | undefined
 }[]>(() => [
   {
+    id: 'start-address',
     label: t('tools.ipv4-range-expander.startAddressLabel'),
     getOldValue: () => rawStartAddress.value,
     getNewValue: result => result?.newStart,
   },
   {
+    id: 'end-address',
     label: t('tools.ipv4-range-expander.endAddressLabel'),
     getOldValue: () => rawEndAddress.value,
     getNewValue: result => result?.newEnd,
   },
   {
+    id: 'addresses-in-range',
     label: t('tools.ipv4-range-expander.addressesInRangeLabel'),
     getOldValue: result => result?.oldSize?.toLocaleString(),
     getNewValue: result => result?.newSize?.toLocaleString(),
   },
   {
+    id: 'cidr',
     label: t('tools.ipv4-range-expander.cidrLabel'),
     getOldValue: () => '',
     getNewValue: result => result?.newCidr,
@@ -94,8 +102,9 @@ function onSwitchStartEndClicked() {
       </thead>
       <tbody>
         <ResultRow
-          v-for="{ label, getOldValue, getNewValue } in calculatedValues"
-          :key="label"
+          v-for="{ id, label, getOldValue, getNewValue } in calculatedValues"
+          :id="id"
+          :key="id"
           :label="label"
           :old-value="getOldValue(result)"
           :new-value="getNewValue(result)"

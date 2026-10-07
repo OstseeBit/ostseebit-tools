@@ -46,6 +46,7 @@ validation:
   invalidMacAddress: Ungültige MAC-Adresse
   invalidPartialMacAddress: Ungültige partielle MAC-Adresse
   invalidIpv4Address: Ungültige IPv4-Adresse
+  invalidBase64String: Ungültiger Base64-String
 copy:
   defaultMessage: In die Zwischenablage kopiert
 tools:
@@ -334,6 +335,19 @@ tools:
       erhalte die Mnemonik aus der Passphrase.
   base64-file-converter:
     title: Base64-Dateikonverter
+    base64ToFileTitle: Base64 zu Datei
+    fileNameLabel: Dateiname
+    fileNamePlaceholder: Download-Dateiname
+    extensionLabel: Erweiterung
+    extensionPlaceholder: Erweiterung
+    inputPlaceholder: Füge hier deinen Base64-Dateistring ein ...
+    previewButton: Bild-Vorschau
+    downloadButton: Datei herunterladen
+    fileToBase64Title: Datei zu Base64
+    uploadLabel: Ziehe eine Datei hierher oder klicke, um eine Datei auszuwählen
+    outputPlaceholder: Die Datei in Base64 erscheint hier
+    copyButton: Kopieren
+    copiedMessage: Base64-String in die Zwischenablage kopiert
     description: Konvertiere Strings, Dateien oder Bilder in ihre Base64-Repräsentation.
   list-converter:
     title: Listenkonverter
@@ -362,6 +376,22 @@ tools:
       auf jede Zeile anwenden.
   base64-string-converter:
     title: Base64-String-Encoder/Decoder
+    stringToBase64Title: String zu Base64
+    encodeUrlSafeLabel: URL-sicher kodieren
+    encodeInputLabel: Zu kodierender String
+    encodeInputPlaceholder: Füge hier deinen String ein ...
+    encodeOutputLabel: Base64 des Strings
+    encodeOutputPlaceholder: Die Base64-Kodierung deines Strings erscheint hier
+    copyBase64Button: Base64 kopieren
+    base64ToStringTitle: Base64 zu String
+    decodeUrlSafeLabel: URL-sicher decodieren
+    decodeInputLabel: Zu decodierender Base64-String
+    decodeInputPlaceholder: Dein Base64-String ...
+    decodeOutputLabel: Decodierter String
+    decodeOutputPlaceholder: Der decodierte String erscheint hier
+    copyDecodedButton: Decodierten String kopieren
+    copiedBase64Message: Base64-String in die Zwischenablage kopiert
+    copiedStringMessage: String in die Zwischenablage kopiert
     description: Codiere und decodiere Strings einfach in ihre Base64-Repräsentation.
   toml-to-yaml:
     title: TOML zu YAML
@@ -393,12 +423,51 @@ tools:
       Ursprung, Parameter, Port, Benutzername-Passwort usw.) zu erhalten.
   iban-validator-and-parser:
     title: IBAN-Validator und -Parser
+    inputPlaceholder: Gib eine IBAN zur Überprüfung ein ...
+    isValidLabel: Ist die IBAN gültig?
+    errorsLabel: IBAN-Fehler
+    isQrIbanLabel: Ist die IBAN eine QR-IBAN?
+    countryCodeLabel: Ländercode
+    bbanLabel: BBAN
+    friendlyFormatLabel: IBAN im lesbaren Format
+    examplesTitle: Gültige IBAN-Beispiele
+    errorNoIban: Keine IBAN angegeben
+    errorNoIbanCountry: Kein IBAN-Land
+    errorWrongBbanLength: Falsche BBAN-Länge
+    errorWrongBbanFormat: Falsches BBAN-Format
+    errorChecksumNotNumber: Prüfsumme ist keine Zahl
+    errorWrongIbanChecksum: Falsche IBAN-Prüfsumme
+    errorWrongAccountBankBranchChecksum: Falsche Konto-/Bank-/Filial-Prüfsumme
+    errorQrIbanNotAllowed: QR-IBAN nicht erlaubt
     description: >-
       Validiere und parse IBAN-Nummern. Überprüfe, ob die IBAN gültig ist, und
       erhalte das Land, BBAN, ob es sich um eine QR-IBAN handelt und das
       IBAN-freundliche Format.
   user-agent-parser:
     title: User-Agent-Parser
+    inputLabel: User-Agent-String
+    inputPlaceholder: Füge hier deinen User-Agent ein ...
+    browserHeading: Browser
+    engineHeading: Engine
+    osHeading: Betriebssystem
+    deviceHeading: Gerät
+    cpuHeading: CPU
+    nameLabel: Name
+    versionLabel: Version
+    modelLabel: Modell
+    typeLabel: Typ
+    vendorLabel: Anbieter
+    architectureLabel: Architektur
+    noBrowserNameMessage: Kein Browser-Name verfügbar
+    noBrowserVersionMessage: Keine Browser-Version verfügbar
+    noEngineNameMessage: Kein Engine-Name verfügbar
+    noEngineVersionMessage: Keine Engine-Version verfügbar
+    noOsNameMessage: Kein Betriebssystem-Name verfügbar
+    noOsVersionMessage: Keine Betriebssystem-Version verfügbar
+    noDeviceModelMessage: Kein Gerätemodell verfügbar
+    noDeviceTypeMessage: Kein Gerätetyp verfügbar
+    noDeviceVendorMessage: Kein Geräteanbieter verfügbar
+    noCpuArchitectureMessage: Keine CPU-Architektur verfügbar
     description: >-
       Erkenne und parse Browser, Engine, Betriebssystem, CPU und
       Gerätetyp/-modell aus einer User-Agent-Zeichenfolge.
@@ -577,6 +646,24 @@ tools:
       Telefonnummer, wie z. B. die Landesvorwahl, den Typ usw.
   ipv4-subnet-calculator:
     title: IPv4-Subnetzrechner
+    inputLabel: Eine IPv4-Adresse mit oder ohne Maske
+    inputPlaceholder: Die IPv4-Adresse ...
+    parseErrorMessage: Diese Adresse kann nicht verarbeitet werden, prüfe das Format
+    netmaskLabel: Netzmaske
+    networkAddressLabel: Netzwerkadresse
+    networkMaskLabel: Netzwerkmaske
+    networkMaskBinaryLabel: Netzwerkmaske in Binär
+    cidrNotationLabel: CIDR-Notation
+    wildcardMaskLabel: Wildcard-Maske
+    networkSizeLabel: Netzwerkgröße
+    firstAddressLabel: Erste Adresse
+    lastAddressLabel: Letzte Adresse
+    broadcastAddressLabel: Broadcast-Adresse
+    noBroadcastMessage: Keine Broadcast-Adresse mit dieser Maske
+    ipClassLabel: IP-Klasse
+    unknownClassMessage: Unbekannter Klassentyp
+    previousBlockButton: Vorheriger Block
+    nextBlockButton: Nächster Block
     description: >-
       Parse deine IPv4-CIDR-Blöcke und erhalte alle Informationen, die du über
       dein Subnetz benötigst.

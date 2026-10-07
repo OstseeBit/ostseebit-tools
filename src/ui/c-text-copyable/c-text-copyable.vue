@@ -9,9 +9,6 @@ const { copy, isJustCopied } = useCopy({ source: value, createToast: false });
 
 <template>
   <c-tooltip :tooltip="isJustCopied ? 'Copied!' : 'Copy to clipboard'" cursor-pointer @click="copy">
-    <span flex items-center gap-2 :class="{ 'font-mono': monospace }">
-      {{ displayedValue ?? value }}
-      <icon-mdi-content-copy v-if="showIcon" op-40 />
-    </span>
+    <span flex items-center gap-2 :class="{ 'font-mono': monospace }">{{ displayedValue ?? value }}<icon-mdi-content-copy v-if="showIcon" op-40 /></span>
   </c-tooltip>
 </template>
