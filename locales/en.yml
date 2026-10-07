@@ -43,6 +43,7 @@ validation:
   providedFormatInvalid: 'Provided {format} is not valid.'
   invalidMacAddress: Invalid MAC address
   invalidPartialMacAddress: Invalid partial MAC address
+  invalidIpv4Address: Invalid ipv4 address
 copy:
   defaultMessage: Copied to the clipboard
 tools:
@@ -300,6 +301,16 @@ tools:
 
   bip39-generator:
     title: BIP39 passphrase generator
+    languageLabel: 'Language:'
+    entropyLabel: 'Entropy (seed):'
+    entropyPlaceholder: Your string...
+    entropyLengthMessage: Entropy length should be >= 16, <= 32 and be a multiple of 4
+    entropyHexMessage: Entropy should be an hexadecimal string
+    passphraseLabel: 'Passphrase (mnemonic):'
+    passphrasePlaceholder: Your mnemonic...
+    invalidMnemonicMessage: Invalid mnemonic
+    copiedEntropyMessage: Entropy copied to the clipboard
+    copiedPassphraseMessage: Passphrase copied to the clipboard
     description: Generate a BIP39 passphrase from an existing or random mnemonic, or get the mnemonic from the passphrase.
 
   base64-file-converter:
@@ -348,6 +359,16 @@ tools:
 
   url-parser:
     title: URL parser
+    inputLabel: 'Your url to parse:'
+    inputPlaceholder: Your url to parse...
+    invalidUrlMessage: Invalid url
+    protocolLabel: Protocol
+    usernameLabel: Username
+    passwordLabel: Password
+    hostnameLabel: Hostname
+    portLabel: Port
+    pathLabel: Path
+    paramsLabel: Params
     description: Parse a URL into its separate constituent parts (protocol, origin, params, port, username-password, ...)
 
   iban-validator-and-parser:
@@ -511,6 +532,11 @@ tools:
 
   jwt-parser:
     title: JWT parser
+    inputLabel: JWT to decode
+    inputPlaceholder: Put your token here...
+    invalidJwtMessage: Invalid JWT
+    headerTitle: Header
+    payloadTitle: Payload
     description: Parse and decode your JSON Web Token (jwt) and display its content.
 
   date-converter:
@@ -618,6 +644,14 @@ tools:
 
   ipv4-address-converter:
     title: IPv4 address converter
+    inputLabel: 'The ipv4 address:'
+    inputPlaceholder: The ipv4 address...
+    decimalLabel: 'Decimal: '
+    hexadecimalLabel: 'Hexadecimal: '
+    binaryLabel: 'Binary: '
+    ipv6Label: 'Ipv6: '
+    ipv6ShortLabel: 'Ipv6 (short): '
+    outputPlaceholder: Set a correct ipv4 address
     description: Convert an IP address into decimal, binary, hexadecimal, or even an IPv6 representation of it.
 
   text-statistics:
@@ -667,6 +701,17 @@ tools:
 
   ipv4-range-expander:
     title: IPv4 range expander
+    startAddressLabel: Start address
+    startAddressPlaceholder: Start IPv4 address...
+    endAddressLabel: End address
+    endAddressPlaceholder: End IPv4 address...
+    addressesInRangeLabel: Addresses in range
+    cidrLabel: CIDR
+    oldValueHeader: old value
+    newValueHeader: new value
+    invalidCombinationTitle: Invalid combination of start and end IPv4 address
+    invalidCombinationText: The end IPv4 address is lower than the start IPv4 address. This is not valid and no result could be calculated. In the most cases the solution to solve this problem is to change start and end address.
+    switchButton: Switch start and end IPv4 address
     description: Given a start and an end IPv4 address, this tool calculates a valid IPv4 subnet along with its CIDR notation.
 
   text-diff:

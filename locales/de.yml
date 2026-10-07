@@ -45,6 +45,7 @@ validation:
   providedFormatInvalid: '{format} ist nicht gültig.'
   invalidMacAddress: Ungültige MAC-Adresse
   invalidPartialMacAddress: Ungültige partielle MAC-Adresse
+  invalidIpv4Address: Ungültige IPv4-Adresse
 copy:
   defaultMessage: In die Zwischenablage kopiert
 tools:
@@ -318,6 +319,16 @@ tools:
       Hash-Funktion.
   bip39-generator:
     title: BIP39-Passphrasengenerator
+    languageLabel: 'Sprache:'
+    entropyLabel: 'Entropie (Seed):'
+    entropyPlaceholder: Dein String ...
+    entropyLengthMessage: Die Entropie-Länge sollte >= 16, <= 32 und ein Vielfaches von 4 sein
+    entropyHexMessage: Die Entropie sollte eine hexadezimale Zeichenfolge sein
+    passphraseLabel: 'Passphrase (Mnemonik):'
+    passphrasePlaceholder: Deine Mnemonik ...
+    invalidMnemonicMessage: Ungültige Mnemonik
+    copiedEntropyMessage: Entropie in die Zwischenablage kopiert
+    copiedPassphraseMessage: Passphrase in die Zwischenablage kopiert
     description: >-
       Generiere BIP39-Passphrasen aus vorhandener oder zufälliger Mnemonik oder
       erhalte die Mnemonik aus der Passphrase.
@@ -367,6 +378,16 @@ tools:
     description: Konvertiere JSON einfach in YAML mit diesem Live-Online-Konverter.
   url-parser:
     title: URL-Parser
+    inputLabel: 'Deine zu parsende URL:'
+    inputPlaceholder: Deine zu parsende URL ...
+    invalidUrlMessage: Ungültige URL
+    protocolLabel: Protokoll
+    usernameLabel: Benutzername
+    passwordLabel: Passwort
+    hostnameLabel: Hostname
+    portLabel: Port
+    pathLabel: Pfad
+    paramsLabel: Parameter
     description: >-
       Parse eine URL-Zeichenfolge, um alle verschiedenen Teile (Protokoll,
       Ursprung, Parameter, Port, Benutzername-Passwort usw.) zu erhalten.
@@ -538,6 +559,11 @@ tools:
     description: Vergleiche zwei JSON-Objekte und erhalte die Unterschiede zwischen ihnen.
   jwt-parser:
     title: JWT-Parser
+    inputLabel: Zu decodierendes JWT
+    inputPlaceholder: Füge hier dein Token ein ...
+    invalidJwtMessage: Ungültiges JWT
+    headerTitle: Header
+    payloadTitle: Payload
     description: >-
       Parse und decodiere deinen JSON-Web-Token (JWT) und zeige dessen Inhalt
       an.
@@ -661,6 +687,14 @@ tools:
       entspricht (was ziemlich viel ist!).
   ipv4-address-converter:
     title: IPv4-Adresskonverter
+    inputLabel: 'Die IPv4-Adresse:'
+    inputPlaceholder: Die IPv4-Adresse ...
+    decimalLabel: 'Dezimal: '
+    hexadecimalLabel: 'Hexadezimal: '
+    binaryLabel: 'Binär: '
+    ipv6Label: 'IPv6: '
+    ipv6ShortLabel: 'IPv6 (kurz): '
+    outputPlaceholder: Gib eine korrekte IPv4-Adresse an
     description: >-
       Konvertiere eine IP-Adresse in Dezimal, Binär, Hexadezimal oder sogar in
       IPv6.
@@ -713,6 +747,20 @@ tools:
     description: Parse und konvertiere Text in Unicode und umgekehrt.
   ipv4-range-expander:
     title: IPv4-Bereichserweiterer
+    startAddressLabel: Startadresse
+    startAddressPlaceholder: Start-IPv4-Adresse ...
+    endAddressLabel: Endadresse
+    endAddressPlaceholder: End-IPv4-Adresse ...
+    addressesInRangeLabel: Adressen im Bereich
+    cidrLabel: CIDR
+    oldValueHeader: Alter Wert
+    newValueHeader: Neuer Wert
+    invalidCombinationTitle: Ungültige Kombination aus Start- und End-IPv4-Adresse
+    invalidCombinationText: >-
+      Die End-IPv4-Adresse ist niedriger als die Start-IPv4-Adresse. Das ist
+      nicht gültig, es konnte kein Ergebnis berechnet werden. In den meisten
+      Fällen besteht die Lösung darin, Start- und Endadresse zu tauschen.
+    switchButton: Start- und End-IPv4-Adresse tauschen
     description: >-
       Bei Angabe einer Start- und End-IPv4-Adresse berechnet dieses Tool ein
       gültiges IPv4-Netzwerk mit seiner CIDR-Notation.
