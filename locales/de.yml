@@ -159,6 +159,9 @@ tools:
       werden können.
   json-to-csv:
     title: JSON zu CSV
+    inputLabel: Dein rohes JSON
+    inputPlaceholder: Füge dein rohes JSON hier ein...
+    outputLabel: CSV-Version deines JSON
     description: Konvertiere JSON mit automatischer Headererkennung in CSV.
   camera-recorder:
     title: Kamera-Rekorder
@@ -395,6 +398,9 @@ tools:
     description: Codiere und decodiere Strings einfach in ihre Base64-Repräsentation.
   toml-to-yaml:
     title: TOML zu YAML
+    inputLabel: Dein TOML
+    inputPlaceholder: Füge dein TOML hier ein...
+    outputLabel: YAML aus deinem TOML
     description: Parse und konvertiere TOML zu YAML.
   math-evaluator:
     title: Mathematischer Auswerter
@@ -405,6 +411,9 @@ tools:
       Funktionen wie sqrt, cos, sin, abs usw. verwenden.
   json-to-yaml-converter:
     title: JSON zu YAML
+    inputLabel: Dein JSON
+    inputPlaceholder: Füge dein JSON hier ein...
+    outputLabel: YAML aus deinem JSON
     description: Konvertiere JSON einfach in YAML mit diesem Live-Online-Konverter.
   url-parser:
     title: URL-Parser
@@ -534,6 +543,9 @@ tools:
     description: Konvertiere MIME-Typen in Erweiterungen und umgekehrt.
   toml-to-json:
     title: TOML zu JSON
+    inputLabel: Dein TOML
+    inputPlaceholder: Füge dein TOML hier ein...
+    outputLabel: JSON aus deinem TOML
     description: Parse und konvertiere TOML zu JSON.
   lorem-ipsum-generator:
     title: Lorem Ipsum Generator
@@ -578,6 +590,11 @@ tools:
     download: QR-Code herunterladen
   xml-formatter:
     title: XML-Formatter
+    collapseContentLabel: 'Inhalt zusammenfassen:'
+    indentSizeLabel: 'Einrückungsgröße:'
+    inputLabel: Dein XML
+    inputPlaceholder: Füge dein XML hier ein...
+    outputLabel: Formatiertes XML aus deinem XML
     description: Verschönere deinen XML-String in ein menschenlesbares Format.
   temperature-converter:
     title: Temperaturkonverter
@@ -697,6 +714,9 @@ tools:
       SHA256, SHA224, SHA512, SHA384, SHA3 oder RIPEMD160
   json-to-toml:
     title: JSON zu TOML
+    inputLabel: Dein JSON
+    inputPlaceholder: Füge dein JSON hier ein...
+    outputLabel: TOML aus deinem JSON
     description: Parse und konvertiere JSON zu TOML.
   device-information:
     title: Geräteinformationen
@@ -725,6 +745,9 @@ tools:
       geändert wurde.
   json-minify:
     title: JSON minifizieren
+    inputLabel: Dein rohes JSON
+    inputPlaceholder: Füge dein rohes JSON hier ein...
+    outputLabel: Minimierte Version deines JSON
     description: >-
       Minifiziere und komprimiere dein JSON, indem unnötige Leerzeichen entfernt
       werden.
@@ -756,6 +779,9 @@ tools:
       Binär, Oktal, Base64, ...).
   yaml-to-json-converter:
     title: YAML zu JSON
+    inputLabel: Dein YAML
+    inputPlaceholder: Füge dein YAML hier ein...
+    outputLabel: JSON aus deinem YAML
     description: Konvertiere YAML einfach in JSON mit diesem Live-Online-Konverter.
   uuid-generator:
     title: UUID-Generator
@@ -899,6 +925,9 @@ tools:
     description: Erstelle ASCII-Art-Text mit vielen Schriftarten und Stilen.
   json-to-xml:
     title: JSON zu XML
+    inputLabel: Dein JSON-Inhalt
+    inputPlaceholder: Füge deinen JSON-Inhalt hier ein...
+    outputLabel: Konvertiertes XML
     description: Konvertiere JSON zu XML.
   markdown-to-html:
     title: Markdown zu HTML
@@ -914,6 +943,9 @@ tools:
     description: Dekodiere Outlook-SafeLink-Links.
   xml-to-json:
     title: XML zu JSON
+    inputLabel: Dein XML-Inhalt
+    inputPlaceholder: Füge deinen XML-Inhalt hier ein...
+    outputLabel: Konvertiertes JSON
     description: Konvertiere XML zu JSON.
   email-normalizer:
     title: E-Mail-Normalisierer

@@ -15,9 +15,9 @@ const rules = computed(() => [createParseValidationRule(v => JSON5.parse(v), 'JS
 
 <template>
   <format-transformer
-    input-label="Your JSON"
-    input-placeholder="Paste your JSON here..."
-    output-label="TOML from your JSON"
+    :input-label="t('tools.json-to-toml.inputLabel')"
+    :input-placeholder="t('tools.json-to-toml.inputPlaceholder')"
+    :output-label="t('tools.json-to-toml.outputLabel')"
     output-language="toml"
     :input-validation-rules="rules"
     :transformer="transformer"

@@ -119,6 +119,14 @@ export default defineConfig({
       // "Cannot read properties of undefined (reading 'prototype')" the
       // moment xml-js is imported, regardless of which part of it is used.
       stream: 'stream-browserify',
+      // vuedraggable's published "main"/"module" dist files are a
+      // pre-bundled webpack+core-js@2 artifact. Its global-object detection
+      // falls back to `Function('return this')()`, which this project's CSP
+      // (no 'unsafe-eval') blocks outright, breaking every page in Firefox
+      // since Home.page.vue (the "/" route) pulls it into the eagerly
+      // loaded main chunk. Alias straight to the package's own un-bundled
+      // ES source instead (plain sortablejs + Vue, no eval anywhere).
+      vuedraggable: fileURLToPath(new URL('./node_modules/vuedraggable/src/vuedraggable.js', import.meta.url)),
     },
   },
   define: {

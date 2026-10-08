@@ -18,10 +18,10 @@ const rules = computed(() => [createParseValidationRule(v => JSON5.parse(v), 'JS
 
 <template>
   <format-transformer
-    input-label="Your JSON content"
+    :input-label="t('tools.json-to-xml.inputLabel')"
     :input-default="defaultValue"
-    input-placeholder="Paste your JSON content here..."
-    output-label="Converted XML"
+    :input-placeholder="t('tools.json-to-xml.inputPlaceholder')"
+    :output-label="t('tools.json-to-xml.outputLabel')"
     output-language="xml"
     :transformer="transformer"
     :input-validation-rules="rules"

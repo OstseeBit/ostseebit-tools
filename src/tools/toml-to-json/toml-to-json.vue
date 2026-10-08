@@ -1,24 +1,20 @@
 <script setup lang="ts">
-import type { UseValidationRule } from '@/composable/validation';
 import { parse as parseToml } from 'smol-toml';
+import { createParseValidationRule } from '@/composable/validation';
 import { withDefaultOnError } from '../../utils/defaults';
-import { isValidToml } from './toml-to-json.service';
+
+const { t } = useI18n();
 
 const transformer = (value: string) => value === '' ? '' : withDefaultOnError(() => JSON.stringify(parseToml(value), null, 3), '');
 
-const rules: UseValidationRule<string>[] = [
-  {
-    validator: isValidToml,
-    message: 'Provided TOML is not valid.',
-  },
-];
+const rules = computed(() => [createParseValidationRule(v => parseToml(v), 'TOML', t)]);
 </script>
 
 <template>
   <format-transformer
-    input-label="Your TOML"
-    input-placeholder="Paste your TOML here..."
-    output-label="JSON from your TOML"
+    :input-label="t('tools.toml-to-json.inputLabel')"
+    :input-placeholder="t('tools.toml-to-json.inputPlaceholder')"
+    :output-label="t('tools.toml-to-json.outputLabel')"
     output-language="json"
     :input-validation-rules="rules"
     :transformer="transformer"

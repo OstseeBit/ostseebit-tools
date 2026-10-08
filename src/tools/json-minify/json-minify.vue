@@ -13,10 +13,10 @@ const rules = computed(() => [createParseValidationRule(v => JSON5.parse(v), 'JS
 
 <template>
   <format-transformer
-    input-label="Your raw JSON"
+    :input-label="t('tools.json-minify.inputLabel')"
     :input-default="defaultValue"
-    input-placeholder="Paste your raw JSON here..."
-    output-label="Minified version of your JSON"
+    :input-placeholder="t('tools.json-minify.inputPlaceholder')"
+    :output-label="t('tools.json-minify.outputLabel')"
     output-language="json"
     :input-validation-rules="rules"
     :transformer="transformer"

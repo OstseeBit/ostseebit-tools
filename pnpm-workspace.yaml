@@ -3,3 +3,11 @@ allowBuilds:
   vue-demi: false
 minimumReleaseAgeExclude:
   - eslint@10.12.0
+overrides:
+  # js-sha256@0.9.0 (transitive via @it-tools/bip39) uses eval("require(...)")
+  # for its Node.js code path. That eval is blocked by this project's CSP
+  # (script-src 'self', no 'unsafe-eval') and breaks every page load in
+  # Firefox, since the dependency ends up in the globally-loaded shared
+  # chunk. Fixed upstream in 0.10.0 (replaced eval with plain require());
+  # pin to that fix without jumping to the unrelated 1.0.0 rewrite.
+  js-sha256: ^0.11.1

@@ -17,9 +17,9 @@ const rules = computed(() => [createParseValidationRule(v => parseYaml(v), 'YAML
 
 <template>
   <format-transformer
-    input-label="Your YAML"
-    input-placeholder="Paste your yaml here..."
-    output-label="JSON from your YAML"
+    :input-label="t('tools.yaml-to-json-converter.inputLabel')"
+    :input-placeholder="t('tools.yaml-to-json-converter.inputPlaceholder')"
+    :output-label="t('tools.yaml-to-json-converter.outputLabel')"
     output-language="json"
     :input-validation-rules="rules"
     :transformer="transformer"

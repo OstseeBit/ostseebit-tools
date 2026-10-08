@@ -150,6 +150,9 @@ tools:
 
   json-to-csv:
     title: JSON to CSV
+    inputLabel: Your raw JSON
+    inputPlaceholder: Paste your raw JSON here...
+    outputLabel: CSV version of your JSON
     description: Convert JSON to CSV with automatic header detection.
 
   camera-recorder:
@@ -375,6 +378,9 @@ tools:
 
   toml-to-yaml:
     title: TOML to YAML
+    inputLabel: Your TOML
+    inputPlaceholder: Paste your TOML here...
+    outputLabel: YAML from your TOML
     description: Parse and convert TOML to YAML.
 
   math-evaluator:
@@ -385,6 +391,9 @@ tools:
 
   json-to-yaml-converter:
     title: JSON to YAML converter
+    inputLabel: Your JSON
+    inputPlaceholder: Paste your JSON here...
+    outputLabel: YAML from your JSON
     description: Simply convert JSON to YAML with this online live converter.
 
   url-parser:
@@ -510,6 +519,9 @@ tools:
 
   toml-to-json:
     title: TOML to JSON
+    inputLabel: Your TOML
+    inputPlaceholder: Paste your TOML here...
+    outputLabel: JSON from your TOML
     description: Parse and convert TOML to JSON.
 
   lorem-ipsum-generator:
@@ -551,6 +563,11 @@ tools:
 
   xml-formatter:
     title: XML formatter
+    collapseContentLabel: 'Collapse content:'
+    indentSizeLabel: 'Indent size:'
+    inputLabel: Your XML
+    inputPlaceholder: Paste your XML here...
+    outputLabel: Formatted XML from your XML
     description: Prettify your XML string into a friendly, human-readable format.
 
   temperature-converter:
@@ -664,6 +681,9 @@ tools:
 
   json-to-toml:
     title: JSON to TOML
+    inputLabel: Your JSON
+    inputPlaceholder: Paste your JSON here...
+    outputLabel: TOML from your JSON
     description: Parse and convert JSON to TOML.
 
   device-information:
@@ -689,6 +709,9 @@ tools:
 
   json-minify:
     title: JSON minify
+    inputLabel: Your raw JSON
+    inputPlaceholder: Paste your raw JSON here...
+    outputLabel: Minified version of your JSON
     description: Minify and compress your JSON by removing unnecessary whitespace.
 
   ulid-generator:
@@ -715,6 +738,9 @@ tools:
 
   yaml-to-json-converter:
     title: YAML to JSON converter
+    inputLabel: Your YAML
+    inputPlaceholder: Paste your YAML here...
+    outputLabel: JSON from your YAML
     description: Simply convert YAML to JSON with this online live converter.
 
   uuid-generator:
@@ -848,6 +874,9 @@ tools:
     description: Create ASCII art text with many fonts and styles.
   json-to-xml:
     title: JSON to XML
+    inputLabel: Your JSON content
+    inputPlaceholder: Paste your JSON content here...
+    outputLabel: Converted XML
     description: Convert JSON to XML
   markdown-to-html:
     title: Markdown to HTML
@@ -863,6 +892,9 @@ tools:
     description: Decode Outlook SafeLink links
   xml-to-json:
     title: XML to JSON
+    inputLabel: Your XML content
+    inputPlaceholder: Paste your XML content here...
+    outputLabel: Converted JSON
     description: Convert XML to JSON
   email-normalizer:
     title: Email normalizer

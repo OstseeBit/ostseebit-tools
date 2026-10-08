@@ -13,9 +13,9 @@ const rules = computed(() => [createParseValidationRule(v => JSON5.parse(v), 'JS
 
 <template>
   <format-transformer
-    input-label="Your JSON"
-    input-placeholder="Paste your JSON here..."
-    output-label="YAML from your JSON"
+    :input-label="t('tools.json-to-yaml-converter.inputLabel')"
+    :input-placeholder="t('tools.json-to-yaml-converter.inputPlaceholder')"
+    :output-label="t('tools.json-to-yaml-converter.outputLabel')"
     output-language="yaml"
     :input-validation-rules="rules"
     :transformer="transformer"

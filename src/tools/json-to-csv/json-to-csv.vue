@@ -20,9 +20,9 @@ const rules = computed(() => [createParseValidationRule(v => JSON5.parse(v), 'JS
 
 <template>
   <format-transformer
-    input-label="Your raw JSON"
-    input-placeholder="Paste your raw JSON here..."
-    output-label="CSV version of your JSON"
+    :input-label="t('tools.json-to-csv.inputLabel')"
+    :input-placeholder="t('tools.json-to-csv.inputPlaceholder')"
+    :output-label="t('tools.json-to-csv.outputLabel')"
     :input-validation-rules="rules"
     :transformer="transformer"
   />
