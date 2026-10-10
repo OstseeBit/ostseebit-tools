@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { describe, expect, it } from 'vitest';
-import { booleanToHumanReadable, isNotThrowing } from './boolean';
+import { isNotThrowing } from './boolean';
 
 describe('boolean utils', () => {
   describe('isNotThrowing', () => {
@@ -11,13 +11,6 @@ describe('boolean utils', () => {
           throw new Error('message');
         }),
       ).to.eql(false);
-    });
-  });
-
-  describe('booleanToHumanReadable', () => {
-    it('should return "Yes" if the value is true and "No" otherwise', () => {
-      expect(booleanToHumanReadable(true)).to.eql('Yes');
-      expect(booleanToHumanReadable(false)).to.eql('No');
     });
   });
 });

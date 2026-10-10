@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import lookup from 'country-code-lookup';
 import { getCountries, getCountryCallingCode, parsePhoneNumber } from 'libphonenumber-js/max';
 import { useValidation } from '@/composable/validation';
-import { booleanToHumanReadable } from '@/utils/boolean';
 import { withDefaultOnError } from '@/utils/defaults';
 import {
   formatTypeToHumanReadable,
@@ -10,16 +8,18 @@ import {
   getFullCountryName,
 } from './phone-parser-and-formatter.service';
 
+const { t, locale } = useI18n();
+
 const rawPhone = ref('');
 const defaultCountryCode = ref(getDefaultCountryCode());
 const validation = useValidation({
   source: rawPhone,
-  rules: [
+  rules: computed(() => [
     {
-      validator: value => value === '' || /^[0-9 +\-()]+$/.test(value),
-      message: 'Invalid phone number',
+      validator: (value: string) => value === '' || /^[0-9 +\-()]+$/.test(value),
+      message: t('tools.phone-parser-and-formatter.invalidPhoneNumber'),
     },
-  ],
+  ]),
 });
 
 const parsedDetails = computed(() => {
@@ -33,78 +33,92 @@ const parsedDetails = computed(() => {
     return undefined;
   }
 
+  const yesNo = (value: boolean) => t(`tools.phone-parser-and-formatter.${value ? 'yes' : 'no'}`);
+
   return [
     {
-      label: 'Country',
+      id: 'countryCode',
+      label: t('tools.phone-parser-and-formatter.countryCodeLabel'),
       value: parsed.country,
     },
     {
-      label: 'Country',
-      value: getFullCountryName(parsed.country),
+      id: 'country',
+      label: t('tools.phone-parser-and-formatter.countryLabel'),
+      value: getFullCountryName(parsed.country, locale.value),
     },
     {
-      label: 'Country calling code',
+      id: 'callingCode',
+      label: t('tools.phone-parser-and-formatter.callingCodeLabel'),
       value: parsed.countryCallingCode,
     },
     {
-      label: 'Is valid?',
-      value: booleanToHumanReadable(parsed.isValid()),
+      id: 'isValid',
+      label: t('tools.phone-parser-and-formatter.isValidLabel'),
+      value: yesNo(parsed.isValid()),
     },
     {
-      label: 'Is possible?',
-      value: booleanToHumanReadable(parsed.isPossible()),
+      id: 'isPossible',
+      label: t('tools.phone-parser-and-formatter.isPossibleLabel'),
+      value: yesNo(parsed.isPossible()),
     },
     {
-      label: 'Type',
-      value: formatTypeToHumanReadable(parsed.getType()),
+      id: 'type',
+      label: t('tools.phone-parser-and-formatter.typeLabel'),
+      value: formatTypeToHumanReadable(parsed.getType(), t),
     },
     {
-      label: 'International format',
+      id: 'international',
+      label: t('tools.phone-parser-and-formatter.internationalFormatLabel'),
       value: parsed.formatInternational(),
     },
     {
-      label: 'National format',
+      id: 'national',
+      label: t('tools.phone-parser-and-formatter.nationalFormatLabel'),
       value: parsed.formatNational(),
     },
     {
-      label: 'E.164 format',
+      id: 'e164',
+      label: t('tools.phone-parser-and-formatter.e164FormatLabel'),
       value: parsed.format('E.164'),
     },
     {
-      label: 'RFC3966 format',
+      id: 'rfc3966',
+      label: t('tools.phone-parser-and-formatter.rfc3966FormatLabel'),
       value: parsed.format('RFC3966'),
     },
   ];
 });
 
-const countriesOptions = getCountries().map(code => ({
-  label: `${lookup.byIso(code)?.country || code} (+${getCountryCallingCode(code)})`,
-  value: code,
-}));
+const countriesOptions = computed(() =>
+  getCountries().map(code => ({
+    label: `${getFullCountryName(code, locale.value) || code} (+${getCountryCallingCode(code)})`,
+    value: code,
+  })),
+);
 </script>
 
 <template>
   <div>
-    <c-select v-model:value="defaultCountryCode" label="Default country code:" :options="countriesOptions" searchable mb-5 />
+    <c-select v-model:value="defaultCountryCode" :label="t('tools.phone-parser-and-formatter.defaultCountryCodeLabel')" :options="countriesOptions" searchable mb-5 />
 
     <c-input-text
       v-model:value="rawPhone"
-      placeholder="Enter a phone number"
-      label="Phone number:"
+      :placeholder="t('tools.phone-parser-and-formatter.phoneNumberPlaceholder')"
+      :label="t('tools.phone-parser-and-formatter.phoneNumberLabel')"
       :validation="validation"
       mb-5
     />
 
     <n-table v-if="parsedDetails">
       <tbody>
-        <tr v-for="{ label, value } in parsedDetails" :key="label">
+        <tr v-for="{ id, label, value } in parsedDetails" :key="id">
           <td font-bold>
             {{ label }}
           </td>
           <td>
-            <span-copyable v-if="value" :value="value" />
+            <c-text-copyable v-if="value" :value="value" />
             <span v-else op-70>
-              Unknown
+              {{ t('tools.phone-parser-and-formatter.unknown') }}
             </span>
           </td>
         </tr>

@@ -247,6 +247,77 @@ tools:
 
   http-status-codes:
     title: HTTP status codes
+    searchPlaceholder: Search http status...
+    searchResults: Search results
+    forProtocol: 'For {type}.'
+    category1xx: '1xx informational response'
+    category2xx: '2xx success'
+    category3xx: '3xx redirection'
+    category4xx: '4xx client error'
+    category5xx: '5xx server error'
+    description100: 'Waiting for the client to emit the body of the request.'
+    description101: 'The server has agreed to change protocol.'
+    description102: 'The server is processing the request, but no response is available yet.'
+    description103: 'The server returns some response headers before final HTTP message.'
+    description200: 'Standard response for successful HTTP requests.'
+    description201: 'The request has been fulfilled, resulting in the creation of a new resource.'
+    description202: 'The request has been accepted for processing, but the processing has not been completed.'
+    description203: 'The request is successful but the content of the original request has been modified by a transforming proxy.'
+    description204: 'The server successfully processed the request and is not returning any content.'
+    description205: 'The server indicates to reinitialize the document view which sent this request.'
+    description206: 'The server is delivering only part of the resource due to a range header sent by the client.'
+    description207: 'The message body that follows is an XML message and can contain a number of separate response codes.'
+    description208: 'The members of a DAV binding have already been enumerated in a preceding part of the (multistatus) response.'
+    description226: 'The server has fulfilled a request for the resource, and the response is a representation of the result.'
+    description300: 'Indicates multiple options for the resource that the client may follow.'
+    description301: 'This and all future requests should be directed to the given URI.'
+    description302: 'Redirect to another URL. This is an example of industry practice contradicting the standard.'
+    description303: 'The response to the request can be found under another URI using a GET method.'
+    description304: 'Indicates that the resource has not been modified since the version specified by the request headers.'
+    description305: 'The requested resource is available only through a proxy, the address for which is provided in the response.'
+    description306: 'No longer used. Originally meant "Subsequent requests should use the specified proxy."'
+    description307: 'In this case, the request should be repeated with another URI; however, future requests should still use the original URI.'
+    description308: 'The request and all future requests should be repeated using another URI.'
+    description400: 'The server cannot or will not process the request due to an apparent client error.'
+    description401: 'Similar to 403 Forbidden, but specifically for use when authentication is required and has failed or has not yet been provided.'
+    description402: 'Reserved for future use. The original intention was that this code might be used as part of some form of digital cash or micropayment scheme.'
+    description403: 'The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource.'
+    description404: 'The requested resource could not be found but may be available in the future.'
+    description405: 'A request method is not supported for the requested resource.'
+    description406: 'The requested resource is capable of generating only content not acceptable according to the Accept headers sent in the request.'
+    description407: 'The client must first authenticate itself with the proxy.'
+    description408: 'The server timed out waiting for the request.'
+    description409: 'Indicates that the request could not be processed because of conflict in the request, such as an edit conflict.'
+    description410: 'Indicates that the resource requested is no longer available and will not be available again.'
+    description411: 'The request did not specify the length of its content, which is required by the requested resource.'
+    description412: 'The server does not meet one of the preconditions that the requester put on the request.'
+    description413: 'The request is larger than the server is willing or able to process.'
+    description414: 'The URI provided was too long for the server to process.'
+    description415: 'The request entity has a media type which the server or resource does not support.'
+    description416: 'The client has asked for a portion of the file, but the server cannot supply that portion.'
+    description417: 'The server cannot meet the requirements of the Expect request-header field.'
+    description418: 'The server refuses the attempt to brew coffee with a teapot.'
+    description421: 'The request was directed at a server that is not able to produce a response.'
+    description422: 'The request was well-formed but was unable to be followed due to semantic errors.'
+    description423: 'The resource that is being accessed is locked.'
+    description424: 'The request failed due to failure of a previous request.'
+    description425: 'Indicates that the server is unwilling to risk processing a request that might be replayed.'
+    description426: 'The client should switch to a different protocol such as TLS/1.0.'
+    description428: 'The origin server requires the request to be conditional.'
+    description429: 'The user has sent too many requests in a given amount of time.'
+    description431: 'The server is unwilling to process the request because either an individual header field, or all the header fields collectively, are too large.'
+    description451: 'A server operator has received a legal demand to deny access to a resource or to a set of resources that includes the requested resource.'
+    description500: 'A generic error message, given when an unexpected condition was encountered and no more specific message is suitable.'
+    description501: 'The server either does not recognize the request method, or it lacks the ability to fulfill the request.'
+    description502: 'The server was acting as a gateway or proxy and received an invalid response from the upstream server.'
+    description503: 'The server is currently unavailable (because it is overloaded or down for maintenance).'
+    description504: 'The server was acting as a gateway or proxy and did not receive a timely response from the upstream server.'
+    description505: 'The server does not support the HTTP protocol version used in the request.'
+    description506: 'Transparent content negotiation for the request results in a circular reference.'
+    description507: 'The server is unable to store the representation needed to complete the request.'
+    description508: 'The server detected an infinite loop while processing the request.'
+    description510: 'Further extensions to the request are required for the server to fulfill it.'
+    description511: 'The client needs to authenticate to gain network access.'
     description: The list of all HTTP status codes, their name, and their meaning.
 
   sql-prettify:
@@ -643,6 +714,11 @@ tools:
 
   rsa-key-pair-generator:
     title: RSA key pair generator
+    bitsLabel: 'Bits:'
+    bitsInvalid: Bits should be 256 <= bits <= 16384 and be a multiple of 8
+    refreshButton: Refresh key-pair
+    publicKeyHeading: Public key
+    privateKeyHeading: Private key
     description: Generate a new random RSA private and public pem certificate key pair.
 
   html-wysiwyg-editor:
@@ -671,6 +747,12 @@ tools:
 
   json-diff:
     title: JSON diff
+    firstJsonLabel: Your first JSON
+    firstJsonPlaceholder: Paste your first JSON here...
+    secondJsonLabel: Your JSON to compare
+    secondJsonPlaceholder: Paste your JSON to compare here...
+    onlyShowDifferencesLabel: Only show differences
+    jsonsAreTheSame: The provided JSONs are the same
     description: Compare two JSON objects and get the differences between them.
 
   jwt-parser:
@@ -688,6 +770,34 @@ tools:
 
   phone-parser-and-formatter:
     title: Phone parser and formatter
+    defaultCountryCodeLabel: 'Default country code:'
+    phoneNumberLabel: 'Phone number:'
+    phoneNumberPlaceholder: Enter a phone number
+    invalidPhoneNumber: Invalid phone number
+    countryCodeLabel: Country code
+    countryLabel: Country
+    callingCodeLabel: Country calling code
+    isValidLabel: Is valid?
+    isPossibleLabel: Is possible?
+    typeLabel: Type
+    internationalFormatLabel: International format
+    nationalFormatLabel: National format
+    e164FormatLabel: E.164 format
+    rfc3966FormatLabel: RFC3966 format
+    unknown: Unknown
+    'yes': 'Yes'
+    'no': 'No'
+    typeMobile: Mobile
+    typeFixedLine: Fixed line
+    typeFixedLineOrMobile: Fixed line or mobile
+    typePersonalNumber: Personal number
+    typePremiumRate: Premium rate
+    typeSharedCost: Shared cost
+    typeTollFree: Toll free
+    typeUan: Universal access number
+    typeVoicemail: Voicemail
+    typeVoip: VoIP
+    typePager: Pager
     description: Parse, validate and format phone numbers. Get information about the phone number, like the country code, type, etc.
 
   ipv4-subnet-calculator:
@@ -906,6 +1016,29 @@ tools:
 
   otp-generator:
     title: OTP code generator
+    secretLabel: Secret
+    secretPlaceholder: Paste your TOTP secret...
+    invalidSecretMessage: Secret should be a base32 string
+    secretRequiredMessage: Please set a secret
+    newSecretTooltip: Generate a new random secret
+    nextIn: Next in {seconds}s
+    openKeyUri: Open Key URI in new tab
+    secretHexLabel: Secret in hexadecimal
+    secretHexPlaceholder: Secret in hex will be displayed here
+    epochLabel: Epoch
+    epochPlaceholder: Epoch in sec will be displayed here
+    iterationHeading: Iteration
+    countLabel: 'Count:'
+    countPlaceholder: Iteration count will be displayed here
+    paddedHexLabel: 'Padded hex:'
+    paddedHexPlaceholder: Iteration count in hex will be displayed here
+    tokenPrevious: Previous
+    tokenCurrent: Current OTP
+    tokenNext: Next
+    copiedTooltip: Copied!
+    copyPreviousTooltip: Copy previous OTP
+    copyCurrentTooltip: Copy current OTP
+    copyNextTooltip: Copy next OTP
     description: Generate and validate time-based OTP (one time password) for multi-factor authentication.
 
   url-encoder:

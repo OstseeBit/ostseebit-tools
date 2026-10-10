@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import JSON5 from 'json5';
 
-import { isNotThrowing } from '@/utils/boolean';
+import { createParseValidationRule } from '@/composable/validation';
 import { withDefaultOnError } from '@/utils/defaults';
 import DiffsViewer from './diff-viewer/diff-viewer.vue';
+
+const { t } = useI18n();
 
 const rawLeftJson = ref('');
 const rawRightJson = ref('');
@@ -11,20 +13,15 @@ const rawRightJson = ref('');
 const leftJson = computed(() => withDefaultOnError(() => JSON5.parse(rawLeftJson.value), undefined));
 const rightJson = computed(() => withDefaultOnError(() => JSON5.parse(rawRightJson.value), undefined));
 
-const jsonValidationRules = [
-  {
-    validator: (value: string) => value === '' || isNotThrowing(() => JSON5.parse(value)),
-    message: 'Invalid JSON format',
-  },
-];
+const jsonValidationRules = computed(() => [createParseValidationRule(v => JSON5.parse(v), 'JSON', t)]);
 </script>
 
 <template>
   <c-input-text
     v-model:value="rawLeftJson"
     :validation-rules="jsonValidationRules"
-    label="Your first JSON"
-    placeholder="Paste your first JSON here..."
+    :label="t('tools.json-diff.firstJsonLabel')"
+    :placeholder="t('tools.json-diff.firstJsonPlaceholder')"
     rows="20"
     multiline
     test-id="leftJson"
@@ -35,8 +32,8 @@ const jsonValidationRules = [
   <c-input-text
     v-model:value="rawRightJson"
     :validation-rules="jsonValidationRules"
-    label="Your JSON to compare"
-    placeholder="Paste your JSON to compare here..."
+    :label="t('tools.json-diff.secondJsonLabel')"
+    :placeholder="t('tools.json-diff.secondJsonPlaceholder')"
     rows="20"
     multiline
     test-id="rightJson"

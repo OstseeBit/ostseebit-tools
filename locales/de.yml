@@ -259,6 +259,77 @@ tools:
       Beschreibung des Cron-Zeitplans.
   http-status-codes:
     title: HTTP-Statuscodes
+    searchPlaceholder: HTTP-Status suchen ...
+    searchResults: Suchergebnisse
+    forProtocol: 'Für {type}.'
+    category1xx: '1xx Informationen'
+    category2xx: '2xx Erfolg'
+    category3xx: '3xx Umleitung'
+    category4xx: '4xx Client-Fehler'
+    category5xx: '5xx Server-Fehler'
+    description100: 'Der Server wartet darauf, dass der Client den Body der Anfrage sendet.'
+    description101: 'Der Server hat dem Wechsel des Protokolls zugestimmt.'
+    description102: 'Der Server verarbeitet die Anfrage, aber es liegt noch keine Antwort vor.'
+    description103: 'Der Server liefert einige Response-Header vor der endgültigen HTTP-Antwort.'
+    description200: 'Standardantwort für erfolgreiche HTTP-Anfragen.'
+    description201: 'Die Anfrage wurde erfüllt und hat zur Erstellung einer neuen Ressource geführt.'
+    description202: 'Die Anfrage wurde zur Verarbeitung angenommen, die Verarbeitung ist aber noch nicht abgeschlossen.'
+    description203: 'Die Anfrage war erfolgreich, aber der Inhalt der ursprünglichen Antwort wurde von einem transformierenden Proxy verändert.'
+    description204: 'Der Server hat die Anfrage erfolgreich verarbeitet und liefert keinen Inhalt zurück.'
+    description205: 'Der Server weist den Client an, die Dokumentansicht zurückzusetzen, die diese Anfrage gesendet hat.'
+    description206: 'Der Server liefert aufgrund eines vom Client gesendeten Range-Headers nur einen Teil der Ressource.'
+    description207: 'Der folgende Nachrichtenkörper ist eine XML-Nachricht und kann mehrere separate Antwortcodes enthalten.'
+    description208: 'Die Mitglieder einer DAV-Bindung wurden bereits in einem vorherigen Teil der (Multistatus-)Antwort aufgeführt.'
+    description226: 'Der Server hat die Anfrage für die Ressource erfüllt, und die Antwort ist eine Repräsentation des Ergebnisses.'
+    description300: 'Zeigt mehrere Optionen für die Ressource an, denen der Client folgen kann.'
+    description301: 'Diese und alle zukünftigen Anfragen sollen an die angegebene URI gerichtet werden.'
+    description302: 'Weiterleitung auf eine andere URL. Dies ist ein Beispiel dafür, dass die Praxis der Branche dem Standard widerspricht.'
+    description303: 'Die Antwort auf die Anfrage ist unter einer anderen URI mit einer GET-Methode zu finden.'
+    description304: 'Zeigt an, dass die Ressource seit der in den Anfrage-Headern angegebenen Version nicht verändert wurde.'
+    description305: 'Die angeforderte Ressource ist nur über einen Proxy verfügbar, dessen Adresse in der Antwort angegeben ist.'
+    description306: 'Wird nicht mehr verwendet. Ursprünglich bedeutete es: "Nachfolgende Anfragen sollen den angegebenen Proxy verwenden."'
+    description307: 'In diesem Fall soll die Anfrage mit einer anderen URI wiederholt werden; zukünftige Anfragen sollen aber weiterhin die ursprüngliche URI verwenden.'
+    description308: 'Die Anfrage und alle zukünftigen Anfragen sollen mit einer anderen URI wiederholt werden.'
+    description400: 'Der Server kann oder will die Anfrage aufgrund eines offensichtlichen Client-Fehlers nicht verarbeiten.'
+    description401: 'Ähnlich wie 403 Forbidden, jedoch speziell für den Fall, dass eine Authentifizierung erforderlich ist und fehlgeschlagen ist oder noch nicht erfolgt ist.'
+    description402: 'Für die zukünftige Verwendung reserviert. Ursprünglich war vorgesehen, diesen Code im Rahmen eines digitalen Bargeld- oder Mikrozahlungssystems zu nutzen.'
+    description403: 'Die Anfrage war gültig, aber der Server verweigert die Ausführung. Der Benutzer hat möglicherweise nicht die nötigen Berechtigungen für eine Ressource.'
+    description404: 'Die angeforderte Ressource wurde nicht gefunden, ist aber möglicherweise in Zukunft verfügbar.'
+    description405: 'Eine Anfragemethode wird für die angeforderte Ressource nicht unterstützt.'
+    description406: 'Die angeforderte Ressource kann nur Inhalte erzeugen, die gemäß den in der Anfrage gesendeten Accept-Headern nicht akzeptabel sind.'
+    description407: 'Der Client muss sich zuerst beim Proxy authentifizieren.'
+    description408: 'Der Server hat beim Warten auf die Anfrage das Zeitlimit überschritten.'
+    description409: 'Zeigt an, dass die Anfrage wegen eines Konflikts in der Anfrage, etwa eines Bearbeitungskonflikts, nicht verarbeitet werden konnte.'
+    description410: 'Zeigt an, dass die angeforderte Ressource nicht mehr verfügbar ist und auch nicht wieder verfügbar sein wird.'
+    description411: 'Die Anfrage enthielt keine Angabe zur Länge ihres Inhalts, die von der angeforderten Ressource verlangt wird.'
+    description412: 'Der Server erfüllt eine der Vorbedingungen nicht, die der Anfragende an die Anfrage gestellt hat.'
+    description413: 'Die Anfrage ist größer, als der Server zu verarbeiten bereit oder in der Lage ist.'
+    description414: 'Die angegebene URI war für den Server zu lang, um sie zu verarbeiten.'
+    description415: 'Die Anfrage-Entität hat einen Medientyp, den der Server oder die Ressource nicht unterstützt.'
+    description416: 'Der Client hat einen Teil der Datei angefordert, aber der Server kann diesen Teil nicht liefern.'
+    description417: 'Der Server kann die Anforderungen des Expect-Request-Header-Felds nicht erfüllen.'
+    description418: 'Der Server verweigert den Versuch, mit einer Teekanne Kaffee zu kochen.'
+    description421: 'Die Anfrage wurde an einen Server gerichtet, der keine Antwort erzeugen kann.'
+    description422: 'Die Anfrage war wohlgeformt, konnte aber aufgrund semantischer Fehler nicht befolgt werden.'
+    description423: 'Die Ressource, auf die zugegriffen wird, ist gesperrt.'
+    description424: 'Die Anfrage ist aufgrund des Fehlschlagens einer vorherigen Anfrage fehlgeschlagen.'
+    description425: 'Zeigt an, dass der Server nicht bereit ist, das Risiko einzugehen, eine Anfrage zu verarbeiten, die wiederholt werden könnte.'
+    description426: 'Der Client soll auf ein anderes Protokoll wie TLS/1.0 wechseln.'
+    description428: 'Der Ursprungsserver verlangt, dass die Anfrage bedingt ist.'
+    description429: 'Der Benutzer hat in einer bestimmten Zeitspanne zu viele Anfragen gesendet.'
+    description431: 'Der Server ist nicht bereit, die Anfrage zu verarbeiten, weil entweder ein einzelnes Header-Feld oder alle Header-Felder zusammen zu groß sind.'
+    description451: 'Ein Serverbetreiber hat eine rechtliche Aufforderung erhalten, den Zugriff auf eine Ressource oder eine Gruppe von Ressourcen, die die angeforderte Ressource enthält, zu verweigern.'
+    description500: 'Eine allgemeine Fehlermeldung, die ausgegeben wird, wenn ein unerwarteter Zustand aufgetreten ist und keine spezifischere Meldung passt.'
+    description501: 'Der Server erkennt entweder die Anfragemethode nicht oder ist nicht in der Lage, die Anfrage zu erfüllen.'
+    description502: 'Der Server fungierte als Gateway oder Proxy und hat vom Upstream-Server eine ungültige Antwort erhalten.'
+    description503: 'Der Server ist derzeit nicht verfügbar (weil er überlastet ist oder wegen Wartungsarbeiten heruntergefahren wurde).'
+    description504: 'Der Server fungierte als Gateway oder Proxy und hat vom Upstream-Server nicht rechtzeitig eine Antwort erhalten.'
+    description505: 'Der Server unterstützt die in der Anfrage verwendete HTTP-Protokollversion nicht.'
+    description506: 'Die transparente Inhaltsaushandlung für die Anfrage führt zu einem Zirkelbezug.'
+    description507: 'Der Server kann die zur Erfüllung der Anfrage benötigte Repräsentation nicht speichern.'
+    description508: 'Der Server hat bei der Verarbeitung der Anfrage eine Endlosschleife erkannt.'
+    description510: 'Für die Erfüllung der Anfrage sind weitere Erweiterungen der Anfrage erforderlich.'
+    description511: 'Der Client muss sich authentifizieren, um Netzwerkzugriff zu erhalten.'
     description: Liste aller HTTP-Statuscodes, ihrer Namen und ihrer Bedeutung.
   sql-prettify:
     title: SQL verschönern und formatieren
@@ -674,6 +745,11 @@ tools:
       Online-Chmod-Rechner.
   rsa-key-pair-generator:
     title: RSA-Schlüsselpaar-Generator
+    bitsLabel: 'Bits:'
+    bitsInvalid: Bits müssen 256 <= Bits <= 16384 erfüllen und ein Vielfaches von 8 sein
+    refreshButton: Schlüsselpaar neu generieren
+    publicKeyHeading: Öffentlicher Schlüssel
+    privateKeyHeading: Privater Schlüssel
     description: Generiere neue zufällige RSA-Private- und Public-Key-PEM-Zertifikate.
   html-wysiwyg-editor:
     title: HTML-WYSIWYG-Editor
@@ -702,6 +778,12 @@ tools:
       Schreibweise (Groß- oder Kleinbuchstaben) generiert.
   json-diff:
     title: JSON-Unterschied
+    firstJsonLabel: Dein erstes JSON
+    firstJsonPlaceholder: Füge dein erstes JSON hier ein ...
+    secondJsonLabel: Dein JSON zum Vergleichen
+    secondJsonPlaceholder: Füge dein JSON zum Vergleichen hier ein ...
+    onlyShowDifferencesLabel: Nur Unterschiede anzeigen
+    jsonsAreTheSame: Die angegebenen JSONs sind identisch
     description: Vergleiche zwei JSON-Objekte und erhalte die Unterschiede zwischen ihnen.
   jwt-parser:
     title: JWT-Parser
@@ -718,6 +800,34 @@ tools:
     description: Konvertiere Datum und Uhrzeit in verschiedene Formate.
   phone-parser-and-formatter:
     title: Telefonnummer-Parser und -Formatter
+    defaultCountryCodeLabel: 'Standard-Ländercode:'
+    phoneNumberLabel: 'Telefonnummer:'
+    phoneNumberPlaceholder: Gib eine Telefonnummer ein
+    invalidPhoneNumber: Ungültige Telefonnummer
+    countryCodeLabel: Land (Code)
+    countryLabel: Land
+    callingCodeLabel: Ländervorwahl
+    isValidLabel: Gültig?
+    isPossibleLabel: Möglich?
+    typeLabel: Typ
+    internationalFormatLabel: Internationales Format
+    nationalFormatLabel: Nationales Format
+    e164FormatLabel: E.164-Format
+    rfc3966FormatLabel: RFC3966-Format
+    unknown: Unbekannt
+    'yes': Ja
+    'no': Nein
+    typeMobile: Mobilfunk
+    typeFixedLine: Festnetz
+    typeFixedLineOrMobile: Festnetz oder Mobilfunk
+    typePersonalNumber: Persönliche Rufnummer
+    typePremiumRate: Mehrwertdienst
+    typeSharedCost: Geteilte Kosten
+    typeTollFree: Gebührenfrei
+    typeUan: Universelle Zugangsnummer
+    typeVoicemail: Voicemail
+    typeVoip: VoIP
+    typePager: Pager
     description: >-
       Parse, validiere und formatiere Telefonnummern. Erhalte Informationen zur
       Telefonnummer, wie z. B. die Landesvorwahl, den Typ usw.
@@ -958,6 +1068,29 @@ tools:
     description: Vergleiche zwei Texte und sieh die Unterschiede zwischen ihnen.
   otp-generator:
     title: OTP-Code-Generator
+    secretLabel: Secret
+    secretPlaceholder: Füge dein TOTP-Secret ein ...
+    invalidSecretMessage: Das Secret muss ein Base32-String sein
+    secretRequiredMessage: Bitte ein Secret festlegen
+    newSecretTooltip: Neues zufälliges Secret generieren
+    nextIn: Nächster Code in {seconds}s
+    openKeyUri: Key-URI in neuem Tab öffnen
+    secretHexLabel: Secret als Hexadezimalwert
+    secretHexPlaceholder: Das Secret als Hexadezimalwert erscheint hier
+    epochLabel: Epoch
+    epochPlaceholder: Die Epoche in Sekunden erscheint hier
+    iterationHeading: Iteration
+    countLabel: 'Zähler:'
+    countPlaceholder: Der Iterationszähler erscheint hier
+    paddedHexLabel: 'Hex (aufgefüllt):'
+    paddedHexPlaceholder: Der Iterationszähler als Hexadezimalwert erscheint hier
+    tokenPrevious: Vorheriger
+    tokenCurrent: Aktueller OTP
+    tokenNext: Nächster
+    copiedTooltip: Kopiert!
+    copyPreviousTooltip: Vorherigen OTP kopieren
+    copyCurrentTooltip: Aktuellen OTP kopieren
+    copyNextTooltip: Nächsten OTP kopieren
     description: >-
       Generiere und validiere zeitbasierte OTPs (Einmalpasswörter) für
       Multi-Faktor-Authentifizierung.

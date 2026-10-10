@@ -2,11 +2,21 @@
 import { useFuzzySearch } from '@/composable/fuzzySearch';
 import { codesByCategories } from './http-status-codes.constants';
 
+const { t } = useI18n();
+
 const search = ref('');
+
+const translatedCategories = computed(() =>
+  codesByCategories.map(({ id, codes }) => ({
+    id,
+    category: t(`tools.http-status-codes.category${id}`),
+    codes: codes.map(code => ({ ...code, description: t(`tools.http-status-codes.description${code.code}`) })),
+  })),
+);
 
 const { searchResult } = useFuzzySearch({
   search,
-  data: codesByCategories.flatMap(({ codes, category }) => codes.map(code => ({ ...code, category }))),
+  data: computed(() => translatedCategories.value.flatMap(({ codes, category }) => codes.map(code => ({ ...code, category })))),
   options: {
     keys: [{ name: 'code', weight: 3 }, { name: 'name', weight: 2 }, 'description', 'category'],
   },
@@ -14,10 +24,10 @@ const { searchResult } = useFuzzySearch({
 
 const codesByCategoryFiltered = computed(() => {
   if (!search.value) {
-    return codesByCategories;
+    return translatedCategories.value;
   }
 
-  return [{ category: 'Search results', codes: searchResult.value }];
+  return [{ id: 'search', category: t('tools.http-status-codes.searchResults'), codes: searchResult.value }];
 });
 </script>
 
@@ -25,11 +35,11 @@ const codesByCategoryFiltered = computed(() => {
   <div>
     <c-input-text
       v-model:value="search"
-      placeholder="Search http status..."
+      :placeholder="t('tools.http-status-codes.searchPlaceholder')"
       autofocus raw-text mb-10
     />
 
-    <div v-for="{ codes, category } of codesByCategoryFiltered" :key="category" mb-8>
+    <div v-for="{ codes, category, id } of codesByCategoryFiltered" :key="id" mb-8>
       <div mb-2 text-xl>
         {{ category }}
       </div>
@@ -39,7 +49,7 @@ const codesByCategoryFiltered = computed(() => {
           {{ code }} {{ name }}
         </div>
         <div op-70>
-          {{ description }} {{ type !== 'HTTP' ? `For ${type}.` : '' }}
+          {{ description }} {{ type !== 'HTTP' ? t('tools.http-status-codes.forProtocol', { type }) : '' }}
         </div>
       </c-card>
     </div>
