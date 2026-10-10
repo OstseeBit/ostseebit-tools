@@ -38,7 +38,7 @@ watch([input, font, width], async ([text, fontName, lineWidth], _previous, onCle
       return;
     }
     output.value = figlet.textSync(text, {
-      font: fontName as figlet.Fonts,
+      font: fontName as Parameters<typeof figlet.loadFontSync>[0],
       width: lineWidth ?? 80,
       whitespaceBreak: true,
     });
