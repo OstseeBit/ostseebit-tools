@@ -17,6 +17,7 @@ home:
     lightMode: 'Light mode'
     mode: 'Toggle dark/light mode'
 about:
+  title: About
   content: >
     # About OstseeBit Tools
 
@@ -29,6 +30,7 @@ about:
     [GitHub](https://github.com/OstseeBit/ostseebit-tools) · [LICENSE](https://github.com/OstseeBit/ostseebit-tools/blob/main/LICENSE) · [NOTICE](https://github.com/OstseeBit/ostseebit-tools/blob/main/NOTICE.md)
 404:
   notFound: '404 Not Found'
+  pageTitle: Page not found
   sorry: 'Sorry, this page does not seem to exist'
   maybe: 'Maybe the cache is doing tricky things, try force-refreshing?'
   backHome: 'Back home'

@@ -2,7 +2,9 @@
 import { useHead } from '@unhead/vue';
 import { brand } from '@/branding';
 
-useHead({ title: `Page not found - ${brand.name}` });
+const { t } = useI18n();
+
+useHead({ title: computed(() => `${t('404.pageTitle')} - ${brand.name}`) });
 </script>
 
 <template>

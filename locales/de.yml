@@ -1,5 +1,6 @@
 '404':
   notFound: 404 Nicht gefunden
+  pageTitle: Seite nicht gefunden
   sorry: Entschuldigung, diese Seite scheint nicht zu existieren
   maybe: >-
     Vielleicht macht der Cache etwas Seltsames. Mit einem erzwungenen Neuladen
@@ -24,6 +25,7 @@ home:
     lightMode: Hellmodus
     mode: Wechseln zwischen dunklem/hellem Modus
 about:
+  title: Über
   content: >
     # Über OstseeBit Tools
 
