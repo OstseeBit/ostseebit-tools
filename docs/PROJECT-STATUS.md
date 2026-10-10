@@ -311,6 +311,22 @@ Beim vollständigen `pnpm test:e2e`-Lauf (alle 3 Browser-Projekte, 462 Tests ins
 - Nicht übersetzt, weil kein Anzeigetext vorhanden: `temperature-converter` (nur Skalennamen/Einheiten) und `text-diff` (reiner Wrapper um `c-diff-editor`).
 - Verifiziert: `pnpm lint`, `pnpm typecheck`, `pnpm test:unit` (172/172, `safelink-decoder`-Test auf die neue Signatur angepasst), `pnpm build` — alle grün. Smoke-Tests der 6 betroffenen Routen über alle 3 Browser: 18/18. Live im Browser: Fehlertext des SafeLink-Decoders, Label-Breite bei `yaml-prettify`, QR-Fehlerkorrektur — keine Konsolenfehler.
 
+## Umgesetzt am 2026-10-10 (gemeinsame Komponenten: englische Standardtexte übersetzt)
+
+Beim Übersetzen von `pdf-signature-checker` fiel auf, dass gemeinsame Komponenten in **jedem** Tool englische Standardtexte lieferten ("Copy to clipboard", "Copied!", "Yes"/"No"/"N/A", "Select an option", "Search...", "Input text", "Drag and drop files here…", "or"/"Browse files", aria-Label "Data table", Command-Palette- und Sprachwahl-Platzhalter). Alle auf einen neuen Top-Level-Namespace `common.*` in `de.yml`/`en.yml` umgestellt: `c-text-copyable`, `InputCopyable`, `TextareaCopyable`, `c-key-value-list-item`, `c-modal-value`, `c-file-upload`, `c-input-text`, `c-select`, `c-table`, `FormatTransformer`, `command-palette`, `locale-selector`.
+
+- Props mit englischem Standardwert (`placeholder`, `title`, `description`, `inputLabel`, …) haben jetzt `undefined` als Default und fallen im Template/`computed` auf den übersetzten `common.*`-Text zurück — `withDefaults` kann `t()` nicht aufrufen.
+- **Testinfrastruktur:** Die Komponenten-Unit-Tests (`c-input-text`, `c-table`) mounteten ohne i18n-Plugin und schlugen mit "Need to install with `app.use`" fehl. Neues `src/test-setup.ts` (per `setupFiles` in `vite.config.ts`) installiert das echte `i18nPlugin` global für alle Komponententests.
+- `iban-validator-and-parser.e2e.spec.ts` erwartete die englischen Werte "Yes"/"No"/"N/A" und prüft jetzt "Ja"/"Nein"/"k. A.".
+
+## Umgesetzt am 2026-10-10 (i18n-Batch 15: 5 weitere Tools)
+
+5 vollständig übersetzte Tools: `git-memo` und `regex-memo` (Spickzettel als eigene deutsche Markdown-Dateien `*.content.de.md`; die Komponente wählt per `locale` zwischen `MemoDe` und `MemoEn`; Codebeispiele unverändert; `components.d.ts` registriert die neuen Dateien automatisch), `html-wysiwyg-editor` (Menüleisten-Tooltips in `computed()`, Standardinhalt über `translate()` aus zwei Teilschlüsseln statt HTML in der Locale-Datei, da vue-i18n bei HTML in Nachrichten warnt), `emoji-picker` (Emoji-Namen und -Gruppen stammen aus `unicode-emoji-json`/`emojilib` und bleiben englisch — der Platzhalter weist deshalb auf englische Suchbegriffe hin; E2E-Spec angepasst) und `pdf-signature-checker` (Zertifikatsfelder, Tabellenköpfe, Datumsformat mit der aktuellen UI-Locale statt der Browser-Locale; das ungenutzte Feld `certificateName` entfernt).
+
+- Nicht übersetzt, weil kein Anzeigetext: `temperature-converter`, `text-diff`.
+- **Neues Prüfwerkzeug:** Ein Einmal-Skript hat alle statischen `t('…')`/`translate('…')`-Schlüssel im Quellcode gegen beide Locale-Dateien geprüft: 950 Schlüssel, alle in `de` und `en` vorhanden. Dynamische Schlüssel (11, z. B. `color-converter`, `http-status-codes`, `qrcode-generator`) sind darüber nicht abgedeckt, wurden aber live bzw. per E2E geprüft.
+- Verifiziert: `pnpm lint`, `pnpm typecheck`, `pnpm test:unit` (172/172), `pnpm build` — alle grün. **Vollständiger `pnpm test:e2e` über alle 3 Browser: 462/462 bestanden**, wichtig wegen der gemeinsamen Komponenten, die praktisch jedes Tool betreffen. Live im Browser: beide Spickzettel, `emoji-picker`, `html-wysiwyg-editor`, `pdf-signature-checker` (inkl. übersetzter Upload-Komponente) ohne Konsolenfehler.
+
 ## Weitere Modernisierung in Modulen
 
 1. **Abhängigkeiten und Sicherheit:** die konkret gefundenen Freeze-/Injection-Risiken (bcrypt, regex-tester, math-evaluator, markdown-to-html) sind behoben, `iarna-toml-esm`/`jwt-decode`/`vue-router`/`uuid` sind aktualisiert (siehe oben). Die Browser-/Buildwarnungen bei `bcryptjs`/`pdf-signature-reader` sind geprüft und als ungefährlich bestätigt (siehe oben). `@tabler/icons-vue` ist entfernt (siehe oben). Offen bleiben: belastbare Behandlung der übrigen kryptografischen Funktionen, und die Zusammenführung von `@vicons/material` (10 Verwendungen) und `unplugin-icons`/mdi (10) — braucht pro Icon einen bewussten visuellen Abgleich, kein mechanischer Umbau.

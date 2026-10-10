@@ -1,13 +1,17 @@
 <script setup lang="ts">
 import { useThemeVars } from 'naive-ui';
-import Memo from './regex-memo.content.md';
+import MemoDe from './regex-memo.content.de.md';
+import MemoEn from './regex-memo.content.md';
 
 const themeVars = useThemeVars();
+
+const { locale } = useI18n();
+const Memo = computed(() => locale.value === 'de' ? MemoDe : MemoEn);
 </script>
 
 <template>
   <div>
-    <Memo />
+    <component :is="Memo" />
   </div>
 </template>
 
