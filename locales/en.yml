@@ -380,6 +380,11 @@ tools:
 
   yaml-prettify:
     title: YAML prettify and format
+    sortKeysLabel: 'Sort keys:'
+    indentSizeLabel: 'Indent size:'
+    inputLabel: Your raw YAML
+    inputPlaceholder: Paste your raw YAML here...
+    outputLabel: Prettified version of your YAML
     description: Prettify your YAML string into a friendly, human-readable format.
 
   eta-calculator:
@@ -618,6 +623,12 @@ tools:
 
   docker-run-to-docker-compose-converter:
     title: Docker run to Docker compose converter
+    inputLabel: 'Your docker run command:'
+    inputPlaceholder: Your docker run command to convert...
+    downloadButton: Download docker-compose.yml
+    notComposableTitle: This options are not translatable to docker-compose
+    notImplementedTitle: This options are not yet implemented and therefore haven't been translated to docker-compose
+    errorsTitle: The following errors occured
     description: Transforms "docker run" commands into docker-compose files!
 
   mac-address-lookup:
@@ -667,6 +678,17 @@ tools:
 
   qrcode-generator:
     title: QR Code generator
+    textLabel: 'Text:'
+    textPlaceholder: Your link or text...
+    foregroundColorLabel: 'Foreground color:'
+    backgroundColorLabel: 'Background color:'
+    errorCorrectionLabel: 'Error resistance:'
+    errorCorrection:
+      low: low
+      medium: medium
+      quartile: quartile
+      high: high
+    downloadButton: Download qr-code
     description: Generate and download a QR code for a URL (or just plain text), and customize the background and foreground colors.
 
   wifi-qrcode-generator:
@@ -1086,6 +1108,10 @@ tools:
     description: Convert JSON to XML
   markdown-to-html:
     title: Markdown to HTML
+    inputLabel: 'Your Markdown to convert:'
+    inputPlaceholder: Your Markdown content...
+    outputLabel: 'Output HTML:'
+    printButton: Print as PDF
     description: Convert Markdown to Html and allow to print (as PDF)
   regex-memo:
     title: Regex cheatsheet
@@ -1095,6 +1121,10 @@ tools:
     description: Test your regular expressions with sample text.
   safelink-decoder:
     title: Outlook Safelink decoder
+    inputLabel: 'Your input Outlook SafeLink Url:'
+    inputPlaceholder: Your input Outlook SafeLink Url...
+    outputLabel: 'Output decoded URL:'
+    invalidUrlError: Invalid SafeLinks URL provided
     description: Decode Outlook SafeLink links
   xml-to-json:
     title: XML to JSON

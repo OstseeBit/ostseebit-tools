@@ -303,6 +303,14 @@ Beim vollständigen `pnpm test:e2e`-Lauf (alle 3 Browser-Projekte, 462 Tests ins
 - Dead Code entfernt: `booleanToHumanReadable` (`src/utils/boolean.ts`) samt Test, da nach der Umstellung ohne Aufrufer (Unit-Tests dadurch 173 → 172).
 - Verifiziert: `pnpm lint`, `pnpm typecheck`, `pnpm test:unit` (172/172), `pnpm build` — alle grün. Gezielter Playwright-Lauf über alle 3 Browser (4 Tool-Specs plus die 5 Smoke-Tests): 45/45 bestanden. Live im Browser: Telefonnummer `+49 30 12345678` (deutsche Ländernamen, alle Ergebniswerte sichtbar), HTTP-Suche über übersetzte Beschreibungen, OTP-Countdown, RSA-Beschriftungen — keine Konsolenfehler.
 
+## Umgesetzt am 2026-10-10 (i18n-Batch 14: 5 weitere Tools)
+
+5 vollständig übersetzte Tools: `safelink-decoder` (Service nimmt jetzt `t` entgegen; die Fehlermeldung erscheint ohne das englische `Error:`-Präfix, das zuvor durch `e.toString()` entstand; der frühere `catch (e: any)` hatte den Rückgabetyp zu `any` aufgeweicht und `null` aus `searchParams.get` verdeckt, jetzt sauber mit `?? ''`), `yaml-viewer` (Locale-Key `yaml-prettify`, Validierung über `createParseValidationRule`), `markdown-to-html`, `docker-run-to-docker-compose-converter` (Oberfläche übersetzt; die Hinweistexte, die `composerize-ts` selbst liefert, bleiben bibliotheksbedingt englisch) und `qr-code-generator` (Locale-Key `qrcode-generator`, Fehlerkorrektur-Optionen in `computed()`).
+
+- **Nachbesserung zu Batch 12:** `json-viewer.vue` hatte wie zuvor `xml-formatter` ein `label-width="100"`, das für "Einrückungsgröße:" zu schmal ist. Bei `json-viewer` und `yaml-viewer` auf `150` gesetzt, bei `yaml-viewer` live bestätigt.
+- Nicht übersetzt, weil kein Anzeigetext vorhanden: `temperature-converter` (nur Skalennamen/Einheiten) und `text-diff` (reiner Wrapper um `c-diff-editor`).
+- Verifiziert: `pnpm lint`, `pnpm typecheck`, `pnpm test:unit` (172/172, `safelink-decoder`-Test auf die neue Signatur angepasst), `pnpm build` — alle grün. Smoke-Tests der 6 betroffenen Routen über alle 3 Browser: 18/18. Live im Browser: Fehlertext des SafeLink-Decoders, Label-Breite bei `yaml-prettify`, QR-Fehlerkorrektur — keine Konsolenfehler.
+
 ## Weitere Modernisierung in Modulen
 
 1. **Abhängigkeiten und Sicherheit:** die konkret gefundenen Freeze-/Injection-Risiken (bcrypt, regex-tester, math-evaluator, markdown-to-html) sind behoben, `iarna-toml-esm`/`jwt-decode`/`vue-router`/`uuid` sind aktualisiert (siehe oben). Die Browser-/Buildwarnungen bei `bcryptjs`/`pdf-signature-reader` sind geprüft und als ungefährlich bestätigt (siehe oben). `@tabler/icons-vue` ist entfernt (siehe oben). Offen bleiben: belastbare Behandlung der übrigen kryptografischen Funktionen, und die Zusammenführung von `@vicons/material` (10 Verwendungen) und `unplugin-icons`/mdi (10) — braucht pro Icon einen bewussten visuellen Abgleich, kein mechanischer Umbau.

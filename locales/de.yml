@@ -395,6 +395,11 @@ tools:
       Ports (0-1023).
   yaml-prettify:
     title: YAML verschönern und formatieren
+    sortKeysLabel: 'Schlüssel sortieren:'
+    indentSizeLabel: 'Einrückungsgröße:'
+    inputLabel: Dein rohes YAML
+    inputPlaceholder: Füge dein rohes YAML hier ein ...
+    outputLabel: Formatierte Version deines YAML
     description: Verschönere deinen YAML-String in ein menschenlesbares Format.
   eta-calculator:
     title: ETA-Rechner
@@ -648,6 +653,12 @@ tools:
     description: Verschönere deinen JSON-String in ein menschenlesbares Format.
   docker-run-to-docker-compose-converter:
     title: Docker run zu Docker compose Konverter
+    inputLabel: 'Dein docker-run-Befehl:'
+    inputPlaceholder: Dein zu konvertierender docker-run-Befehl ...
+    downloadButton: docker-compose.yml herunterladen
+    notComposableTitle: Diese Optionen lassen sich nicht in docker-compose übersetzen
+    notImplementedTitle: Diese Optionen sind noch nicht implementiert und wurden daher nicht in docker-compose übersetzt
+    errorsTitle: Folgende Fehler sind aufgetreten
     description: Wandle docker run-Befehle in docker-compose-Dateien um!
   mac-address-lookup:
     title: MAC-Adressensuche
@@ -695,6 +706,17 @@ tools:
       bedeutendem Inhalt zu demonstrieren.
   qrcode-generator:
     title: QR-Code-Generator
+    textLabel: 'Text:'
+    textPlaceholder: Dein Link oder Text ...
+    foregroundColorLabel: 'Vordergrundfarbe:'
+    backgroundColorLabel: 'Hintergrundfarbe:'
+    errorCorrectionLabel: 'Fehlerkorrektur:'
+    errorCorrection:
+      low: Niedrig
+      medium: Mittel
+      quartile: Quartil
+      high: Hoch
+    downloadButton: QR-Code herunterladen
     description: >-
       Generiere und downloade QR-Codes für eine URL oder einfach einen Text und
       passe die Hintergrund- und Vordergrundfarben an.
@@ -1140,6 +1162,10 @@ tools:
     description: Konvertiere JSON zu XML.
   markdown-to-html:
     title: Markdown zu HTML
+    inputLabel: 'Dein zu konvertierendes Markdown:'
+    inputPlaceholder: Dein Markdown-Inhalt ...
+    outputLabel: 'Ausgabe-HTML:'
+    printButton: Als PDF drucken
     description: Konvertiere Markdown zu HTML und ermögliche den Druck (als PDF).
   regex-memo:
     title: Regex-Spickzettel
@@ -1149,6 +1175,10 @@ tools:
     description: Teste deine regulären Ausdrücke mit Beispieltext.
   safelink-decoder:
     title: Outlook-Safelink-Decoder
+    inputLabel: 'Deine Outlook-SafeLink-URL:'
+    inputPlaceholder: Deine Outlook-SafeLink-URL ...
+    outputLabel: 'Dekodierte URL:'
+    invalidUrlError: Ungültige SafeLinks-URL angegeben
     description: Dekodiere Outlook-SafeLink-Links.
   xml-to-json:
     title: XML zu JSON
