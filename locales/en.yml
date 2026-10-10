@@ -364,6 +364,25 @@ tools:
 
   benchmark-builder:
     title: Benchmark builder
+    defaultSuiteTitle: Suite {number}
+    headerPosition: Position
+    headerSuite: Suite
+    headerSamples: Samples
+    headerMean: Mean
+    headerVariance: Variance
+    suiteNameLabel: Suite name
+    suiteNamePlaceholder: Suite name...
+    suiteValuesLabel: Suite values
+    deleteSuite: Delete suite
+    addSuite: Add suite
+    unitLabel: Unit
+    unitPlaceholder: 'Unit (eg: ms)'
+    resetSuites: Reset suites
+    copyMarkdown: Copy as markdown table
+    copyBulletList: Copy as bullet list
+    measurePlaceholder: Set your measure...
+    deleteValueTooltip: Delete this value
+    addMeasure: Add a measure
     description: Easily compare execution time of tasks with this very simple online benchmark builder.
 
   git-memo:
@@ -833,6 +852,14 @@ tools:
 
   date-converter:
     title: Date-time converter
+    formatJsDate: JS locale date string
+    formatUnixTimestamp: Unix timestamp
+    formatTimestamp: Timestamp
+    formatUtc: UTC format
+    formatExcel: Excel date/time
+    invalidDateMessage: This date is invalid for this format
+    inputPlaceholder: Put your date string here...
+    invalidDatePlaceholder: Invalid date...
     description: Convert date and time into the various different formats
 
   phone-parser-and-formatter:
@@ -891,6 +918,148 @@ tools:
 
   og-meta-generator:
     title: Open graph meta generator
+    yourMetaTags: 'Your meta tags'
+    schemas:
+      website:
+        name: 'General information'
+        typeLabel: 'Page type'
+        typePlaceholder: 'Select the type of your website...'
+        titleLabel: 'Title'
+        titlePlaceholder: 'Enter the title of your website...'
+        descriptionLabel: 'Description'
+        descriptionPlaceholder: 'Enter the description of your website...'
+        urlLabel: 'Page URL'
+        urlPlaceholder: 'Enter the url of your website...'
+        optionWebsite: 'Website'
+        optionArticle: 'Article'
+        optionBook: 'Book'
+        optionProfile: 'Profile'
+        optionGroupMusic: 'Music'
+        optionSong: 'Song'
+        optionAlbum: 'Music album'
+        optionPlaylist: 'Playlist'
+        optionRadioStation: 'Radio station'
+        optionGroupVideo: 'Video'
+        optionMovie: 'Movie'
+        optionEpisode: 'Episode'
+        optionTvShow: 'TV show'
+        optionOtherVideo: 'Other video'
+      image:
+        name: 'Image'
+        urlLabel: 'Image url'
+        urlPlaceholder: 'The url of your website social image...'
+        altLabel: 'Image alt'
+        altPlaceholder: 'The alternative text of your website social image...'
+        widthLabel: 'Width'
+        widthPlaceholder: 'Width in px of your website social image...'
+        heightLabel: 'Height'
+        heightPlaceholder: 'Height in px of your website social image...'
+      twitter:
+        name: 'Twitter'
+        cardLabel: 'Card type'
+        cardPlaceholder: 'The Twitter card type...'
+        siteLabel: 'Site account'
+        sitePlaceholder: 'The name of the Twitter account of the site (ex: {''@''}example)...'
+        creatorLabel: 'Creator acc.'
+        creatorPlaceholder: 'The name of the Twitter account of the creator (ex: {''@''}example)...'
+        optionSummary: 'Summary'
+        optionSummaryLargeImage: 'Summary with large image'
+        optionApp: 'Application'
+        optionPlayer: 'Player'
+      article:
+        name: 'Article'
+        publishedTimeLabel: 'Publishing date'
+        publishedTimePlaceholder: 'When the article was first published...'
+        modifiedTimeLabel: 'Modification date'
+        modifiedTimePlaceholder: 'When the article was last changed...'
+        expirationTimeLabel: 'Expiration date'
+        expirationTimePlaceholder: 'When the article is out of date after...'
+        authorLabel: 'Author'
+        authorPlaceholder: 'Writers of the article...'
+        sectionLabel: 'Section'
+        sectionPlaceholder: 'A high-level section name. E.g. Technology..'
+        tagLabel: 'Tag'
+        tagPlaceholder: 'Tag words associated with this article...'
+      book:
+        name: 'Book'
+        authorLabel: 'Author'
+        authorPlaceholder: 'Who wrote this book...'
+        isbnLabel: 'ISBN'
+        isbnPlaceholder: 'The International Standard Book Number...'
+        releaseDateLabel: 'Release date'
+        releaseDatePlaceholder: 'The date the book was released...'
+        tagLabel: 'Tag'
+        tagPlaceholder: 'Tag words associated with this book...'
+      musicAlbum:
+        name: 'Album details'
+        songLabel: 'Song'
+        songPlaceholder: 'The song on this album...'
+        discLabel: 'Disc'
+        discPlaceholder: 'The same as music:album:disc but in reverse...'
+        trackLabel: 'Track'
+        trackPlaceholder: 'The same as music:album:track but in reverse...'
+        musicianLabel: 'Musician'
+        musicianPlaceholder: 'The musician that made this song...'
+        releaseDateLabel: 'Release date'
+        releaseDatePlaceholder: 'The date the album was released...'
+      musicPlaylist:
+        name: 'Playlist details'
+        songLabel: 'Song'
+        songPlaceholder: 'The song on this album...'
+        discLabel: 'Disc'
+        discPlaceholder: 'The same as music:album:disc but in reverse...'
+        trackLabel: 'Track'
+        trackPlaceholder: 'The same as music:album:track but in reverse...'
+        creatorLabel: 'Creator'
+        creatorPlaceholder: 'The creator of this playlist...'
+      musicRadioStation:
+        name: 'Radio station details'
+        creatorLabel: 'Creator'
+        creatorPlaceholder: 'The creator of this radio station...'
+      musicSong:
+        name: 'Song details'
+        durationLabel: 'Duration'
+        durationPlaceholder: 'The duration of the song...'
+        albumLabel: 'Album'
+        albumPlaceholder: 'The album this song is from...'
+        discLabel: 'Disc'
+        discPlaceholder: 'Which disc of the album this song is on...'
+        trackLabel: 'Track'
+        trackPlaceholder: 'Which track this song is...'
+        musicianLabel: 'Musician'
+        musicianPlaceholder: 'The musician that made this song...'
+      profile:
+        name: 'Profile'
+        firstNameLabel: 'First name'
+        firstNamePlaceholder: 'Enter the first name of the person...'
+        lastNameLabel: 'Last name'
+        lastNamePlaceholder: 'Enter the last name of the person...'
+        usernameLabel: 'Username'
+        usernamePlaceholder: 'Enter the username of the person...'
+        genderLabel: 'Gender'
+        genderPlaceholder: 'Enter the gender of the person...'
+      videoMovie:
+        name: 'Movie details'
+        actorLabel: 'Actor'
+        actorPlaceholder: 'Name of the actress/actor...'
+        directorLabel: 'Director'
+        directorPlaceholder: 'Name of the director...'
+        writerLabel: 'Writer'
+        writerPlaceholder: 'Writers of the movie...'
+        durationLabel: 'Duration'
+        durationPlaceholder: 'The movie''s length in seconds...'
+        releaseDateLabel: 'Release date'
+        releaseDatePlaceholder: 'The date the movie was released...'
+        tagLabel: 'Tag'
+        tagPlaceholder: 'Tag words associated with this movie...'
+      videoEpisode:
+        name: 'Video episode details'
+        seriesLabel: 'Series'
+        seriesPlaceholder: 'Which series this episode belongs to...'
+      videoOther:
+        name: 'Other video details'
+      videoTVShow:
+        name: 'TV show details'
     description: Generate open-graph and socials HTML meta tags for your website.
 
   ipv6-ula-generator:
@@ -1160,6 +1329,15 @@ tools:
     description: Convert text to its ASCII binary representation and vice-versa.
   ascii-text-drawer:
     title: ASCII Art Text Generator
+    textLabel: 'Your text:'
+    textPlaceholder: Your text to draw
+    fontLabel: 'Font:'
+    fontPlaceholder: Select font to use
+    widthLabel: 'Width:'
+    widthPlaceholder: Width of the text
+    loadingFont: Loading font...
+    settingsError: Current settings resulted in error.
+    outputLabel: 'Ascii Art text:'
     description: Create ASCII art text with many fonts and styles.
   json-to-xml:
     title: JSON to XML

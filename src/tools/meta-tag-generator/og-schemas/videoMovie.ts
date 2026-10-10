@@ -1,29 +1,43 @@
 import type { OGSchemaType } from '../OGSchemaType.type';
 
 export const videoMovie: OGSchemaType = {
-  name: 'Movie details',
+  nameKey: 'tools.og-meta-generator.schemas.videoMovie.name',
   elements: [
     {
       type: 'input-multiple',
-      label: 'Actor',
       key: 'video:actor',
-      placeholder: 'Name of the actress/actor...',
+      labelKey: 'tools.og-meta-generator.schemas.videoMovie.actorLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.videoMovie.actorPlaceholder',
     },
-    // { type: 'input', label: 'Actor role', key: 'video:actor:role', placeholder: 'The role they played...' },
     {
       type: 'input-multiple',
-      label: 'Director',
       key: 'video:director',
-      placeholder: 'Name of the director...',
+      labelKey: 'tools.og-meta-generator.schemas.videoMovie.directorLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.videoMovie.directorPlaceholder',
     },
-    { type: 'input-multiple', label: 'Writer', key: 'video:writer', placeholder: 'Writers of the movie...' },
-    { type: 'input', label: 'Duration', key: 'video:duration', placeholder: 'The movie\'s length in seconds...' },
+    {
+      type: 'input-multiple',
+      key: 'video:writer',
+      labelKey: 'tools.og-meta-generator.schemas.videoMovie.writerLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.videoMovie.writerPlaceholder',
+    },
     {
       type: 'input',
-      label: 'Release date',
-      key: 'video:release_date',
-      placeholder: 'The date the movie was released...',
+      key: 'video:duration',
+      labelKey: 'tools.og-meta-generator.schemas.videoMovie.durationLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.videoMovie.durationPlaceholder',
     },
-    { type: 'input', label: 'Tag', key: 'video:tag', placeholder: 'Tag words associated with this movie...' },
+    {
+      type: 'input',
+      key: 'video:release_date',
+      labelKey: 'tools.og-meta-generator.schemas.videoMovie.releaseDateLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.videoMovie.releaseDatePlaceholder',
+    },
+    {
+      type: 'input',
+      key: 'video:tag',
+      labelKey: 'tools.og-meta-generator.schemas.videoMovie.tagLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.videoMovie.tagPlaceholder',
+    },
   ],
 };

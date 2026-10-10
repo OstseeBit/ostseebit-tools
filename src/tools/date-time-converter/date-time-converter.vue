@@ -29,72 +29,84 @@ import {
   isUTCDateString,
 } from './date-time-converter.service';
 
+const { t } = useI18n();
+
 const inputDate = ref('');
 
 const toDate: ToDateMapper = date => new Date(date);
 
-const formats: DateFormat[] = [
+const formats = computed<DateFormat[]>(() => [
   {
-    name: 'JS locale date string',
+    id: 'jsDate',
+    name: t('tools.date-converter.formatJsDate'),
     fromDate: date => date.toString(),
     toDate,
     formatMatcher: () => false,
   },
   {
+    id: 'iso8601',
     name: 'ISO 8601',
     fromDate: formatISO,
     toDate: parseISO,
     formatMatcher: date => isISO8601DateTimeString(date),
   },
   {
+    id: 'iso9075',
     name: 'ISO 9075',
     fromDate: formatISO9075,
     toDate: parseISO,
     formatMatcher: date => isISO9075DateString(date),
   },
   {
+    id: 'rfc3339',
     name: 'RFC 3339',
     fromDate: formatRFC3339,
     toDate,
     formatMatcher: date => isRFC3339DateString(date),
   },
   {
+    id: 'rfc7231',
     name: 'RFC 7231',
     fromDate: formatRFC7231,
     toDate,
     formatMatcher: date => isRFC7231DateString(date),
   },
   {
-    name: 'Unix timestamp',
+    id: 'unixTimestamp',
+    name: t('tools.date-converter.formatUnixTimestamp'),
     fromDate: date => String(getUnixTime(date)),
     toDate: sec => fromUnixTime(+sec),
     formatMatcher: date => isUnixTimestamp(date),
   },
   {
-    name: 'Timestamp',
+    id: 'timestamp',
+    name: t('tools.date-converter.formatTimestamp'),
     fromDate: date => String(getTime(date)),
     toDate: ms => parseJSON(+ms),
     formatMatcher: date => isTimestamp(date),
   },
   {
-    name: 'UTC format',
+    id: 'utc',
+    name: t('tools.date-converter.formatUtc'),
     fromDate: date => date.toUTCString(),
     toDate,
     formatMatcher: date => isUTCDateString(date),
   },
   {
+    id: 'mongoObjectId',
     name: 'Mongo ObjectID',
     fromDate: date => `${Math.floor(date.getTime() / 1000).toString(16)}0000000000000000`,
     toDate: objectId => new Date(Number.parseInt(objectId.substring(0, 8), 16) * 1000),
     formatMatcher: date => isMongoObjectId(date),
   },
   {
-    name: 'Excel date/time',
+    id: 'excel',
+    name: t('tools.date-converter.formatExcel'),
     fromDate: date => dateToExcelFormat(date),
     toDate: excelFormatToDate,
     formatMatcher: isExcelFormat,
   },
-];
+]);
 
 const formatIndex = ref(6);
 const now = useNow();
@@ -104,7 +116,7 @@ const normalizedDate = computed(() => {
     return now.value;
   }
 
-  const { toDate } = formats[formatIndex.value];
+  const { toDate } = formats.value[formatIndex.value];
 
   try {
     return toDate(inputDate.value);
@@ -115,7 +127,7 @@ const normalizedDate = computed(() => {
 });
 
 function onDateInputChanged(value: string) {
-  const matchingIndex = formats.findIndex(({ formatMatcher }) => formatMatcher(value));
+  const matchingIndex = formats.value.findIndex(({ formatMatcher }) => formatMatcher(value));
   if (matchingIndex !== -1) {
     formatIndex.value = matchingIndex;
   }
@@ -124,20 +136,20 @@ function onDateInputChanged(value: string) {
 const validation = useValidation({
   source: inputDate,
   watch: [formatIndex],
-  rules: [
+  rules: computed(() => [
     {
-      message: 'This date is invalid for this format',
-      validator: value =>
+      message: t('tools.date-converter.invalidDateMessage'),
+      validator: (value: string) =>
         withDefaultOnError(() => {
           if (value === '') {
             return true;
           }
 
-          const maybeDate = formats[formatIndex.value].toDate(value);
+          const maybeDate = formats.value[formatIndex.value].toDate(value);
           return isDate(maybeDate) && isValid(maybeDate);
         }, false),
     },
-  ],
+  ]),
 });
 
 function formatDateUsingFormatter(formatter: (date: Date) => string, date?: Date) {
@@ -155,7 +167,7 @@ function formatDateUsingFormatter(formatter: (date: Date) => string, date?: Date
       <c-input-text
         v-model:value="inputDate"
         autofocus
-        placeholder="Put your date string here..."
+        :placeholder="t('tools.date-converter.inputPlaceholder')"
         clearable
         test-id="date-time-converter-input"
         :validation="validation"
@@ -173,15 +185,15 @@ function formatDateUsingFormatter(formatter: (date: Date) => string, date?: Date
     <n-divider />
 
     <input-copyable
-      v-for="{ name, fromDate } in formats"
-      :key="name"
+      v-for="{ id, name, fromDate } in formats"
+      :key="id"
       :label="name"
-      label-width="150px"
+      label-width="200px"
       label-position="left"
       label-align="right"
       :value="formatDateUsingFormatter(fromDate, normalizedDate)"
-      placeholder="Invalid date..."
-      :test-id="name"
+      :placeholder="t('tools.date-converter.invalidDatePlaceholder')"
+      :test-id="id"
       readonly
       mt-2
     />

@@ -376,6 +376,25 @@ tools:
       verschiedene SQL-Dialekte).
   benchmark-builder:
     title: Benchmark-Builder
+    defaultSuiteTitle: Suite {number}
+    headerPosition: Position
+    headerSuite: Suite
+    headerSamples: Stichproben
+    headerMean: Mittelwert
+    headerVariance: Varianz
+    suiteNameLabel: Suite-Name
+    suiteNamePlaceholder: Suite-Name ...
+    suiteValuesLabel: Suite-Werte
+    deleteSuite: Suite löschen
+    addSuite: Suite hinzufügen
+    unitLabel: Einheit
+    unitPlaceholder: Einheit (z. B. ms)
+    resetSuites: Suites zurücksetzen
+    copyMarkdown: Als Markdown-Tabelle kopieren
+    copyBulletList: Als Aufzählungsliste kopieren
+    measurePlaceholder: Messwert eingeben ...
+    deleteValueTooltip: Diesen Wert löschen
+    addMeasure: Messwert hinzufügen
     description: >-
       Vergleiche ganz einfach die Ausführungszeit von Aufgaben mit diesem sehr
       einfachen Online-Benchmark-Builder.
@@ -864,6 +883,14 @@ tools:
       an.
   date-converter:
     title: Datum-Uhrzeit-Konverter
+    formatJsDate: JS-Datumsstring (lokal)
+    formatUnixTimestamp: Unix-Zeitstempel
+    formatTimestamp: Zeitstempel
+    formatUtc: UTC-Format
+    formatExcel: Excel-Datum/-Uhrzeit
+    invalidDateMessage: Dieses Datum ist für dieses Format ungültig
+    inputPlaceholder: Füge deinen Datumsstring hier ein ...
+    invalidDatePlaceholder: Ungültiges Datum ...
     description: Konvertiere Datum und Uhrzeit in verschiedene Formate.
   phone-parser-and-formatter:
     title: Telefonnummer-Parser und -Formatter
@@ -923,6 +950,148 @@ tools:
       dein Subnetz benötigst.
   og-meta-generator:
     title: Open Graph Meta-Generator
+    yourMetaTags: 'Deine Meta-Tags'
+    schemas:
+      website:
+        name: 'Allgemeine Informationen'
+        typeLabel: 'Seitentyp'
+        typePlaceholder: 'Wähle den Typ deiner Website ...'
+        titleLabel: 'Titel'
+        titlePlaceholder: 'Gib den Titel deiner Website ein ...'
+        descriptionLabel: 'Beschreibung'
+        descriptionPlaceholder: 'Gib die Beschreibung deiner Website ein ...'
+        urlLabel: 'Seiten-URL'
+        urlPlaceholder: 'Gib die URL deiner Website ein ...'
+        optionWebsite: 'Website'
+        optionArticle: 'Artikel'
+        optionBook: 'Buch'
+        optionProfile: 'Profil'
+        optionGroupMusic: 'Musik'
+        optionSong: 'Song'
+        optionAlbum: 'Musikalbum'
+        optionPlaylist: 'Playlist'
+        optionRadioStation: 'Radiosender'
+        optionGroupVideo: 'Video'
+        optionMovie: 'Film'
+        optionEpisode: 'Episode'
+        optionTvShow: 'TV-Serie'
+        optionOtherVideo: 'Anderes Video'
+      image:
+        name: 'Bild'
+        urlLabel: 'Bild-URL'
+        urlPlaceholder: 'Die URL des Social-Bildes deiner Website ...'
+        altLabel: 'Bild-Alt-Text'
+        altPlaceholder: 'Der Alternativtext des Social-Bildes deiner Website ...'
+        widthLabel: 'Breite'
+        widthPlaceholder: 'Breite des Social-Bildes deiner Website in px ...'
+        heightLabel: 'Höhe'
+        heightPlaceholder: 'Höhe des Social-Bildes deiner Website in px ...'
+      twitter:
+        name: 'Twitter'
+        cardLabel: 'Kartentyp'
+        cardPlaceholder: 'Der Twitter-Kartentyp ...'
+        siteLabel: 'Site-Konto'
+        sitePlaceholder: 'Der Name des Twitter-Kontos der Website (z. B. {''@''}example) ...'
+        creatorLabel: 'Ersteller-Konto'
+        creatorPlaceholder: 'Der Name des Twitter-Kontos des Erstellers (z. B. {''@''}example) ...'
+        optionSummary: 'Zusammenfassung'
+        optionSummaryLargeImage: 'Zusammenfassung mit großem Bild'
+        optionApp: 'Anwendung'
+        optionPlayer: 'Player'
+      article:
+        name: 'Artikel'
+        publishedTimeLabel: 'Veröffentlichungsdatum'
+        publishedTimePlaceholder: 'Wann der Artikel erstmals veröffentlicht wurde ...'
+        modifiedTimeLabel: 'Änderungsdatum'
+        modifiedTimePlaceholder: 'Wann der Artikel zuletzt geändert wurde ...'
+        expirationTimeLabel: 'Ablaufdatum'
+        expirationTimePlaceholder: 'Ab wann der Artikel veraltet ist ...'
+        authorLabel: 'Autor'
+        authorPlaceholder: 'Verfasser des Artikels ...'
+        sectionLabel: 'Rubrik'
+        sectionPlaceholder: 'Ein übergeordneter Rubrikname, z. B. Technologie ...'
+        tagLabel: 'Tag'
+        tagPlaceholder: 'Mit diesem Artikel verbundene Schlagwörter ...'
+      book:
+        name: 'Buch'
+        authorLabel: 'Autor'
+        authorPlaceholder: 'Wer dieses Buch geschrieben hat ...'
+        isbnLabel: 'ISBN'
+        isbnPlaceholder: 'Die Internationale Standardbuchnummer ...'
+        releaseDateLabel: 'Erscheinungsdatum'
+        releaseDatePlaceholder: 'Das Datum, an dem das Buch erschienen ist ...'
+        tagLabel: 'Tag'
+        tagPlaceholder: 'Mit diesem Buch verbundene Schlagwörter ...'
+      musicAlbum:
+        name: 'Albumdetails'
+        songLabel: 'Song'
+        songPlaceholder: 'Der Song auf diesem Album ...'
+        discLabel: 'Disc'
+        discPlaceholder: 'Dasselbe wie music:album:disc, aber umgekehrt ...'
+        trackLabel: 'Track'
+        trackPlaceholder: 'Dasselbe wie music:album:track, aber umgekehrt ...'
+        musicianLabel: 'Musiker'
+        musicianPlaceholder: 'Der Musiker, der diesen Song gemacht hat ...'
+        releaseDateLabel: 'Erscheinungsdatum'
+        releaseDatePlaceholder: 'Das Datum, an dem das Album erschienen ist ...'
+      musicPlaylist:
+        name: 'Playlist-Details'
+        songLabel: 'Song'
+        songPlaceholder: 'Der Song auf diesem Album ...'
+        discLabel: 'Disc'
+        discPlaceholder: 'Dasselbe wie music:album:disc, aber umgekehrt ...'
+        trackLabel: 'Track'
+        trackPlaceholder: 'Dasselbe wie music:album:track, aber umgekehrt ...'
+        creatorLabel: 'Ersteller'
+        creatorPlaceholder: 'Der Ersteller dieser Playlist ...'
+      musicRadioStation:
+        name: 'Radiosender-Details'
+        creatorLabel: 'Ersteller'
+        creatorPlaceholder: 'Der Ersteller dieses Radiosenders ...'
+      musicSong:
+        name: 'Song-Details'
+        durationLabel: 'Dauer'
+        durationPlaceholder: 'Die Dauer des Songs ...'
+        albumLabel: 'Album'
+        albumPlaceholder: 'Das Album, von dem dieser Song stammt ...'
+        discLabel: 'Disc'
+        discPlaceholder: 'Auf welcher Disc des Albums dieser Song ist ...'
+        trackLabel: 'Track'
+        trackPlaceholder: 'Welcher Track dieser Song ist ...'
+        musicianLabel: 'Musiker'
+        musicianPlaceholder: 'Der Musiker, der diesen Song gemacht hat ...'
+      profile:
+        name: 'Profil'
+        firstNameLabel: 'Vorname'
+        firstNamePlaceholder: 'Gib den Vornamen der Person ein ...'
+        lastNameLabel: 'Nachname'
+        lastNamePlaceholder: 'Gib den Nachnamen der Person ein ...'
+        usernameLabel: 'Benutzername'
+        usernamePlaceholder: 'Gib den Benutzernamen der Person ein ...'
+        genderLabel: 'Geschlecht'
+        genderPlaceholder: 'Gib das Geschlecht der Person ein ...'
+      videoMovie:
+        name: 'Filmdetails'
+        actorLabel: 'Schauspieler'
+        actorPlaceholder: 'Name der Schauspielerin bzw. des Schauspielers ...'
+        directorLabel: 'Regisseur'
+        directorPlaceholder: 'Name des Regisseurs ...'
+        writerLabel: 'Drehbuchautor'
+        writerPlaceholder: 'Drehbuchautoren des Films ...'
+        durationLabel: 'Dauer'
+        durationPlaceholder: 'Die Länge des Films in Sekunden ...'
+        releaseDateLabel: 'Erscheinungsdatum'
+        releaseDatePlaceholder: 'Das Datum, an dem der Film erschienen ist ...'
+        tagLabel: 'Tag'
+        tagPlaceholder: 'Mit diesem Film verbundene Schlagwörter ...'
+      videoEpisode:
+        name: 'Episodendetails'
+        seriesLabel: 'Serie'
+        seriesPlaceholder: 'Zu welcher Serie diese Episode gehört ...'
+      videoOther:
+        name: 'Details zu anderem Video'
+      videoTVShow:
+        name: 'TV-Serien-Details'
     description: Generiere Open Graph- und Social-HTML-Metatags für deine Website.
   ipv6-ula-generator:
     title: IPv6-ULA-Generator
@@ -1214,6 +1383,15 @@ tools:
     description: Konvertiere Text in seine ASCII-Binärrepräsentation und umgekehrt.
   ascii-text-drawer:
     title: ASCII-Art-Text-Generator
+    textLabel: 'Dein Text:'
+    textPlaceholder: Dein zu zeichnender Text
+    fontLabel: 'Schriftart:'
+    fontPlaceholder: Zu verwendende Schriftart auswählen
+    widthLabel: 'Breite:'
+    widthPlaceholder: Breite des Textes
+    loadingFont: Schriftart wird geladen ...
+    settingsError: Die aktuellen Einstellungen führten zu einem Fehler.
+    outputLabel: 'ASCII-Art-Text:'
     description: Erstelle ASCII-Art-Text mit vielen Schriftarten und Stilen.
   json-to-xml:
     title: JSON zu XML

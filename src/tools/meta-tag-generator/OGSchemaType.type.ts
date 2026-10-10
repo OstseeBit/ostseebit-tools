@@ -1,11 +1,17 @@
-import type { SelectGroupOption, SelectOption } from 'naive-ui';
+export type {
+  OGSchemaType,
+  OGSchemaTypeElementInput,
+  OGSchemaTypeElementInputMultiple,
+  OGSchemaTypeElementSelect,
+  OGSchemaTypeOption,
+};
 
-export type { OGSchemaType, OGSchemaTypeElementInput, OGSchemaTypeElementInputMultiple, OGSchemaTypeElementSelect };
-
+// All display texts are i18n keys (`labelKey`, `placeholderKey`, `nameKey`) that
+// the component resolves with t(), so the schemas stay plain, language-independent data.
 interface OGSchemaTypeElementBase {
   key: string
-  label: string
-  placeholder: string
+  labelKey: string
+  placeholderKey: string
 }
 
 interface OGSchemaTypeElementInput extends OGSchemaTypeElementBase {
@@ -16,12 +22,26 @@ interface OGSchemaTypeElementInputMultiple extends OGSchemaTypeElementBase {
   type: 'input-multiple'
 }
 
+interface OGSchemaTypeOptionItem {
+  labelKey: string
+  value: string
+}
+
+interface OGSchemaTypeOptionGroup {
+  type: 'group'
+  key: string
+  labelKey: string
+  children: OGSchemaTypeOptionItem[]
+}
+
+type OGSchemaTypeOption = OGSchemaTypeOptionItem | OGSchemaTypeOptionGroup;
+
 interface OGSchemaTypeElementSelect extends OGSchemaTypeElementBase {
   type: 'select'
-  options: Array<SelectOption | SelectGroupOption>
+  options: OGSchemaTypeOption[]
 }
 
 interface OGSchemaType {
-  name: string
+  nameKey: string
   elements: (OGSchemaTypeElementSelect | OGSchemaTypeElementInput | OGSchemaTypeElementInputMultiple)[]
 }
