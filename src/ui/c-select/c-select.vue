@@ -27,6 +27,8 @@ const emits = defineEmits(['update:value']);
 
 const { options: rawOptions, placeholder, size: sizeName, searchable } = toRefs(props);
 
+const { t } = useI18n();
+
 const options = computed(() => {
   return rawOptions.value.map((option: string | CSelectOption<T>) => {
     if (typeof option === 'string') {
@@ -143,12 +145,12 @@ function onSearchInput() {
       >
         <div flex-1 truncate>
           <slot name="displayed-value">
-            <input v-if="searchable && isOpen" ref="searchInputRef" v-model="searchQuery" type="text" placeholder="Search..." class="search-input" w-full color-current lh-normal @input="onSearchInput">
+            <input v-if="searchable && isOpen" ref="searchInputRef" v-model="searchQuery" type="text" :placeholder="t('common.searchPlaceholder')" class="search-input" w-full color-current lh-normal @input="onSearchInput">
             <span v-else-if="selectedOption" lh-normal>
               {{ selectedOption.label }}
             </span>
             <span v-else class="placeholder" lh-normal>
-              {{ placeholder ?? 'Select an option' }}
+              {{ placeholder ?? t('common.selectOption') }}
             </span>
           </slot>
         </div>

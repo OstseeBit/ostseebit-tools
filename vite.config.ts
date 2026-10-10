@@ -134,6 +134,7 @@ export default defineConfig({
   },
   test: {
     exclude: [...configDefaults.exclude, '**/*.e2e.spec.ts'],
+    setupFiles: ['./src/test-setup.ts'],
   },
   build: {
     target: 'esnext',

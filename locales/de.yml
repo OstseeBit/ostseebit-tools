@@ -49,6 +49,25 @@ validation:
   invalidBase64String: Ungültiger Base64-String
 copy:
   defaultMessage: In die Zwischenablage kopiert
+common:
+  copy: Kopieren
+  copied: Kopiert!
+  copyToClipboard: In die Zwischenablage kopieren
+  'yes': Ja
+  'no': Nein
+  notAvailable: k. A.
+  selectOption: Option auswählen
+  searchPlaceholder: Suchen ...
+  inputTextPlaceholder: Texteingabe
+  dataTableLabel: Datentabelle
+  dropFiles: Dateien hierher ziehen oder klicken, um Dateien auszuwählen
+  or: oder
+  browseFiles: Dateien durchsuchen
+  inputLabel: Eingabe
+  inputPlaceholder: Eingabe ...
+  outputLabel: Ausgabe
+  selectLanguage: Sprache auswählen
+  commandPalettePlaceholder: Tippen, um ein Tool oder einen Befehl zu suchen ...
 tools:
   categories:
     favorite-tools: Deine Lieblingstools
@@ -184,6 +203,13 @@ tools:
       einer beliebigen gedrückten Taste.
   emoji-picker:
     title: Emoji-Picker
+    searchPlaceholder: "Emojis suchen (englische Begriffe, z. B. 'smile') ..."
+    noResults: Keine Ergebnisse
+    searchResult: Suchergebnis
+    showMore: Mehr anzeigen ({count} verbleibend)
+    emojiCopied: Emoji {emoji} in die Zwischenablage kopiert
+    codePointsCopied: "Codepunkte '{codePoints}' in die Zwischenablage kopiert"
+    unicodeCopied: "Unicode '{unicode}' in die Zwischenablage kopiert"
     description: >-
       Einfaches Kopieren und Einfügen von Emojis. Erhalte außerdem den Unicode-
       und Codepunkt-Wert jedes Emojis.
@@ -775,6 +801,25 @@ tools:
     description: Generiere neue zufällige RSA-Private- und Public-Key-PEM-Zertifikate.
   html-wysiwyg-editor:
     title: HTML-WYSIWYG-Editor
+    defaultHeading: Hallo!
+    defaultText: Willkommen in diesem HTML-WYSIWYG-Editor
+    menu:
+      bold: Fett
+      italic: Kursiv
+      strike: Durchgestrichen
+      inlineCode: Inline-Code
+      heading1: Überschrift 1
+      heading2: Überschrift 2
+      heading3: Überschrift 3
+      heading4: Überschrift 4
+      bulletList: Aufzählungsliste
+      orderedList: Nummerierte Liste
+      codeBlock: Codeblock
+      blockquote: Zitat
+      hardBreak: Harter Zeilenumbruch
+      clearFormat: Formatierung entfernen
+      undo: Rückgängig
+      redo: Wiederholen
     description: >-
       Online-HTML-Editor mit funktionsreichem WYSIWYG-Editor, erhalte sofort den
       Quellcode des Inhalts.
@@ -930,6 +975,22 @@ tools:
       Benutzeragent, ...) erhalten.
   pdf-signature-checker:
     title: PDF-Signaturprüfer
+    uploadTitle: Eine PDF-Datei hierher ziehen oder klicken, um eine Datei auszuwählen
+    noSignaturesFound: In der angegebenen Datei wurden keine Signaturen gefunden.
+    signatureCertificates: "Zertifikate der Signatur {index}:"
+    validityPeriod: Gültigkeitszeitraum
+    issuedBy: Ausgestellt von
+    issuedTo: Ausgestellt für
+    pemCertificate: PEM-Zertifikat
+    notBefore: Nicht vor
+    notAfter: Nicht nach
+    commonName: Allgemeiner Name (CN)
+    organizationName: Organisation
+    countryName: Land
+    localityName: Ort
+    organizationalUnitName: Organisationseinheit
+    stateOrProvinceName: Bundesland oder Provinz
+    viewPemCert: PEM-Zertifikat anzeigen
     description: >-
       Überprüfe die Signaturen einer PDF-Datei. Eine signierte PDF-Datei enthält
       eine oder mehrere Signaturen, die verwendet werden können, um

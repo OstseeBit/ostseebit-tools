@@ -36,7 +36,7 @@ const props = withDefaults(
   {
     value: '',
     id: generateRandomId,
-    placeholder: 'Input text',
+    placeholder: undefined,
     label: undefined,
     readonly: false,
     disabled: false,
@@ -66,6 +66,9 @@ const value = useVModel(props, 'value', emit);
 const showPassword = ref(false);
 
 const { id, placeholder, label, validationRules, labelPosition, labelWidth, labelAlign, autosize, readonly, disabled, clearable, type, multiline, rows, rawText, autofocus, monospace } = toRefs(props);
+
+const { t } = useI18n();
+const effectivePlaceholder = computed(() => placeholder.value ?? t('common.inputTextPlaceholder'));
 
 const validation
   = props.validation
@@ -163,7 +166,7 @@ defineExpose({
           :class="{
             'leading-5 !font-mono': monospace,
           }"
-          :placeholder="placeholder"
+          :placeholder="effectivePlaceholder"
           :readonly="readonly"
           :disabled="disabled"
           :data-test-id="testId"
@@ -185,7 +188,7 @@ defineExpose({
             'leading-5 !font-mono': monospace,
           }"
           size="1"
-          :placeholder="placeholder"
+          :placeholder="effectivePlaceholder"
           :readonly="readonly"
           :disabled="disabled"
           :data-test-id="testId"

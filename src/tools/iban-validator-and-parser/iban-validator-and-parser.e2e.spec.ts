@@ -29,8 +29,8 @@ test.describe('Tool - Iban validator and parser', () => {
     const ibanInfo = await extractIbanInfo({ page });
 
     expect(ibanInfo).toEqual([
-      ['Ist die IBAN gültig?', 'Yes'],
-      ['Ist die IBAN eine QR-IBAN?', 'No'],
+      ['Ist die IBAN gültig?', 'Ja'],
+      ['Ist die IBAN eine QR-IBAN?', 'Nein'],
       ['Ländercode', 'DE'],
       ['BBAN', '370400440532013000'],
       ['IBAN im lesbaren Format', 'DE89 3704 0044 0532 0130 00'],
@@ -43,11 +43,11 @@ test.describe('Tool - Iban validator and parser', () => {
     const ibanInfo = await extractIbanInfo({ page });
 
     expect(ibanInfo).toEqual([
-      ['Ist die IBAN gültig?', 'No'],
+      ['Ist die IBAN gültig?', 'Nein'],
       ['IBAN-Fehler', 'Falsche Konto-/Bank-/Filial-Prüfsumme Falsche IBAN-Prüfsumme'],
-      ['Ist die IBAN eine QR-IBAN?', 'No'],
-      ['Ländercode', 'N/A'],
-      ['BBAN', 'N/A'],
+      ['Ist die IBAN eine QR-IBAN?', 'Nein'],
+      ['Ländercode', 'k. A.'],
+      ['BBAN', 'k. A.'],
       ['IBAN im lesbaren Format', 'FR76 3000 6060 0112 3456 7890 189'],
     ]);
   });
