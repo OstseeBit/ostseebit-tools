@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useHead } from '@vueuse/head';
+import { useHead } from '@unhead/vue';
 import { brand } from '@/branding';
 
 useHead({ title: `Page not found - ${brand.name}` });

@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { useHead } from '@unhead/vue';
 import DragDrop from '@vicons/tabler/es/DragDrop';
-import { useHead } from '@vueuse/head';
 import { computed } from 'vue';
 import Draggable from 'vuedraggable';
 import { brand } from '@/branding';

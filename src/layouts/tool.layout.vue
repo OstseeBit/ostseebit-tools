@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import type { HeadObject } from '@vueuse/head';
+import type { ReactiveHead } from '@unhead/vue';
 import type { Tool } from '@/tools/tools.types';
-import { useHead } from '@vueuse/head';
+import { useHead } from '@unhead/vue';
 
 import { useRoute } from 'vue-router';
 import { brand } from '@/branding';
@@ -10,7 +10,7 @@ import BaseLayout from './base.layout.vue';
 
 const route = useRoute();
 
-const head = computed<HeadObject>(() => ({
+const head = computed<ReactiveHead>(() => ({
   title: `${route.meta.name} - ${brand.name}`,
   meta: [
     {
