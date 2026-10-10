@@ -177,6 +177,23 @@ tools:
   camera-recorder:
     title: Camera recorder
     description: Take a picture or record a video from your webcam or camera.
+    notSupported: Your browser does not support recording video from camera
+    permissionNeeded: You need to grant permission to use your camera and microphone
+    permissionBlocked: Your browser has blocked permission request or does not support it. You need to grant permission manually in your browser settings (usually the lock icon in the address bar).
+    grantPermission: Grant permission
+    videoLabel: 'Video:'
+    audioLabel: 'Audio:'
+    selectCamera: Select camera
+    selectMicrophone: Select microphone
+    startWebcam: Start webcam
+    takeScreenshot: Take screenshot
+    startRecording: Start recording
+    pause: Pause
+    resume: Resume
+    stop: Stop
+    recordingNotSupported: Video recording is not supported in your browser
+    screenshot: Screenshot
+    video: Video
 
   keycode-info:
     title: Keycode info
@@ -1358,6 +1375,42 @@ tools:
   regex-tester:
     title: Regex Tester
     description: Test your regular expressions with sample text.
+    regexLabel: 'Regex to test:'
+    regexPlaceholder: Put the regex to test
+    invalidRegex: 'Invalid regex: {error}'
+    cheatsheet: See Regular Expression Cheatsheet
+    flags:
+      global: Global search.
+      globalTitle: Global search
+      ignoreCase: Case-insensitive search.
+      ignoreCaseTitle: Case-insensitive search
+      multiline: Multiline
+      multilineTitle: Allows ^ and $ to match next to newline characters.
+      dotAll: Singleline
+      dotAllTitle: Allows . to match newline characters.
+      unicode: Unicode
+      unicodeTitle: Unicode; treat a pattern as a sequence of Unicode code points.
+      unicodeSets: Unicode Sets
+      unicodeSetsTitle: An upgrade to the u mode with more Unicode features.
+    textLabel: 'Text to match:'
+    textPlaceholder: Put the text to match
+    regexCard: Regex
+    matchesCard: Matches
+    columnIndex: Index in text
+    columnValue: Value
+    columnCaptures: Captures
+    columnGroups: Groups
+    noMatch: No match
+    sampleCard: Sample matching text
+    sampleGenerating: Generating sample…
+    diagramCard: Regex Diagram
+    errors:
+      matchFailed: Matching failed.
+      matchTimeout: Matching timed out. Simplify the expression.
+      sampleFailed: Sample generation failed.
+      sampleTimeout: Sample generation timed out. Simplify the expression.
+      sampleUnavailable: Sample generation is unavailable in this browser.
+      sampleLimit: Sample generation exceeded its safety limit. Simplify the expression.
   safelink-decoder:
     title: Outlook Safelink decoder
     inputLabel: 'Your input Outlook SafeLink Url:'
