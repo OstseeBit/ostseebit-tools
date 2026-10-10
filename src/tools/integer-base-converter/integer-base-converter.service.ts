@@ -1,4 +1,4 @@
-export function convertBase({ value, fromBase, toBase }: { value: string, fromBase: number, toBase: number }) {
+export function convertBase({ value, fromBase, toBase, t }: { value: string, fromBase: number, toBase: number, t: (key: string, named?: Record<string, unknown>) => string }) {
   const range = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/'.split('');
   const fromRange = range.slice(0, fromBase);
   const toRange = range.slice(0, toBase);
@@ -7,7 +7,7 @@ export function convertBase({ value, fromBase, toBase }: { value: string, fromBa
     .reverse()
     .reduce((carry: bigint, digit: string, index: number) => {
       if (!fromRange.includes(digit)) {
-        throw new Error(`Invalid digit "${digit}" for base ${fromBase}.`);
+        throw new Error(t('tools.base-converter.invalidDigitError', { digit, base: fromBase }));
       }
       return (carry += BigInt(fromRange.indexOf(digit)) * BigInt(fromBase) ** BigInt(index));
     }, 0n);

@@ -180,6 +180,22 @@ tools:
 
   color-converter:
     title: Color converter
+    pickerLabel: Color picker
+    hexLabel: hex
+    hexPlaceholder: e.g. #ff0000
+    rgbLabel: rgb
+    rgbPlaceholder: e.g. rgb(255, 0, 0)
+    hslLabel: hsl
+    hslPlaceholder: e.g. hsl(0, 100%, 50%)
+    hwbLabel: hwb
+    hwbPlaceholder: e.g. hwb(0, 0%, 0%)
+    lchLabel: lch
+    lchPlaceholder: e.g. lch(53.24, 104.55, 40.85)
+    cmykLabel: cmyk
+    cmykPlaceholder: e.g. cmyk(0, 100%, 100%, 0)
+    nameLabel: name
+    namePlaceholder: e.g. red
+    unknownColorName: Unknown
     description: Convert color between the different formats (hex, rgb, hsl and css name)
 
   bcrypt:
@@ -203,6 +219,30 @@ tools:
 
   crontab-generator:
     title: Crontab generator
+    meaningAnyValue: Any value
+    equivalentEveryMinute: Every minute
+    meaningRangeOfValues: Range of values
+    equivalentMinutes1Through10: Minutes 1 through 10
+    meaningListOfValues: List of values
+    equivalentAtMinutes1And10: At minutes 1 and 10
+    meaningStepValues: Step values
+    equivalentEvery10Minutes: Every 10 minutes
+    meaningYearly: Once every year at midnight of 1 January
+    meaningSameAsYearly: "Same as {'@'}yearly"
+    meaningMonthly: Once a month at midnight on the first day
+    meaningWeekly: Once a week at midnight on Sunday morning
+    meaningDaily: Once a day at midnight
+    meaningSameAsDaily: "Same as {'@'}daily"
+    meaningHourly: Once an hour at the beginning of the hour
+    meaningReboot: Run at startup
+    verboseLabel: Verbose
+    use24HourTimeFormatLabel: Use 24 hour time format
+    daysStartAt0Label: Days start at 0
+    symbolLabel: Symbol
+    meaningLabel: Meaning
+    exampleLabel: Example
+    equivalentLabel: Equivalent
+    invalidCronMessage: This cron is invalid
     description: Validate and generate crontab and get the human-readable description of the cron schedule.
 
   http-status-codes:
@@ -273,6 +313,18 @@ tools:
 
   eta-calculator:
     title: ETA calculator
+    explanation: With a concrete example, if you wash 5 plates in 3 minutes and you have 500 plates to wash, it will take you 5 hours to wash them all.
+    amountToConsumeLabel: Amount of element to consume
+    consumptionStartedAtLabel: The consumption started at
+    amountPerTimeSpanLabel: Amount of unit consumed by time span
+    inLabel: in
+    unitMilliseconds: milliseconds
+    unitSeconds: seconds
+    unitMinutes: minutes
+    unitHours: hours
+    unitDays: days
+    totalDurationLabel: Total duration
+    endAtLabel: "It will end "
     description: An ETA (Estimated Time of Arrival) calculator to determine the approximate end time of a task, for example, the end time and duration of a file download.
 
   roman-numeral-converter:
@@ -486,6 +538,11 @@ tools:
 
   json-prettify:
     title: JSON prettify and format
+    sortKeysLabel: "Sort keys:"
+    indentSizeLabel: "Indent size:"
+    inputLabel: Your raw JSON
+    inputPlaceholder: Paste your raw JSON here...
+    outputLabel: Prettified version of your JSON
     description: Prettify your JSON string into a friendly, human-readable format.
 
   docker-run-to-docker-compose-converter:
@@ -734,6 +791,22 @@ tools:
 
   base-converter:
     title: Integer base converter
+    inputNumberLabel: Input number
+    inputNumberPlaceholder: "Put your number here (ex: 42)"
+    inputBaseLabel: Input base
+    inputBasePlaceholder: "Put your input base here (ex: 10)"
+    binaryLabel: Binary (2)
+    binaryPlaceholder: Binary version will be here...
+    octalLabel: Octal (8)
+    octalPlaceholder: Octal version will be here...
+    decimalLabel: Decimal (10)
+    decimalPlaceholder: Decimal version will be here...
+    hexadecimalLabel: Hexadecimal (16)
+    hexadecimalPlaceholder: Hexadecimal version will be here...
+    base64Placeholder: Base64 version will be here...
+    customLabel: "Custom:"
+    customPlaceholder: "Base {base} will be here..."
+    invalidDigitError: "Invalid digit \"{digit}\" for base {base}."
     description: Convert a number between different bases (decimal, hexadecimal, binary, octal, base64, ...)
 
   yaml-to-json-converter:

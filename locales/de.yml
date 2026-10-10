@@ -189,6 +189,22 @@ tools:
       und Codepunkt-Wert jedes Emojis.
   color-converter:
     title: Farbkonverter
+    pickerLabel: Farbwähler
+    hexLabel: hex
+    hexPlaceholder: z. B. #ff0000
+    rgbLabel: rgb
+    rgbPlaceholder: z. B. rgb(255, 0, 0)
+    hslLabel: hsl
+    hslPlaceholder: z. B. hsl(0, 100%, 50%)
+    hwbLabel: hwb
+    hwbPlaceholder: z. B. hwb(0, 0%, 0%)
+    lchLabel: lch
+    lchPlaceholder: z. B. lch(53.24, 104.55, 40.85)
+    cmykLabel: cmyk
+    cmykPlaceholder: z. B. cmyk(0, 100%, 100%, 0)
+    nameLabel: name
+    namePlaceholder: z. B. red
+    unknownColorName: Unbekannt
     description: >-
       Konvertiere Farben zwischen den verschiedenen Formaten (Hex, RGB, HSL und
       CSS-Name).
@@ -214,6 +230,30 @@ tools:
     copiedMessage: Gehashter String in die Zwischenablage kopiert
   crontab-generator:
     title: Crontab-Generator
+    meaningAnyValue: Beliebiger Wert
+    equivalentEveryMinute: Jede Minute
+    meaningRangeOfValues: Wertebereich
+    equivalentMinutes1Through10: Minuten 1 bis 10
+    meaningListOfValues: Werteliste
+    equivalentAtMinutes1And10: Bei den Minuten 1 und 10
+    meaningStepValues: Schrittweite
+    equivalentEvery10Minutes: Alle 10 Minuten
+    meaningYearly: Einmal im Jahr um Mitternacht am 1. Januar
+    meaningSameAsYearly: "Dasselbe wie {'@'}yearly"
+    meaningMonthly: Einmal im Monat um Mitternacht am ersten Tag
+    meaningWeekly: Einmal in der Woche um Mitternacht am Sonntagmorgen
+    meaningDaily: Einmal am Tag um Mitternacht
+    meaningSameAsDaily: "Dasselbe wie {'@'}daily"
+    meaningHourly: Einmal pro Stunde zu Beginn der Stunde
+    meaningReboot: Beim Systemstart ausführen
+    verboseLabel: Ausführlich
+    use24HourTimeFormatLabel: 24-Stunden-Format verwenden
+    daysStartAt0Label: Tage beginnen bei 0
+    symbolLabel: Symbol
+    meaningLabel: Bedeutung
+    exampleLabel: Beispiel
+    equivalentLabel: Entspricht
+    invalidCronMessage: Dieser Cron-Ausdruck ist ungültig
     description: >-
       Überprüfe und generiere Crontab und erhalte die menschenlesbare
       Beschreibung des Cron-Zeitplans.
@@ -287,6 +327,21 @@ tools:
     description: Verschönere deinen YAML-String in ein menschenlesbares Format.
   eta-calculator:
     title: ETA-Rechner
+    explanation: >-
+      Konkretes Beispiel: Wenn du 5 Teller in 3 Minuten abwäschst und
+      insgesamt 500 Teller abwaschen musst, dauert es 5 Stunden, bis alle
+      fertig sind.
+    amountToConsumeLabel: Menge des zu verbrauchenden Elements
+    consumptionStartedAtLabel: Der Verbrauch begann am
+    amountPerTimeSpanLabel: Verbrauchte Menge pro Zeitspanne
+    inLabel: in
+    unitMilliseconds: Millisekunden
+    unitSeconds: Sekunden
+    unitMinutes: Minuten
+    unitHours: Stunden
+    unitDays: Tagen
+    totalDurationLabel: Gesamtdauer
+    endAtLabel: Es wird enden
     description: >-
       Ein ETA (Estimated Time of Arrival)-Rechner, um die ungefähre Endzeit
       einer Aufgabe zu erfahren, z. B. den Zeitpunkt des Endes eines Downloads.
@@ -514,6 +569,11 @@ tools:
       HTML-Version).
   json-prettify:
     title: JSON verschönern und formatieren
+    sortKeysLabel: "Schlüssel sortieren:"
+    indentSizeLabel: "Einrückungsgröße:"
+    inputLabel: Dein rohes JSON
+    inputPlaceholder: Füge dein rohes JSON hier ein...
+    outputLabel: Formatierte Version deines JSON
     description: Verschönere deinen JSON-String in ein menschenlesbares Format.
   docker-run-to-docker-compose-converter:
     title: Docker run zu Docker compose Konverter
@@ -774,6 +834,22 @@ tools:
       Inhalt preiszugeben.
   base-converter:
     title: Ganzzahl-Basiskonverter
+    inputNumberLabel: Eingabezahl
+    inputNumberPlaceholder: "Gib deine Zahl hier ein (z. B.: 42)"
+    inputBaseLabel: Eingabebasis
+    inputBasePlaceholder: "Gib deine Eingabebasis hier ein (z. B.: 10)"
+    binaryLabel: Binär (2)
+    binaryPlaceholder: Hier erscheint die Binärversion ...
+    octalLabel: Oktal (8)
+    octalPlaceholder: Hier erscheint die Oktalversion ...
+    decimalLabel: Dezimal (10)
+    decimalPlaceholder: Hier erscheint die Dezimalversion ...
+    hexadecimalLabel: Hexadezimal (16)
+    hexadecimalPlaceholder: Hier erscheint die Hexadezimalversion ...
+    base64Placeholder: Hier erscheint die Base64-Version ...
+    customLabel: "Benutzerdefiniert:"
+    customPlaceholder: "Hier erscheint Basis {base} ..."
+    invalidDigitError: "Ungültige Ziffer \"{digit}\" für Basis {base}."
     description: >-
       Konvertiere Zahlen zwischen verschiedenen Basen (Dezimal, Hexadezimal,
       Binär, Oktal, Base64, ...).

@@ -1,10 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import { calculateCidr } from './ipv4-range-expander.service';
 
+const t = (key: string) => key;
+
 describe('ipv4RangeExpander', () => {
   describe('when there are two valid ipv4 addresses given', () => {
     it('should calculate valid cidr for given addresses', () => {
-      const result = calculateCidr({ startIp: '192.168.1.1', endIp: '192.168.7.255' });
+      const result = calculateCidr({ startIp: '192.168.1.1', endIp: '192.168.7.255', t });
 
       expect(result).toBeDefined();
       expect(result?.oldSize).toEqual(1791);
@@ -15,7 +17,7 @@ describe('ipv4RangeExpander', () => {
     });
 
     it('should calculate valid cidr for given addresses, where first octet is lower than 128', () => {
-      const result = calculateCidr({ startIp: '10.0.0.1', endIp: '10.0.0.17' });
+      const result = calculateCidr({ startIp: '10.0.0.1', endIp: '10.0.0.17', t });
 
       expect(result).toBeDefined();
       expect(result?.oldSize).toEqual(17);
@@ -26,7 +28,7 @@ describe('ipv4RangeExpander', () => {
     });
 
     it('should return empty result for invalid input', () => {
-      expect(calculateCidr({ startIp: '192.168.7.1', endIp: '192.168.6.255' })).not.toBeDefined();
+      expect(calculateCidr({ startIp: '192.168.7.1', endIp: '192.168.6.255', t })).not.toBeDefined();
     });
   });
 });

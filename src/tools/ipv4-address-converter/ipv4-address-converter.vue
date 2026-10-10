@@ -17,11 +17,11 @@ const convertedSections = computed(() => {
     },
     {
       label: t('tools.ipv4-address-converter.hexadecimalLabel'),
-      value: convertBase({ fromBase: 10, toBase: 16, value: String(ipInDecimal) }).toUpperCase(),
+      value: convertBase({ fromBase: 10, toBase: 16, value: String(ipInDecimal), t }).toUpperCase(),
     },
     {
       label: t('tools.ipv4-address-converter.binaryLabel'),
-      value: convertBase({ fromBase: 10, toBase: 2, value: String(ipInDecimal) }),
+      value: convertBase({ fromBase: 10, toBase: 2, value: String(ipInDecimal), t }),
     },
     {
       label: t('tools.ipv4-address-converter.ipv6Label'),

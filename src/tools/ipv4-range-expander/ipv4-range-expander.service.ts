@@ -36,16 +36,18 @@ function getCidr(start: string, end: string) {
   return { start: newStart, end: newEnd, mask };
 }
 
-function calculateCidr({ startIp, endIp }: { startIp: string, endIp: string }) {
+function calculateCidr({ startIp, endIp, t }: { startIp: string, endIp: string, t: (key: string, named?: Record<string, unknown>) => string }) {
   const start = convertBase({
     value: ipv4ToInt({ ip: startIp }).toString(),
     fromBase: 10,
     toBase: 2,
+    t,
   }).padStart(32, '0');
   const end = convertBase({
     value: ipv4ToInt({ ip: endIp }).toString(),
     fromBase: 10,
     toBase: 2,
+    t,
   }).padStart(32, '0');
 
   const cidr = getCidr(start, end);

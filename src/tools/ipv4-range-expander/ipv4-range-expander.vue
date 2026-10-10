@@ -11,7 +11,7 @@ const { t } = useI18n();
 const rawStartAddress = useStorage('ipv4-range-expander:startAddress', '192.168.1.1');
 const rawEndAddress = useStorage('ipv4-range-expander:endAddress', '192.168.6.255');
 
-const result = computed(() => calculateCidr({ startIp: rawStartAddress.value, endIp: rawEndAddress.value }));
+const result = computed(() => calculateCidr({ startIp: rawStartAddress.value, endIp: rawEndAddress.value, t }));
 
 // `id` is a stable identifier for :key and data-test-id — must NOT be
 // derived from the translated `label`, which previously broke e2e
