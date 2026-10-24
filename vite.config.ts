@@ -132,6 +132,11 @@ export default defineConfig({
   // Auto-registered components and lazy tools must be scanned before the first navigation.
   optimizeDeps: {
     entries: ['index.html', 'src/**/*.vue'],
+    // Dependencies that are only imported from web workers are invisible to the scan above. Vite then
+    // bundles them on the first request and reloads the page ("504 Outdated Optimize Dep"), which broke
+    // whichever page happened to be loading at that moment, in CI and locally. randexp is only used by
+    // the regex-tester sample worker.
+    include: ['randexp'],
   },
   base: baseUrl,
   resolve: {
