@@ -1,38 +1,23 @@
-import { figue } from 'figue';
+const appEnvs = ['production', 'development', 'preview', 'test'] as const;
+type AppEnv = typeof appEnvs[number];
 
-export const config = figue({
+function parseAppEnv(value: string | undefined): AppEnv {
+  if (value === undefined || value === '') {
+    return import.meta.env.PROD ? 'production' : 'development';
+  }
+  if (!(appEnvs as readonly string[]).includes(value)) {
+    throw new Error(`Invalid configuration: VITE_VERCEL_ENV must be one of ${appEnvs.join(', ')}, got "${value}"`);
+  }
+  return value as AppEnv;
+}
+
+// Plain reads of Vite's environment. The string 'import.meta.env.PACKAGE_VERSION' is statically
+// replaced during build time (see 'define' in vite.config.ts), so it has to be accessed literally.
+export const config = {
   app: {
-    version: {
-      doc: 'Application current version',
-      format: 'string',
-      default: '0.0.0',
-      env: 'PACKAGE_VERSION',
-    },
-    lastCommitSha: {
-      doc: 'Application last commit SHA version',
-      format: 'string',
-      default: '',
-      env: 'VITE_GIT_COMMIT_SHA',
-    },
-    baseUrl: {
-      doc: 'Application base url',
-      format: 'string',
-      default: '/',
-      env: 'BASE_URL',
-    },
-    env: {
-      doc: 'Application current env',
-      format: 'enum',
-      values: ['production', 'development', 'preview', 'test'],
-      default: import.meta.env.PROD ? 'production' : 'development',
-      env: 'VITE_VERCEL_ENV',
-    },
+    version: (import.meta.env.PACKAGE_VERSION as string | undefined) || '0.0.0',
+    lastCommitSha: (import.meta.env.VITE_GIT_COMMIT_SHA as string | undefined) ?? '',
+    baseUrl: (import.meta.env.BASE_URL as string | undefined) ?? '/',
+    env: parseAppEnv(import.meta.env.VITE_VERCEL_ENV as string | undefined),
   },
-})
-  .loadEnv({
-    ...import.meta.env,
-    // Because the string 'import.meta.env.PACKAGE_VERSION' is statically replaced during build time (see 'define' in vite.config.ts)
-    PACKAGE_VERSION: import.meta.env.PACKAGE_VERSION,
-  })
-  .validate()
-  .getConfig();
+} as const;

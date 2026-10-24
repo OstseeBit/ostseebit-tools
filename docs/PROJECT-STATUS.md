@@ -1,6 +1,32 @@
 # Projektstatus
 
-Stand: 2026-10-04. Paketversion: `0.1.0`. Arbeitsbranch: `chore/plattform-modernisierung`.
+Paketversion: `0.1.0`. Dieses Dokument ist ein **chronologisches Änderungsprotokoll** (ältester Eintrag oben, neuester unten). Wer nur wissen will, wo das Projekt steht und was als Nächstes kommt, liest die Standortbestimmung direkt darunter; die Phasen stehen in [ROADMAP.md](ROADMAP.md).
+
+## Standortbestimmung (Stand 2026-10-24)
+
+**Kurs:** Der Plan ist die [ROADMAP.md](ROADMAP.md). Nach jedem Schritt muss die gesamte Anwendung weiter funktionieren; deshalb endet jeder Schritt mit Lint, Typecheck, Unit-Tests, Build, vollem E2E-Lauf (477 Tests, 3 Browser) und `test:pwa`.
+
+| Roadmap-Phase | Stand |
+| --- | --- |
+| 1 Repository und Baseline | im Wesentlichen erledigt; **28 Commits liegen nur lokal**, nichts ist auf `origin` gepusht |
+| 2 Toolchain | erledigt (Node 24, pnpm 12, ESLint Flat Config); offen: TypeScript 7, noch nicht freigegeben |
+| 3 Abhängigkeiten | fast erledigt: Sicherheitsfunde 76 → 8, Tiptap 3, alle Versionsbereiche aktualisiert, Hauptversionen Gruppe 1 und 2; offen: `vue-router` 5, `ua-parser-js` 2 (AGPL, Lizenzentscheidung nötig) |
+| 4 Performance | **nächste Phase**, noch nicht begonnen (PWA-Vorab-Cache aktuell 571 Einträge, ca. 22 MiB) |
+| 5 Docker | offen; kein Docker in der Entwicklungsumgebung, Container kann hier nicht getestet werden |
+| 6 CI/CD | Workflow `validate.yml` (Windows und Linux) ist vorhanden; ob er auf GitHub bereits grün gelaufen ist, ist hier nicht belegt (die Doku vom 2026-10-04 nennt ihn "noch nicht remote ausgeführt", die PRs #5 und #6 wurden danach gemergt) und sollte mit dem nächsten Push geprüft werden |
+| 7 Neue Funktionen | bewusst erst nach Stabilisierung |
+
+**Zusatzspur (auf Wunsch eingeschoben, abgeschlossen):** vollständige deutsche Oberfläche (i18n) für alle 86 Tools und die gemeinsamen Komponenten, Batches 1 bis 17. Dabei wurden mehrere echte Fehler gefunden und behoben (u. a. Firefox-CSP-Fehler durch `vuedraggable`, leerer Telefon-Parser, veraltete E2E-Titel, veraltete PWA-Spec).
+
+**Selbstprüfung 2026-10-24:** Die Abhängigkeitsarbeit ist vom Sicherheitsziel (Audit) zu einer breiten Auffrischung gewachsen. Das war von der Roadmap gedeckt (Phase 3), aber größer als nötig; es wird deshalb mit Gruppe 2 abgeschlossen und nicht weiter ausgedehnt.
+
+**Nächste Schritte in dieser Reihenfolge:**
+
+1. ✅ Gruppe 2 der Hauptversionen abgeschlossen (`marked` 18, `markdown-it` 15, `vite-plugin-pwa` 2, `figue` entfernt).
+2. Entscheidung des Eigentümers: Push/Pull-Request für die 28 lokalen Commits (Sicherung und Voraussetzung für Phase 6).
+3. Entscheidung des Eigentümers: `ua-parser-js` bei 1.x (MIT) belassen oder auf 2.x (AGPL-3.0) gehen.
+4. Phase 4 Performance: Bundle-Analyse, größte Chunks, Vorab-Cache verkleinern.
+5. `vue-router` 5 als eigener, einzeln geprüfter Schritt.
 
 ## Lokal nachgewiesen
 
@@ -367,7 +393,7 @@ Nach Abschluss der i18n-Einführung ergab `pnpm audit --prod` **76 Funde (1 krit
 - **`pnpm update` über alle Abhängigkeiten, nur innerhalb der in `package.json` erlaubten Hauptversionen.** Betroffen sind u. a. `vue`/`@vue/*` 3.5.44, `vite` 8.3.5, `vitest` 5.0.5, `vue-i18n` 11.4.16, `@unhead/vue` 3.4.3, Tiptap 3.32, `dompurify` 3.4.17 sowie viele Tool-Bibliotheken (`libphonenumber-js` 1.10 → 1.13, `ibantools` 4.3 → 4.5, `qrcode`, `xml-formatter`, `sql-formatter` 13.1, `oui-data` 1.2, `ua-parser-js` 1.0.41, `highlight.js` 11.12, `@iconify-json/mdi` 1.2). Audit der Produktionsabhängigkeiten: **8 Meldungen in 3 Paketen** (`ip-address` 6 Meldungen und `deepmerge-ts` 1 über `composerize-ts`, `node-forge` 1 ohne gepatchte Version); `sprintf-js` taucht nicht mehr auf.
 - **Typfehler durch genauere Typen:** Die neueren `@types/lodash` liefern für `_.nth()` jetzt `T | undefined`. `command-palette.vue` aktiviert die Option bei Enter nur noch, wenn eine gewählt ist (vorher wäre bei leerer Trefferliste `undefined` an `activateOption` gegangen).
 - **`crypto-js` bleibt:** `encryption` bietet die OpenSSL-kompatiblen Chiffren AES, TripleDES, Rabbit und RC4 mit Passwort-Schlüsselableitung an. Rabbit, RC4 und TripleDES gibt es weder in der Web-Crypto-API noch in einer gepflegten Bibliothek; `crypto-js` bliebe also so oder so im Projekt. Eine Umstellung der vier übrigen Tools (`hash-text`, `hmac-generator`, `ipv6-ula-generator`, OTP) brächte daher keinen Sicherheitsgewinn, und die PBKDF2-Lücke ist seit 4.2.0 behoben. Die Veraltet-Markierung von `crypto-js` ist ein Wartungshinweis, keine Schwachstelle. Entscheidung: nicht migrieren.
-- **Neue Hauptversionen, Gruppe 1 (siehe unten):** `bcryptjs` 3, `change-case` 5, `cronstrue` 3, `date-fns` 4, `fuse.js` 7, `sql-formatter` 15, `ulid` 3. **Noch nicht aktualisiert (Gruppe 2):** `figue` 3, `markdown-it` 15, `marked` 18, `ua-parser-js` 2, `vue-router` 5, `typescript` 7 und `vite-plugin-pwa` 2. Jede dieser Bibliotheken ist in 1 bis 9 Dateien eingebunden und braucht einen Blick in die jeweiligen Änderungshinweise.
+- **Neue Hauptversionen, Gruppe 1 (siehe unten):** `bcryptjs` 3, `change-case` 5, `cronstrue` 3, `date-fns` 4, `fuse.js` 7, `sql-formatter` 15, `ulid` 3. **Gruppe 2 siehe unten.** Weiterhin offen: `vue-router` 5, `typescript` 7 und `ua-parser-js` 2.
 - Verifiziert: `pnpm lint`, `pnpm typecheck`, `pnpm test:unit` (172/172), `pnpm build`, 1043 statische Übersetzungsschlüssel, voller `pnpm test:e2e` **477/477** (bisher 462 plus 15 Editor-Tests) und `pnpm test:pwa` (Offline-Test) bestanden.
 
 ## Umgesetzt am 2026-10-24 (Abhängigkeiten: neue Hauptversionen, Gruppe 1)
@@ -380,6 +406,15 @@ Sieben Bibliotheken, die jeweils nur reine Funktionen liefern und in 1 bis 5 Dat
 - **`case-converter` (einziger sichtbarer Verhaltensunterschied):** `change-case` 5 hat `headerCase` in `trainCase` und `paramCase` in `kebabCase` umbenannt und die Option `stripRegexp` entfernt. Die bisherige Option (`/[^a-z\xDF-\xF6\xF8-\xFF]+/gi`) entfernte alle Zeichen außer lateinischen Buchstaben, also auch **Ziffern** und alle Zeichen außerhalb von Latin-1. Jetzt bleiben Ziffern und Unicode-Buchstaben erhalten: "Größe über 3 Meter" ergibt `größe_über_3_meter` (snake) statt eines Ergebnisses ohne die 3. Die Beschriftungen "Headercase:" und "Paramcase:" in der Oberfläche bleiben unverändert.
 - **Gezielte Funktionsprüfung** mit echten Aufrufen im Node-Prozess: bcrypt-Hash und -Vergleich (richtig/falsch), ULID-Format, Fuzzy-Suche, SQL-Formatierung, deutsche Cron-Beschreibung ("Alle 5 Minuten"), Dauer-Formatierung mit deutscher Locale, `parseJSON` gegen `new Date`.
 - Verifiziert: `pnpm lint`, `pnpm typecheck`, `pnpm test:unit` (172/172), `pnpm build`, voller `pnpm test:e2e` **477/477**, `pnpm test:pwa` bestanden.
+
+## Umgesetzt am 2026-10-24 (Abhängigkeiten: neue Hauptversionen, Gruppe 2)
+
+- **`marked` 10 → 18 (`c-markdown`):** Der Link-Renderer bekommt jetzt ein Token statt dreier Argumente; der Linktext wird mit `this.parser.parseInline(tokens)` gerendert, `href` wird für das Attribut maskiert, und `marked.parse(…, { async: false })` liefert einen String statt `string | Promise<string>`. Geprüft mit echten Eingaben (Node + DOMPurify): Fettschrift im Link bleibt erhalten, `javascript:`-Links verlieren ihr `href`, ein Link mit eingeschleustem `"onmouseover=` bleibt im Attribut, `<img onerror>` wird bereinigt.
+- **`markdown-it` 15, `vite-plugin-pwa` 2:** ohne Codeänderung. PWA-Build weiterhin mit 571 Vorab-Cache-Einträgen; `test:pwa` (Offline-Test) besteht.
+- **`figue` entfernt statt aktualisiert:** Version 3 verlangt eine zusätzliche Validierungsbibliothek (zod/valibot) und hat ein neues API; gelesen wurden nur vier Werte (`version`, `lastCommitSha`, `baseUrl`, `env`). `src/config.ts` ist jetzt ein schlichtes Modul mit derselben Form (`config.app.*`); ein ungültiger Wert in `VITE_VERCEL_ENV` führt wie zuvor zu einem Fehler. Eine Abhängigkeit weniger.
+- **`ua-parser-js` bleibt bei 1.0.41 (MIT):** Version 2 steht unter **AGPL-3.0-or-later**; das Projekt ist GPLv3. Die AGPL bringt zusätzliche Pflichten beim Betrieb als Webdienst (Quellcode-Angebot an Nutzer). Das ist eine Lizenzentscheidung des Eigentümers und wurde nicht eigenmächtig getroffen. Der Audit meldet für 1.x nichts.
+- **Noch offen:** `vue-router` 5 (eigener Schritt) und `typescript` 7 (Werkzeug-Ökosystem erst prüfen).
+- Verifiziert: `pnpm lint`, `pnpm typecheck`, `pnpm test:unit` (172/172), `pnpm build`, 1043 Übersetzungsschlüssel, voller `pnpm test:e2e` **477/477**, `pnpm test:pwa` bestanden.
 
 ## Weitere Modernisierung in Modulen
 

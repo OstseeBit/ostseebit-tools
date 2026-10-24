@@ -5,15 +5,21 @@ import { marked } from 'marked';
 const props = withDefaults(defineProps<{ markdown?: string }>(), { markdown: '' });
 const { markdown } = toRefs(props);
 
+function escapeAttribute(value: string) {
+  return value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
 marked.use({
   renderer: {
-    link(href, title, text) {
-      return `<a class="text-primary transition decoration-none hover:underline" href="${href}" target="_blank" rel="noopener">${text}</a>`;
+    // marked 18 passes a token; the link text is the already parsed inline content.
+    link({ href, tokens }) {
+      return `<a class="text-primary transition decoration-none hover:underline" href="${escapeAttribute(href)}" target="_blank" rel="noopener">${this.parser.parseInline(tokens)}</a>`;
     },
   },
 });
 
-const html = computed(() => DomPurify.sanitize(marked(markdown.value), { ADD_ATTR: ['target'] }));
+// async: false makes marked return a string instead of string | Promise<string>.
+const html = computed(() => DomPurify.sanitize(marked.parse(markdown.value, { async: false }), { ADD_ATTR: ['target'] }));
 </script>
 
 <template>
