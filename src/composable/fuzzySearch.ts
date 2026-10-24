@@ -1,3 +1,4 @@
+import type { IFuseOptions } from 'fuse.js';
 import type { MaybeRef } from 'vue';
 import { get } from '@vueuse/core';
 import Fuse from 'fuse.js';
@@ -17,7 +18,7 @@ function useFuzzySearch<Data>({
   // no-op with no reactive dependency, so the Fuse instance below is still
   // only ever built once for those callers.
   data: MaybeRef<Data[]>
-  options?: Fuse.IFuseOptions<Data> & { filterEmpty?: boolean }
+  options?: IFuseOptions<Data> & { filterEmpty?: boolean }
 }) {
   const filterEmpty = options.filterEmpty ?? true;
 
