@@ -3,34 +3,39 @@ import lookup from 'country-code-lookup';
 
 export { formatTypeToHumanReadable, getDefaultCountryCode, getFullCountryName };
 
-const typeToLabel: Record<NonNullable<NumberType>, string> = {
-  MOBILE: 'Mobile',
-  FIXED_LINE: 'Fixed line',
-  FIXED_LINE_OR_MOBILE: 'Fixed line or mobile',
-  PERSONAL_NUMBER: 'Personal number',
-  PREMIUM_RATE: 'Premium rate',
-  SHARED_COST: 'Shared cost',
-  TOLL_FREE: 'Toll free',
-  UAN: 'Universal access number',
-  VOICEMAIL: 'Voicemail',
-  VOIP: 'VoIP',
-  PAGER: 'Pager',
+const typeToLabelKey: Record<NonNullable<NumberType>, string> = {
+  MOBILE: 'typeMobile',
+  FIXED_LINE: 'typeFixedLine',
+  FIXED_LINE_OR_MOBILE: 'typeFixedLineOrMobile',
+  PERSONAL_NUMBER: 'typePersonalNumber',
+  PREMIUM_RATE: 'typePremiumRate',
+  SHARED_COST: 'typeSharedCost',
+  TOLL_FREE: 'typeTollFree',
+  UAN: 'typeUan',
+  VOICEMAIL: 'typeVoicemail',
+  VOIP: 'typeVoip',
+  PAGER: 'typePager',
 };
 
-function formatTypeToHumanReadable(type: NumberType): string | undefined {
+function formatTypeToHumanReadable(type: NumberType, t: (key: string) => string): string | undefined {
   if (!type) {
     return undefined;
   }
 
-  return typeToLabel[type];
+  return t(`tools.phone-parser-and-formatter.${typeToLabelKey[type]}`);
 }
 
-function getFullCountryName(countryCode: string | undefined) {
+function getFullCountryName(countryCode: string | undefined, locale: string) {
   if (!countryCode) {
     return undefined;
   }
 
-  return lookup.byIso(countryCode)?.country;
+  try {
+    return new Intl.DisplayNames([locale], { type: 'region' }).of(countryCode) ?? lookup.byIso(countryCode)?.country;
+  }
+  catch {
+    return lookup.byIso(countryCode)?.country;
+  }
 }
 
 function getDefaultCountryCode({

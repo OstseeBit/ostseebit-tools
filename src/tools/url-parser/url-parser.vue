@@ -3,33 +3,35 @@ import { isNotThrowing } from '@/utils/boolean';
 import { withDefaultOnError } from '@/utils/defaults';
 import InputCopyable from '../../components/InputCopyable.vue';
 
+const { t } = useI18n();
+
 const urlToParse = ref('https://me:pwd@example.com:3000/url-parser?key1=value&key2=value2#the-hash');
 
 const urlParsed = computed(() => withDefaultOnError(() => new URL(urlToParse.value), undefined));
-const urlValidationRules = [
+const urlValidationRules = computed(() => [
   {
     validator: (value: string) => isNotThrowing(() => new URL(value)),
-    message: 'Invalid url',
+    message: t('tools.url-parser.invalidUrlMessage'),
   },
-];
+]);
 
-const properties: { title: string, key: keyof URL }[] = [
-  { title: 'Protocol', key: 'protocol' },
-  { title: 'Username', key: 'username' },
-  { title: 'Password', key: 'password' },
-  { title: 'Hostname', key: 'hostname' },
-  { title: 'Port', key: 'port' },
-  { title: 'Path', key: 'pathname' },
-  { title: 'Params', key: 'search' },
-];
+const properties = computed<{ title: string, key: keyof URL }[]>(() => [
+  { title: t('tools.url-parser.protocolLabel'), key: 'protocol' },
+  { title: t('tools.url-parser.usernameLabel'), key: 'username' },
+  { title: t('tools.url-parser.passwordLabel'), key: 'password' },
+  { title: t('tools.url-parser.hostnameLabel'), key: 'hostname' },
+  { title: t('tools.url-parser.portLabel'), key: 'port' },
+  { title: t('tools.url-parser.pathLabel'), key: 'pathname' },
+  { title: t('tools.url-parser.paramsLabel'), key: 'search' },
+]);
 </script>
 
 <template>
   <c-card>
     <c-input-text
       v-model:value="urlToParse"
-      label="Your url to parse:"
-      placeholder="Your url to parse..."
+      :label="t('tools.url-parser.inputLabel')"
+      :placeholder="t('tools.url-parser.inputPlaceholder')"
       raw-text
       :validation-rules="urlValidationRules"
     />

@@ -6,7 +6,7 @@ test.describe('Tool - YAML to TOML', () => {
   });
 
   test('Has correct title', async ({ page }) => {
-    await expect(page).toHaveTitle('YAML to TOML - OstseeBit Tools');
+    await expect(page).toHaveTitle('YAML zu TOML - OstseeBit Tools');
   });
 
   test('JSON is parsed and outputs clean TOML', async ({ page }) => {
@@ -28,9 +28,9 @@ foo = "bar"
 [list]
 name = "item"
 
-  [list.another]
-  key = "value"
-  number = 1
+[list.another]
+key = "value"
+number = 1
    `.trim(),
     );
   });

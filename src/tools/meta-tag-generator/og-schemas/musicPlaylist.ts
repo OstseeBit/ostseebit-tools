@@ -1,21 +1,31 @@
 import type { OGSchemaType } from '../OGSchemaType.type';
 
 export const musicPlaylist: OGSchemaType = {
-  name: 'Playlist details',
+  nameKey: 'tools.og-meta-generator.schemas.musicPlaylist.name',
   elements: [
-    { type: 'input', label: 'Song', key: 'music:song', placeholder: 'The song on this album...' },
     {
       type: 'input',
-      label: 'Disc',
+      key: 'music:song',
+      labelKey: 'tools.og-meta-generator.schemas.musicPlaylist.songLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.musicPlaylist.songPlaceholder',
+    },
+    {
+      type: 'input',
       key: 'music:song:disc',
-      placeholder: 'The same as music:album:disc but in reverse...',
+      labelKey: 'tools.og-meta-generator.schemas.musicPlaylist.discLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.musicPlaylist.discPlaceholder',
     },
     {
       type: 'input',
-      label: 'Track',
       key: 'music:song:track',
-      placeholder: 'The same as music:album:track but in reverse...',
+      labelKey: 'tools.og-meta-generator.schemas.musicPlaylist.trackLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.musicPlaylist.trackPlaceholder',
     },
-    { type: 'input', label: 'Creator', key: 'music:creator', placeholder: 'The creator of this playlist...' },
+    {
+      type: 'input',
+      key: 'music:creator',
+      labelKey: 'tools.og-meta-generator.schemas.musicPlaylist.creatorLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.musicPlaylist.creatorPlaceholder',
+    },
   ],
 };

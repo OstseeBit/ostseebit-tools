@@ -4,6 +4,8 @@ import { useCopy } from '@/composable/copy';
 import { randIntFromInterval } from '@/utils/random';
 import { generateLoremIpsum } from './lorem-ipsum-generator.service';
 
+const { t } = useI18n();
+
 const paragraphs = ref(1);
 const sentences = ref([3, 8]);
 const words = ref([8, 15]);
@@ -20,35 +22,35 @@ const [loremIpsumText, refreshLoremIpsum] = computedRefreshable(() =>
   }),
 );
 
-const { copy } = useCopy({ source: loremIpsumText, text: 'Lorem ipsum copied to the clipboard' });
+const { copy } = useCopy({ source: loremIpsumText, text: t('tools.lorem-ipsum-generator.copiedMessage') });
 </script>
 
 <template>
   <c-card>
-    <n-form-item label="Paragraphs" :show-feedback="false" label-width="200" label-placement="left">
+    <n-form-item :label="t('tools.lorem-ipsum-generator.paragraphsLabel')" :show-feedback="false" label-width="200" label-placement="left">
       <n-slider v-model:value="paragraphs" :step="1" :min="1" :max="20" />
     </n-form-item>
-    <n-form-item label="Sentences per paragraph" :show-feedback="false" label-width="200" label-placement="left">
+    <n-form-item :label="t('tools.lorem-ipsum-generator.sentencesLabel')" :show-feedback="false" label-width="200" label-placement="left">
       <n-slider v-model:value="sentences" range :step="1" :min="1" :max="50" />
     </n-form-item>
-    <n-form-item label="Words per sentence" :show-feedback="false" label-width="200" label-placement="left">
+    <n-form-item :label="t('tools.lorem-ipsum-generator.wordsLabel')" :show-feedback="false" label-width="200" label-placement="left">
       <n-slider v-model:value="words" range :step="1" :min="1" :max="50" />
     </n-form-item>
-    <n-form-item label="Start with lorem ipsum ?" :show-feedback="false" label-width="200" label-placement="left">
+    <n-form-item :label="t('tools.lorem-ipsum-generator.startWithLabel')" :show-feedback="false" label-width="200" label-placement="left">
       <n-switch v-model:value="startWithLoremIpsum" />
     </n-form-item>
-    <n-form-item label="As html ?" :show-feedback="false" label-width="200" label-placement="left">
+    <n-form-item :label="t('tools.lorem-ipsum-generator.asHtmlLabel')" :show-feedback="false" label-width="200" label-placement="left">
       <n-switch v-model:value="asHTML" />
     </n-form-item>
 
-    <c-input-text :value="loremIpsumText" multiline placeholder="Your lorem ipsum..." readonly mt-5 rows="5" />
+    <c-input-text :value="loremIpsumText" multiline :placeholder="t('tools.lorem-ipsum-generator.outputPlaceholder')" readonly mt-5 rows="5" />
 
     <div mt-5 flex justify-center gap-3>
       <c-button autofocus @click="copy()">
-        Copy
+        {{ t('tools.lorem-ipsum-generator.copyButton') }}
       </c-button>
       <c-button @click="refreshLoremIpsum">
-        Refresh
+        {{ t('tools.lorem-ipsum-generator.refreshButton') }}
       </c-button>
     </div>
   </c-card>

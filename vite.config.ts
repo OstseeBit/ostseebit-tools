@@ -60,6 +60,30 @@ export default defineConfig({
         // Include the existing Monaco editor and MAC vendor database in offline precaching.
         // Keep a bounded limit; bundle splitting is tracked separately in the roadmap.
         maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
+        // Kept out of the install-time precache (22 MiB in total) to keep the first visit fast:
+        //  - the /c-lib component showcase is only registered in development;
+        //  - the heavy, rarely used chunks below are cached on first use instead (runtimeCaching),
+        //    so those tools still work offline after their first visit.
+        globIgnores: [
+          '**/assets/*.demo-*.js',
+          '**/assets/demo-wrapper-*.js',
+          '**/assets/figlet-fonts/**',
+          '**/assets/c-diff-editor-*',
+          '**/assets/editor.worker-*.js',
+          '**/assets/mac-address-lookup-*.js',
+        ],
+        runtimeCaching: [
+          {
+            urlPattern: /\/assets\/(?:figlet-fonts\/|c-diff-editor-|editor\.worker-|mac-address-lookup-)/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'heavy-tool-assets',
+              // Hashed file names never change content, so a long lifetime is safe.
+              expiration: { maxEntries: 400, maxAgeSeconds: 60 * 60 * 24 * 365 },
+              cacheableResponse: { statuses: [200] },
+            },
+          },
+        ],
       },
       manifest: {
         name: brand.name,
@@ -119,6 +143,19 @@ export default defineConfig({
       // "Cannot read properties of undefined (reading 'prototype')" the
       // moment xml-js is imported, regardless of which part of it is used.
       stream: 'stream-browserify',
+      // vuedraggable's published "main"/"module" dist files are a
+      // pre-bundled webpack+core-js@2 artifact. Its global-object detection
+      // falls back to `Function('return this')()`, which this project's CSP
+      // (no 'unsafe-eval') blocks outright, breaking every page in Firefox
+      // since Home.page.vue (the "/" route) pulls it into the eagerly
+      // loaded main chunk. Alias straight to the package's own un-bundled
+      // ES source instead (plain sortablejs + Vue, no eval anywhere).
+      vuedraggable: fileURLToPath(new URL('./node_modules/vuedraggable/src/vuedraggable.js', import.meta.url)),
+      // vue-shadow-dom declares a "browser" field that points at its IIFE build
+      // (dist/shadow.global.prod.js), which Vite prefers over "module". That file does a CommonJS
+      // require('vue'), so it dragged a second copy of Vue plus the template compiler
+      // (@vue/compiler-core/-dom, ~190 KB) into the entry chunk. Use the plain ES module instead.
+      'vue-shadow-dom': fileURLToPath(new URL('./node_modules/vue-shadow-dom/shadow.mjs', import.meta.url)),
     },
   },
   define: {
@@ -126,8 +163,19 @@ export default defineConfig({
   },
   test: {
     exclude: [...configDefaults.exclude, '**/*.e2e.spec.ts'],
+    setupFiles: ['./src/test-setup.ts'],
   },
   build: {
     target: 'esnext',
+    rollupOptions: {
+      output: {
+        // The ~330 figlet fonts are one tiny chunk each. A separate folder lets the service worker
+        // cache them on first use instead of pre-caching all of them (see VitePWA above).
+        chunkFileNames: chunk =>
+          chunk.moduleIds.some(id => id.replaceAll('\\', '/').includes('/figlet/fonts/'))
+            ? 'assets/figlet-fonts/[name]-[hash].js'
+            : 'assets/[name]-[hash].js',
+      },
+    },
   },
 });

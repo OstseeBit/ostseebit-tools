@@ -1,5 +1,6 @@
 '404':
   notFound: 404 Nicht gefunden
+  pageTitle: Seite nicht gefunden
   sorry: Entschuldigung, diese Seite scheint nicht zu existieren
   maybe: >-
     Vielleicht macht der Cache etwas Seltsames. Mit einem erzwungenen Neuladen
@@ -24,6 +25,7 @@ home:
     lightMode: Hellmodus
     mode: Wechseln zwischen dunklem/hellem Modus
 about:
+  title: Über
   content: >
     # Über OstseeBit Tools
 
@@ -41,6 +43,34 @@ toolCard:
   new: Neu
 search:
   label: Suche
+validation:
+  providedFormatInvalid: '{format} ist nicht gültig.'
+  invalidMacAddress: Ungültige MAC-Adresse
+  invalidPartialMacAddress: Ungültige partielle MAC-Adresse
+  invalidIpv4Address: Ungültige IPv4-Adresse
+  invalidBase64String: Ungültiger Base64-String
+copy:
+  defaultMessage: In die Zwischenablage kopiert
+common:
+  copy: Kopieren
+  copied: Kopiert!
+  copyToClipboard: In die Zwischenablage kopieren
+  'yes': Ja
+  'no': Nein
+  notAvailable: k. A.
+  noResults: Keine Treffer gefunden
+  selectOption: Option auswählen
+  searchPlaceholder: Suchen ...
+  inputTextPlaceholder: Texteingabe
+  dataTableLabel: Datentabelle
+  dropFiles: Dateien hierher ziehen oder klicken, um Dateien auszuwählen
+  or: oder
+  browseFiles: Dateien durchsuchen
+  inputLabel: Eingabe
+  inputPlaceholder: Eingabe ...
+  outputLabel: Ausgabe
+  selectLanguage: Sprache auswählen
+  commandPalettePlaceholder: Tippen, um ein Tool oder einen Befehl zu suchen ...
 tools:
   categories:
     favorite-tools: Deine Lieblingstools
@@ -56,11 +86,47 @@ tools:
     data: Daten
   password-strength-analyser:
     title: Passwortstärken-Analysator
+    inputPlaceholder: Gib ein Passwort ein ...
+    crackDurationLabel: Dauer, um dieses Passwort per Brute-Force zu knacken
+    passwordLengthLabel: 'Passwortlänge:'
+    entropyLabel: 'Entropie:'
+    charsetLengthLabel: 'Zeichensatzgröße:'
+    scoreLabel: 'Bewertung:'
+    noteLabel: 'Hinweis: '
+    noteText: >-
+      Die berechnete Stärke basiert auf der Zeit, die ein Brute-Force-Ansatz
+      zum Knacken des Passworts benötigen würde; die Möglichkeit eines
+      Wörterbuchangriffs wird nicht berücksichtigt.
+    durationInstantly: Sofort
+    durationLessThanSecond: Weniger als eine Sekunde
+    unitMillenniumSingular: Jahrtausend
+    unitMillenniumPlural: Jahrtausende
+    unitCenturySingular: Jahrhundert
+    unitCenturyPlural: Jahrhunderte
+    unitDecadeSingular: Jahrzehnt
+    unitDecadePlural: Jahrzehnte
+    unitYearSingular: Jahr
+    unitYearPlural: Jahre
+    unitMonthSingular: Monat
+    unitMonthPlural: Monate
+    unitWeekSingular: Woche
+    unitWeekPlural: Wochen
+    unitDaySingular: Tag
+    unitDayPlural: Tage
+    unitHourSingular: Stunde
+    unitHourPlural: Stunden
+    unitMinuteSingular: Minute
+    unitMinutePlural: Minuten
+    unitSecondSingular: Sekunde
+    unitSecondPlural: Sekunden
     description: >-
       Ermittle die Stärke deines Passworts mit diesem Client-seitigen
       Passwortstärken-Analysator und Tool zur Schätzung der Knackzeit.
   chronometer:
     title: Chronometer
+    startButton: Start
+    stopButton: Stopp
+    resetButton: Zurücksetzen
     description: >-
       Überwache die Dauer einer Sache. Im Grunde ein Chronometer mit einfachen
       Chronometerfunktionen.
@@ -81,32 +147,110 @@ tools:
       refresh: Aktualisieren
   percentage-calculator:
     title: Prozentrechner
+    whatIsLabel: Wie viel sind
+    percentOfLabel: '% von'
+    isWhatPercentLabel: ist wie viel Prozent von
+    percentageChangeLabel: Wie hoch ist die prozentuale Zu-/Abnahme
+    resultPlaceholder: Ergebnis
+    fromPlaceholder: Von
+    toPlaceholder: Bis
     description: >-
       Berechne einfach Prozentsätze von einem Wert zu einem anderen Wert oder
       von einem Prozentsatz zu einem Wert.
   svg-placeholder-generator:
     title: SVG-Platzhalter-Generator
+    widthLabel: Breite (in px)
+    widthPlaceholder: SVG-Breite ...
+    backgroundLabel: Hintergrund
+    heightLabel: Höhe (in px)
+    heightPlaceholder: SVG-Höhe ...
+    textColorLabel: Textfarbe
+    fontSizeLabel: Schriftgröße
+    fontSizePlaceholder: Schriftgröße ...
+    customTextLabel: Eigener Text
+    customTextPlaceholder: 'Standard ist {size}'
+    exactSizeLabel: Exakte Größe verwenden
+    svgElementLabel: SVG-HTML-Element
+    svgBase64Label: SVG in Base64
+    copySvgButton: SVG kopieren
+    copyBase64Button: Base64 kopieren
+    downloadButton: SVG herunterladen
+    imageAlt: Bild
     description: >-
       Generiere SVG-Bilder, die als Platzhalter in deinen Anwendungen verwendet
       werden können.
   json-to-csv:
     title: JSON zu CSV
+    inputLabel: Dein rohes JSON
+    inputPlaceholder: Füge dein rohes JSON hier ein...
+    outputLabel: CSV-Version deines JSON
     description: Konvertiere JSON mit automatischer Headererkennung in CSV.
   camera-recorder:
     title: Kamera-Rekorder
     description: Mache ein Foto oder nimm ein Video von deiner Webcam oder Kamera auf.
+    notSupported: Dein Browser unterstützt keine Videoaufnahme von der Kamera.
+    permissionNeeded: Du musst den Zugriff auf Kamera und Mikrofon erlauben.
+    permissionBlocked: Dein Browser hat die Berechtigungsanfrage blockiert oder unterstützt sie nicht. Erlaube den Zugriff manuell in den Browsereinstellungen (meist über das Schloss-Symbol in der Adressleiste).
+    grantPermission: Zugriff erlauben
+    videoLabel: 'Video:'
+    audioLabel: 'Audio:'
+    selectCamera: Kamera auswählen
+    selectMicrophone: Mikrofon auswählen
+    startWebcam: Webcam starten
+    takeScreenshot: Screenshot aufnehmen
+    startRecording: Aufnahme starten
+    pause: Pause
+    resume: Fortsetzen
+    stop: Stopp
+    recordingNotSupported: Videoaufnahme wird von deinem Browser nicht unterstützt.
+    screenshot: Screenshot
+    video: Video
   keycode-info:
     title: Keycode-Info
+    pressKeyText: Drücke die Taste auf deiner Tastatur, über die du Informationen erhalten möchtest
+    keyLabel: 'Taste:'
+    keyPlaceholder: Tastenname ...
+    keycodeLabel: 'Keycode:'
+    keycodePlaceholder: Keycode ...
+    codeLabel: 'Code:'
+    codePlaceholder: Code ...
+    locationLabel: 'Standort:'
+    locationPlaceholder: Code ...
+    modifiersLabel: 'Modifikatoren:'
+    noneOption: Keine
     description: >-
       Finde den JavaScript-Keycode, den Code, den Standort und die Modifikatoren
       einer beliebigen gedrückten Taste.
   emoji-picker:
     title: Emoji-Picker
+    searchPlaceholder: "Emojis suchen (englische Begriffe, z. B. 'smile') ..."
+    noResults: Keine Ergebnisse
+    searchResult: Suchergebnis
+    showMore: Mehr anzeigen ({count} verbleibend)
+    emojiCopied: Emoji {emoji} in die Zwischenablage kopiert
+    codePointsCopied: "Codepunkte '{codePoints}' in die Zwischenablage kopiert"
+    unicodeCopied: "Unicode '{unicode}' in die Zwischenablage kopiert"
     description: >-
       Einfaches Kopieren und Einfügen von Emojis. Erhalte außerdem den Unicode-
       und Codepunkt-Wert jedes Emojis.
   color-converter:
     title: Farbkonverter
+    pickerLabel: Farbwähler
+    hexLabel: hex
+    hexPlaceholder: z. B. #ff0000
+    rgbLabel: rgb
+    rgbPlaceholder: z. B. rgb(255, 0, 0)
+    hslLabel: hsl
+    hslPlaceholder: z. B. hsl(0, 100%, 50%)
+    hwbLabel: hwb
+    hwbPlaceholder: z. B. hwb(0, 0%, 0%)
+    lchLabel: lch
+    lchPlaceholder: z. B. lch(53.24, 104.55, 40.85)
+    cmykLabel: cmyk
+    cmykPlaceholder: z. B. cmyk(0, 100%, 100%, 0)
+    nameLabel: name
+    namePlaceholder: z. B. red
+    unknownColorName: Unbekannt
     description: >-
       Konvertiere Farben zwischen den verschiedenen Formaten (Hex, RGB, HSL und
       CSS-Name).
@@ -115,21 +259,162 @@ tools:
     description: >-
       Hashen und Vergleichen von Strings mit bcrypt. Bcrypt ist eine auf der
       Blowfish-Chiffre basierende Hash-Funktion.
+    hashTitle: Hash
+    inputLabel: 'Dein String: '
+    inputPlaceholder: Dein String für bcrypt ...
+    saltCountLabel: 'Salt-Runden: '
+    saltCountPlaceholder: Salt-Runden ...
+    copyHash: Hash kopieren
+    compareTitle: String mit Hash vergleichen
+    compareStringLabel: 'Dein String: '
+    compareStringPlaceholder: Dein String zum Vergleichen ...
+    compareHashLabel: 'Dein Hash: '
+    compareHashPlaceholder: Dein Hash zum Vergleichen ...
+    matchLabel: 'Stimmen sie überein? '
+    'yes': Ja
+    'no': Nein
+    copiedMessage: Gehashter String in die Zwischenablage kopiert
   crontab-generator:
     title: Crontab-Generator
+    meaningAnyValue: Beliebiger Wert
+    equivalentEveryMinute: Jede Minute
+    meaningRangeOfValues: Wertebereich
+    equivalentMinutes1Through10: Minuten 1 bis 10
+    meaningListOfValues: Werteliste
+    equivalentAtMinutes1And10: Bei den Minuten 1 und 10
+    meaningStepValues: Schrittweite
+    equivalentEvery10Minutes: Alle 10 Minuten
+    meaningYearly: Einmal im Jahr um Mitternacht am 1. Januar
+    meaningSameAsYearly: "Dasselbe wie {'@'}yearly"
+    meaningMonthly: Einmal im Monat um Mitternacht am ersten Tag
+    meaningWeekly: Einmal in der Woche um Mitternacht am Sonntagmorgen
+    meaningDaily: Einmal am Tag um Mitternacht
+    meaningSameAsDaily: "Dasselbe wie {'@'}daily"
+    meaningHourly: Einmal pro Stunde zu Beginn der Stunde
+    meaningReboot: Beim Systemstart ausführen
+    verboseLabel: Ausführlich
+    use24HourTimeFormatLabel: 24-Stunden-Format verwenden
+    daysStartAt0Label: Tage beginnen bei 0
+    symbolLabel: Symbol
+    meaningLabel: Bedeutung
+    exampleLabel: Beispiel
+    equivalentLabel: Entspricht
+    invalidCronMessage: Dieser Cron-Ausdruck ist ungültig
     description: >-
       Überprüfe und generiere Crontab und erhalte die menschenlesbare
       Beschreibung des Cron-Zeitplans.
   http-status-codes:
     title: HTTP-Statuscodes
+    searchPlaceholder: HTTP-Status suchen ...
+    searchResults: Suchergebnisse
+    forProtocol: 'Für {type}.'
+    category1xx: '1xx Informationen'
+    category2xx: '2xx Erfolg'
+    category3xx: '3xx Umleitung'
+    category4xx: '4xx Client-Fehler'
+    category5xx: '5xx Server-Fehler'
+    description100: 'Der Server wartet darauf, dass der Client den Body der Anfrage sendet.'
+    description101: 'Der Server hat dem Wechsel des Protokolls zugestimmt.'
+    description102: 'Der Server verarbeitet die Anfrage, aber es liegt noch keine Antwort vor.'
+    description103: 'Der Server liefert einige Response-Header vor der endgültigen HTTP-Antwort.'
+    description200: 'Standardantwort für erfolgreiche HTTP-Anfragen.'
+    description201: 'Die Anfrage wurde erfüllt und hat zur Erstellung einer neuen Ressource geführt.'
+    description202: 'Die Anfrage wurde zur Verarbeitung angenommen, die Verarbeitung ist aber noch nicht abgeschlossen.'
+    description203: 'Die Anfrage war erfolgreich, aber der Inhalt der ursprünglichen Antwort wurde von einem transformierenden Proxy verändert.'
+    description204: 'Der Server hat die Anfrage erfolgreich verarbeitet und liefert keinen Inhalt zurück.'
+    description205: 'Der Server weist den Client an, die Dokumentansicht zurückzusetzen, die diese Anfrage gesendet hat.'
+    description206: 'Der Server liefert aufgrund eines vom Client gesendeten Range-Headers nur einen Teil der Ressource.'
+    description207: 'Der folgende Nachrichtenkörper ist eine XML-Nachricht und kann mehrere separate Antwortcodes enthalten.'
+    description208: 'Die Mitglieder einer DAV-Bindung wurden bereits in einem vorherigen Teil der (Multistatus-)Antwort aufgeführt.'
+    description226: 'Der Server hat die Anfrage für die Ressource erfüllt, und die Antwort ist eine Repräsentation des Ergebnisses.'
+    description300: 'Zeigt mehrere Optionen für die Ressource an, denen der Client folgen kann.'
+    description301: 'Diese und alle zukünftigen Anfragen sollen an die angegebene URI gerichtet werden.'
+    description302: 'Weiterleitung auf eine andere URL. Dies ist ein Beispiel dafür, dass die Praxis der Branche dem Standard widerspricht.'
+    description303: 'Die Antwort auf die Anfrage ist unter einer anderen URI mit einer GET-Methode zu finden.'
+    description304: 'Zeigt an, dass die Ressource seit der in den Anfrage-Headern angegebenen Version nicht verändert wurde.'
+    description305: 'Die angeforderte Ressource ist nur über einen Proxy verfügbar, dessen Adresse in der Antwort angegeben ist.'
+    description306: 'Wird nicht mehr verwendet. Ursprünglich bedeutete es: "Nachfolgende Anfragen sollen den angegebenen Proxy verwenden."'
+    description307: 'In diesem Fall soll die Anfrage mit einer anderen URI wiederholt werden; zukünftige Anfragen sollen aber weiterhin die ursprüngliche URI verwenden.'
+    description308: 'Die Anfrage und alle zukünftigen Anfragen sollen mit einer anderen URI wiederholt werden.'
+    description400: 'Der Server kann oder will die Anfrage aufgrund eines offensichtlichen Client-Fehlers nicht verarbeiten.'
+    description401: 'Ähnlich wie 403 Forbidden, jedoch speziell für den Fall, dass eine Authentifizierung erforderlich ist und fehlgeschlagen ist oder noch nicht erfolgt ist.'
+    description402: 'Für die zukünftige Verwendung reserviert. Ursprünglich war vorgesehen, diesen Code im Rahmen eines digitalen Bargeld- oder Mikrozahlungssystems zu nutzen.'
+    description403: 'Die Anfrage war gültig, aber der Server verweigert die Ausführung. Der Benutzer hat möglicherweise nicht die nötigen Berechtigungen für eine Ressource.'
+    description404: 'Die angeforderte Ressource wurde nicht gefunden, ist aber möglicherweise in Zukunft verfügbar.'
+    description405: 'Eine Anfragemethode wird für die angeforderte Ressource nicht unterstützt.'
+    description406: 'Die angeforderte Ressource kann nur Inhalte erzeugen, die gemäß den in der Anfrage gesendeten Accept-Headern nicht akzeptabel sind.'
+    description407: 'Der Client muss sich zuerst beim Proxy authentifizieren.'
+    description408: 'Der Server hat beim Warten auf die Anfrage das Zeitlimit überschritten.'
+    description409: 'Zeigt an, dass die Anfrage wegen eines Konflikts in der Anfrage, etwa eines Bearbeitungskonflikts, nicht verarbeitet werden konnte.'
+    description410: 'Zeigt an, dass die angeforderte Ressource nicht mehr verfügbar ist und auch nicht wieder verfügbar sein wird.'
+    description411: 'Die Anfrage enthielt keine Angabe zur Länge ihres Inhalts, die von der angeforderten Ressource verlangt wird.'
+    description412: 'Der Server erfüllt eine der Vorbedingungen nicht, die der Anfragende an die Anfrage gestellt hat.'
+    description413: 'Die Anfrage ist größer, als der Server zu verarbeiten bereit oder in der Lage ist.'
+    description414: 'Die angegebene URI war für den Server zu lang, um sie zu verarbeiten.'
+    description415: 'Die Anfrage-Entität hat einen Medientyp, den der Server oder die Ressource nicht unterstützt.'
+    description416: 'Der Client hat einen Teil der Datei angefordert, aber der Server kann diesen Teil nicht liefern.'
+    description417: 'Der Server kann die Anforderungen des Expect-Request-Header-Felds nicht erfüllen.'
+    description418: 'Der Server verweigert den Versuch, mit einer Teekanne Kaffee zu kochen.'
+    description421: 'Die Anfrage wurde an einen Server gerichtet, der keine Antwort erzeugen kann.'
+    description422: 'Die Anfrage war wohlgeformt, konnte aber aufgrund semantischer Fehler nicht befolgt werden.'
+    description423: 'Die Ressource, auf die zugegriffen wird, ist gesperrt.'
+    description424: 'Die Anfrage ist aufgrund des Fehlschlagens einer vorherigen Anfrage fehlgeschlagen.'
+    description425: 'Zeigt an, dass der Server nicht bereit ist, das Risiko einzugehen, eine Anfrage zu verarbeiten, die wiederholt werden könnte.'
+    description426: 'Der Client soll auf ein anderes Protokoll wie TLS/1.0 wechseln.'
+    description428: 'Der Ursprungsserver verlangt, dass die Anfrage bedingt ist.'
+    description429: 'Der Benutzer hat in einer bestimmten Zeitspanne zu viele Anfragen gesendet.'
+    description431: 'Der Server ist nicht bereit, die Anfrage zu verarbeiten, weil entweder ein einzelnes Header-Feld oder alle Header-Felder zusammen zu groß sind.'
+    description451: 'Ein Serverbetreiber hat eine rechtliche Aufforderung erhalten, den Zugriff auf eine Ressource oder eine Gruppe von Ressourcen, die die angeforderte Ressource enthält, zu verweigern.'
+    description500: 'Eine allgemeine Fehlermeldung, die ausgegeben wird, wenn ein unerwarteter Zustand aufgetreten ist und keine spezifischere Meldung passt.'
+    description501: 'Der Server erkennt entweder die Anfragemethode nicht oder ist nicht in der Lage, die Anfrage zu erfüllen.'
+    description502: 'Der Server fungierte als Gateway oder Proxy und hat vom Upstream-Server eine ungültige Antwort erhalten.'
+    description503: 'Der Server ist derzeit nicht verfügbar (weil er überlastet ist oder wegen Wartungsarbeiten heruntergefahren wurde).'
+    description504: 'Der Server fungierte als Gateway oder Proxy und hat vom Upstream-Server nicht rechtzeitig eine Antwort erhalten.'
+    description505: 'Der Server unterstützt die in der Anfrage verwendete HTTP-Protokollversion nicht.'
+    description506: 'Die transparente Inhaltsaushandlung für die Anfrage führt zu einem Zirkelbezug.'
+    description507: 'Der Server kann die zur Erfüllung der Anfrage benötigte Repräsentation nicht speichern.'
+    description508: 'Der Server hat bei der Verarbeitung der Anfrage eine Endlosschleife erkannt.'
+    description510: 'Für die Erfüllung der Anfrage sind weitere Erweiterungen der Anfrage erforderlich.'
+    description511: 'Der Client muss sich authentifizieren, um Netzwerkzugriff zu erhalten.'
     description: Liste aller HTTP-Statuscodes, ihrer Namen und ihrer Bedeutung.
   sql-prettify:
     title: SQL verschönern und formatieren
+    dialectLabel: Dialekt
+    keywordCaseLabel: Schlüsselwort-Schreibweise
+    keywordUppercase: GROSSBUCHSTABEN
+    keywordLowercase: kleinbuchstaben
+    keywordPreserve: Beibehalten
+    indentStyleLabel: Einrückungsstil
+    indentStandard: Standard
+    indentTabularLeft: Tabellarisch links
+    indentTabularRight: Tabellarisch rechts
+    inputLabel: Deine SQL-Abfrage
+    inputPlaceholder: Füge hier deine SQL-Abfrage ein ...
+    outputLabel: Verschönerte Version deiner Abfrage
     description: >-
       Formatiere und verschönere deine SQL-Abfragen online (unterstützt
       verschiedene SQL-Dialekte).
   benchmark-builder:
     title: Benchmark-Builder
+    defaultSuiteTitle: Suite {number}
+    headerPosition: Position
+    headerSuite: Suite
+    headerSamples: Stichproben
+    headerMean: Mittelwert
+    headerVariance: Varianz
+    suiteNameLabel: Suite-Name
+    suiteNamePlaceholder: Suite-Name ...
+    suiteValuesLabel: Suite-Werte
+    deleteSuite: Suite löschen
+    addSuite: Suite hinzufügen
+    unitLabel: Einheit
+    unitPlaceholder: Einheit (z. B. ms)
+    resetSuites: Suites zurücksetzen
+    copyMarkdown: Als Markdown-Tabelle kopieren
+    copyBulletList: Als Aufzählungsliste kopieren
+    measurePlaceholder: Messwert eingeben ...
+    deleteValueTooltip: Diesen Wert löschen
+    addMeasure: Messwert hinzufügen
     description: >-
       Vergleiche ganz einfach die Ausführungszeit von Aufgaben mit diesem sehr
       einfachen Online-Benchmark-Builder.
@@ -140,46 +425,150 @@ tools:
       Spickzettel hast du schnellen Zugriff auf die gängigsten Git-Befehle.
   slugify-string:
     title: Slugify String
+    inputLabel: Dein String zum Slugifizieren
+    inputPlaceholder: 'Gib hier deinen String ein (z. B.: Mein Dateipfad)'
+    outputLabel: Dein Slug
+    outputPlaceholder: 'Dein Slug wird hier generiert (z. B.: mein-dateipfad)'
+    copyButton: Slug kopieren
+    copiedMessage: Slug in die Zwischenablage kopiert
     description: Mache einen String URL-, Dateinamen- und ID-sicher.
   encryption:
     title: Text verschlüsseln / entschlüsseln
+    encryptTitle: Verschlüsseln
+    textLabel: 'Dein Text:'
+    textPlaceholder: Der zu verschlüsselnde String
+    secretKeyLabel: 'Dein geheimer Schlüssel:'
+    algorithmLabel: 'Verschlüsselungsalgorithmus:'
+    encryptedOutputLabel: 'Dein verschlüsselter Text:'
+    outputPlaceholder: Dein String-Hash
+    decryptTitle: Entschlüsseln
+    encryptedTextLabel: 'Dein verschlüsselter Text:'
+    encryptedTextPlaceholder: Der zu verschlüsselnde String
+    decryptErrorTitle: Fehler beim Entschlüsseln
+    decryptErrorMessage: Dein Text kann nicht entschlüsselt werden
+    decryptedOutputLabel: 'Dein entschlüsselter Text:'
     description: >-
       Verschlüssele und entschlüssele Klartext mithilfe von Kryptoalgorithmen
       wie AES, TripleDES, Rabbit oder RC4.
   random-port-generator:
     title: Zufälliger Port-Generator
+    copyButton: Kopieren
+    refreshButton: Aktualisieren
+    copiedMessage: Port in die Zwischenablage kopiert
     description: >-
       Generiere zufällige Portnummern außerhalb des Bereichs der "bekannten"
       Ports (0-1023).
   yaml-prettify:
     title: YAML verschönern und formatieren
+    sortKeysLabel: 'Schlüssel sortieren:'
+    indentSizeLabel: 'Einrückungsgröße:'
+    inputLabel: Dein rohes YAML
+    inputPlaceholder: Füge dein rohes YAML hier ein ...
+    outputLabel: Formatierte Version deines YAML
     description: Verschönere deinen YAML-String in ein menschenlesbares Format.
   eta-calculator:
     title: ETA-Rechner
+    explanation: >-
+      Konkretes Beispiel: Wenn du 5 Teller in 3 Minuten abwäschst und
+      insgesamt 500 Teller abwaschen musst, dauert es 5 Stunden, bis alle
+      fertig sind.
+    amountToConsumeLabel: Menge des zu verbrauchenden Elements
+    consumptionStartedAtLabel: Der Verbrauch begann am
+    amountPerTimeSpanLabel: Verbrauchte Menge pro Zeitspanne
+    inLabel: in
+    unitMilliseconds: Millisekunden
+    unitSeconds: Sekunden
+    unitMinutes: Minuten
+    unitHours: Stunden
+    unitDays: Tagen
+    totalDurationLabel: Gesamtdauer
+    endAtLabel: Es wird enden
     description: >-
       Ein ETA (Estimated Time of Arrival)-Rechner, um die ungefähre Endzeit
       einer Aufgabe zu erfahren, z. B. den Zeitpunkt des Endes eines Downloads.
   roman-numeral-converter:
     title: Römische Zahlen Konverter
+    arabicToRomanTitle: Arabisch zu Römisch
+    romanToArabicTitle: Römisch zu Arabisch
+    rangeMessage: 'Wir können nur Zahlen zwischen {min} und {max} konvertieren'
+    invalidRomanMessage: Die eingegebene Zahl ist keine gültige römische Zahl
+    copyButton: Kopieren
+    copiedRomanMessage: Römische Zahl in die Zwischenablage kopiert
+    copiedArabicMessage: Arabische Zahl in die Zwischenablage kopiert
     description: >-
       Konvertiere römische Zahlen in Dezimalzahlen und Dezimalzahlen in römische
       Zahlen.
   hmac-generator:
     title: HMAC-Generator
+    plainTextLabel: Klartext für die Hash-Berechnung
+    plainTextPlaceholder: Klartext für die Hash-Berechnung ...
+    secretKeyLabel: Geheimer Schlüssel
+    secretKeyPlaceholder: Gib den geheimen Schlüssel ein ...
+    hashFunctionLabel: Hash-Funktion
+    hashFunctionPlaceholder: Wähle eine Hash-Funktion ...
+    outputEncodingLabel: Ausgabe-Kodierung
+    outputEncodingPlaceholder: Wähle die Ergebnis-Kodierung ...
+    binary: Binär (Basis 2)
+    hexadecimal: Hexadezimal (Basis 16)
+    outputLabel: HMAC deines Textes
+    outputPlaceholder: Das Ergebnis des HMAC ...
+    copyButton: HMAC kopieren
     description: >-
       Berechnet einen hashbasierten Nachrichtenauthentifizierungscode (HMAC)
       unter Verwendung eines geheimen Schlüssels und deiner bevorzugten
       Hash-Funktion.
   bip39-generator:
     title: BIP39-Passphrasengenerator
+    languageLabel: 'Sprache:'
+    languageHint: 'Hinweis: Der BIP39-Standard kennt keine offizielle deutsche Wortliste, deshalb steht Deutsch hier nicht zur Auswahl. Eine selbst erstellte Liste würde von Wallets nicht erkannt, und die Wiederherstellung wäre dann nicht möglich.'
+    entropyLabel: 'Entropie (Seed):'
+    entropyPlaceholder: Dein String ...
+    entropyLengthMessage: Die Entropie-Länge sollte >= 16, <= 32 und ein Vielfaches von 4 sein
+    entropyHexMessage: Die Entropie sollte eine hexadezimale Zeichenfolge sein
+    passphraseLabel: 'Passphrase (Mnemonik):'
+    passphrasePlaceholder: Deine Mnemonik ...
+    invalidMnemonicMessage: Ungültige Mnemonik
+    copiedEntropyMessage: Entropie in die Zwischenablage kopiert
+    copiedPassphraseMessage: Passphrase in die Zwischenablage kopiert
     description: >-
       Generiere BIP39-Passphrasen aus vorhandener oder zufälliger Mnemonik oder
       erhalte die Mnemonik aus der Passphrase.
   base64-file-converter:
     title: Base64-Dateikonverter
+    base64ToFileTitle: Base64 zu Datei
+    fileNameLabel: Dateiname
+    fileNamePlaceholder: Download-Dateiname
+    extensionLabel: Erweiterung
+    extensionPlaceholder: Erweiterung
+    inputPlaceholder: Füge hier deinen Base64-Dateistring ein ...
+    previewButton: Bild-Vorschau
+    downloadButton: Datei herunterladen
+    fileToBase64Title: Datei zu Base64
+    uploadLabel: Ziehe eine Datei hierher oder klicke, um eine Datei auszuwählen
+    outputPlaceholder: Die Datei in Base64 erscheint hier
+    copyButton: Kopieren
+    copiedMessage: Base64-String in die Zwischenablage kopiert
     description: Konvertiere Strings, Dateien oder Bilder in ihre Base64-Repräsentation.
   list-converter:
     title: Listenkonverter
+    sortAscending: Aufsteigend sortieren
+    sortDescending: Absteigend sortieren
+    trimItemsLabel: Listeneinträge trimmen
+    removeDuplicatesLabel: Duplikate entfernen
+    lowercaseLabel: In Kleinbuchstaben umwandeln
+    keepLineBreaksLabel: Zeilenumbrüche beibehalten
+    sortListLabel: Liste sortieren
+    sortListPlaceholder: Alphabetisch sortieren
+    separatorLabel: Trennzeichen
+    wrapItemLabel: Eintrag umschließen
+    itemPrefixPlaceholder: Eintrags-Präfix
+    itemSuffixPlaceholder: Eintrags-Suffix
+    wrapListLabel: Liste umschließen
+    listPrefixPlaceholder: Listen-Präfix
+    listSuffixPlaceholder: Listen-Suffix
+    inputLabel: Deine Eingabedaten
+    inputPlaceholder: Füge hier deine Eingabedaten ein ...
+    outputLabel: Deine transformierten Daten
     description: >-
       Dieses Tool kann spaltenbasierte Daten verarbeiten und verschiedene
       Änderungen (transponieren, Präfix und Suffix hinzufügen, Liste umkehren,
@@ -187,36 +576,111 @@ tools:
       auf jede Zeile anwenden.
   base64-string-converter:
     title: Base64-String-Encoder/Decoder
+    stringToBase64Title: String zu Base64
+    encodeUrlSafeLabel: URL-sicher kodieren
+    encodeInputLabel: Zu kodierender String
+    encodeInputPlaceholder: Füge hier deinen String ein ...
+    encodeOutputLabel: Base64 des Strings
+    encodeOutputPlaceholder: Die Base64-Kodierung deines Strings erscheint hier
+    copyBase64Button: Base64 kopieren
+    base64ToStringTitle: Base64 zu String
+    decodeUrlSafeLabel: URL-sicher decodieren
+    decodeInputLabel: Zu decodierender Base64-String
+    decodeInputPlaceholder: Dein Base64-String ...
+    decodeOutputLabel: Decodierter String
+    decodeOutputPlaceholder: Der decodierte String erscheint hier
+    copyDecodedButton: Decodierten String kopieren
+    copiedBase64Message: Base64-String in die Zwischenablage kopiert
+    copiedStringMessage: String in die Zwischenablage kopiert
     description: Codiere und decodiere Strings einfach in ihre Base64-Repräsentation.
   toml-to-yaml:
     title: TOML zu YAML
+    inputLabel: Dein TOML
+    inputPlaceholder: Füge dein TOML hier ein...
+    outputLabel: YAML aus deinem TOML
     description: Parse und konvertiere TOML zu YAML.
   math-evaluator:
     title: Mathematischer Auswerter
+    inputPlaceholder: "Dein mathematischer Ausdruck (z. B.: 2*sqrt(6) ) ..."
+    resultTitle: Ergebnis
     description: >-
       Ein Taschenrechner zum Auswerten mathematischer Ausdrücke. Du kannst
       Funktionen wie sqrt, cos, sin, abs usw. verwenden.
   json-to-yaml-converter:
     title: JSON zu YAML
+    inputLabel: Dein JSON
+    inputPlaceholder: Füge dein JSON hier ein...
+    outputLabel: YAML aus deinem JSON
     description: Konvertiere JSON einfach in YAML mit diesem Live-Online-Konverter.
   url-parser:
     title: URL-Parser
+    inputLabel: 'Deine zu parsende URL:'
+    inputPlaceholder: Deine zu parsende URL ...
+    invalidUrlMessage: Ungültige URL
+    protocolLabel: Protokoll
+    usernameLabel: Benutzername
+    passwordLabel: Passwort
+    hostnameLabel: Hostname
+    portLabel: Port
+    pathLabel: Pfad
+    paramsLabel: Parameter
     description: >-
       Parse eine URL-Zeichenfolge, um alle verschiedenen Teile (Protokoll,
       Ursprung, Parameter, Port, Benutzername-Passwort usw.) zu erhalten.
   iban-validator-and-parser:
     title: IBAN-Validator und -Parser
+    inputPlaceholder: Gib eine IBAN zur Überprüfung ein ...
+    isValidLabel: Ist die IBAN gültig?
+    errorsLabel: IBAN-Fehler
+    isQrIbanLabel: Ist die IBAN eine QR-IBAN?
+    countryCodeLabel: Ländercode
+    bbanLabel: BBAN
+    friendlyFormatLabel: IBAN im lesbaren Format
+    examplesTitle: Gültige IBAN-Beispiele
+    errorNoIban: Keine IBAN angegeben
+    errorNoIbanCountry: Kein IBAN-Land
+    errorWrongBbanLength: Falsche BBAN-Länge
+    errorWrongBbanFormat: Falsches BBAN-Format
+    errorChecksumNotNumber: Prüfsumme ist keine Zahl
+    errorWrongIbanChecksum: Falsche IBAN-Prüfsumme
+    errorWrongAccountBankBranchChecksum: Falsche Konto-/Bank-/Filial-Prüfsumme
+    errorQrIbanNotAllowed: QR-IBAN nicht erlaubt
     description: >-
       Validiere und parse IBAN-Nummern. Überprüfe, ob die IBAN gültig ist, und
       erhalte das Land, BBAN, ob es sich um eine QR-IBAN handelt und das
       IBAN-freundliche Format.
   user-agent-parser:
     title: User-Agent-Parser
+    inputLabel: User-Agent-String
+    inputPlaceholder: Füge hier deinen User-Agent ein ...
+    browserHeading: Browser
+    engineHeading: Engine
+    osHeading: Betriebssystem
+    deviceHeading: Gerät
+    cpuHeading: CPU
+    nameLabel: Name
+    versionLabel: Version
+    modelLabel: Modell
+    typeLabel: Typ
+    vendorLabel: Anbieter
+    architectureLabel: Architektur
+    noBrowserNameMessage: Kein Browser-Name verfügbar
+    noBrowserVersionMessage: Keine Browser-Version verfügbar
+    noEngineNameMessage: Kein Engine-Name verfügbar
+    noEngineVersionMessage: Keine Engine-Version verfügbar
+    noOsNameMessage: Kein Betriebssystem-Name verfügbar
+    noOsVersionMessage: Keine Betriebssystem-Version verfügbar
+    noDeviceModelMessage: Kein Gerätemodell verfügbar
+    noDeviceTypeMessage: Kein Gerätetyp verfügbar
+    noDeviceVendorMessage: Kein Geräteanbieter verfügbar
+    noCpuArchitectureMessage: Keine CPU-Architektur verfügbar
     description: >-
       Erkenne und parse Browser, Engine, Betriebssystem, CPU und
       Gerätetyp/-modell aus einer User-Agent-Zeichenfolge.
   numeronym-generator:
     title: Numeronym-Generator
+    inputPlaceholder: "Gib ein Wort ein, z. B.: 'internationalization'"
+    outputPlaceholder: "Dein Numeronym erscheint hier, z. B.: 'i18n'"
     description: >-
       Ein Numeronym ist ein Wort, bei dem eine Zahl verwendet wird, um eine
       Abkürzung zu bilden. Zum Beispiel ist "i18n" ein Numeronym für
@@ -224,37 +688,116 @@ tools:
       dem ersten "i" und dem letzten "n" im Wort steht.
   case-converter:
     title: Fall-Konverter
+    inputLabel: 'Dein String:'
+    inputPlaceholder: Dein String ...
+    formats:
+      lowercase: "Kleinbuchstaben:"
+      uppercase: "Großbuchstaben:"
+      camelcase: "camelCase:"
+      capitalcase: "Capital Case:"
+      constantcase: "CONSTANT_CASE:"
+      dotcase: "dot.case:"
+      headercase: "Train-Case:"
+      nocase: "Wörter getrennt (no case):"
+      paramcase: "kebab-case:"
+      pascalcase: "PascalCase:"
+      pathcase: "path/case:"
+      sentencecase: "Satzanfang groß (Sentence case):"
+      snakecase: "snake_case:"
+      mockingcase: "aBwEcHsElNd (Mocking case):"
     description: >-
       Ändere den Fall eines Strings und wähle zwischen verschiedenen Formaten
       aus.
   html-entities:
     title: HTML-Entity-Escape
+    escapeTitle: HTML-Entitäten escapen
+    escapeInputLabel: 'Dein String:'
+    escapeInputPlaceholder: Der zu escapende String
+    escapeOutputLabel: 'Dein escapter String:'
+    escapeOutputPlaceholder: Dein escapter String
+    unescapeTitle: HTML-Entitäten unescapen
+    unescapeInputLabel: 'Dein escapter String:'
+    unescapeInputPlaceholder: Der zu unescapende String
+    unescapeOutputLabel: 'Dein unescapter String:'
+    unescapeOutputPlaceholder: Dein unescapter String
+    copyButton: Kopieren
     description: >-
       Escape oder unescape HTML-Entitäten (ersetze <, >, &, " und ' durch ihre
       HTML-Version).
   json-prettify:
     title: JSON verschönern und formatieren
+    sortKeysLabel: "Schlüssel sortieren:"
+    indentSizeLabel: "Einrückungsgröße:"
+    inputLabel: Dein rohes JSON
+    inputPlaceholder: Füge dein rohes JSON hier ein...
+    outputLabel: Formatierte Version deines JSON
     description: Verschönere deinen JSON-String in ein menschenlesbares Format.
   docker-run-to-docker-compose-converter:
     title: Docker run zu Docker compose Konverter
+    inputLabel: 'Dein docker-run-Befehl:'
+    inputPlaceholder: Dein zu konvertierender docker-run-Befehl ...
+    downloadButton: docker-compose.yml herunterladen
+    notComposableTitle: Diese Optionen lassen sich nicht in docker-compose übersetzen
+    notImplementedTitle: Diese Optionen sind noch nicht implementiert und wurden daher nicht in docker-compose übersetzt
+    errorsTitle: Folgende Fehler sind aufgetreten
     description: Wandle docker run-Befehle in docker-compose-Dateien um!
   mac-address-lookup:
     title: MAC-Adressensuche
+    macAddressLabel: 'MAC-Adresse:'
+    macAddressPlaceholder: Gib eine MAC-Adresse ein
+    vendorInfoLabel: 'Anbieter-Info:'
+    unknownVendor: Unbekannter Anbieter für diese Adresse
+    copyButton: Anbieter-Info kopieren
+    copiedMessage: Anbieter-Info in die Zwischenablage kopiert
     description: Finde den Anbieter und Hersteller eines Geräts anhand seiner MAC-Adresse.
   mime-types:
     title: MIME-Typen
+    mimeToExtensionTitle: MIME-Typ zu Dateiendung
+    mimeToExtensionSubtitle: Finde heraus, welche Dateiendungen zu einem MIME-Typ gehören
+    mimePlaceholder: "Wähle hier deinen MIME-Typ aus ... (z. B.: application/pdf)"
+    extensionsOfLabel: Dateiendungen des MIME-Typs
+    mimeTypeSuffixLabel: ':'
+    extensionToMimeTitle: Dateiendung zu MIME-Typ
+    extensionToMimeSubtitle: Finde heraus, welcher MIME-Typ zu einer Dateiendung gehört
+    mimeOfExtensionLabel: MIME-Typ für die Dateiendung
+    extensionSuffixLabel: ':'
+    tableMimeTypesHeader: MIME-Typen
+    tableExtensionsHeader: Dateiendungen
     description: Konvertiere MIME-Typen in Erweiterungen und umgekehrt.
   toml-to-json:
     title: TOML zu JSON
+    inputLabel: Dein TOML
+    inputPlaceholder: Füge dein TOML hier ein...
+    outputLabel: JSON aus deinem TOML
     description: Parse und konvertiere TOML zu JSON.
   lorem-ipsum-generator:
     title: Lorem Ipsum Generator
+    paragraphsLabel: Absätze
+    sentencesLabel: Sätze pro Absatz
+    wordsLabel: Wörter pro Satz
+    startWithLabel: Mit "Lorem ipsum" beginnen?
+    asHtmlLabel: Als HTML?
+    outputPlaceholder: Dein Lorem Ipsum ...
+    copyButton: Kopieren
+    refreshButton: Aktualisieren
+    copiedMessage: Lorem Ipsum in die Zwischenablage kopiert
     description: >-
       Lorem Ipsum ist ein Platzhaltertext, der häufig verwendet wird, um die
       visuelle Form eines Dokuments oder einer Schriftart ohne Verwendung von
       bedeutendem Inhalt zu demonstrieren.
   qrcode-generator:
     title: QR-Code-Generator
+    textLabel: 'Text:'
+    textPlaceholder: Dein Link oder Text ...
+    foregroundColorLabel: 'Vordergrundfarbe:'
+    backgroundColorLabel: 'Hintergrundfarbe:'
+    errorCorrectionLabel: 'Fehlerkorrektur:'
+    errorCorrection:
+      low: Niedrig
+      medium: Mittel
+      quartile: Quartil
+      high: Hoch
+    downloadButton: QR-Code herunterladen
     description: >-
       Generiere und downloade QR-Codes für eine URL oder einfach einen Text und
       passe die Hintergrund- und Vordergrundfarben an.
@@ -263,8 +806,29 @@ tools:
     description: >-
       Generiere und lade QR-Codes für schnelle Verbindungen zu WLAN-Netzwerken
       herunter.
+    encryptionMethod: Verschlüsselungsmethode
+    noPassword: Kein Passwort
+    wep: WEP
+    ssidLabel: 'SSID:'
+    ssidPlaceholder: Deine WLAN-SSID ...
+    hiddenSsid: Versteckte SSID
+    passwordLabel: 'Passwort:'
+    passwordPlaceholder: Dein WLAN-Passwort ...
+    eapMethod: EAP-Methode
+    identityLabel: 'Identität:'
+    identityPlaceholder: Deine EAP-Identität ...
+    anonymous: Anonym?
+    eapPhase2Method: EAP-Phase-2-Methode
+    foregroundColor: 'Vordergrundfarbe:'
+    backgroundColor: 'Hintergrundfarbe:'
+    download: QR-Code herunterladen
   xml-formatter:
     title: XML-Formatter
+    collapseContentLabel: 'Inhalt zusammenfassen:'
+    indentSizeLabel: 'Einrückungsgröße:'
+    inputLabel: Dein XML
+    inputPlaceholder: Füge dein XML hier ein...
+    outputLabel: Formatiertes XML aus deinem XML
     description: Verschönere deinen XML-String in ein menschenlesbares Format.
   temperature-converter:
     title: Temperaturkonverter
@@ -273,69 +837,365 @@ tools:
       Delisle, Newton, Réaumur und Rømer.
   chmod-calculator:
     title: Chmod-Rechner
+    ownerHeader: Eigentümer (u)
+    groupHeader: Gruppe (g)
+    publicHeader: Öffentlich (o)
+    readLabel: Lesen (4)
+    writeLabel: Schreiben (2)
+    executeLabel: Ausführen (1)
     description: >-
       Berechne deine Chmod-Berechtigungen und -Befehle mit diesem
       Online-Chmod-Rechner.
   rsa-key-pair-generator:
     title: RSA-Schlüsselpaar-Generator
+    bitsLabel: 'Bits:'
+    bitsInvalid: Bits müssen 256 <= Bits <= 16384 erfüllen und ein Vielfaches von 8 sein
+    refreshButton: Schlüsselpaar neu generieren
+    publicKeyHeading: Öffentlicher Schlüssel
+    privateKeyHeading: Privater Schlüssel
     description: Generiere neue zufällige RSA-Private- und Public-Key-PEM-Zertifikate.
   html-wysiwyg-editor:
     title: HTML-WYSIWYG-Editor
+    defaultHeading: Hallo!
+    defaultText: Willkommen in diesem HTML-WYSIWYG-Editor
+    menu:
+      bold: Fett
+      italic: Kursiv
+      strike: Durchgestrichen
+      inlineCode: Inline-Code
+      heading1: Überschrift 1
+      heading2: Überschrift 2
+      heading3: Überschrift 3
+      heading4: Überschrift 4
+      bulletList: Aufzählungsliste
+      orderedList: Nummerierte Liste
+      codeBlock: Codeblock
+      blockquote: Zitat
+      hardBreak: Harter Zeilenumbruch
+      clearFormat: Formatierung entfernen
+      undo: Rückgängig
+      redo: Wiederholen
     description: >-
       Online-HTML-Editor mit funktionsreichem WYSIWYG-Editor, erhalte sofort den
       Quellcode des Inhalts.
   yaml-to-toml:
     title: YAML zu TOML
     description: Parse und konvertiere YAML zu TOML.
+    inputLabel: Dein YAML
+    inputPlaceholder: Füge hier dein YAML ein ...
+    outputLabel: TOML aus deinem YAML
   mac-address-generator:
     title: MAC-Adressen-Generator
+    quantityLabel: 'Anzahl:'
+    prefixLabel: 'MAC-Adress-Präfix:'
+    prefixPlaceholder: 'Präfix festlegen, z. B.: 64:16:7F'
+    caseLabel: 'Groß-/Kleinschreibung:'
+    separatorLabel: 'Trennzeichen:'
+    noneOption: Keins
+    refreshButton: Aktualisieren
+    copyButton: Kopieren
+    copiedMessage: MAC-Adressen in die Zwischenablage kopiert
     description: >-
       Gebe die Menge und das Präfix ein. MAC-Adressen werden in deiner gewählten
       Schreibweise (Groß- oder Kleinbuchstaben) generiert.
   json-diff:
     title: JSON-Unterschied
+    firstJsonLabel: Dein erstes JSON
+    firstJsonPlaceholder: Füge dein erstes JSON hier ein ...
+    secondJsonLabel: Dein JSON zum Vergleichen
+    secondJsonPlaceholder: Füge dein JSON zum Vergleichen hier ein ...
+    onlyShowDifferencesLabel: Nur Unterschiede anzeigen
+    jsonsAreTheSame: Die angegebenen JSONs sind identisch
     description: Vergleiche zwei JSON-Objekte und erhalte die Unterschiede zwischen ihnen.
   jwt-parser:
     title: JWT-Parser
+    inputLabel: Zu decodierendes JWT
+    inputPlaceholder: Füge hier dein Token ein ...
+    invalidJwtMessage: Ungültiges JWT
+    headerTitle: Header
+    payloadTitle: Payload
     description: >-
       Parse und decodiere deinen JSON-Web-Token (JWT) und zeige dessen Inhalt
       an.
   date-converter:
     title: Datum-Uhrzeit-Konverter
+    formatJsDate: JS-Datumsstring (lokal)
+    formatUnixTimestamp: Unix-Zeitstempel
+    formatTimestamp: Zeitstempel
+    formatUtc: UTC-Format
+    formatExcel: Excel-Datum/-Uhrzeit
+    invalidDateMessage: Dieses Datum ist für dieses Format ungültig
+    inputPlaceholder: Füge deinen Datumsstring hier ein ...
+    invalidDatePlaceholder: Ungültiges Datum ...
     description: Konvertiere Datum und Uhrzeit in verschiedene Formate.
   phone-parser-and-formatter:
     title: Telefonnummer-Parser und -Formatter
+    defaultCountryCodeLabel: 'Standard-Ländercode:'
+    phoneNumberLabel: 'Telefonnummer:'
+    phoneNumberPlaceholder: Gib eine Telefonnummer ein
+    invalidPhoneNumber: Ungültige Telefonnummer
+    countryCodeLabel: Land (Code)
+    countryLabel: Land
+    callingCodeLabel: Ländervorwahl
+    isValidLabel: Gültig?
+    isPossibleLabel: Möglich?
+    typeLabel: Typ
+    internationalFormatLabel: Internationales Format
+    nationalFormatLabel: Nationales Format
+    e164FormatLabel: E.164-Format
+    rfc3966FormatLabel: RFC3966-Format
+    unknown: Unbekannt
+    'yes': Ja
+    'no': Nein
+    typeMobile: Mobilfunk
+    typeFixedLine: Festnetz
+    typeFixedLineOrMobile: Festnetz oder Mobilfunk
+    typePersonalNumber: Persönliche Rufnummer
+    typePremiumRate: Mehrwertdienst
+    typeSharedCost: Geteilte Kosten
+    typeTollFree: Gebührenfrei
+    typeUan: Universelle Zugangsnummer
+    typeVoicemail: Voicemail
+    typeVoip: VoIP
+    typePager: Pager
     description: >-
       Parse, validiere und formatiere Telefonnummern. Erhalte Informationen zur
       Telefonnummer, wie z. B. die Landesvorwahl, den Typ usw.
   ipv4-subnet-calculator:
     title: IPv4-Subnetzrechner
+    inputLabel: Eine IPv4-Adresse mit oder ohne Maske
+    inputPlaceholder: Die IPv4-Adresse ...
+    parseErrorMessage: Diese Adresse kann nicht verarbeitet werden, prüfe das Format
+    netmaskLabel: Netzmaske
+    networkAddressLabel: Netzwerkadresse
+    networkMaskLabel: Netzwerkmaske
+    networkMaskBinaryLabel: Netzwerkmaske in Binär
+    cidrNotationLabel: CIDR-Notation
+    wildcardMaskLabel: Wildcard-Maske
+    networkSizeLabel: Netzwerkgröße
+    firstAddressLabel: Erste Adresse
+    lastAddressLabel: Letzte Adresse
+    broadcastAddressLabel: Broadcast-Adresse
+    noBroadcastMessage: Keine Broadcast-Adresse mit dieser Maske
+    ipClassLabel: IP-Klasse
+    unknownClassMessage: Unbekannter Klassentyp
+    previousBlockButton: Vorheriger Block
+    nextBlockButton: Nächster Block
     description: >-
       Parse deine IPv4-CIDR-Blöcke und erhalte alle Informationen, die du über
       dein Subnetz benötigst.
   og-meta-generator:
     title: Open Graph Meta-Generator
+    yourMetaTags: 'Deine Meta-Tags'
+    schemas:
+      website:
+        name: 'Allgemeine Informationen'
+        typeLabel: 'Seitentyp'
+        typePlaceholder: 'Wähle den Typ deiner Website ...'
+        titleLabel: 'Titel'
+        titlePlaceholder: 'Gib den Titel deiner Website ein ...'
+        descriptionLabel: 'Beschreibung'
+        descriptionPlaceholder: 'Gib die Beschreibung deiner Website ein ...'
+        urlLabel: 'Seiten-URL'
+        urlPlaceholder: 'Gib die URL deiner Website ein ...'
+        optionWebsite: 'Website'
+        optionArticle: 'Artikel'
+        optionBook: 'Buch'
+        optionProfile: 'Profil'
+        optionGroupMusic: 'Musik'
+        optionSong: 'Song'
+        optionAlbum: 'Musikalbum'
+        optionPlaylist: 'Playlist'
+        optionRadioStation: 'Radiosender'
+        optionGroupVideo: 'Video'
+        optionMovie: 'Film'
+        optionEpisode: 'Episode'
+        optionTvShow: 'TV-Serie'
+        optionOtherVideo: 'Anderes Video'
+      image:
+        name: 'Bild'
+        urlLabel: 'Bild-URL'
+        urlPlaceholder: 'Die URL des Social-Bildes deiner Website ...'
+        altLabel: 'Bild-Alt-Text'
+        altPlaceholder: 'Der Alternativtext des Social-Bildes deiner Website ...'
+        widthLabel: 'Breite'
+        widthPlaceholder: 'Breite des Social-Bildes deiner Website in px ...'
+        heightLabel: 'Höhe'
+        heightPlaceholder: 'Höhe des Social-Bildes deiner Website in px ...'
+      twitter:
+        name: 'Twitter'
+        cardLabel: 'Kartentyp'
+        cardPlaceholder: 'Der Twitter-Kartentyp ...'
+        siteLabel: 'Site-Konto'
+        sitePlaceholder: 'Der Name des Twitter-Kontos der Website (z. B. {''@''}example) ...'
+        creatorLabel: 'Ersteller-Konto'
+        creatorPlaceholder: 'Der Name des Twitter-Kontos des Erstellers (z. B. {''@''}example) ...'
+        optionSummary: 'Zusammenfassung'
+        optionSummaryLargeImage: 'Zusammenfassung mit großem Bild'
+        optionApp: 'Anwendung'
+        optionPlayer: 'Player'
+      article:
+        name: 'Artikel'
+        publishedTimeLabel: 'Veröffentlichungsdatum'
+        publishedTimePlaceholder: 'Wann der Artikel erstmals veröffentlicht wurde ...'
+        modifiedTimeLabel: 'Änderungsdatum'
+        modifiedTimePlaceholder: 'Wann der Artikel zuletzt geändert wurde ...'
+        expirationTimeLabel: 'Ablaufdatum'
+        expirationTimePlaceholder: 'Ab wann der Artikel veraltet ist ...'
+        authorLabel: 'Autor'
+        authorPlaceholder: 'Verfasser des Artikels ...'
+        sectionLabel: 'Rubrik'
+        sectionPlaceholder: 'Ein übergeordneter Rubrikname, z. B. Technologie ...'
+        tagLabel: 'Tag'
+        tagPlaceholder: 'Mit diesem Artikel verbundene Schlagwörter ...'
+      book:
+        name: 'Buch'
+        authorLabel: 'Autor'
+        authorPlaceholder: 'Wer dieses Buch geschrieben hat ...'
+        isbnLabel: 'ISBN'
+        isbnPlaceholder: 'Die Internationale Standardbuchnummer ...'
+        releaseDateLabel: 'Erscheinungsdatum'
+        releaseDatePlaceholder: 'Das Datum, an dem das Buch erschienen ist ...'
+        tagLabel: 'Tag'
+        tagPlaceholder: 'Mit diesem Buch verbundene Schlagwörter ...'
+      musicAlbum:
+        name: 'Albumdetails'
+        songLabel: 'Song'
+        songPlaceholder: 'Der Song auf diesem Album ...'
+        discLabel: 'Disc'
+        discPlaceholder: 'Dasselbe wie music:album:disc, aber umgekehrt ...'
+        trackLabel: 'Track'
+        trackPlaceholder: 'Dasselbe wie music:album:track, aber umgekehrt ...'
+        musicianLabel: 'Musiker'
+        musicianPlaceholder: 'Der Musiker, der diesen Song gemacht hat ...'
+        releaseDateLabel: 'Erscheinungsdatum'
+        releaseDatePlaceholder: 'Das Datum, an dem das Album erschienen ist ...'
+      musicPlaylist:
+        name: 'Playlist-Details'
+        songLabel: 'Song'
+        songPlaceholder: 'Der Song auf diesem Album ...'
+        discLabel: 'Disc'
+        discPlaceholder: 'Dasselbe wie music:album:disc, aber umgekehrt ...'
+        trackLabel: 'Track'
+        trackPlaceholder: 'Dasselbe wie music:album:track, aber umgekehrt ...'
+        creatorLabel: 'Ersteller'
+        creatorPlaceholder: 'Der Ersteller dieser Playlist ...'
+      musicRadioStation:
+        name: 'Radiosender-Details'
+        creatorLabel: 'Ersteller'
+        creatorPlaceholder: 'Der Ersteller dieses Radiosenders ...'
+      musicSong:
+        name: 'Song-Details'
+        durationLabel: 'Dauer'
+        durationPlaceholder: 'Die Dauer des Songs ...'
+        albumLabel: 'Album'
+        albumPlaceholder: 'Das Album, von dem dieser Song stammt ...'
+        discLabel: 'Disc'
+        discPlaceholder: 'Auf welcher Disc des Albums dieser Song ist ...'
+        trackLabel: 'Track'
+        trackPlaceholder: 'Welcher Track dieser Song ist ...'
+        musicianLabel: 'Musiker'
+        musicianPlaceholder: 'Der Musiker, der diesen Song gemacht hat ...'
+      profile:
+        name: 'Profil'
+        firstNameLabel: 'Vorname'
+        firstNamePlaceholder: 'Gib den Vornamen der Person ein ...'
+        lastNameLabel: 'Nachname'
+        lastNamePlaceholder: 'Gib den Nachnamen der Person ein ...'
+        usernameLabel: 'Benutzername'
+        usernamePlaceholder: 'Gib den Benutzernamen der Person ein ...'
+        genderLabel: 'Geschlecht'
+        genderPlaceholder: 'Gib das Geschlecht der Person ein ...'
+      videoMovie:
+        name: 'Filmdetails'
+        actorLabel: 'Schauspieler'
+        actorPlaceholder: 'Name der Schauspielerin bzw. des Schauspielers ...'
+        directorLabel: 'Regisseur'
+        directorPlaceholder: 'Name des Regisseurs ...'
+        writerLabel: 'Drehbuchautor'
+        writerPlaceholder: 'Drehbuchautoren des Films ...'
+        durationLabel: 'Dauer'
+        durationPlaceholder: 'Die Länge des Films in Sekunden ...'
+        releaseDateLabel: 'Erscheinungsdatum'
+        releaseDatePlaceholder: 'Das Datum, an dem der Film erschienen ist ...'
+        tagLabel: 'Tag'
+        tagPlaceholder: 'Mit diesem Film verbundene Schlagwörter ...'
+      videoEpisode:
+        name: 'Episodendetails'
+        seriesLabel: 'Serie'
+        seriesPlaceholder: 'Zu welcher Serie diese Episode gehört ...'
+      videoOther:
+        name: 'Details zu anderem Video'
+      videoTVShow:
+        name: 'TV-Serien-Details'
     description: Generiere Open Graph- und Social-HTML-Metatags für deine Website.
   ipv6-ula-generator:
     title: IPv6-ULA-Generator
+    infoTitle: Info
+    infoText: >-
+      Dieses Tool nutzt die von der IETF vorgeschlagene erste Methode: aktueller
+      Zeitstempel plus MAC-Adresse, SHA1-gehasht, und die unteren 40 Bit zur
+      Erzeugung deiner zufälligen ULA.
+    macAddressLabel: 'MAC-Adresse:'
+    macAddressPlaceholder: Gib eine MAC-Adresse ein
+    ulaLabel: 'IPv6-ULA:'
+    firstBlockLabel: 'Erster routbarer Block:'
+    lastBlockLabel: 'Letzter routbarer Block:'
     description: >-
       Generiere deine eigenen lokalen, nicht routbaren IP-Adressen in deinem
       Netzwerk gemäß RFC4193.
   hash-text:
     title: Text hashen
+    inputLabel: 'Dein Text zum Hashen:'
+    inputPlaceholder: Dein String zum Hashen ...
+    encodingLabel: Digest-Kodierung
+    binary: Binär (Basis 2)
+    hexadecimal: Hexadezimal (Basis 16)
     description: >-
       Hashe einen Text-String mit der von dir benötigten Funktion: MD5, SHA1,
       SHA256, SHA224, SHA512, SHA384, SHA3 oder RIPEMD160
   json-to-toml:
     title: JSON zu TOML
+    inputLabel: Dein JSON
+    inputPlaceholder: Füge dein JSON hier ein...
+    outputLabel: TOML aus deinem JSON
     description: Parse und konvertiere JSON zu TOML.
   device-information:
     title: Geräteinformationen
+    screenSection: Bildschirm
+    screenSizeLabel: Bildschirmgröße
+    orientationLabel: Ausrichtung
+    orientationAngleLabel: Ausrichtungswinkel
+    colorDepthLabel: Farbtiefe
+    pixelRatioLabel: Pixelverhältnis
+    windowSizeLabel: Fenstergröße
+    deviceSection: Gerät
+    browserVendorLabel: Browser-Anbieter
+    languagesLabel: Sprachen
+    platformLabel: Plattform
+    userAgentLabel: User-Agent
+    unknownValue: unbekannt
     description: >-
       Informationen zu deinem aktuellen Gerät (Bildschirmgröße, Pixelverhältnis,
       Benutzeragent, ...) erhalten.
   pdf-signature-checker:
     title: PDF-Signaturprüfer
+    uploadTitle: Eine PDF-Datei hierher ziehen oder klicken, um eine Datei auszuwählen
+    noSignaturesFound: In der angegebenen Datei wurden keine Signaturen gefunden.
+    signatureCertificates: "Zertifikate der Signatur {index}:"
+    validityPeriod: Gültigkeitszeitraum
+    issuedBy: Ausgestellt von
+    issuedTo: Ausgestellt für
+    pemCertificate: PEM-Zertifikat
+    notBefore: Nicht vor
+    notAfter: Nicht nach
+    commonName: Allgemeiner Name (CN)
+    organizationName: Organisation
+    countryName: Land
+    localityName: Ort
+    organizationalUnitName: Organisationseinheit
+    stateOrProvinceName: Bundesland oder Provinz
+    viewPemCert: PEM-Zertifikat anzeigen
     description: >-
       Überprüfe die Signaturen einer PDF-Datei. Eine signierte PDF-Datei enthält
       eine oder mehrere Signaturen, die verwendet werden können, um
@@ -343,30 +1203,70 @@ tools:
       geändert wurde.
   json-minify:
     title: JSON minifizieren
+    inputLabel: Dein rohes JSON
+    inputPlaceholder: Füge dein rohes JSON hier ein...
+    outputLabel: Minimierte Version deines JSON
     description: >-
       Minifiziere und komprimiere dein JSON, indem unnötige Leerzeichen entfernt
       werden.
   ulid-generator:
     title: ULID-Generator
+    quantityLabel: 'Anzahl:'
+    formatLabel: 'Format: '
+    refreshButton: Aktualisieren
+    copyButton: Kopieren
+    copiedMessage: ULIDs in die Zwischenablage kopiert
     description: >-
       Generiere zufällige Universally Unique Lexicographically Sortable
       Identifier (ULID).
   string-obfuscator:
     title: String-Verschleierer
+    inputLabel: 'String zum Verschleiern:'
+    inputPlaceholder: Zu verschleiernden String eingeben
+    keepFirstLabel: 'Erste behalten:'
+    keepLastLabel: 'Letzte behalten:'
+    keepSpacesLabel: 'Leerzeichen behalten:'
     description: >-
       Verschleiere einen String (wie ein Secret, eine IBAN oder ein Token), um
       ihn weitergeben zu können und identifizierbar zu machen, ohne seinen
       Inhalt preiszugeben.
   base-converter:
     title: Ganzzahl-Basiskonverter
+    inputNumberLabel: Eingabezahl
+    inputNumberPlaceholder: "Gib deine Zahl hier ein (z. B.: 42)"
+    inputBaseLabel: Eingabebasis
+    inputBasePlaceholder: "Gib deine Eingabebasis hier ein (z. B.: 10)"
+    binaryLabel: Binär (2)
+    binaryPlaceholder: Hier erscheint die Binärversion ...
+    octalLabel: Oktal (8)
+    octalPlaceholder: Hier erscheint die Oktalversion ...
+    decimalLabel: Dezimal (10)
+    decimalPlaceholder: Hier erscheint die Dezimalversion ...
+    hexadecimalLabel: Hexadezimal (16)
+    hexadecimalPlaceholder: Hier erscheint die Hexadezimalversion ...
+    base64Placeholder: Hier erscheint die Base64-Version ...
+    customLabel: "Benutzerdefiniert:"
+    customPlaceholder: "Hier erscheint Basis {base} ..."
+    invalidDigitError: "Ungültige Ziffer \"{digit}\" für Basis {base}."
     description: >-
       Konvertiere Zahlen zwischen verschiedenen Basen (Dezimal, Hexadezimal,
       Binär, Oktal, Base64, ...).
   yaml-to-json-converter:
     title: YAML zu JSON
+    inputLabel: Dein YAML
+    inputPlaceholder: Füge dein YAML hier ein...
+    outputLabel: JSON aus deinem YAML
     description: Konvertiere YAML einfach in JSON mit diesem Live-Online-Konverter.
   uuid-generator:
     title: UUID-Generator
+    versionLabel: UUID-Version
+    quantityLabel: 'Anzahl '
+    quantityPlaceholder: UUID-Anzahl
+    invalidUuidMessage: Ungültige UUID
+    uuidsPlaceholder: Deine UUIDs
+    copyButton: Kopieren
+    refreshButton: Aktualisieren
+    copiedMessage: UUIDs in die Zwischenablage kopiert
     description: >-
       Ein Universally Unique Identifier (UUID) ist eine 128-Bit-Nummer, die zur
       Identifizierung von Informationen in Computersystemen verwendet wird. Die
@@ -374,29 +1274,80 @@ tools:
       entspricht (was ziemlich viel ist!).
   ipv4-address-converter:
     title: IPv4-Adresskonverter
+    inputLabel: 'Die IPv4-Adresse:'
+    inputPlaceholder: Die IPv4-Adresse ...
+    decimalLabel: 'Dezimal: '
+    hexadecimalLabel: 'Hexadezimal: '
+    binaryLabel: 'Binär: '
+    ipv6Label: 'IPv6: '
+    ipv6ShortLabel: 'IPv6 (kurz): '
+    outputPlaceholder: Gib eine korrekte IPv4-Adresse an
     description: >-
       Konvertiere eine IP-Adresse in Dezimal, Binär, Hexadezimal oder sogar in
       IPv6.
   text-statistics:
     title: Textstatistiken
+    inputPlaceholder: Dein Text ...
+    characterCountLabel: Zeichenanzahl
+    wordCountLabel: Wortanzahl
+    lineCountLabel: Zeilenanzahl
+    byteSizeLabel: Byte-Größe
     description: >-
       Informationen zu einem Text erhalten, wie die Anzahl der Zeichen, die
       Anzahl der Wörter, die Größe usw.
   text-to-nato-alphabet:
     title: Text zu NATO-Alphabet
+    inputLabel: Dein Text für das NATO-Phonetik-Alphabet
+    inputPlaceholder: Gib hier deinen Text ein ...
+    outputLabel: Dein Text im NATO-Phonetik-Alphabet
+    copyButton: NATO-String kopieren
+    copiedMessage: NATO-Alphabet-String kopiert.
     description: >-
       Wandle Text in das NATO-Phonetik-Alphabet für die mündliche Übermittlung
       um.
   basic-auth-generator:
     title: Basic-Auth-Generator
+    usernameLabel: Benutzername
+    usernamePlaceholder: Dein Benutzername ...
+    passwordLabel: Passwort
+    passwordPlaceholder: Dein Passwort ...
+    headerLabel: 'Authorization-Header:'
+    copyButton: Header kopieren
+    copiedMessage: Header in die Zwischenablage kopiert
     description: >-
       Generiere einen Base64-Basic-Auth-Header aus einem Benutzernamen und einem
       Passwort.
   text-to-unicode:
     title: Text zu Unicode
+    textToUnicodeTitle: Text zu Unicode
+    textInputLabel: Gib Text ein, der in Unicode umgewandelt werden soll
+    textInputPlaceholder: "z. B.: 'Hello Avengers'"
+    unicodeOutputLabel: Unicode aus deinem Text
+    unicodeOutputPlaceholder: Die Unicode-Darstellung deines Textes erscheint hier
+    copyUnicodeButton: Unicode in die Zwischenablage kopieren
+    unicodeToTextTitle: Unicode zu Text
+    unicodeInputLabel: Gib Unicode ein, das in Text umgewandelt werden soll
+    unicodeInputPlaceholder: Unicode-Eingabe
+    textOutputLabel: Text aus deinem Unicode
+    textOutputPlaceholder: Die Textdarstellung deines Unicodes erscheint hier
+    copyTextButton: Text in die Zwischenablage kopieren
     description: Parse und konvertiere Text in Unicode und umgekehrt.
   ipv4-range-expander:
     title: IPv4-Bereichserweiterer
+    startAddressLabel: Startadresse
+    startAddressPlaceholder: Start-IPv4-Adresse ...
+    endAddressLabel: Endadresse
+    endAddressPlaceholder: End-IPv4-Adresse ...
+    addressesInRangeLabel: Adressen im Bereich
+    cidrLabel: CIDR
+    oldValueHeader: Alter Wert
+    newValueHeader: Neuer Wert
+    invalidCombinationTitle: Ungültige Kombination aus Start- und End-IPv4-Adresse
+    invalidCombinationText: >-
+      Die End-IPv4-Adresse ist niedriger als die Start-IPv4-Adresse. Das ist
+      nicht gültig, es konnte kein Ergebnis berechnet werden. In den meisten
+      Fällen besteht die Lösung darin, Start- und Endadresse zu tauschen.
+    switchButton: Start- und End-IPv4-Adresse tauschen
     description: >-
       Bei Angabe einer Start- und End-IPv4-Adresse berechnet dieses Tool ein
       gültiges IPv4-Netzwerk mit seiner CIDR-Notation.
@@ -405,14 +1356,157 @@ tools:
     description: Vergleiche zwei Texte und sieh die Unterschiede zwischen ihnen.
   otp-generator:
     title: OTP-Code-Generator
+    secretLabel: Secret
+    secretPlaceholder: Füge dein TOTP-Secret ein ...
+    invalidSecretMessage: Das Secret muss ein Base32-String sein
+    secretRequiredMessage: Bitte ein Secret festlegen
+    newSecretTooltip: Neues zufälliges Secret generieren
+    nextIn: Nächster Code in {seconds}s
+    openKeyUri: Key-URI in neuem Tab öffnen
+    secretHexLabel: Secret als Hexadezimalwert
+    secretHexPlaceholder: Das Secret als Hexadezimalwert erscheint hier
+    epochLabel: Epoch
+    epochPlaceholder: Die Epoche in Sekunden erscheint hier
+    iterationHeading: Iteration
+    countLabel: 'Zähler:'
+    countPlaceholder: Der Iterationszähler erscheint hier
+    paddedHexLabel: 'Hex (aufgefüllt):'
+    paddedHexPlaceholder: Der Iterationszähler als Hexadezimalwert erscheint hier
+    tokenPrevious: Vorheriger
+    tokenCurrent: Aktueller OTP
+    tokenNext: Nächster
+    copiedTooltip: Kopiert!
+    copyPreviousTooltip: Vorherigen OTP kopieren
+    copyCurrentTooltip: Aktuellen OTP kopieren
+    copyNextTooltip: Nächsten OTP kopieren
     description: >-
       Generiere und validiere zeitbasierte OTPs (Einmalpasswörter) für
       Multi-Faktor-Authentifizierung.
   url-encoder:
     title: Kodieren/Decodieren von URL-formatierten Zeichenfolgen
+    encodeTitle: Kodieren
+    encodeInputLabel: 'Dein String:'
+    encodeInputPlaceholder: Der zu kodierende String
+    encodeOutputLabel: 'Dein kodierter String:'
+    encodeOutputPlaceholder: Dein kodierter String
+    decodeTitle: Decodieren
+    decodeInputLabel: 'Dein kodierter String:'
+    decodeInputPlaceholder: Der zu decodierende String
+    decodeOutputLabel: 'Dein decodierter String:'
+    decodeOutputPlaceholder: Dein decodierter String
+    copyButton: Kopieren
+    encodedCopiedMessage: Kodierter String in die Zwischenablage kopiert
+    decodedCopiedMessage: Decodierter String in die Zwischenablage kopiert
+    parseErrorMessage: Dieser String kann nicht verarbeitet werden
     description: >-
       Kodiere zum URL-kodierten Format (auch als "prozentkodiert" bekannt) oder
       decodiere es.
   text-to-binary:
     title: Text zu ASCII-Binär
+    textToBinaryTitle: Text zu ASCII-Binär
+    textInputLabel: Gib Text ein, der in Binär umgewandelt werden soll
+    textInputPlaceholder: "z. B.: 'Hello world'"
+    binaryOutputLabel: Binär aus deinem Text
+    binaryOutputPlaceholder: Die Binärdarstellung deines Textes erscheint hier
+    copyBinaryButton: Binär in die Zwischenablage kopieren
+    binaryToTextTitle: ASCII-Binär zu Text
+    binaryInputLabel: Gib Binär ein, das in Text umgewandelt werden soll
+    binaryInputPlaceholder: "z. B.: '01001000 01100101 01101100 01101100 01101111'"
+    invalidBinaryMessage: Binär sollte ein gültiger ASCII-Binärstring mit Vielfachen von 8 Bit sein
+    textOutputLabel: Text aus deinem Binär
+    textOutputPlaceholder: Die Textdarstellung deines Binärs erscheint hier
+    copyTextButton: Text in die Zwischenablage kopieren
     description: Konvertiere Text in seine ASCII-Binärrepräsentation und umgekehrt.
+  ascii-text-drawer:
+    title: ASCII-Art-Text-Generator
+    textLabel: 'Dein Text:'
+    textPlaceholder: Dein zu zeichnender Text
+    fontLabel: 'Schriftart:'
+    fontPlaceholder: Zu verwendende Schriftart auswählen
+    widthLabel: 'Breite:'
+    widthPlaceholder: Breite des Textes
+    loadingFont: Schriftart wird geladen ...
+    settingsError: Die aktuellen Einstellungen führten zu einem Fehler.
+    outputLabel: 'ASCII-Art-Text:'
+    description: Erstelle ASCII-Art-Text mit vielen Schriftarten und Stilen.
+  json-to-xml:
+    title: JSON zu XML
+    inputLabel: Dein JSON-Inhalt
+    inputPlaceholder: Füge deinen JSON-Inhalt hier ein...
+    outputLabel: Konvertiertes XML
+    description: Konvertiere JSON zu XML.
+  markdown-to-html:
+    title: Markdown zu HTML
+    inputLabel: 'Dein zu konvertierendes Markdown:'
+    inputPlaceholder: Dein Markdown-Inhalt ...
+    outputLabel: 'Ausgabe-HTML:'
+    printButton: Als PDF drucken
+    description: Konvertiere Markdown zu HTML und ermögliche den Druck (als PDF).
+  regex-memo:
+    title: Regex-Spickzettel
+    description: JavaScript-Regex/Regulärer-Ausdruck-Spickzettel.
+  regex-tester:
+    title: Regex-Tester
+    description: Teste deine regulären Ausdrücke mit Beispieltext.
+    regexLabel: 'Zu testender regulärer Ausdruck:'
+    regexPlaceholder: Gib den zu testenden regulären Ausdruck ein
+    invalidRegex: 'Ungültiger regulärer Ausdruck: {error}'
+    cheatsheet: Zur Spickzettel-Übersicht für reguläre Ausdrücke
+    flags:
+      global: Globale Suche.
+      globalTitle: Globale Suche
+      ignoreCase: Groß-/Kleinschreibung ignorieren.
+      ignoreCaseTitle: Suche ohne Beachtung der Groß-/Kleinschreibung
+      multiline: Mehrzeilig
+      multilineTitle: Erlaubt, dass ^ und $ an Zeilenumbrüchen übereinstimmen.
+      dotAll: Einzeilig
+      dotAllTitle: Erlaubt, dass . auch Zeilenumbrüche erfasst.
+      unicode: Unicode
+      unicodeTitle: Unicode; behandelt das Muster als Folge von Unicode-Codepunkten.
+      unicodeSets: Unicode-Mengen
+      unicodeSetsTitle: Eine Erweiterung des u-Modus mit zusätzlichen Unicode-Funktionen.
+    textLabel: 'Zu durchsuchender Text:'
+    textPlaceholder: Gib den zu durchsuchenden Text ein
+    regexCard: Regex
+    matchesCard: Treffer
+    columnIndex: Position im Text
+    columnValue: Wert
+    columnCaptures: Captures
+    columnGroups: Gruppen
+    noMatch: Kein Treffer
+    sampleCard: Beispieltext zum Muster
+    sampleGenerating: Beispiel wird erzeugt …
+    diagramCard: Regex-Diagramm
+    errors:
+      matchFailed: Der Abgleich ist fehlgeschlagen.
+      matchTimeout: Der Abgleich hat zu lange gedauert. Vereinfache den Ausdruck.
+      sampleFailed: Die Beispielerzeugung ist fehlgeschlagen.
+      sampleTimeout: Die Beispielerzeugung hat zu lange gedauert. Vereinfache den Ausdruck.
+      sampleUnavailable: Die Beispielerzeugung ist in diesem Browser nicht verfügbar.
+      sampleLimit: Die Beispielerzeugung hat ihre Sicherheitsgrenze überschritten. Vereinfache den Ausdruck.
+  safelink-decoder:
+    title: Outlook-Safelink-Decoder
+    inputLabel: 'Deine Outlook-SafeLink-URL:'
+    inputPlaceholder: Deine Outlook-SafeLink-URL ...
+    outputLabel: 'Dekodierte URL:'
+    invalidUrlError: Ungültige SafeLinks-URL angegeben
+    description: Dekodiere Outlook-SafeLink-Links.
+  xml-to-json:
+    title: XML zu JSON
+    inputLabel: Dein XML-Inhalt
+    inputPlaceholder: Füge deinen XML-Inhalt hier ein...
+    outputLabel: Konvertiertes JSON
+    description: Konvertiere XML zu JSON.
+  email-normalizer:
+    title: E-Mail-Normalisierer
+    description: >-
+      Normalisiere E-Mail-Adressen in ein Standardformat für einfacheren
+      Vergleich. Nützlich für Deduplizierung und Datenbereinigung.
+    rawLabel: 'Rohe E-Mails zum Normalisieren:'
+    rawPlaceholder: Gib hier deine E-Mails ein (eine pro Zeile) ...
+    normalizedLabel: 'Normalisierte E-Mails:'
+    normalizedPlaceholder: Normalisierte E-Mails erscheinen hier ...
+    clearButton: E-Mails leeren
+    copyButton: Normalisierte E-Mails kopieren
+    unableToParse: 'E-Mail konnte nicht verarbeitet werden: {email}'
+    copiedMessage: Normalisierte E-Mails in die Zwischenablage kopiert

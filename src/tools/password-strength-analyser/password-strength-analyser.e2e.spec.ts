@@ -6,7 +6,7 @@ test.describe('Tool - Password strength analyser', () => {
   });
 
   test('Has correct title', async ({ page }) => {
-    await expect(page).toHaveTitle('Password strength analyser - OstseeBit Tools');
+    await expect(page).toHaveTitle('Passwortstärken-Analysator - OstseeBit Tools');
   });
 
   test('Computes the brute force attack time of a password', async ({ page }) => {
@@ -14,6 +14,6 @@ test.describe('Tool - Password strength analyser', () => {
 
     const crackDuration = await page.getByTestId('crack-duration').textContent();
 
-    expect(crackDuration).toEqual('15,091 millennia, 3 centuries');
+    expect(crackDuration).toEqual('15,091 Jahrtausende, 3 Jahrhunderte');
   });
 });

@@ -6,7 +6,7 @@ test.describe('Tool - JSON diff', () => {
   });
 
   test('Has correct title', async ({ page }) => {
-    await expect(page).toHaveTitle('JSON diff - OstseeBit Tools');
+    await expect(page).toHaveTitle('JSON-Unterschied - OstseeBit Tools');
   });
 
   test('Identical JSONs have a custom result message', async ({ page }) => {
@@ -15,7 +15,7 @@ test.describe('Tool - JSON diff', () => {
 
     const result = await page.getByTestId('diff-result').innerText();
 
-    expect(result).toContain('The provided JSONs are the same');
+    expect(result).toContain('Die angegebenen JSONs sind identisch');
   });
 
   test('Different JSONs have differences listed', async ({ page }) => {

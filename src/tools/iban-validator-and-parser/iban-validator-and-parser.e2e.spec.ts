@@ -20,7 +20,7 @@ test.describe('Tool - Iban validator and parser', () => {
   });
 
   test('Has correct title', async ({ page }) => {
-    await expect(page).toHaveTitle('IBAN validator and parser - OstseeBit Tools');
+    await expect(page).toHaveTitle('IBAN-Validator und -Parser - OstseeBit Tools');
   });
 
   test('iban info are extracted from a valid iban', async ({ page }) => {
@@ -29,11 +29,11 @@ test.describe('Tool - Iban validator and parser', () => {
     const ibanInfo = await extractIbanInfo({ page });
 
     expect(ibanInfo).toEqual([
-      ['Is IBAN valid ?', 'Yes'],
-      ['Is IBAN a QR-IBAN ?', 'No'],
-      ['Country code', 'DE'],
+      ['Ist die IBAN gültig?', 'Ja'],
+      ['Ist die IBAN eine QR-IBAN?', 'Nein'],
+      ['Ländercode', 'DE'],
       ['BBAN', '370400440532013000'],
-      ['IBAN friendly format', 'DE89 3704 0044 0532 0130 00'],
+      ['IBAN im lesbaren Format', 'DE89 3704 0044 0532 0130 00'],
     ]);
   });
 
@@ -43,12 +43,12 @@ test.describe('Tool - Iban validator and parser', () => {
     const ibanInfo = await extractIbanInfo({ page });
 
     expect(ibanInfo).toEqual([
-      ['Is IBAN valid ?', 'No'],
-      ['IBAN errors', 'Wrong account bank branch checksum Wrong IBAN checksum'],
-      ['Is IBAN a QR-IBAN ?', 'No'],
-      ['Country code', 'N/A'],
-      ['BBAN', 'N/A'],
-      ['IBAN friendly format', 'FR76 3000 6060 0112 3456 7890 189'],
+      ['Ist die IBAN gültig?', 'Nein'],
+      ['IBAN-Fehler', 'Falsche Konto-/Bank-/Filial-Prüfsumme Falsche IBAN-Prüfsumme'],
+      ['Ist die IBAN eine QR-IBAN?', 'Nein'],
+      ['Ländercode', 'k. A.'],
+      ['BBAN', 'k. A.'],
+      ['IBAN im lesbaren Format', 'FR76 3000 6060 0112 3456 7890 189'],
     ]);
   });
 });

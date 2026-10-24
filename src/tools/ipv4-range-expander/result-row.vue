@@ -1,14 +1,11 @@
 <script setup lang="ts">
-import _ from 'lodash';
-
-const props = withDefaults(defineProps<{ label?: string, oldValue?: string, newValue?: string }>(), {
+const props = withDefaults(defineProps<{ id?: string, label?: string, oldValue?: string, newValue?: string }>(), {
+  id: '',
   label: '',
   oldValue: '',
   newValue: '',
 });
-const { label, oldValue, newValue } = toRefs(props);
-
-const testId = computed(() => _.kebabCase(label.value));
+const { id, label, oldValue, newValue } = toRefs(props);
 </script>
 
 <template>
@@ -16,10 +13,10 @@ const testId = computed(() => _.kebabCase(label.value));
     <td font-bold>
       {{ label }}
     </td>
-    <td :data-test-id="`${testId}.old`">
+    <td :data-test-id="`${id}.old`">
       <c-text-copyable :value="oldValue" monospace :show-icon="false" />
     </td>
-    <td :data-test-id="`${testId}.new`">
+    <td :data-test-id="`${id}.new`">
       <c-text-copyable :value="newValue" monospace :show-icon="false" />
     </td>
   </tr>

@@ -4,77 +4,75 @@ import {
   capitalCase,
   constantCase,
   dotCase,
-  headerCase,
+  kebabCase,
   noCase,
-  paramCase,
   pascalCase,
   pathCase,
   sentenceCase,
   snakeCase,
+  trainCase,
 } from 'change-case';
 import InputCopyable from '../../components/InputCopyable.vue';
 
-const baseConfig = {
-  stripRegexp: /[^a-z\xDF-\xF6\xF8-\xFF]+/gi,
-};
+const { t } = useI18n();
 
 const input = ref('lorem ipsum dolor sit amet');
 
 const formats = computed(() => [
   {
-    label: 'Lowercase:',
+    label: t('tools.case-converter.formats.lowercase'),
     value: input.value.toLocaleLowerCase(),
   },
   {
-    label: 'Uppercase:',
+    label: t('tools.case-converter.formats.uppercase'),
     value: input.value.toLocaleUpperCase(),
   },
   {
-    label: 'Camelcase:',
-    value: camelCase(input.value, baseConfig),
+    label: t('tools.case-converter.formats.camelcase'),
+    value: camelCase(input.value),
   },
   {
-    label: 'Capitalcase:',
-    value: capitalCase(input.value, baseConfig),
+    label: t('tools.case-converter.formats.capitalcase'),
+    value: capitalCase(input.value),
   },
   {
-    label: 'Constantcase:',
-    value: constantCase(input.value, baseConfig),
+    label: t('tools.case-converter.formats.constantcase'),
+    value: constantCase(input.value),
   },
   {
-    label: 'Dotcase:',
-    value: dotCase(input.value, baseConfig),
+    label: t('tools.case-converter.formats.dotcase'),
+    value: dotCase(input.value),
   },
   {
-    label: 'Headercase:',
-    value: headerCase(input.value, baseConfig),
+    label: t('tools.case-converter.formats.headercase'),
+    value: trainCase(input.value),
   },
   {
-    label: 'Nocase:',
-    value: noCase(input.value, baseConfig),
+    label: t('tools.case-converter.formats.nocase'),
+    value: noCase(input.value),
   },
   {
-    label: 'Paramcase:',
-    value: paramCase(input.value, baseConfig),
+    label: t('tools.case-converter.formats.paramcase'),
+    value: kebabCase(input.value),
   },
   {
-    label: 'Pascalcase:',
-    value: pascalCase(input.value, baseConfig),
+    label: t('tools.case-converter.formats.pascalcase'),
+    value: pascalCase(input.value),
   },
   {
-    label: 'Pathcase:',
-    value: pathCase(input.value, baseConfig),
+    label: t('tools.case-converter.formats.pathcase'),
+    value: pathCase(input.value),
   },
   {
-    label: 'Sentencecase:',
-    value: sentenceCase(input.value, baseConfig),
+    label: t('tools.case-converter.formats.sentencecase'),
+    value: sentenceCase(input.value),
   },
   {
-    label: 'Snakecase:',
-    value: snakeCase(input.value, baseConfig),
+    label: t('tools.case-converter.formats.snakecase'),
+    value: snakeCase(input.value),
   },
   {
-    label: 'Mockingcase:',
+    label: t('tools.case-converter.formats.mockingcase'),
     value: input.value
       .split('')
       .map((char, index) => (index % 2 === 0 ? char.toUpperCase() : char.toLowerCase()))
@@ -93,8 +91,8 @@ const inputLabelAlignmentConfig = {
   <c-card>
     <c-input-text
       v-model:value="input"
-      label="Your string:"
-      placeholder="Your string..."
+      :label="t('tools.case-converter.inputLabel')"
+      :placeholder="t('tools.case-converter.inputPlaceholder')"
       raw-text
       v-bind="inputLabelAlignmentConfig"
     />

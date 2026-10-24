@@ -2,9 +2,14 @@ import type { OGSchemaType } from '../OGSchemaType.type';
 import { videoMovie } from './videoMovie';
 
 export const videoEpisode: OGSchemaType = {
-  name: 'Video episode details',
+  nameKey: 'tools.og-meta-generator.schemas.videoEpisode.name',
   elements: [
     ...videoMovie.elements,
-    { type: 'input', label: 'Series', key: 'video:series', placeholder: 'Which series this episode belongs to...' },
+    {
+      type: 'input',
+      key: 'video:series',
+      labelKey: 'tools.og-meta-generator.schemas.videoEpisode.seriesLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.videoEpisode.seriesPlaceholder',
+    },
   ],
 };

@@ -3,11 +3,16 @@ import type { QRCodeErrorCorrectionLevel } from 'qrcode';
 import { useDownloadFileFromBase64 } from '@/composable/downloadBase64';
 import { useQRCode } from './useQRCode';
 
+const { t } = useI18n();
+
 const foreground = ref('#000000ff');
 const background = ref('#ffffffff');
 const errorCorrectionLevel = ref<QRCodeErrorCorrectionLevel>('medium');
 
-const errorCorrectionLevels = ['low', 'medium', 'quartile', 'high'];
+const errorCorrectionLevels = ['low', 'medium', 'quartile', 'high'] as const;
+const errorCorrectionOptions = computed(() =>
+  errorCorrectionLevels.map(value => ({ label: t(`tools.qrcode-generator.errorCorrection.${value}`), value })),
+);
 
 const text = ref('https://example.com');
 const { qrcode } = useQRCode({
@@ -32,27 +37,27 @@ const { download } = useDownloadFileFromBase64({ source: qrcode, filename: 'qr-c
           label-position="left"
           label-width="130px"
           label-align="right"
-          label="Text:"
+          :label="t('tools.qrcode-generator.textLabel')"
           multiline
           rows="1"
           autosize
-          placeholder="Your link or text..."
+          :placeholder="t('tools.qrcode-generator.textPlaceholder')"
           mb-6
         />
         <n-form label-width="130" label-placement="left">
-          <n-form-item label="Foreground color:">
+          <n-form-item :label="t('tools.qrcode-generator.foregroundColorLabel')">
             <n-color-picker v-model:value="foreground" :modes="['hex']" />
           </n-form-item>
-          <n-form-item label="Background color:">
+          <n-form-item :label="t('tools.qrcode-generator.backgroundColorLabel')">
             <n-color-picker v-model:value="background" :modes="['hex']" />
           </n-form-item>
           <c-select
             v-model:value="errorCorrectionLevel"
-            label="Error resistance:"
+            :label="t('tools.qrcode-generator.errorCorrectionLabel')"
             label-position="left"
             label-width="130px"
             label-align="right"
-            :options="errorCorrectionLevels.map((value) => ({ label: value, value }))"
+            :options="errorCorrectionOptions"
           />
         </n-form>
       </n-gi>
@@ -60,7 +65,7 @@ const { download } = useDownloadFileFromBase64({ source: qrcode, filename: 'qr-c
         <div flex flex-col items-center gap-3>
           <n-image :src="qrcode" width="200" />
           <c-button @click="download">
-            Download qr-code
+            {{ t('tools.qrcode-generator.downloadButton') }}
           </c-button>
         </div>
       </n-gi>

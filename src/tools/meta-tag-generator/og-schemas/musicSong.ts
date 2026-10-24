@@ -1,22 +1,37 @@
 import type { OGSchemaType } from '../OGSchemaType.type';
 
 export const musicSong: OGSchemaType = {
-  name: 'Song details',
+  nameKey: 'tools.og-meta-generator.schemas.musicSong.name',
   elements: [
-    { type: 'input', label: 'Duration', placeholder: 'The duration of the song...', key: 'music:duration' },
-    { type: 'input', label: 'Album', placeholder: 'The album this song is from...', key: 'music:album' },
     {
       type: 'input',
-      label: 'Disc',
-      placeholder: 'Which disc of the album this song is on...',
-      key: 'music:album:disk',
+      key: 'music:duration',
+      labelKey: 'tools.og-meta-generator.schemas.musicSong.durationLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.musicSong.durationPlaceholder',
     },
-    { type: 'input', label: 'Track', placeholder: ' Which track this song is...', key: 'music:album:track' },
+    {
+      type: 'input',
+      key: 'music:album',
+      labelKey: 'tools.og-meta-generator.schemas.musicSong.albumLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.musicSong.albumPlaceholder',
+    },
+    {
+      type: 'input',
+      key: 'music:album:disk',
+      labelKey: 'tools.og-meta-generator.schemas.musicSong.discLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.musicSong.discPlaceholder',
+    },
+    {
+      type: 'input',
+      key: 'music:album:track',
+      labelKey: 'tools.og-meta-generator.schemas.musicSong.trackLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.musicSong.trackPlaceholder',
+    },
     {
       type: 'input-multiple',
-      label: 'Musician',
-      placeholder: 'The musician that made this song...',
       key: 'music:musician',
+      labelKey: 'tools.og-meta-generator.schemas.musicSong.musicianLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.musicSong.musicianPlaceholder',
     },
   ],
 };

@@ -6,7 +6,7 @@ test.describe('Tool - Text to ASCII binary', () => {
   });
 
   test('Has correct title', async ({ page }) => {
-    await expect(page).toHaveTitle('Text to ASCII binary - OstseeBit Tools');
+    await expect(page).toHaveTitle('Text zu ASCII-Binär - OstseeBit Tools');
   });
 
   test('Text to binary conversion', async ({ page }) => {

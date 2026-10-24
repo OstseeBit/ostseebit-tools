@@ -17,6 +17,9 @@ export default defineConfig({
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: isCI,
   failOnFlakyTests: true,
+  /* Every page is a lazily loaded route chunk; under parallel load in three browsers the default
+     5 s occasionally ends before the page title or first render has switched over. */
+  expect: { timeout: 10_000 },
   /* Retry on CI only */
   retries: isCI ? 2 : 0,
   /* Opt out of parallel tests on CI. */

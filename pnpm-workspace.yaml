@@ -3,3 +3,22 @@ allowBuilds:
   vue-demi: false
 minimumReleaseAgeExclude:
   - eslint@10.12.0
+overrides:
+  # js-sha256@0.9.0 (transitive via @it-tools/bip39) uses eval("require(...)")
+  # for its Node.js code path. That eval is blocked by this project's CSP
+  # (script-src 'self', no 'unsafe-eval') and breaks every page load in
+  # Firefox, since the dependency ends up in the globally-loaded shared
+  # chunk. Fixed upstream in 0.10.0 (replaced eval with plain require());
+  # pin to that fix without jumping to the unrelated 1.0.0 rewrite.
+  js-sha256: ^0.11.1
+  # Security patches for transitive dependencies that the direct dependencies
+  # (composerize-ts, @it-tools/bip39, naive-ui, vue, tiptap) have not picked up
+  # yet. Each range only matches the vulnerable versions and stays inside the
+  # same major version, so no consumer sees an API change. Revisit and drop an
+  # entry once its parent depends on a patched release on its own.
+  'brace-expansion@<1.1.12': ^1.1.12
+  'minimatch@<3.1.3': ^3.1.3
+  'nanoid@<3.3.8': ^3.3.8
+  'lodash-es@<4.18.1': ^4.18.1
+  'source-map-js@<1.2.2': ^1.2.2
+  'browserslist@<4.28.7': ^4.28.7

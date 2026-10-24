@@ -36,28 +36,3 @@ declare module 'pdf-signature-reader' {
 
   export default verifySignature;
 }
-
-declare module '@tabler/icons-vue/dist/esm/icons/IconDragDrop.mjs' {
-  const icon: typeof import('@tabler/icons-vue').IconDragDrop;
-  export default icon;
-}
-
-declare module '@tabler/icons-vue/dist/esm/icons/IconBrandGithub.mjs' {
-  const icon: typeof import('@tabler/icons-vue').IconBrandGithub;
-  export default icon;
-}
-
-declare module '@tabler/icons-vue/dist/esm/icons/IconInfoCircle.mjs' {
-  const icon: typeof import('@tabler/icons-vue').IconInfoCircle;
-  export default icon;
-}
-
-declare module '@tabler/icons-vue/dist/esm/icons/IconMoon.mjs' {
-  const icon: typeof import('@tabler/icons-vue').IconMoon;
-  export default icon;
-}
-
-declare module '@tabler/icons-vue/dist/esm/icons/IconSun.mjs' {
-  const icon: typeof import('@tabler/icons-vue').IconSun;
-  export default icon;
-}

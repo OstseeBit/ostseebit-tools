@@ -1,5 +1,6 @@
 import type { Colord } from 'colord';
 import { colord } from 'colord';
+import { computed, ref } from 'vue';
 import { useValidation } from '@/composable/validation';
 import { withDefaultOnError } from '@/utils/defaults';
 
@@ -10,35 +11,32 @@ function removeAlphaChannelWhenOpaque(hexColor: string) {
 }
 
 function buildColorFormat({
-  label,
+  formatId,
   parse = value => colord(value),
   format,
-  placeholder,
-  invalidMessage = `Invalid ${label.toLowerCase()} format.`,
+  t,
   type = 'text',
 }: {
-  label: string
+  formatId: string
   parse?: (value: string) => Colord
   format: (value: Colord) => string
-  placeholder?: string
-  invalidMessage?: string
+  t: (key: string, named?: Record<string, unknown>) => string
   type?: 'text' | 'color-picker'
 }) {
   const value = ref('');
 
   return {
     type,
-    label,
+    formatId,
     parse: (v: string) => withDefaultOnError(() => parse(v), undefined),
     format,
-    placeholder,
     value,
     validation: useValidation({
       source: value,
-      rules: [
+      rules: computed(() => [
         {
-          message: invalidMessage,
-          validator: v => withDefaultOnError(() => {
+          message: t('validation.providedFormatInvalid', { format: formatId }),
+          validator: (v: string) => withDefaultOnError(() => {
             if (v === '') {
               return true;
             }
@@ -46,7 +44,7 @@ function buildColorFormat({
             return parse(v).isValid();
           }, false),
         },
-      ],
+      ]),
     }),
 
   };

@@ -6,6 +6,6 @@ test.describe('Tool - MAC address generator', () => {
   });
 
   test('Has correct title', async ({ page }) => {
-    await expect(page).toHaveTitle('MAC address generator - OstseeBit Tools');
+    await expect(page).toHaveTitle('MAC-Adressen-Generator - OstseeBit Tools');
   });
 });

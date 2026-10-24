@@ -6,7 +6,7 @@ test.describe('Tool - JSON to TOML', () => {
   });
 
   test('Has correct title', async ({ page }) => {
-    await expect(page).toHaveTitle('JSON to TOML - OstseeBit Tools');
+    await expect(page).toHaveTitle('JSON zu TOML - OstseeBit Tools');
   });
 
   test('JSON is parsed and outputs clean TOML', async ({ page }) => {
@@ -31,8 +31,8 @@ foo = "bar"
 [list]
 name = "item"
 
-  [list.another]
-  key = "value"
+[list.another]
+key = "value"
    `.trim(),
     );
   });

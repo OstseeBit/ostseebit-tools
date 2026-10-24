@@ -21,10 +21,16 @@ export interface UseValidationRule<T> {
 // string "false" or "0"), which is a real bug, not just a style preference.
 // Also removes the copy-paste risk that once shipped a wrong error message
 // (yaml-to-toml claiming "Provided JSON is not valid").
-export function createParseValidationRule(parse: (value: string) => unknown, formatName: string): UseValidationRule<string> {
+//
+// `t` is the caller's `useI18n().t`, passed in rather than called here so the
+// message stays reactive to locale changes — callers must wrap the returned
+// rule in a `computed()` that re-evaluates when `t` changes. `formatName`
+// (JSON/YAML/TOML/XML) is passed untranslated since those are identical in
+// every supported locale, only the surrounding sentence is translated.
+export function createParseValidationRule(parse: (value: string) => unknown, formatName: string, t: (key: string, named: Record<string, unknown>) => string): UseValidationRule<string> {
   return {
     validator: (value: string) => value === '' || isNotThrowing(() => parse(value)),
-    message: `Provided ${formatName} is not valid.`,
+    message: t('validation.providedFormatInvalid', { format: formatName }),
   };
 }
 

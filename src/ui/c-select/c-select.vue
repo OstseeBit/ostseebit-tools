@@ -27,6 +27,8 @@ const emits = defineEmits(['update:value']);
 
 const { options: rawOptions, placeholder, size: sizeName, searchable } = toRefs(props);
 
+const { t } = useI18n();
+
 const options = computed(() => {
   return rawOptions.value.map((option: string | CSelectOption<T>) => {
     if (typeof option === 'string') {
@@ -43,7 +45,10 @@ const theme = useTheme();
 const appTheme = useAppTheme();
 
 const isOpen = ref(false);
-const selectedOption = shallowRef<CSelectOption<T> | undefined>(options.value.find((option: CSelectOption<T>) => option.value === value.value));
+// Derived from options + value (not a ref set imperatively) so the
+// displayed label stays correct when options change without value
+// changing — e.g. translated option labels after a locale switch.
+const selectedOption = computed<CSelectOption<T> | undefined>(() => options.value.find((option: CSelectOption<T>) => option.value === value.value));
 const focusIndex = ref(0);
 const elementRef = ref(null);
 
@@ -64,19 +69,9 @@ whenever(() => isOpen.value, () => {
 onClickOutside(elementRef, close);
 whenever(keys.escape, close);
 
-watch(
-  value,
-  (newValue) => {
-    const option = options.value.find((option: CSelectOption<T>) => option.value === newValue);
-    if (option) {
-      selectedOption.value = option;
-    }
-  },
-);
-
 const { searchResult: filteredOptions } = useFuzzySearch<CSelectOption<T>>({
   search: searchQuery,
-  data: options.value,
+  data: options,
   options: {
     keys: ['label'],
     shouldSort: false,
@@ -94,7 +89,6 @@ function toggleOpen() {
 }
 
 function selectOption({ option }: { option: CSelectOption<T> }) {
-  selectedOption.value = option;
   // @ts-expect-error vue template generic is a bit flacky thanks to withDefaults
   value.value = option.value;
   isOpen.value = false;
@@ -151,12 +145,12 @@ function onSearchInput() {
       >
         <div flex-1 truncate>
           <slot name="displayed-value">
-            <input v-if="searchable && isOpen" ref="searchInputRef" v-model="searchQuery" type="text" placeholder="Search..." class="search-input" w-full color-current lh-normal @input="onSearchInput">
+            <input v-if="searchable && isOpen" ref="searchInputRef" v-model="searchQuery" type="text" :placeholder="t('common.searchPlaceholder')" class="search-input" w-full color-current lh-normal @input="onSearchInput">
             <span v-else-if="selectedOption" lh-normal>
               {{ selectedOption.label }}
             </span>
             <span v-else class="placeholder" lh-normal>
-              {{ placeholder ?? 'Select an option' }}
+              {{ placeholder ?? t('common.selectOption') }}
             </span>
           </slot>
         </div>
@@ -169,7 +163,7 @@ function onSearchInput() {
           <template v-if="!filteredOptions.length">
             <slot name="empty">
               <div px-4 py-1 opacity-70>
-                No results found
+                {{ t('common.noResults') }}
               </div>
             </slot>
           </template>

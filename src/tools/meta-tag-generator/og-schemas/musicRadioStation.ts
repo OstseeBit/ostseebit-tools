@@ -1,8 +1,13 @@
 import type { OGSchemaType } from '../OGSchemaType.type';
 
 export const musicRadioStation: OGSchemaType = {
-  name: 'Radio station details',
+  nameKey: 'tools.og-meta-generator.schemas.musicRadioStation.name',
   elements: [
-    { type: 'input', label: 'Creator', key: 'music:creator', placeholder: 'The creator of this radio station...' },
+    {
+      type: 'input',
+      key: 'music:creator',
+      labelKey: 'tools.og-meta-generator.schemas.musicRadioStation.creatorLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.musicRadioStation.creatorPlaceholder',
+    },
   ],
 };

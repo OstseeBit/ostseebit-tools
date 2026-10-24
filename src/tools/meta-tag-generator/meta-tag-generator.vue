@@ -1,9 +1,18 @@
 <script setup lang="ts">
-import type { OGSchemaType, OGSchemaTypeElementSelect } from './OGSchemaType.type';
+import type { SelectGroupOption, SelectOption } from 'naive-ui';
+import type { OGSchemaType, OGSchemaTypeElementSelect, OGSchemaTypeOption } from './OGSchemaType.type';
 import { generateMeta } from '@it-tools/oggen';
 import _ from 'lodash';
 import TextareaCopyable from '@/components/TextareaCopyable.vue';
 import { image, ogSchemas, twitter, website } from './og-schemas';
+
+const { t } = useI18n();
+
+function toSelectOptions(options: OGSchemaTypeOption[]): Array<SelectOption | SelectGroupOption> {
+  return options.map(option => 'children' in option
+    ? { type: 'group', key: option.key, label: t(option.labelKey), children: option.children.map(child => ({ label: t(child.labelKey), value: child.value })) }
+    : { label: t(option.labelKey), value: option.value });
+}
 
 // Since type guards do not work in template
 
@@ -52,22 +61,22 @@ const metaTags = computed(() => {
 
 <template>
   <div>
-    <div v-for="{ name, elements } of sections" :key="name" style="margin-bottom: 15px">
+    <div v-for="{ nameKey, elements } of sections" :key="nameKey" style="margin-bottom: 15px">
       <div mb-5px>
-        {{ name }}
+        {{ t(nameKey) }}
       </div>
 
-      <n-input-group v-for="{ key, type, label, placeholder, ...element } of elements" :key="key">
-        <n-input-group-label style="flex: 0 0 110px">
-          {{ label }}
+      <n-input-group v-for="{ key, type, labelKey, placeholderKey, ...element } of elements" :key="key">
+        <n-input-group-label style="flex: 0 0 150px">
+          {{ t(labelKey) }}
         </n-input-group-label>
 
-        <c-input-text v-if="type === 'input'" v-model:value="metadata[key]" :placeholder="placeholder" clearable />
+        <c-input-text v-if="type === 'input'" v-model:value="metadata[key]" :placeholder="t(placeholderKey)" clearable />
         <n-dynamic-input
           v-else-if="type === 'input-multiple'"
           v-model:value="metadata[key]"
           :min="1"
-          :placeholder="placeholder"
+          :placeholder="t(placeholderKey)"
           :default-value="['']"
           :show-sort-button="true"
         />
@@ -76,14 +85,14 @@ const metaTags = computed(() => {
           v-else-if="type === 'select'"
           v-model:value="metadata[key]"
           w-full
-          :placeholder="placeholder"
-          :options="(element as OGSchemaTypeElementSelect).options"
+          :placeholder="t(placeholderKey)"
+          :options="toSelectOptions((element as OGSchemaTypeElementSelect).options)"
         />
       </n-input-group>
     </div>
   </div>
   <div>
-    <n-form-item label="Your meta tags">
+    <n-form-item :label="t('tools.og-meta-generator.yourMetaTags')">
       <TextareaCopyable :value="metaTags" language="html" />
     </n-form-item>
   </div>

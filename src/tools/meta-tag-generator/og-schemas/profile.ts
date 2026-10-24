@@ -1,21 +1,31 @@
 import type { OGSchemaType } from '../OGSchemaType.type';
 
 export const profile: OGSchemaType = {
-  name: 'Profile',
+  nameKey: 'tools.og-meta-generator.schemas.profile.name',
   elements: [
     {
       type: 'input',
-      label: 'First name',
-      placeholder: 'Enter the first name of the person...',
       key: 'profile:first_name',
+      labelKey: 'tools.og-meta-generator.schemas.profile.firstNameLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.profile.firstNamePlaceholder',
     },
     {
       type: 'input',
-      label: 'Last name',
-      placeholder: 'Enter the last name of the person...',
       key: 'profile:last_name',
+      labelKey: 'tools.og-meta-generator.schemas.profile.lastNameLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.profile.lastNamePlaceholder',
     },
-    { type: 'input', label: 'Username', placeholder: 'Enter the username of the person...', key: 'profile:username' },
-    { type: 'input', label: 'Gender', placeholder: 'Enter the gender of the person...', key: 'profile:gender' },
+    {
+      type: 'input',
+      key: 'profile:username',
+      labelKey: 'tools.og-meta-generator.schemas.profile.usernameLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.profile.usernamePlaceholder',
+    },
+    {
+      type: 'input',
+      key: 'profile:gender',
+      labelKey: 'tools.og-meta-generator.schemas.profile.genderLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.profile.genderPlaceholder',
+    },
   ],
 };

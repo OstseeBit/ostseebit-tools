@@ -1,27 +1,37 @@
 import type { OGSchemaType } from '../OGSchemaType.type';
 
 export const musicAlbum: OGSchemaType = {
-  name: 'Album details',
+  nameKey: 'tools.og-meta-generator.schemas.musicAlbum.name',
   elements: [
-    { type: 'input', label: 'Song', key: 'music:song', placeholder: 'The song on this album...' },
     {
       type: 'input',
-      label: 'Disc',
+      key: 'music:song',
+      labelKey: 'tools.og-meta-generator.schemas.musicAlbum.songLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.musicAlbum.songPlaceholder',
+    },
+    {
+      type: 'input',
       key: 'music:song:disc',
-      placeholder: 'The same as music:album:disc but in reverse...',
+      labelKey: 'tools.og-meta-generator.schemas.musicAlbum.discLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.musicAlbum.discPlaceholder',
     },
     {
       type: 'input',
-      label: 'Track',
       key: 'music:song:track',
-      placeholder: 'The same as music:album:track but in reverse...',
+      labelKey: 'tools.og-meta-generator.schemas.musicAlbum.trackLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.musicAlbum.trackPlaceholder',
     },
-    { type: 'input', label: 'Musician', key: 'music:musician', placeholder: 'The musician that made this song...' },
     {
       type: 'input',
-      label: 'Release date',
+      key: 'music:musician',
+      labelKey: 'tools.og-meta-generator.schemas.musicAlbum.musicianLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.musicAlbum.musicianPlaceholder',
+    },
+    {
+      type: 'input',
       key: 'music:release_date',
-      placeholder: 'The date the album was released...',
+      labelKey: 'tools.og-meta-generator.schemas.musicAlbum.releaseDateLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.musicAlbum.releaseDatePlaceholder',
     },
   ],
 };

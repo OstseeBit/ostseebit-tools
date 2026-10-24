@@ -1,56 +1,61 @@
-import type { OGSchemaType } from '../OGSchemaType.type';
+import type { OGSchemaType, OGSchemaTypeOption } from '../OGSchemaType.type';
 
-const typeOptions = [
-  { label: 'Website', value: 'website' },
-  { label: 'Article', value: 'article' },
-  { label: 'Book', value: 'book' },
-  { label: 'Profile', value: 'profile' },
+const typeOptions: OGSchemaTypeOption[] = [
+  { labelKey: 'tools.og-meta-generator.schemas.website.optionWebsite', value: 'website' },
+  { labelKey: 'tools.og-meta-generator.schemas.website.optionArticle', value: 'article' },
+  { labelKey: 'tools.og-meta-generator.schemas.website.optionBook', value: 'book' },
+  { labelKey: 'tools.og-meta-generator.schemas.website.optionProfile', value: 'profile' },
   {
     type: 'group',
-    label: 'Music',
     key: 'Music',
+    labelKey: 'tools.og-meta-generator.schemas.website.optionGroupMusic',
     children: [
-      { label: 'Song', value: 'music.song' },
-      { label: 'Music album', value: 'music.album' },
-      { label: 'Playlist', value: 'music.playlist' },
-      { label: 'Radio station', value: 'music.radio_station' },
+      { labelKey: 'tools.og-meta-generator.schemas.website.optionSong', value: 'music.song' },
+      { labelKey: 'tools.og-meta-generator.schemas.website.optionAlbum', value: 'music.album' },
+      { labelKey: 'tools.og-meta-generator.schemas.website.optionPlaylist', value: 'music.playlist' },
+      { labelKey: 'tools.og-meta-generator.schemas.website.optionRadioStation', value: 'music.radio_station' },
     ],
   },
   {
     type: 'group',
-    label: 'Video',
     key: 'Video',
+    labelKey: 'tools.og-meta-generator.schemas.website.optionGroupVideo',
     children: [
-      { label: 'Movie', value: 'video.movie' },
-      { label: 'Episode', value: 'video.episode' },
-      { label: 'TV show', value: 'video.tv_show' },
-      { label: 'Other video', value: 'video.other' },
+      { labelKey: 'tools.og-meta-generator.schemas.website.optionMovie', value: 'video.movie' },
+      { labelKey: 'tools.og-meta-generator.schemas.website.optionEpisode', value: 'video.episode' },
+      { labelKey: 'tools.og-meta-generator.schemas.website.optionTvShow', value: 'video.tv_show' },
+      { labelKey: 'tools.og-meta-generator.schemas.website.optionOtherVideo', value: 'video.other' },
     ],
   },
 ];
 
 export const website: OGSchemaType = {
-  name: 'General information',
+  nameKey: 'tools.og-meta-generator.schemas.website.name',
   elements: [
     {
       type: 'select',
-      label: 'Page type',
-      placeholder: 'Select the type of your website...',
       key: 'type',
+      labelKey: 'tools.og-meta-generator.schemas.website.typeLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.website.typePlaceholder',
       options: typeOptions,
     },
-    { type: 'input', label: 'Title', placeholder: 'Enter the title of your website...', key: 'title' },
     {
       type: 'input',
-      label: 'Description',
-      placeholder: 'Enter the description of your website...',
-      key: 'description',
+      key: 'title',
+      labelKey: 'tools.og-meta-generator.schemas.website.titleLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.website.titlePlaceholder',
     },
     {
       type: 'input',
-      label: 'Page URL',
-      placeholder: 'Enter the url of your website...',
+      key: 'description',
+      labelKey: 'tools.og-meta-generator.schemas.website.descriptionLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.website.descriptionPlaceholder',
+    },
+    {
+      type: 'input',
       key: 'url',
+      labelKey: 'tools.og-meta-generator.schemas.website.urlLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.website.urlPlaceholder',
     },
   ],
 };

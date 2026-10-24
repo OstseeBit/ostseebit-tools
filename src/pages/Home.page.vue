@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import IconDragDrop from '@tabler/icons-vue/dist/esm/icons/IconDragDrop.mjs';
-import { useHead } from '@vueuse/head';
+import { useHead } from '@unhead/vue';
+import DragDrop from '@vicons/tabler/es/DragDrop';
 import { computed } from 'vue';
 import Draggable from 'vuedraggable';
 import { brand } from '@/branding';
@@ -28,7 +28,7 @@ function onUpdateFavoriteTools() {
           <h3 class="mb-5px mt-25px text-neutral-400 font-500">
             {{ $t('home.categories.favoriteTools') }}
             <c-tooltip :tooltip="$t('home.categories.favoritesDndToolTip')">
-              <n-icon :component="IconDragDrop" size="18" />
+              <n-icon :component="DragDrop" size="18" />
             </c-tooltip>
           </h3>
           <Draggable

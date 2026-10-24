@@ -2,11 +2,12 @@
 import type { HeaderConfiguration } from './c-table.types';
 import _ from 'lodash';
 
-const props = withDefaults(defineProps<{ data?: T[], headers?: HeaderConfiguration, hideHeaders?: boolean, description?: string }>(), { data: () => [], headers: undefined, hideHeaders: false, description: 'Data table' });
+const props = withDefaults(defineProps<{ data?: T[], headers?: HeaderConfiguration, hideHeaders?: boolean, description?: string }>(), { data: () => [], headers: undefined, hideHeaders: false, description: undefined });
+
 defineSlots<{
   [name: string]: (props: { value: unknown, row: T, headers: unknown }) => unknown
 }>();
-
+const { t } = useI18n();
 const { data, headers: rawHeaders, hideHeaders } = toRefs(props);
 
 const headers = computed(() => {
@@ -43,7 +44,7 @@ const headers = computed(() => {
 
 <template>
   <div class="relative overflow-x-auto rounded">
-    <table class="w-full border-collapse text-left text-sm text-gray-500 dark:text-gray-400" role="table" :aria-label="description">
+    <table class="w-full border-collapse text-left text-sm text-gray-500 dark:text-gray-400" role="table" :aria-label="description ?? t('common.dataTableLabel')">
       <thead v-if="!hideHeaders" class="bg-#ffffff text-gray-700 uppercase dark:bg-#333333 dark:text-gray-400" border-b="1px solid dark:transparent #efeff5">
         <tr>
           <th v-for="header in headers" :key="header.key" scope="col" class="px-6 py-3 text-xs">

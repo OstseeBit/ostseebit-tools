@@ -1,33 +1,43 @@
 import type { OGSchemaType } from '../OGSchemaType.type';
 
 export const article: OGSchemaType = {
-  name: 'Article',
+  nameKey: 'tools.og-meta-generator.schemas.article.name',
   elements: [
     {
       type: 'input',
-      label: 'Publishing date',
       key: 'article:published_time',
-      placeholder: 'When the article was first published...',
+      labelKey: 'tools.og-meta-generator.schemas.article.publishedTimeLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.article.publishedTimePlaceholder',
     },
     {
       type: 'input',
-      label: 'Modification date',
       key: 'article:modified_time',
-      placeholder: 'When the article was last changed...',
+      labelKey: 'tools.og-meta-generator.schemas.article.modifiedTimeLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.article.modifiedTimePlaceholder',
     },
     {
       type: 'input',
-      label: 'Expiration date',
       key: 'article:expiration_time',
-      placeholder: 'When the article is out of date after...',
+      labelKey: 'tools.og-meta-generator.schemas.article.expirationTimeLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.article.expirationTimePlaceholder',
     },
-    { type: 'input', label: 'Author', key: 'article:author', placeholder: 'Writers of the article...' },
     {
       type: 'input',
-      label: 'Section',
-      key: 'article:section',
-      placeholder: 'A high-level section name. E.g. Technology..',
+      key: 'article:author',
+      labelKey: 'tools.og-meta-generator.schemas.article.authorLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.article.authorPlaceholder',
     },
-    { type: 'input', label: 'Tag', key: 'article:tag', placeholder: 'Tag words associated with this article...' },
+    {
+      type: 'input',
+      key: 'article:section',
+      labelKey: 'tools.og-meta-generator.schemas.article.sectionLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.article.sectionPlaceholder',
+    },
+    {
+      type: 'input',
+      key: 'article:tag',
+      labelKey: 'tools.og-meta-generator.schemas.article.tagLabel',
+      placeholderKey: 'tools.og-meta-generator.schemas.article.tagPlaceholder',
+    },
   ],
 };

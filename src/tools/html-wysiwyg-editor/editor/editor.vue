@@ -12,7 +12,10 @@ const html = useVModel(props, 'html', emit);
 
 const editor = new Editor({
   content: html.value,
-  extensions: [StarterKit],
+  // Tiptap 3 bundles Link and Underline in StarterKit and adds a trailing empty paragraph after
+  // block nodes (trailingNode). The toolbar offers no links/underline and the HTML output should
+  // stay free of that extra <p></p>, so keep all three off to match the Tiptap 2 behaviour.
+  extensions: [StarterKit.configure({ link: false, underline: false, trailingNode: false })],
 });
 
 editor.on('update', ({ editor }) => emit('update:html', editor.getHTML()));

@@ -2,6 +2,9 @@
 import type { EmojiInfo } from './emoji.types';
 
 const props = withDefaults(defineProps<{ emojiInfos?: EmojiInfo[] }>(), { emojiInfos: () => [] });
+
+const { t } = useI18n();
+
 const { emojiInfos } = toRefs(props);
 const visibleCount = ref(48);
 const visibleEmojis = computed(() => emojiInfos.value.slice(0, visibleCount.value));
@@ -15,6 +18,6 @@ watch(emojiInfos, () => {
     <emoji-card v-for="emojiInfo in visibleEmojis" :key="emojiInfo.name" :emoji-info="emojiInfo" flex items-center gap-3 />
   </div>
   <c-button v-if="visibleCount < emojiInfos.length" mt-3 @click="visibleCount += 48">
-    Show more ({{ emojiInfos.length - visibleCount }} remaining)
+    {{ t('tools.emoji-picker.showMore', { count: emojiInfos.length - visibleCount }) }}
   </c-button>
 </template>

@@ -1,10 +1,15 @@
-import { generateRegexSample } from './regex-sample.service';
+import { generateRegexSample, SAMPLE_LIMIT_MESSAGE } from './regex-sample.service';
 
+// See regex-match.worker.ts: failures are reported as data so the component can translate them.
 globalThis.onmessage = (event: MessageEvent<string>) => {
   try {
-    globalThis.postMessage({ sample: generateRegexSample(event.data), error: '' });
+    globalThis.postMessage({ sample: generateRegexSample(event.data), failed: false, limit: false, detail: '' });
   }
   catch (error) {
-    globalThis.postMessage({ sample: '', error: error instanceof Error ? error.message : 'Sample generation failed.' });
+    const detail = error instanceof Error ? error.message : '';
+    globalThis.postMessage({ sample: '', failed: true, limit: detail === SAMPLE_LIMIT_MESSAGE, detail });
   }
 };
+
+// First message, see regex-worker.ts: the run timeout only starts once the worker is loaded.
+globalThis.postMessage({ ready: true });

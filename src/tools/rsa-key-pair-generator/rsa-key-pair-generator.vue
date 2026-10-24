@@ -5,17 +5,19 @@ import { useValidation } from '@/composable/validation';
 import { withDefaultOnErrorAsync } from '@/utils/defaults';
 import { generateKeyPair } from './rsa-key-pair-generator.service';
 
+const { t } = useI18n();
+
 const bits = ref(2048);
 const emptyCerts = { publicKeyPem: '', privateKeyPem: '' };
 
 const { attrs: bitsValidationAttrs } = useValidation({
   source: bits,
-  rules: [
+  rules: computed(() => [
     {
-      message: 'Bits should be 256 <= bits <= 16384 and be a multiple of 8',
-      validator: value => value >= 256 && value <= 16384 && value % 8 === 0,
+      message: t('tools.rsa-key-pair-generator.bitsInvalid'),
+      validator: (value: number) => value >= 256 && value <= 16384 && value % 8 === 0,
     },
-  ],
+  ]),
 });
 
 const [certs, refreshCerts] = computedRefreshableAsync(
@@ -27,23 +29,23 @@ const [certs, refreshCerts] = computedRefreshableAsync(
 <template>
   <div style="flex: 0 0 100%">
     <div item-style="flex: 1 1 0" style="max-width: 600px" mx-auto flex gap-3>
-      <n-form-item label="Bits :" v-bind="bitsValidationAttrs as any" label-placement="left" label-width="100">
+      <n-form-item :label="t('tools.rsa-key-pair-generator.bitsLabel')" v-bind="bitsValidationAttrs as any" label-placement="left" label-width="100">
         <n-input-number v-model:value="bits" min="256" max="16384" step="8" />
       </n-form-item>
 
       <c-button @click="refreshCerts">
-        Refresh key-pair
+        {{ t('tools.rsa-key-pair-generator.refreshButton') }}
       </c-button>
     </div>
   </div>
 
   <div>
-    <h3>Public key</h3>
+    <h3>{{ t('tools.rsa-key-pair-generator.publicKeyHeading') }}</h3>
     <TextareaCopyable :value="certs.publicKeyPem" />
   </div>
 
   <div>
-    <h3>Private key</h3>
+    <h3>{{ t('tools.rsa-key-pair-generator.privateKeyHeading') }}</h3>
     <TextareaCopyable :value="certs.privateKeyPem" />
   </div>
 </template>

@@ -6,13 +6,13 @@ test.describe('Tool - Token generator', () => {
   });
 
   test('Has title', async ({ page }) => {
-    await expect(page).toHaveTitle('Token generator - OstseeBit Tools');
+    await expect(page).toHaveTitle('Token-Generator - OstseeBit Tools');
   });
 
   test('New token on refresh', async ({ page }) => {
-    const initialToken = await page.getByPlaceholder('The token...').inputValue();
-    await page.getByRole('button', { name: 'Refresh' }).click();
-    const newToken = await page.getByPlaceholder('The token...').inputValue();
+    const initialToken = await page.getByPlaceholder('Der Token ...').inputValue();
+    await page.getByRole('button', { name: 'Aktualisieren' }).click();
+    const newToken = await page.getByPlaceholder('Der Token ...').inputValue();
 
     expect(newToken).not.toEqual(initialToken);
   });
