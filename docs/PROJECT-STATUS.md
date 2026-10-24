@@ -11,7 +11,7 @@ Paketversion: `0.1.0`. Dieses Dokument ist ein **chronologisches Änderungsproto
 | 1 Repository und Baseline | im Wesentlichen erledigt; **28 Commits liegen nur lokal**, nichts ist auf `origin` gepusht |
 | 2 Toolchain | erledigt (Node 24, pnpm 12, ESLint Flat Config); offen: TypeScript 7, noch nicht freigegeben |
 | 3 Abhängigkeiten | fast erledigt: Sicherheitsfunde 76 → 8, Tiptap 3, alle Versionsbereiche aktualisiert, Hauptversionen Gruppe 1 und 2; offen: `vue-router` 5, `ua-parser-js` 2 (AGPL, Lizenzentscheidung nötig) |
-| 4 Performance | **nächste Phase**, noch nicht begonnen (PWA-Vorab-Cache aktuell 571 Einträge, ca. 22 MiB) |
+| 4 Performance | **begonnen**: Einstiegs-Chunk 3,5 → 0,7 MiB, Offline-Vorab-Cache 22,5 → 6,1 MiB; offen: Compiler/Polyfill im Einstiegs-Chunk, weitere Messungen (siehe unten) |
 | 5 Docker | offen; kein Docker in der Entwicklungsumgebung, Container kann hier nicht getestet werden |
 | 6 CI/CD | Workflow `validate.yml` (Windows und Linux) ist vorhanden; ob er auf GitHub bereits grün gelaufen ist, ist hier nicht belegt (die Doku vom 2026-10-04 nennt ihn "noch nicht remote ausgeführt", die PRs #5 und #6 wurden danach gemergt) und sollte mit dem nächsten Push geprüft werden |
 | 7 Neue Funktionen | bewusst erst nach Stabilisierung |
@@ -25,7 +25,7 @@ Paketversion: `0.1.0`. Dieses Dokument ist ein **chronologisches Änderungsproto
 1. ✅ Gruppe 2 der Hauptversionen abgeschlossen (`marked` 18, `markdown-it` 15, `vite-plugin-pwa` 2, `figue` entfernt).
 2. Entscheidung des Eigentümers: Push/Pull-Request für die 28 lokalen Commits (Sicherung und Voraussetzung für Phase 6).
 3. Entscheidung des Eigentümers: `ua-parser-js` bei 1.x (MIT) belassen oder auf 2.x (AGPL-3.0) gehen.
-4. Phase 4 Performance: Bundle-Analyse, größte Chunks, Vorab-Cache verkleinern.
+4. Phase 4 Performance weiterführen: Ursachen für Vue-Compiler und `buffer`-Polyfill im Einstiegs-Chunk klären, danach echte Lade-Messung (Lighthouse o. ä.).
 5. `vue-router` 5 als eigener, einzeln geprüfter Schritt.
 
 ## Lokal nachgewiesen
@@ -415,6 +415,20 @@ Sieben Bibliotheken, die jeweils nur reine Funktionen liefern und in 1 bis 5 Dat
 - **`ua-parser-js` bleibt bei 1.0.41 (MIT):** Version 2 steht unter **AGPL-3.0-or-later**; das Projekt ist GPLv3. Die AGPL bringt zusätzliche Pflichten beim Betrieb als Webdienst (Quellcode-Angebot an Nutzer). Das ist eine Lizenzentscheidung des Eigentümers und wurde nicht eigenmächtig getroffen. Der Audit meldet für 1.x nichts.
 - **Noch offen:** `vue-router` 5 (eigener Schritt) und `typescript` 7 (Werkzeug-Ökosystem erst prüfen).
 - Verifiziert: `pnpm lint`, `pnpm typecheck`, `pnpm test:unit` (172/172), `pnpm build`, 1043 Übersetzungsschlüssel, voller `pnpm test:e2e` **477/477**, `pnpm test:pwa` bestanden.
+
+## Umgesetzt am 2026-10-24 (Roadmap Phase 4: Performance, erster Durchgang)
+
+Auslöser war die Anforderung "es muss performant sein". Gemessen wurde am Produktions-Build (`pnpm build`), die Größen kommen aus `dist/` bzw. aus der Sourcemap-Analyse eines unminifizierten Builds.
+
+- **Fund 1: Monaco im Einstiegs-Chunk (3,5 MiB → 0,7 MiB).** `src/ui/demo/demo.routes.ts` lud alle `*.demo.vue` per `import.meta.glob(…, { eager: true })`. Dadurch landeten auch in der Produktion alle Demos im Einstiegs-Chunk, darunter `c-diff-editor.demo.vue` und mit ihm `monaco-editor` (ca. 7,7 MB Quelltext). Die Demo hatte ich am 2026-10-04 im Rahmen von Phase B ergänzt, die Verschlechterung ging also auf diese Änderung zurück. Jetzt lädt der Glob lazy (`import.meta.glob('../*/*.demo.vue')`, die Route bekommt den Loader). Einstiegs-Chunk: **3516 KiB → 721 KiB (−80 %)**. Monaco liegt nur noch im eigenen Chunk `c-diff-editor-*` (ca. 3 MB), den erst das Text-Diff-Tool nachlädt. `/c-lib` funktioniert in der Entwicklung weiter (alle 16 Demos gelistet, Diff-Editor rendert ohne Konsolenfehler).
+- **Fund 2: PWA-Vorab-Cache 577 Einträge / 22,5 MiB → 241 Einträge / 6,1 MiB (−73 %).** Die App ist bewusst offlinefähig; bisher wurde dafür aber jede Datei bei der Installation geladen. Jetzt gilt:
+  - Vorab-Cache (Installation): alles außer den unten genannten Teilen. Die 17 `/c-lib`-Demo-Chunks entfallen komplett (in der Produktion nie erreichbar).
+  - Cache beim ersten Aufruf (`runtimeCaching`, `CacheFirst`, Cache `heavy-tool-assets`, bis 400 Einträge, 1 Jahr): die rund 330 Figlet-Schriften (`ascii-text-drawer`), Monaco samt Editor-Worker (`text-diff`) und die MAC-Hersteller-Datenbank (`mac-address-lookup`, 3,7 MB). Die Dateinamen sind gehasht, ein langes Ablaufdatum ist daher unkritisch.
+  - Dafür landen die Figlet-Schriften per `build.rollupOptions.output.chunkFileNames` in `assets/figlet-fonts/`, damit das Muster eindeutig ist.
+  - **Auswirkung für Nutzer:** Wer die App installiert und sofort offline geht, hat diese drei Tools (zusammen ca. 8 MiB) erst nach dem jeweils ersten Besuch offline. Alle anderen Tools sind ab der Installation offline verfügbar.
+- **Neuer Test:** `src/pwa.e2e.spec.ts` hat einen zweiten Fall: online `ascii-text-drawer` und `text-diff` öffnen, prüfen, dass Schrift, `c-diff-editor` und `editor.worker` im Cache `heavy-tool-assets` liegen, dann offline erneut öffnen und prüfen, dass beide Tools funktionieren.
+- **Noch offen in Phase 4:** Der Einstiegs-Chunk enthält laut Sourcemap u. a. `naive-ui` (ca. 360 KiB Quelltext), den Vue-Template-Compiler `@vue/compiler-core` (ca. 173 KiB, obwohl nur die Laufzeit gebraucht werden sollte), `sortablejs` (114 KiB) und einen `buffer`-Polyfill (57 KiB). Dort ist weiteres Potenzial; Ursachen sind noch nicht untersucht. Größere Tool-Chunks (`math-evaluator` 635 KiB, `html-wysiwyg-editor` 622 KiB, `emoji-picker` 379 KiB) werden nur bei Aufruf des Tools geladen und sind kein Startproblem.
+- Verifiziert: `pnpm lint`, `pnpm typecheck`, `pnpm test:unit` (172/172), `pnpm build`, voller `pnpm test:e2e` **477/477**, `pnpm test:pwa` **2/2**.
 
 ## Weitere Modernisierung in Modulen
 

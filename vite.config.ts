@@ -60,9 +60,30 @@ export default defineConfig({
         // Include the existing Monaco editor and MAC vendor database in offline precaching.
         // Keep a bounded limit; bundle splitting is tracked separately in the roadmap.
         maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
-        // The /c-lib component showcase is only registered in development; its chunks are never
-        // requested in production, so there is no point in downloading them for offline use.
-        globIgnores: ['**/assets/*.demo-*.js', '**/assets/demo-wrapper-*.js'],
+        // Kept out of the install-time precache (22 MiB in total) to keep the first visit fast:
+        //  - the /c-lib component showcase is only registered in development;
+        //  - the heavy, rarely used chunks below are cached on first use instead (runtimeCaching),
+        //    so those tools still work offline after their first visit.
+        globIgnores: [
+          '**/assets/*.demo-*.js',
+          '**/assets/demo-wrapper-*.js',
+          '**/assets/figlet-fonts/**',
+          '**/assets/c-diff-editor-*',
+          '**/assets/editor.worker-*.js',
+          '**/assets/mac-address-lookup-*.js',
+        ],
+        runtimeCaching: [
+          {
+            urlPattern: /\/assets\/(?:figlet-fonts\/|c-diff-editor-|editor\.worker-|mac-address-lookup-)/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'heavy-tool-assets',
+              // Hashed file names never change content, so a long lifetime is safe.
+              expiration: { maxEntries: 400, maxAgeSeconds: 60 * 60 * 24 * 365 },
+              cacheableResponse: { statuses: [200] },
+            },
+          },
+        ],
       },
       manifest: {
         name: brand.name,
@@ -141,5 +162,15 @@ export default defineConfig({
   },
   build: {
     target: 'esnext',
+    rollupOptions: {
+      output: {
+        // The ~330 figlet fonts are one tiny chunk each. A separate folder lets the service worker
+        // cache them on first use instead of pre-caching all of them (see VitePWA above).
+        chunkFileNames: chunk =>
+          chunk.moduleIds.some(id => id.replaceAll('\\', '/').includes('/figlet/fonts/'))
+            ? 'assets/figlet-fonts/[name]-[hash].js'
+            : 'assets/[name]-[hash].js',
+      },
+    },
   },
 });
