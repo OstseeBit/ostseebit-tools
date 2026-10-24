@@ -4,7 +4,7 @@ import { decodeSafeLinksURL } from './safelink-decoder.service';
 
 const { t } = useI18n();
 
-const inputSafeLinkUrl = ref('');
+const inputSafeLinkUrl = ref('https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.example.com%2Fseite%3Fa%3D1&data=05%7C01%7C&sdata=abc&reserved=0');
 const outputDecodedUrl = computed(() => {
   try {
     return decodeSafeLinksURL(inputSafeLinkUrl.value, t) ?? '';

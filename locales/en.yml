@@ -56,6 +56,7 @@ common:
   'yes': 'Yes'
   'no': 'No'
   notAvailable: N/A
+  noResults: No results found
   selectOption: Select an option
   searchPlaceholder: Search...
   inputTextPlaceholder: Input text
@@ -660,6 +661,21 @@ tools:
     title: Case converter
     inputLabel: 'Your string:'
     inputPlaceholder: Your string...
+    formats:
+      lowercase: "Lowercase:"
+      uppercase: "Uppercase:"
+      camelcase: "camelCase:"
+      capitalcase: "Capital Case:"
+      constantcase: "CONSTANT_CASE:"
+      dotcase: "dot.case:"
+      headercase: "Train-Case:"
+      nocase: "Words separated (no case):"
+      paramcase: "kebab-case:"
+      pascalcase: "PascalCase:"
+      pathcase: "path/case:"
+      sentencecase: "Sentence case:"
+      snakecase: "snake_case:"
+      mockingcase: "aLtErNaTiNg (Mocking case):"
     description: Transform the case of a string and choose between different formats
 
   html-entities:

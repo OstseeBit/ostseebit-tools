@@ -58,6 +58,7 @@ common:
   'yes': Ja
   'no': Nein
   notAvailable: k. A.
+  noResults: Keine Treffer gefunden
   selectOption: Option auswählen
   searchPlaceholder: Suchen ...
   inputTextPlaceholder: Texteingabe
@@ -689,6 +690,21 @@ tools:
     title: Fall-Konverter
     inputLabel: 'Dein String:'
     inputPlaceholder: Dein String ...
+    formats:
+      lowercase: "Kleinbuchstaben:"
+      uppercase: "Großbuchstaben:"
+      camelcase: "camelCase:"
+      capitalcase: "Capital Case:"
+      constantcase: "CONSTANT_CASE:"
+      dotcase: "dot.case:"
+      headercase: "Train-Case:"
+      nocase: "Wörter getrennt (no case):"
+      paramcase: "kebab-case:"
+      pascalcase: "PascalCase:"
+      pathcase: "path/case:"
+      sentencecase: "Satzanfang groß (Sentence case):"
+      snakecase: "snake_case:"
+      mockingcase: "aBwEcHsElNd (Mocking case):"
     description: >-
       Ändere den Fall eines Strings und wähle zwischen verschiedenen Formaten
       aus.

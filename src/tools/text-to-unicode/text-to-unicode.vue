@@ -4,11 +4,11 @@ import { convertTextToUnicode, convertUnicodeToText } from './text-to-unicode.se
 
 const { t } = useI18n();
 
-const inputText = ref('');
+const inputText = ref('Hallo');
 const unicodeFromText = computed(() => inputText.value.trim() === '' ? '' : convertTextToUnicode(inputText.value));
 const { copy: copyUnicode } = useCopy({ source: unicodeFromText });
 
-const inputUnicode = ref('');
+const inputUnicode = ref('&#72;&#97;&#108;&#108;&#111;');
 const textFromUnicode = computed(() => inputUnicode.value.trim() === '' ? '' : convertUnicodeToText(inputUnicode.value));
 const { copy: copyText } = useCopy({ source: textFromUnicode });
 </script>

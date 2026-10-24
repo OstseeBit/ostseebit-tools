@@ -10,7 +10,10 @@ const { t } = useI18n();
 
 const inputElement = ref<HTMLElement>();
 
-const rawYaml = useStorage('yaml-prettify:raw-yaml', '');
+// Example input so the result is visible right away; select all and type to replace it.
+// Deliberately unsorted and unevenly indented, so formatting and key sorting are visible.
+const defaultValue = ['zebra: 1', 'apfel:', '    - b', '    - a', 'name:   OstseeBit', 'server: {host: localhost, port: 8080}'].join('\n');
+const rawYaml = useStorage('yaml-prettify:raw-yaml', defaultValue);
 const indentSize = useStorage('yaml-prettify:indent-size', 2);
 const sortKeys = useStorage('yaml-prettify:sort-keys', false);
 

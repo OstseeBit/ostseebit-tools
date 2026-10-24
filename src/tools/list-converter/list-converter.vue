@@ -18,6 +18,9 @@ const sortOrderOptions = computed(() => [
   },
 ]);
 
+// Example input so the result is visible right away; select all and type to replace it.
+const defaultValue = ['Banane', 'Apfel', 'Kirsche', 'Apfel', 'Banane', 'Mango'].join('\n');
+
 const conversionConfig = useStorage<ConvertOptions>('list-converter:conversionConfig', {
   lowerCase: false,
   trimItems: true,
@@ -118,6 +121,7 @@ function transformer(value: string) {
   </div>
   <format-transformer
     :input-label="t('tools.list-converter.inputLabel')"
+    :input-default="defaultValue"
     :input-placeholder="t('tools.list-converter.inputPlaceholder')"
     :output-label="t('tools.list-converter.outputLabel')"
     :transformer="transformer"

@@ -4,11 +4,12 @@ import { render } from '@regexper/render';
 import { useQueryParamOrStorage } from '@/composable/queryParams';
 import { useValidation } from '@/composable/validation';
 import { matchRegex } from './regex-tester.service';
+import { runInWorker } from './regex-worker';
 
 const { t } = useI18n();
 
-const regex = useQueryParamOrStorage({ name: 'regex', storageName: 'regex-tester:regex', defaultValue: '' });
-const text = ref('');
+const regex = useQueryParamOrStorage({ name: 'regex', storageName: 'regex-tester:regex', defaultValue: '(\\d{4})-(\\d{2})-(\\d{2})' });
+const text = ref('Termine: 2024-03-15 und 2025-01-31.');
 const global = ref(true);
 const ignoreCase = ref(false);
 const multiline = ref(false);
@@ -62,48 +63,34 @@ const resultsError = ref('');
 
 watch([regex, text, flags], ([pattern, textValue, flagsValue], _previous, onCleanup) => {
   resultsError.value = '';
-  let worker: Worker | undefined;
-  let timer: ReturnType<typeof setTimeout> | undefined;
-  let active = true;
-  const stop = () => {
-    active = false;
-    clearTimeout(timer);
-    worker?.terminate();
-  };
-  onCleanup(stop);
-  try {
-    worker = new Worker(new URL('./regex-match.worker.ts', import.meta.url), { type: 'module' });
-    worker.onmessage = (event: MessageEvent<{ results: ReturnType<typeof matchRegex>, failed: boolean, detail: string }>) => {
-      if (!active) {
-        return;
-      }
-      results.value = event.data.results;
-      resultsError.value = event.data.failed ? (event.data.detail || t('tools.regex-tester.errors.matchFailed')) : '';
-      stop();
-    };
-    worker.onerror = () => {
-      results.value = [];
-      resultsError.value = t('tools.regex-tester.errors.matchFailed');
-      stop();
-    };
-    timer = setTimeout(() => {
-      results.value = [];
-      resultsError.value = t('tools.regex-tester.errors.matchTimeout');
-      stop();
-    }, 1000);
-    worker.postMessage({ regex: pattern, text: textValue, flags: flagsValue });
-  }
-  catch {
-    // No Worker support in this environment: fall back to inline matching
-    // (still try/catch-guarded, just without the hang-protection timeout).
-    try {
-      results.value = matchRegex(pattern, textValue, flagsValue);
-    }
-    catch {
-      results.value = [];
-    }
-    stop();
-  }
+  onCleanup(runInWorker<{ results: ReturnType<typeof matchRegex>, failed: boolean, detail: string }>({
+    createWorker: () => new Worker(new URL('./regex-match.worker.ts', import.meta.url), { type: 'module' }),
+    request: { regex: pattern, text: textValue, flags: flagsValue },
+    handlers: {
+      onResult: (data) => {
+        results.value = data.results;
+        resultsError.value = data.failed ? (data.detail || t('tools.regex-tester.errors.matchFailed')) : '';
+      },
+      onTimeout: () => {
+        results.value = [];
+        resultsError.value = t('tools.regex-tester.errors.matchTimeout');
+      },
+      onFailure: () => {
+        results.value = [];
+        resultsError.value = t('tools.regex-tester.errors.matchFailed');
+      },
+      onUnsupported: () => {
+        // No Worker support in this environment: fall back to inline matching
+        // (still try/catch-guarded, just without the hang-protection timeout).
+        try {
+          results.value = matchRegex(pattern, textValue, flagsValue);
+        }
+        catch {
+          results.value = [];
+        }
+      },
+    },
+  }));
 }, { immediate: true });
 
 const sample = ref('');
@@ -114,47 +101,33 @@ watch(regex, (pattern, _previous, onCleanup) => {
   sample.value = '';
   sampleError.value = '';
   samplePending.value = true;
-  let worker: Worker | undefined;
-  let timer: ReturnType<typeof setTimeout> | undefined;
-  let active = true;
-  const stop = () => {
-    active = false;
-    clearTimeout(timer);
-    worker?.terminate();
-  };
-  onCleanup(stop);
-  try {
-    worker = new Worker(new URL('./regex-sample.worker.ts', import.meta.url), { type: 'module' });
-    worker.onmessage = (event: MessageEvent<{ sample: string, failed: boolean, limit: boolean, detail: string }>) => {
-      if (!active) {
-        return;
-      }
-      sample.value = event.data.sample;
-      sampleError.value = !event.data.failed
-        ? ''
-        : event.data.limit
-          ? t('tools.regex-tester.errors.sampleLimit')
-          : (event.data.detail || t('tools.regex-tester.errors.sampleFailed'));
-      samplePending.value = false;
-      stop();
-    };
-    worker.onerror = () => {
-      sampleError.value = t('tools.regex-tester.errors.sampleFailed');
-      samplePending.value = false;
-      stop();
-    };
-    timer = setTimeout(() => {
-      sampleError.value = t('tools.regex-tester.errors.sampleTimeout');
-      samplePending.value = false;
-      stop();
-    }, 1000);
-    worker.postMessage(pattern);
-  }
-  catch {
-    sampleError.value = t('tools.regex-tester.errors.sampleUnavailable');
-    samplePending.value = false;
-    stop();
-  }
+  onCleanup(runInWorker<{ sample: string, failed: boolean, limit: boolean, detail: string }>({
+    createWorker: () => new Worker(new URL('./regex-sample.worker.ts', import.meta.url), { type: 'module' }),
+    request: pattern,
+    handlers: {
+      onResult: (data) => {
+        sample.value = data.sample;
+        sampleError.value = !data.failed
+          ? ''
+          : data.limit
+            ? t('tools.regex-tester.errors.sampleLimit')
+            : (data.detail || t('tools.regex-tester.errors.sampleFailed'));
+        samplePending.value = false;
+      },
+      onTimeout: () => {
+        sampleError.value = t('tools.regex-tester.errors.sampleTimeout');
+        samplePending.value = false;
+      },
+      onFailure: () => {
+        sampleError.value = t('tools.regex-tester.errors.sampleFailed');
+        samplePending.value = false;
+      },
+      onUnsupported: () => {
+        sampleError.value = t('tools.regex-tester.errors.sampleUnavailable');
+        samplePending.value = false;
+      },
+    },
+  }));
 }, { immediate: true });
 
 watchEffect(

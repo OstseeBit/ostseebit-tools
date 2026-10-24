@@ -37,8 +37,8 @@ function formatWithEncoding(words: lib.WordArray, encoding: Encoding) {
 
 const { t } = useI18n();
 
-const plainText = ref('');
-const secret = ref('');
+const plainText = ref('Hallo Welt');
+const secret = ref('mein-geheimer-schluessel');
 const hashFunction = ref<keyof typeof algos>('SHA256');
 const encoding = ref<Encoding>('Hex');
 const hmac = computed(() =>

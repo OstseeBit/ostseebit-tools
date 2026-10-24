@@ -6,11 +6,11 @@ import { convertAsciiBinaryToText, convertTextToAsciiBinary } from './text-to-bi
 
 const { t } = useI18n();
 
-const inputText = ref('');
+const inputText = ref('Hallo');
 const binaryFromText = computed(() => convertTextToAsciiBinary(inputText.value));
 const { copy: copyBinary } = useCopy({ source: binaryFromText });
 
-const inputBinary = ref('');
+const inputBinary = ref('01001000 01100001 01101100 01101100 01101111');
 const textFromBinary = computed(() => withDefaultOnError(() => convertAsciiBinaryToText(inputBinary.value), ''));
 const inputBinaryValidationRules = computed(() => [
   {

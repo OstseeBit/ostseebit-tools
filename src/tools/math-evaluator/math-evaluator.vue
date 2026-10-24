@@ -9,7 +9,7 @@ const { t } = useI18n();
 // power towers like `9^9^9^9`) from locking up the tab for a long time.
 const MAX_EXPRESSION_LENGTH = 1000;
 
-const expression = ref('');
+const expression = ref('2 * sqrt(16) + 3^2');
 
 const result = computed(() => withDefaultOnError(() => {
   if (expression.value.length > MAX_EXPRESSION_LENGTH) {

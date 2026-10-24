@@ -5,7 +5,7 @@ import { withDefaultOnError } from '@/utils/defaults';
 
 const { t } = useI18n();
 
-const input = ref('');
+const input = ref('Größe & Übermaß: Ein Beispiel-Text!');
 const slug = computed(() => withDefaultOnError(() => slugify(input.value), ''));
 const { copy } = useCopy({ source: slug, text: t('tools.slugify-string.copiedMessage') });
 </script>

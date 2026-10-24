@@ -5,7 +5,16 @@ import TextareaCopyable from '@/components/TextareaCopyable.vue';
 
 const { t } = useI18n();
 
-const inputMarkdown = ref('');
+const inputMarkdown = ref([
+  '# Willkommen',
+  '',
+  'Das ist **fetter** und *kursiver* Text.',
+  '',
+  '- Erster Punkt',
+  '- Zweiter Punkt',
+  '',
+  '[Ein Link](https://example.org)',
+].join('\n'));
 const outputHtml = computed(() => {
   const md = markdownit();
   // Sanitized even though markdown-it's defaults already escape raw HTML —

@@ -6,13 +6,13 @@ import { useCopy } from '@/composable/copy';
 const themeVars = useThemeVars();
 const { t } = useI18n();
 
-const input = ref('');
+const input = ref('Hallo Welt');
 const saltCount = ref(10);
 const hashed = computed(() => hashSync(input.value, saltCount.value));
 const { copy } = useCopy({ source: hashed, text: t('tools.bcrypt.copiedMessage') });
 
-const compareString = ref('');
-const compareHash = ref('');
+const compareString = ref('Hallo Welt');
+const compareHash = ref('$2b$10$cPJQ6UvhLqnFPjYi2lDI7ux0kTDR2AIgp9RCe8/v08Rxuxu2JzTI2');
 const compareMatch = computed(() => compareSync(compareString.value, compareHash.value));
 </script>
 

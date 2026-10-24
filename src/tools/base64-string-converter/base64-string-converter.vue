@@ -8,11 +8,11 @@ const { t } = useI18n();
 const encodeUrlSafe = useStorage('base64-string-converter--encode-url-safe', false);
 const decodeUrlSafe = useStorage('base64-string-converter--decode-url-safe', false);
 
-const textInput = ref('');
+const textInput = ref('Hallo Welt!');
 const base64Output = computed(() => textToBase64(textInput.value, { makeUrlSafe: encodeUrlSafe.value }));
 const { copy: copyTextBase64 } = useCopy({ source: base64Output, text: t('tools.base64-string-converter.copiedBase64Message') });
 
-const base64Input = ref('');
+const base64Input = ref('SGFsbG8gV2VsdCE=');
 const textOutput = computed(() =>
   withDefaultOnError(() => base64ToText(base64Input.value.trim(), { makeUrlSafe: decodeUrlSafe.value }), ''),
 );

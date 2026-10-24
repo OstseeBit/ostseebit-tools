@@ -10,7 +10,7 @@ import {
 
 const { t, locale } = useI18n();
 
-const rawPhone = ref('');
+const rawPhone = ref('+49 30 123456');
 const defaultCountryCode = ref(getDefaultCountryCode());
 const validation = useValidation({
   source: rawPhone,

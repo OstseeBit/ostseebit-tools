@@ -9,6 +9,12 @@ test.describe('Tool - Percentage calculator', () => {
     await expect(page).toHaveTitle('Prozentrechner - OstseeBit Tools');
   });
 
+  test('Shows results for the example values right away', async ({ page }) => {
+    await expect(page.getByTestId('percentageResult').locator('input')).toHaveValue('30');
+    await expect(page.getByTestId('numberResult').locator('input')).toHaveValue('25');
+    await expect(page.getByTestId('percentageIncreaseDecrease').locator('input')).toHaveValue('25');
+  });
+
   test('Correctly works out percentages', async ({ page }) => {
     await page.getByTestId('percentageX').locator('input').fill('123');
     await page.getByTestId('percentageY').locator('input').fill('456');
@@ -24,12 +30,16 @@ test.describe('Tool - Percentage calculator', () => {
   });
 
   test('Displays empty results for incomplete input', async ({ page }) => {
+    // The calculators start with example values; clear the second field of each pair first.
+    await page.getByTestId('percentageY').locator('input').fill('');
     await page.getByTestId('percentageX').locator('input').fill('123');
     await expect(page.getByTestId('percentageResult').locator('input')).toHaveValue('');
 
+    await page.getByTestId('numberX').locator('input').fill('');
     await page.getByTestId('numberY').locator('input').fill('456');
     await expect(page.getByTestId('numberResult').locator('input')).toHaveValue('');
 
+    await page.getByTestId('numberTo').locator('input').fill('');
     await page.getByTestId('numberFrom').locator('input').fill('123');
     await expect(page.getByTestId('percentageIncreaseDecrease').locator('input')).toHaveValue('');
   });

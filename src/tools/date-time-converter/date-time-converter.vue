@@ -30,7 +30,7 @@ import {
 
 const { t } = useI18n();
 
-const inputDate = ref('');
+const inputDate = ref('1710498600000');
 
 const toDate: ToDateMapper = date => new Date(date);
 

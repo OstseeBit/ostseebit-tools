@@ -1,32 +1,36 @@
 <script setup lang="ts">
 const { t } = useI18n();
 
-const percentageX = ref();
-const percentageY = ref();
+// Example values so every calculator shows a result right away.
+// A cleared n-input-number emits null, so null counts as empty just like undefined.
+const isEmpty = (value: unknown) => value === undefined || value === null || value === '';
+
+const percentageX = ref<number | null>(15);
+const percentageY = ref<number | null>(200);
 const percentageResult = computed(() => {
-  if (percentageX.value === undefined || percentageY.value === undefined) {
+  if (isEmpty(percentageX.value) || isEmpty(percentageY.value)) {
     return '';
   }
-  return (percentageX.value / 100 * percentageY.value).toString();
+  return ((percentageX.value as number) / 100 * (percentageY.value as number)).toString();
 });
 
-const numberX = ref();
-const numberY = ref();
+const numberX = ref<number | null>(30);
+const numberY = ref<number | null>(120);
 const numberResult = computed(() => {
-  if (numberX.value === undefined || numberY.value === undefined) {
+  if (isEmpty(numberX.value) || isEmpty(numberY.value)) {
     return '';
   }
-  const result = 100 * numberX.value / numberY.value;
+  const result = 100 * (numberX.value as number) / (numberY.value as number);
   return (!Number.isFinite(result) || Number.isNaN(result)) ? '' : result.toString();
 });
 
-const numberFrom = ref();
-const numberTo = ref();
+const numberFrom = ref<number | null>(80);
+const numberTo = ref<number | null>(100);
 const percentageIncreaseDecrease = computed(() => {
-  if (numberFrom.value === undefined || numberTo.value === undefined) {
+  if (isEmpty(numberFrom.value) || isEmpty(numberTo.value)) {
     return '';
   }
-  const result = (numberTo.value - numberFrom.value) / numberFrom.value * 100;
+  const result = ((numberTo.value as number) - (numberFrom.value as number)) / (numberFrom.value as number) * 100;
   return (!Number.isFinite(result) || Number.isNaN(result)) ? '' : result.toString();
 });
 </script>

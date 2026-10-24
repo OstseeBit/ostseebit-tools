@@ -20,59 +20,59 @@ const input = ref('lorem ipsum dolor sit amet');
 
 const formats = computed(() => [
   {
-    label: 'Lowercase:',
+    label: t('tools.case-converter.formats.lowercase'),
     value: input.value.toLocaleLowerCase(),
   },
   {
-    label: 'Uppercase:',
+    label: t('tools.case-converter.formats.uppercase'),
     value: input.value.toLocaleUpperCase(),
   },
   {
-    label: 'Camelcase:',
+    label: t('tools.case-converter.formats.camelcase'),
     value: camelCase(input.value),
   },
   {
-    label: 'Capitalcase:',
+    label: t('tools.case-converter.formats.capitalcase'),
     value: capitalCase(input.value),
   },
   {
-    label: 'Constantcase:',
+    label: t('tools.case-converter.formats.constantcase'),
     value: constantCase(input.value),
   },
   {
-    label: 'Dotcase:',
+    label: t('tools.case-converter.formats.dotcase'),
     value: dotCase(input.value),
   },
   {
-    label: 'Headercase:',
+    label: t('tools.case-converter.formats.headercase'),
     value: trainCase(input.value),
   },
   {
-    label: 'Nocase:',
+    label: t('tools.case-converter.formats.nocase'),
     value: noCase(input.value),
   },
   {
-    label: 'Paramcase:',
+    label: t('tools.case-converter.formats.paramcase'),
     value: kebabCase(input.value),
   },
   {
-    label: 'Pascalcase:',
+    label: t('tools.case-converter.formats.pascalcase'),
     value: pascalCase(input.value),
   },
   {
-    label: 'Pathcase:',
+    label: t('tools.case-converter.formats.pathcase'),
     value: pathCase(input.value),
   },
   {
-    label: 'Sentencecase:',
+    label: t('tools.case-converter.formats.sentencecase'),
     value: sentenceCase(input.value),
   },
   {
-    label: 'Snakecase:',
+    label: t('tools.case-converter.formats.snakecase'),
     value: snakeCase(input.value),
   },
   {
-    label: 'Mockingcase:',
+    label: t('tools.case-converter.formats.mockingcase'),
     value: input.value
       .split('')
       .map((char, index) => (index % 2 === 0 ? char.toUpperCase() : char.toLowerCase()))

@@ -163,7 +163,7 @@ function onSearchInput() {
           <template v-if="!filteredOptions.length">
             <slot name="empty">
               <div px-4 py-1 opacity-70>
-                No results found
+                {{ t('common.noResults') }}
               </div>
             </slot>
           </template>

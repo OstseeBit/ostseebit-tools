@@ -12,3 +12,6 @@ globalThis.onmessage = (event: MessageEvent<{ regex: string, text: string, flags
     globalThis.postMessage({ results: [], failed: true, detail: error instanceof Error ? error.message : '' });
   }
 };
+
+// First message, see regex-worker.ts: the run timeout only starts once the worker is loaded.
+globalThis.postMessage({ ready: true });

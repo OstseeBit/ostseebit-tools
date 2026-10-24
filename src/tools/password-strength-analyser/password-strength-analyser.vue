@@ -3,7 +3,7 @@ import { getPasswordCrackTimeEstimation } from './password-strength-analyser.ser
 
 const { t } = useI18n();
 
-const password = ref('');
+const password = ref('Ostsee-Leuchtturm-2024!');
 const crackTimeEstimation = computed(() => getPasswordCrackTimeEstimation({ password: password.value, t }));
 
 const details = computed(() => [

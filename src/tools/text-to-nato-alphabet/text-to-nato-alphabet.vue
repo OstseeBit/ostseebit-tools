@@ -4,7 +4,7 @@ import { textToNatoAlphabet } from './text-to-nato-alphabet.service';
 
 const { t } = useI18n();
 
-const input = ref('');
+const input = ref('Ostsee 42');
 const natoText = computed(() => textToNatoAlphabet({ text: input.value }));
 const { copy } = useCopy({ source: natoText, text: t('tools.text-to-nato-alphabet.copiedMessage') });
 </script>

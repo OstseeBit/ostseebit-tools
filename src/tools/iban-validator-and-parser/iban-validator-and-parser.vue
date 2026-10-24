@@ -5,7 +5,7 @@ import { getFriendlyErrors } from './iban-validator-and-parser.service';
 
 const { t } = useI18n();
 
-const rawIban = ref('');
+const rawIban = ref('DE89370400440532013000');
 
 const ibanInfo = computed<CKeyValueListItems>(() => {
   const iban = rawIban.value.toUpperCase().replace(/\s/g, '').replace(/-/g, '');

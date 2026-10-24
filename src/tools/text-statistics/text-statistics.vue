@@ -4,7 +4,10 @@ import { getStringSizeInBytes } from './text-statistics.service';
 
 const { t } = useI18n();
 
-const text = ref('');
+const text = ref([
+  'Die Ostsee ist ein Randmeer des Atlantiks.',
+  'Sie liegt zwischen Mitteleuropa und Skandinavien.',
+].join('\n'));
 </script>
 
 <template>

@@ -3,7 +3,7 @@ import { generateNumeronym } from './numeronym-generator.service';
 
 const { t } = useI18n();
 
-const word = ref('');
+const word = ref('internationalization');
 
 const numeronym = computed(() => generateNumeronym(word.value));
 </script>

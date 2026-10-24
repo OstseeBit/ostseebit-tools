@@ -5,7 +5,11 @@ import { withDefaultOnError } from '@/utils/defaults';
 
 const { t } = useI18n();
 
-const emails = ref('');
+const emails = ref([
+  'Max.Mustermann+Newsletter@Gmail.com',
+  'ANNA.Beispiel@Example.org',
+  'max.mustermann@gmail.com',
+].join('\n'));
 const normalizedEmails = computed(() => {
   if (!emails.value) {
     return '';

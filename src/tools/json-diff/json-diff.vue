@@ -7,8 +7,23 @@ import DiffsViewer from './diff-viewer/diff-viewer.vue';
 
 const { t } = useI18n();
 
-const rawLeftJson = ref('');
-const rawRightJson = ref('');
+const rawLeftJson = ref([
+  '{',
+  '  "name": "Anna",',
+  '  "alter": 30,',
+  '  "stadt": "Kiel",',
+  '  "hobbys": ["Segeln", "Lesen"]',
+  '}',
+].join('\n'));
+const rawRightJson = ref([
+  '{',
+  '  "name": "Anna",',
+  '  "alter": 31,',
+  '  "stadt": "Hamburg",',
+  '  "hobbys": ["Segeln", "Radfahren"],',
+  '  "aktiv": true',
+  '}',
+].join('\n'));
 
 const leftJson = computed(() => withDefaultOnError(() => JSON5.parse(rawLeftJson.value), undefined));
 const rightJson = computed(() => withDefaultOnError(() => JSON5.parse(rawRightJson.value), undefined));
