@@ -1,13 +1,15 @@
 # build stage
 FROM node:24.18.1-alpine AS build-stage
-# Set environment variables for non-interactive npm installs
-ENV NPM_CONFIG_LOGLEVEL warn
-ENV CI true
+ENV NPM_CONFIG_LOGLEVEL=warn
+ENV CI=true
 WORKDIR /app
-COPY package.json pnpm-lock.yaml ./
-RUN npm install -g pnpm && pnpm i --frozen-lockfile
+# pnpm-workspace.yaml holds the dependency overrides and build permissions; without it the
+# lockfile does not match and "--frozen-lockfile" aborts.
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+# Use the pnpm version pinned in package.json ("packageManager") through corepack, like CI and local runs.
+RUN corepack enable && corepack pnpm install --frozen-lockfile
 COPY . .
-RUN pnpm build
+RUN corepack pnpm build
 
 # production stage
 FROM nginx:1.27-alpine AS production-stage
