@@ -151,6 +151,11 @@ export default defineConfig({
       // loaded main chunk. Alias straight to the package's own un-bundled
       // ES source instead (plain sortablejs + Vue, no eval anywhere).
       vuedraggable: fileURLToPath(new URL('./node_modules/vuedraggable/src/vuedraggable.js', import.meta.url)),
+      // vue-shadow-dom declares a "browser" field that points at its IIFE build
+      // (dist/shadow.global.prod.js), which Vite prefers over "module". That file does a CommonJS
+      // require('vue'), so it dragged a second copy of Vue plus the template compiler
+      // (@vue/compiler-core/-dom, ~190 KB) into the entry chunk. Use the plain ES module instead.
+      'vue-shadow-dom': fileURLToPath(new URL('./node_modules/vue-shadow-dom/shadow.mjs', import.meta.url)),
     },
   },
   define: {
