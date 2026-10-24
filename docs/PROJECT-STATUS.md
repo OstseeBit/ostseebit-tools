@@ -11,7 +11,7 @@ Paketversion: `0.1.0`. Dieses Dokument ist ein **chronologisches Änderungsproto
 | 1 Repository und Baseline | im Wesentlichen erledigt; **28 Commits liegen nur lokal**, nichts ist auf `origin` gepusht |
 | 2 Toolchain | erledigt (Node 24, pnpm 12, ESLint Flat Config); offen: TypeScript 7, noch nicht freigegeben |
 | 3 Abhängigkeiten | fast erledigt: Sicherheitsfunde 76 → 8, Tiptap 3, alle Versionsbereiche aktualisiert, Hauptversionen Gruppe 1 und 2; offen: `vue-router` 5, `ua-parser-js` 2 (AGPL, Lizenzentscheidung nötig) |
-| 4 Performance | **begonnen**: Einstiegs-Chunk 3,5 → 0,7 MiB, Offline-Vorab-Cache 22,5 → 6,1 MiB; offen: Compiler/Polyfill im Einstiegs-Chunk, weitere Messungen (siehe unten) |
+| 4 Performance | **im Wesentlichen erledigt**: Einstiegs-Chunk 3,5 → 0,6 MiB (brotli 134 KiB), Startseite ca. 475 KiB übertragen, Offline-Vorab-Cache 22,5 → 5,9 MiB, nginx mit Komprimierung und Cache-Headern (ungetestet, siehe unten); offen: Messung mit echter Netzwerkdrosselung |
 | 5 Docker | offen; kein Docker in der Entwicklungsumgebung, Container kann hier nicht getestet werden |
 | 6 CI/CD | Workflow `validate.yml` (Windows und Linux) ist vorhanden; ob er auf GitHub bereits grün gelaufen ist, ist hier nicht belegt (die Doku vom 2026-10-04 nennt ihn "noch nicht remote ausgeführt", die PRs #5 und #6 wurden danach gemergt) und sollte mit dem nächsten Push geprüft werden |
 | 7 Neue Funktionen | bewusst erst nach Stabilisierung |
@@ -25,8 +25,9 @@ Paketversion: `0.1.0`. Dieses Dokument ist ein **chronologisches Änderungsproto
 1. ✅ Gruppe 2 der Hauptversionen abgeschlossen (`marked` 18, `markdown-it` 15, `vite-plugin-pwa` 2, `figue` entfernt).
 2. Entscheidung des Eigentümers: Push/Pull-Request für die 28 lokalen Commits (Sicherung und Voraussetzung für Phase 6).
 3. Entscheidung des Eigentümers: `ua-parser-js` bei 1.x (MIT) belassen oder auf 2.x (AGPL-3.0) gehen.
-4. Phase 4 Performance weiterführen: Ursachen für Vue-Compiler und `buffer`-Polyfill im Einstiegs-Chunk klären, danach echte Lade-Messung (Lighthouse o. ä.).
-5. `vue-router` 5 als eigener, einzeln geprüfter Schritt.
+4. ✅ Phase 4 Performance: erster und zweiter Durchgang abgeschlossen. Offen: Messung unter Netzwerkdrosselung (Lighthouse o. ä.).
+5. Phase 5 Docker: `docker build` und `curl -I`-Prüfung der neuen `nginx.conf` auf einem Rechner mit Docker.
+6. `vue-router` 5 als eigener, einzeln geprüfter Schritt.
 
 ## Lokal nachgewiesen
 
@@ -429,6 +430,25 @@ Auslöser war die Anforderung "es muss performant sein". Gemessen wurde am Produ
 - **Neuer Test:** `src/pwa.e2e.spec.ts` hat einen zweiten Fall: online `ascii-text-drawer` und `text-diff` öffnen, prüfen, dass Schrift, `c-diff-editor` und `editor.worker` im Cache `heavy-tool-assets` liegen, dann offline erneut öffnen und prüfen, dass beide Tools funktionieren.
 - **Noch offen in Phase 4:** Der Einstiegs-Chunk enthält laut Sourcemap u. a. `naive-ui` (ca. 360 KiB Quelltext), den Vue-Template-Compiler `@vue/compiler-core` (ca. 173 KiB, obwohl nur die Laufzeit gebraucht werden sollte), `sortablejs` (114 KiB) und einen `buffer`-Polyfill (57 KiB). Dort ist weiteres Potenzial; Ursachen sind noch nicht untersucht. Größere Tool-Chunks (`math-evaluator` 635 KiB, `html-wysiwyg-editor` 622 KiB, `emoji-picker` 379 KiB) werden nur bei Aufruf des Tools geladen und sind kein Startproblem.
 - Verifiziert: `pnpm lint`, `pnpm typecheck`, `pnpm test:unit` (172/172), `pnpm build`, voller `pnpm test:e2e` **477/477**, `pnpm test:pwa` **2/2**.
+
+## Umgesetzt am 2026-10-24 (Roadmap Phase 4: Performance, zweiter Durchgang: Messung und Auslieferung)
+
+- **Fund 3: zweite Vue-Kopie samt Template-Compiler im Einstiegs-Chunk (721 → 639 KiB).** `vue-shadow-dom` (Regex-Diagramm) hat in der `package.json` ein `browser`-Feld, das auf die IIFE-Datei `dist/shadow.global.prod.js` zeigt. Vite bevorzugt dieses Feld vor `module`; die Datei ruft per CommonJS `require('vue')` auf und zog dadurch `vue.cjs.prod.js`, `@vue/compiler-core` und `@vue/compiler-dom` (ca. 190 KB, obwohl die App nur die Laufzeit braucht) in den Einstiegs-Chunk. Alias in `vite.config.ts` auf das saubere ES-Modul `vue-shadow-dom/shadow.mjs`. Die Typen (`ShadowRootExpose`) kommen weiter über TypeScript aus dem Paket.
+- **Bewusst nicht geändert:** Der `buffer`-Polyfill (`src/polyfills.ts`, ca. 57 KiB Quelltext) bleibt global. `xml-js` und `pdf-signature-reader` brauchen `Buffer` als globale Variable; ein Umbau auf Tool-lokales Laden hätte ein spürbares Risiko für die XML- und PDF-Tools bei kleinem Gewinn.
+- **Messung der echten Ladegröße** (Produktions-Build, Chromium über `vite preview`, Service Worker aus, alle Antworten einzeln gzip-/brotli-komprimiert gerechnet):
+
+  | Aufruf | Anfragen | roh | gzip | brotli |
+  | --- | --- | --- | --- | --- |
+  | `/` (Startseite) | 60 | 1284 KiB | 523 KiB | 474 KiB |
+  | `/token-generator` | 70 | 1284 KiB | 481 KiB | 429 KiB |
+  | `/ascii-text-drawer` | 81 | 1513 KiB | 580 KiB | 521 KiB |
+  | `/text-diff` (mit Monaco) | 64 | 4582 KiB | 1324 KiB | 1083 KiB |
+
+  Der Einstiegs-Chunk allein: 639 KiB roh, 134 KiB brotli. Die Zeiten (ca. 3 s bis "networkidle", 9 s bei `text-diff`) sind lokale Messwerte ohne Netzwerkdrosselung und dienen nur als Vergleich zwischen Läufen, nicht als Aussage über echte Nutzer.
+- **Fund 4: `nginx.conf` ohne Komprimierung und ohne Cache-Header.** Das Container-Image lieferte alles unkomprimiert aus (Startseite 1,3 MiB statt ca. 0,5 MiB) und ohne `Cache-Control`, sodass die gehashten Build-Dateien bei jedem Besuch neu angefragt worden wären. Neu in `nginx.conf`: `gzip` (Stufe 6, ab 1 KiB, für CSS/JS/JSON/SVG/Manifest), `/assets/` mit `public, max-age=31536000, immutable` und `=404` statt SPA-Fallback, `/fonts/` 30 Tage, `/` (Einstiegsseite, `sw.js`) mit `no-cache`, damit Updates ankommen. Weil nginx die `add_header`-Zeilen des `server`-Blocks in jedem `location` mit eigenem `add_header` verwirft, liegen die Sicherheits-Header jetzt in `security-headers.conf` und werden in jedem `location` eingebunden (`Dockerfile`: zusätzliche `COPY`-Zeile nach `/etc/nginx/snippets/`). `netlify.toml` und `vercel.json` erhalten dieselbe Cache-Regel für `/assets/` und `sw.js` (die Komprimierung übernehmen dort die CDNs).
+- **Zeilenenden:** `nginx.conf`, `security-headers.conf` und `Dockerfile` sind in `.gitattributes` auf `eol=lf` festgelegt. Zuvor hatte das Arbeitsverzeichnis unter Windows CRLF, ein Container-Build von diesem Rechner hätte also CRLF-Dateien kopiert.
+- **Wichtige Einschränkung:** In dieser Entwicklungsumgebung gibt es weder `nginx` noch `docker`. Die neue `nginx.conf` konnte deshalb **nicht ausgeführt oder syntaktisch geprüft** werden (Roadmap Phase 5, Punkt 5 bleibt offen). Sie ist bewusst einfach gehalten und von Hand geprüft; vor einer Veröffentlichung des Images muss `docker build` und ein Aufruf mit `curl -I` (Header `Content-Encoding: gzip`, `Cache-Control`, Sicherheits-Header in `/assets/…` und `/`) erfolgen.
+- Verifiziert: `pnpm lint`, `pnpm typecheck`, `pnpm test:unit` (172/172), `pnpm build`, voller `pnpm test:e2e` **477/477**, `pnpm test:pwa` **2/2** (für die Änderung am Alias; die Auslieferungs-Dateien werden von dieser Prüfkette nicht erfasst).
 
 ## Weitere Modernisierung in Modulen
 

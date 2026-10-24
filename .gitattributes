@@ -1,3 +1,7 @@
 .eslintrc-auto-import.json text eol=lf
 auto-imports.d.ts text eol=lf
 components.d.ts text eol=lf
+# nginx and Docker read these inside Linux containers; keep them LF even on Windows checkouts.
+nginx.conf text eol=lf
+security-headers.conf text eol=lf
+Dockerfile text eol=lf
