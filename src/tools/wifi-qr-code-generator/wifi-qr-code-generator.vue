@@ -9,8 +9,9 @@ import {
 const foreground = ref('#000000ff');
 const background = ref('#ffffffff');
 
-const ssid = ref();
-const password = ref();
+// Example values so a QR code is shown right away; the password is a made-up one.
+const ssid = ref('Ostsee-WLAN');
+const password = ref('beispiel-passwort-123');
 const eapMethod = ref();
 const isHiddenSSID = ref(false);
 const eapAnonymous = ref(false);
