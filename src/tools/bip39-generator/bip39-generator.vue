@@ -117,6 +117,9 @@ const { copy: copyPassphrase } = useCopy({ source: passphrase, text: t('tools.bi
         </n-form-item>
       </n-gi>
     </n-grid>
+    <div mb-4 mt-2 text-sm op-70>
+      {{ t('tools.bip39-generator.languageHint') }}
+    </div>
     <n-form-item
       :label="t('tools.bip39-generator.passphraseLabel')"
       :feedback="mnemonicValidation.message"

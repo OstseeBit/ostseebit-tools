@@ -5,7 +5,19 @@ import { withDefaultOnError } from '@/utils/defaults';
 
 const { t } = useI18n();
 
-const defaultValue = '{\n\t"hello": [\n\t\t"world"\n\t]\n}';
+// Example input so the result is visible right away; select all and type to replace it.
+const defaultValue = [
+  '{',
+  '  "name": "OstseeBit Tools",',
+  '  "version": "1.0.0",',
+  '  "aktiv": true,',
+  '  "sprachen": ["de", "en"],',
+  '  "server": {',
+  '    "host": "localhost",',
+  '    "port": 8080',
+  '  }',
+  '}',
+].join('\n');
 const transformer = (value: string) => withDefaultOnError(() => JSON.stringify(JSON5.parse(value), null, 0), '');
 
 const rules = computed(() => [createParseValidationRule(v => JSON5.parse(v), 'JSON', t)]);

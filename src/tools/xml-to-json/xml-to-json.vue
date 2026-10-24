@@ -6,7 +6,19 @@ import { parseXml } from '../xml-formatter/xml-formatter.service';
 
 const { t } = useI18n();
 
-const defaultValue = '<a x="1.234" y="It\'s"/>';
+// Example input so the result is visible right away; select all and type to replace it.
+const defaultValue = [
+  '<bibliothek ort="Kiel">',
+  '  <buch id="1">',
+  '    <titel>Die Ostsee</titel>',
+  '    <autor>Anna Beispiel</autor>',
+  '  </buch>',
+  '  <buch id="2">',
+  '    <titel>Leuchttürme</titel>',
+  '    <autor>Ben Muster</autor>',
+  '  </buch>',
+  '</bibliothek>',
+].join('\n');
 function transformer(value: string) {
   return withDefaultOnError(() => {
     return JSON.stringify(convert.xml2js(value, { compact: true }), null, 2);

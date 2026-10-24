@@ -498,6 +498,7 @@ tools:
   bip39-generator:
     title: BIP39 passphrase generator
     languageLabel: 'Language:'
+    languageHint: 'Note: the BIP39 standard has no official German word list, so German is not offered. A self-made list would not be recognised by wallets, and recovery would not work.'
     entropyLabel: 'Entropy (seed):'
     entropyPlaceholder: Your string...
     entropyLengthMessage: Entropy length should be >= 16, <= 32 and be a multiple of 4

@@ -519,6 +519,7 @@ tools:
   bip39-generator:
     title: BIP39-Passphrasengenerator
     languageLabel: 'Sprache:'
+    languageHint: 'Hinweis: Der BIP39-Standard kennt keine offizielle deutsche Wortliste, deshalb steht Deutsch hier nicht zur Auswahl. Eine selbst erstellte Liste würde von Wallets nicht erkannt, und die Wiederherstellung wäre dann nicht möglich.'
     entropyLabel: 'Entropie (Seed):'
     entropyPlaceholder: Dein String ...
     entropyLengthMessage: Die Entropie-Länge sollte >= 16, <= 32 und ein Vielfaches von 4 sein

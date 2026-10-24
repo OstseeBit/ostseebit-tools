@@ -4,7 +4,10 @@ import { formatXml, parseXml } from './xml-formatter.service';
 
 const { t } = useI18n();
 
-const defaultValue = '<hello><world>foo</world><world>bar</world></hello>';
+// Example input so the result is visible right away; select all and type to replace it.
+const defaultValue = [
+  '<bibliothek ort="Kiel"><buch id="1"><titel>Die Ostsee</titel><autor>Anna Beispiel</autor></buch><buch id="2"><titel>Leuchttürme</titel><autor>Ben Muster</autor></buch></bibliothek>',
+].join('\n');
 const indentSize = useStorage('xml-formatter:indent-size', 2);
 const collapseContent = useStorage('xml-formatter:collapse-content', true);
 
