@@ -60,6 +60,9 @@ export default defineConfig({
         // Include the existing Monaco editor and MAC vendor database in offline precaching.
         // Keep a bounded limit; bundle splitting is tracked separately in the roadmap.
         maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
+        // The /c-lib component showcase is only registered in development; its chunks are never
+        // requested in production, so there is no point in downloading them for offline use.
+        globIgnores: ['**/assets/*.demo-*.js', '**/assets/demo-wrapper-*.js'],
       },
       manifest: {
         name: brand.name,

@@ -1,16 +1,19 @@
 import type { RouteRecordRaw } from 'vue-router';
 import DemoHome from './demo-home.page.vue';
 
-const demoPages = import.meta.glob('../*/*.demo.vue', { eager: true });
+// Lazy on purpose: an eager glob would pull every demo (including c-diff-editor and with it the
+// whole of monaco-editor, ~7.7 MB of source) into the entry chunk that every visitor downloads,
+// even though the demo routes are only registered in development.
+const demoPages = import.meta.glob('../*/*.demo.vue');
 
-export const demoRoutes = Object.keys(demoPages).map((demoComponentPath) => {
+export const demoRoutes = Object.entries(demoPages).map(([demoComponentPath, loadDemoComponent]) => {
   const [, , fileName] = demoComponentPath.split('/');
   const demoComponentName = fileName.split('.').shift();
 
   return {
     path: demoComponentName,
     name: demoComponentName,
-    component: () => import(/* @vite-ignore */ demoComponentPath),
+    component: loadDemoComponent,
   } as RouteRecordRaw;
 });
 
