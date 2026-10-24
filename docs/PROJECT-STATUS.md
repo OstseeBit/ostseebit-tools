@@ -8,7 +8,7 @@ Paketversion: `0.1.0`. Dieses Dokument ist ein **chronologisches Änderungsproto
 
 | Roadmap-Phase | Stand |
 | --- | --- |
-| 1 Repository und Baseline | im Wesentlichen erledigt; **28 Commits liegen nur lokal**, nichts ist auf `origin` gepusht |
+| 1 Repository und Baseline | im Wesentlichen erledigt; **über 30 Commits liegen nur lokal**, nichts ist auf `origin` gepusht |
 | 2 Toolchain | erledigt (Node 24, pnpm 12, ESLint Flat Config); offen: TypeScript 7, noch nicht freigegeben |
 | 3 Abhängigkeiten | fast erledigt: Sicherheitsfunde 76 → 8, Tiptap 3, alle Versionsbereiche aktualisiert, Hauptversionen Gruppe 1 und 2; offen: `vue-router` 5, `ua-parser-js` 2 (AGPL, Lizenzentscheidung nötig) |
 | 4 Performance | **im Wesentlichen erledigt**: Einstiegs-Chunk 3,5 → 0,6 MiB (brotli 134 KiB), Startseite ca. 475 KiB übertragen, Offline-Vorab-Cache 22,5 → 5,9 MiB, nginx mit Komprimierung und Cache-Headern (ungetestet, siehe unten); offen: Messung mit echter Netzwerkdrosselung |
@@ -23,7 +23,7 @@ Paketversion: `0.1.0`. Dieses Dokument ist ein **chronologisches Änderungsproto
 **Nächste Schritte in dieser Reihenfolge:**
 
 1. ✅ Gruppe 2 der Hauptversionen abgeschlossen (`marked` 18, `markdown-it` 15, `vite-plugin-pwa` 2, `figue` entfernt).
-2. Entscheidung des Eigentümers: Push/Pull-Request für die 28 lokalen Commits (Sicherung und Voraussetzung für Phase 6).
+2. Entscheidung des Eigentümers: Push/Pull-Request für die lokalen Commits (über 30) (Sicherung und Voraussetzung für Phase 6).
 3. Entscheidung des Eigentümers: `ua-parser-js` bei 1.x (MIT) belassen oder auf 2.x (AGPL-3.0) gehen.
 4. ✅ Phase 4 Performance: erster und zweiter Durchgang abgeschlossen. Offen: Messung unter Netzwerkdrosselung (Lighthouse o. ä.).
 5. Phase 5 Docker: `docker build` und `curl -I`-Prüfung der neuen `nginx.conf` auf einem Rechner mit Docker.
