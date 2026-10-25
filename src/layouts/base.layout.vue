@@ -18,9 +18,9 @@ import NavbarButtons from '../components/NavbarButtons.vue';
 
 const themeVars = useThemeVars();
 const styleStore = useStyleStore();
-const version = config.app.version;
+const buildDate = config.app.buildDate;
 const commitSha = config.app.lastCommitSha;
-const sourceUrl = /^[a-f0-9]{7,40}$/i.test(commitSha) ? `${brand.repositoryUrl}/tree/${commitSha}` : brand.repositoryUrl;
+const commitUrl = /^[a-f0-9]{7,40}$/i.test(commitSha) ? `${brand.repositoryUrl}/commit/${commitSha}` : brand.repositoryUrl;
 
 const { t } = useI18n();
 
@@ -67,16 +67,16 @@ const tools = computed<ToolCategory[]>(() => [
         <div class="footer">
           <div>
             {{ brand.name }}
-
-            <span>v{{ version }}</span>
+          </div>
+          <div data-test-id="build-version">
+            {{ $t('home.version', { date: buildDate }) }}
 
             <template v-if="commitSha && commitSha.length > 0">
-              -
+              ·
               <c-link
                 target="_blank"
                 rel="noopener"
-                type="primary"
-                :href="sourceUrl"
+                :href="commitUrl"
               >
                 {{ commitSha.slice(0, 7) }}
               </c-link>
@@ -89,9 +89,9 @@ const tools = computed<ToolCategory[]>(() => [
             </c-link>
           </div>
           <div>
-            <RouterLink to="/about">
+            <c-link to="/about">
               {{ $t('home.nav.aboutLabel') }}
-            </RouterLink>
+            </c-link>
           </div>
         </div>
       </div>

@@ -17,6 +17,8 @@ export const config = {
   app: {
     version: (import.meta.env.PACKAGE_VERSION as string | undefined) || '0.0.0',
     lastCommitSha: (import.meta.env.VITE_GIT_COMMIT_SHA as string | undefined) ?? '',
+    // Date of the commit the build is based on (or the build date when git is not available).
+    buildDate: (import.meta.env.VITE_BUILD_DATE as string | undefined) ?? '',
     baseUrl: (import.meta.env.BASE_URL as string | undefined) ?? '/',
     env: parseAppEnv(import.meta.env.VITE_VERCEL_ENV as string | undefined),
   },
