@@ -1,20 +1,21 @@
 import type { Page } from '@playwright/test';
 import { expect, test } from '@playwright/test';
 
-// Puts the caret behind the last character of the last paragraph. The position is set through the
-// document selection instead of a click, because a click depends on pixel positions and the layout is
-// still shifting while the development server finishes loading styles (the caret then ended up at the
-// very start of the document in CI).
+// Puts the caret at the very end of the document through the editor's own command API (Tiptap keeps
+// its instance on the editor element). Neither a click (depends on pixel positions while the layout is
+// still shifting) nor setting the browser selection (WebKit hands it to ProseMirror late) was reliable:
+// in both cases the caret occasionally stayed at the start of the document.
 async function placeCaretAtEnd(page: Page) {
   const editor = page.locator('.ProseMirror');
   await expect(editor.locator('p').last()).toHaveText('Willkommen in diesem HTML-WYSIWYG-Editor');
-  await editor.focus();
   await page.evaluate(() => {
-    const paragraphs = document.querySelectorAll('.ProseMirror p');
-    const selection = globalThis.getSelection();
-    selection?.selectAllChildren(paragraphs[paragraphs.length - 1]);
-    selection?.collapseToEnd();
+    const element = document.querySelector('.ProseMirror') as (HTMLElement & { editor?: { commands: { focus: (position: 'end') => boolean } } }) | null;
+    if (!element?.editor) {
+      throw new Error('Tiptap editor instance not found on the editor element');
+    }
+    element.editor.commands.focus('end');
   });
+  await expect(editor).toBeFocused();
 }
 
 test.describe('Tool - HTML WYSIWYG editor', () => {
