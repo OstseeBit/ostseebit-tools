@@ -6,6 +6,7 @@
 [![Sprache](https://img.shields.io/badge/Sprache-Deutsch%20%C2%B7%20Englisch-0F52BA?style=for-the-badge)](#-projektsprache)
 [![Prüfung](https://img.shields.io/github/actions/workflow/status/OstseeBit/ostseebit-tools/validate.yml?branch=main&style=for-the-badge&label=Pr%C3%BCfung&color=00A9A5)](https://github.com/OstseeBit/ostseebit-tools/actions/workflows/validate.yml)
 [![Stand](https://img.shields.io/github/last-commit/OstseeBit/ostseebit-tools/main?style=for-the-badge&label=Stand&color=00A9A5)](https://github.com/OstseeBit/ostseebit-tools/commits/main)
+[![Docker](https://img.shields.io/docker/pulls/ostseebit/ostseebit-tools?style=for-the-badge&label=Docker%20Pulls&color=0F52BA)](https://hub.docker.com/r/ostseebit/ostseebit-tools)
 [![OstseeBit](https://img.shields.io/badge/by-OstseeBit-00A9A5?style=for-the-badge)](https://github.com/OstseeBit)
 
 </div>
@@ -94,20 +95,30 @@ corepack pnpm run script:create:tool my-tool-name
 
 ## 🐳 Self-Hosting und Container
 
-Die App ist eine statische Webseite und wird im Container über nginx ausgeliefert (Port 80, Benutzer `nginx`, mit Komprimierung, Zwischenspeicher-Regeln und Sicherheits-Headern).
+Die App ist eine statische Webseite und wird im Container über nginx ausgeliefert (Port 80, Benutzer `nginx`, mit Komprimierung, Zwischenspeicher-Regeln und Sicherheits-Headern). Das fertige Image liegt auf Docker Hub: [`ostseebit/ostseebit-tools`](https://hub.docker.com/r/ostseebit/ostseebit-tools).
 
-**Selbst bauen und starten** (auf einem Rechner mit Docker):
+**Starten** (auf jedem Rechner mit Docker, für `amd64` und `arm64`):
+
+```bash
+docker run -d --name ostseebit-tools --restart unless-stopped -p 8080:80 ostseebit/ostseebit-tools:latest
+```
+
+Danach ist die App unter `http://localhost:8080` erreichbar. Mit Docker Compose und zum Aktualisieren siehe [docs/DOCKER.md](docs/DOCKER.md).
+
+| Tag | Bedeutung |
+| --- | --- |
+| `latest` | aktueller Stand von `main` |
+| `sha-<Commit>` | fester Stand zu einem Commit (die Kurz-ID steht auch in der Fußzeile der App) |
+| `1.2.3`, `1.2` | feste Versionen, sobald ein Release-Tag `v1.2.3` gesetzt wird |
+
+Das Image wird bei jeder Änderung an `main` automatisch von GitHub Actions gebaut und veröffentlicht (`.github/workflows/docker-publish.yml`).
+
+**Selbst bauen** (auf einem Rechner mit Docker):
 
 ```bash
 docker build -t ostseebit-tools:latest --build-arg GIT_COMMIT_SHA=$(git rev-parse HEAD) --build-arg BUILD_DATE=$(git log -1 --format=%cs) .
 docker run --rm -p 8080:80 ostseebit-tools:latest
 ```
-
-Danach ist die App unter `http://localhost:8080` erreichbar.
-
-**Veröffentlichung auf Docker Hub:** Der Workflow `.github/workflows/docker-publish.yml` ist vorbereitet. Er baut das Image für `linux/amd64` und `linux/arm64` und lädt es als `<docker-hub-name>/ostseebit-tools` mit den Tags `latest` (aktueller Stand von `main`) und Versionsnummern hoch. Die Einrichtung (Konto, Zugriffstoken, GitHub-Secrets), die Installation auf einem Docker-Host und das Aktualisieren stehen in [docs/DOCKER.md](docs/DOCKER.md).
-
-> **Stand:** Dockerfile, nginx-Konfiguration und Veröffentlichungs-Workflow sind vorbereitet, aber ein Container-Build wurde auf einem Docker-Host noch **nicht** abgenommen, und ein offizielles Image auf Docker Hub ist noch **nicht** veröffentlicht. Erst wenn Build und Laufzeittest erfolgreich waren und die erste Veröffentlichung durch ist, gilt das Image als bereitgestellt.
 
 Siehe auch [Roadmap](docs/ROADMAP.md).
 
