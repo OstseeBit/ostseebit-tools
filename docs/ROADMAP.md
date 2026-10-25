@@ -54,26 +54,22 @@ Nach jeder Gruppe erfolgt erneut die Baseline-Validierung.
 
 ## Phase 5 — Docker und Containerbereitstellung
 
-Status: **verbindlich vorgesehen, noch nicht umgesetzt**
-
-Ziel: ein reproduzierbar gebautes und getestetes Container-Image für den Self-Hosting-Betrieb bereitstellen.
+Status: **umgesetzt (2026-10-25)**. Das Image `ostseebit/ostseebit-tools` wird bei jeder Änderung an `main` automatisch gebaut und auf Docker Hub veröffentlicht (`linux/amd64` und `linux/arm64`); Bau, Start, Bezug von Docker Hub und Betrieb auf einem Docker-Host wurden bestätigt.
 
 Arbeitspunkte:
 
-1. vorhandenes Dockerfile prüfen
-2. ✅ Node- und nginx-Basis-Images bewusst versionieren (2026-10-04: `node:24.18.1-alpine`, `nginx:1.27-alpine` statt `lts`/`stable`)
-3. Buildstufe reproduzierbar gestalten
-4. Runtime-Image minimieren und härten (2026-10-04: nginx-Stage läuft als Benutzer `nginx` statt root; Sicherheits-Header in nginx.conf ergänzt — Rest des Punktes offen)
-5. Container lokal bauen (noch offen — kein Docker in der Entwicklungsumgebung verfügbar, daher ungetestet)
-6. statische Auslieferung über nginx testen
-7. Health-/HTTP-Verhalten prüfen
-8. Multi-Arch-Bedarf bewerten
-9. Image-Namensschema und Tags definieren
-10. Registry-Ziel festlegen
-11. Image veröffentlichen
-12. Self-Hosting-Dokumentation ergänzen
-
-Ein Container wird erst als offiziell verfügbar dokumentiert, wenn Build und Laufzeittest erfolgreich sind.
+1. ✅ vorhandenes Dockerfile prüfen und reparieren (`pnpm-workspace.yaml` und `corepack` in der Build-Stufe)
+2. ✅ Node- und nginx-Basis-Images bewusst versionieren (`node:24.18.1-alpine`, `nginx:1.27-alpine`)
+3. ✅ Buildstufe reproduzierbar gestalten (eingefrorene Lockfile, pnpm-Version über `packageManager`, Build-Stufe auf `BUILDPLATFORM`); offen bleibt, die Basis-Images zusätzlich per Digest zu fixieren
+4. ✅ Runtime-Image minimieren und härten (mehrstufig, Benutzer `nginx`, Sicherheits-Header, Healthcheck)
+5. ✅ Container bauen (auf einem Docker-Host bestätigt)
+6. ✅ statische Auslieferung über nginx (gzip, Cache-Header, Fallback auf `index.html`)
+7. ✅ Healthcheck im Image; die Auswertung der HTTP-Header per `curl -I` ist als Prüfschritt in `docs/DOCKER.md` beschrieben
+8. ✅ Multi-Arch: `amd64` und `arm64`
+9. ✅ Namensschema und Tags: `latest`, `sha-<Commit>`, `1.2.3`/`1.2`
+10. ✅ Registry: Docker Hub
+11. ✅ Image veröffentlicht (Workflow `docker-publish.yml`)
+12. ✅ Self-Hosting-Dokumentation: `docs/DOCKER.md`, README
 
 ## Phase 6 — CI/CD
 

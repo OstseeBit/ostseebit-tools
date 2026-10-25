@@ -12,7 +12,7 @@ Paketversion: `0.1.0`. Dieses Dokument ist ein **chronologisches Änderungsproto
 | 2 Toolchain | erledigt (Node 24, pnpm 12, ESLint Flat Config); offen: TypeScript 7, sobald Lint-Werkzeug und `vue-tsc` es unterstützen |
 | 3 Abhängigkeiten | erledigt: Sicherheitsmeldungen 76 → 8, Tiptap 3, `vue-router` 5, Hauptversionen aktualisiert; bewusst offen: `ua-parser-js` 2 (AGPL-3.0, Lizenzentscheidung) |
 | 4 Performance | im Wesentlichen erledigt: Einstiegs-Chunk 3,5 → 0,6 MiB (Brotli 134 KiB), Startseite ca. 475 KiB übertragen, Offline-Vorab-Cache 22,5 → 5,9 MiB; offen: Messung unter Netzwerkdrosselung |
-| 5 Docker | Dockerfile (mehrstufig, `BUILDPLATFORM`, Healthcheck), nginx-Konfiguration (gzip, Cache-Header) und Veröffentlichungs-Workflow für Docker Hub sind vorbereitet; die Abnahme auf einem Docker-Host und die erste Veröffentlichung stehen aus |
+| 5 Docker | umgesetzt: Image `ostseebit/ostseebit-tools` auf Docker Hub (`amd64`, `arm64`), automatische Veröffentlichung bei jeder Änderung an `main`; Betrieb auf einem Docker-Host bestätigt |
 | 6 CI/CD | läuft auf GitHub Actions (Ubuntu und Windows) |
 | 7 Neue Funktionen | bewusst erst nach Stabilisierung |
 
@@ -22,10 +22,9 @@ Paketversion: `0.1.0`. Dieses Dokument ist ein **chronologisches Änderungsproto
 
 **Offen:**
 
-1. Abnahme des Container-Builds auf einem Docker-Host und erste Veröffentlichung auf Docker Hub (Konto, Zugriffstoken und GitHub-Secrets legt der Maintainer an).
-2. `ua-parser-js` bei 1.x (MIT) belassen oder auf 2.x (AGPL-3.0) wechseln: Lizenzentscheidung.
-3. TypeScript 7, sobald Lint-Werkzeug und `vue-tsc` es unterstützen.
-4. Performance: Messung unter Netzwerkdrosselung (Lighthouse o. Ä.).
+1. `ua-parser-js` bei 1.x (MIT) belassen oder auf 2.x (AGPL-3.0) wechseln: Lizenzentscheidung.
+2. TypeScript 7, sobald Lint-Werkzeug und `vue-tsc` es unterstützen.
+3. Performance: Messung unter Netzwerkdrosselung (Lighthouse o. Ä.).
 
 ## Lokal nachgewiesen
 

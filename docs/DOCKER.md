@@ -1,6 +1,6 @@
 # Docker: Kurzreferenz
 
-Der Container liefert die fertig gebaute App über nginx aus (Port 80 im Container, Benutzer `nginx`, mit Komprimierung, Zwischenspeicher-Regeln und Sicherheits-Headern). Das Image heißt auf Docker Hub `<docker-hub-name>/ostseebit-tools` und trägt Tags wie `latest` oder `1.2.3`.
+Der Container liefert die fertig gebaute App über nginx aus (Port 80 im Container, Benutzer `nginx`, mit Komprimierung, Zwischenspeicher-Regeln und Sicherheits-Headern). Das offizielle Image heißt [`ostseebit/ostseebit-tools`](https://hub.docker.com/r/ostseebit/ostseebit-tools) und trägt Tags wie `latest` oder `1.2.3`. Forks setzen ihren eigenen Docker-Hub-Namen ein.
 
 ## Bauen und starten
 
@@ -39,10 +39,10 @@ Dafür müssen im GitHub-Repository die Secrets `DOCKERHUB_USERNAME` und `DOCKER
 ## Auf einem Docker-Host betreiben
 
 ```bash
-docker run -d --name ostseebit-tools --restart unless-stopped -p 8080:80 <docker-hub-name>/ostseebit-tools:latest
+docker run -d --name ostseebit-tools --restart unless-stopped -p 8080:80 ostseebit/ostseebit-tools:latest
 ```
 
-Mit Compose: `docker-compose.yml` auf den Host kopieren, daneben eine Datei `.env` mit `DOCKERHUB_USERNAME=<docker-hub-name>` anlegen, dann:
+Mit Compose: `docker-compose.yml` auf den Host kopieren (für ein eigenes Image daneben eine Datei `.env` mit `DOCKERHUB_USERNAME=<docker-hub-name>` anlegen), dann:
 
 ```bash
 docker compose up -d
