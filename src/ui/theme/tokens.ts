@@ -12,7 +12,8 @@
 
 export type ThemeMode = 'light' | 'dark';
 
-export const categoryIds = ['dev', 'data', 'net', 'sec', 'ops', 'calc'] as const;
+/** Kategorien in der Reihenfolge der Seitenleiste (siehe src/tools/index.ts). */
+export const categoryIds = ['data', 'text', 'dev', 'db', 'net', 'sec', 'ops', 'calc', 'id'] as const;
 export type CategoryId = typeof categoryIds[number];
 
 export interface ColorTokens {
@@ -70,12 +71,15 @@ export const colorTokens: Record<ThemeMode, ColorTokens> = {
     ok: '#0a6b3d',
     categoryTintPercent: '13%',
     categories: {
-      dev: '#0a6ea8',
-      data: '#0b7a82',
-      net: '#4a58c2',
-      sec: '#b4472a',
-      ops: '#3b7a28',
-      calc: '#97570a',
+      data: '#0b7a82', //  Türkis
+      text: '#8d3f99', //  Purpur
+      dev: '#0a6ea8', //   Meerblau
+      db: '#4f6676', //    Schiefer
+      net: '#4a58c2', //   Himmelsindigo
+      sec: '#b4472a', //   Koralle
+      ops: '#3b7a28', //   Seegras
+      calc: '#97570a', //  Bernstein dunkel
+      id: '#b02a63', //    Rosé
     },
     neutral: { color: 'rgba(15, 42, 54, 0.05)', hover: 'rgba(15, 42, 54, 0.09)', pressed: 'rgba(15, 42, 54, 0.18)' },
     scrim: 'rgba(10, 30, 40, 0.5)',
@@ -101,12 +105,15 @@ export const colorTokens: Record<ThemeMode, ColorTokens> = {
     ok: '#4ade80',
     categoryTintPercent: '18%',
     categories: {
-      dev: '#69bff5',
       data: '#4fd6c8',
+      text: '#d9a3e6',
+      dev: '#69bff5',
+      db: '#a7bccb',
       net: '#a3aeff',
       sec: '#ff9f80',
       ops: '#93d96d',
       calc: '#f6c560',
+      id: '#f59ac0',
     },
     neutral: { color: 'rgba(236, 245, 249, 0.08)', hover: 'rgba(236, 245, 249, 0.12)', pressed: 'rgba(236, 245, 249, 0.24)' },
     scrim: 'rgba(4, 14, 20, 0.65)',

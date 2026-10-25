@@ -42,16 +42,15 @@ search:
 tools:
   categories:
     favorite-tools: '我的收藏'
-    crypto: '加密'
-    converter: '转换器'
-    web: Web
-    images and videos: '图片和视频'
-    development: '开发'
-    network: '网络'
-    math: '数学'
-    measurement: '测量'
-    text: '文本'
-    data: '数据'
+    data and formats: '数据与格式'
+    text and characters: '文本与字符'
+    development and web: '开发与网页'
+    databases: '数据库'
+    network and email: '网络与邮件'
+    security and crypto: '安全与加密'
+    admin and devops: '运维与 DevOps'
+    calculators and units: '计算器与单位'
+    identifiers and codes: '标识符与代码'
 
   password-strength-analyser:
     title: 密码强度分析仪

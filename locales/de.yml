@@ -75,16 +75,15 @@ common:
 tools:
   categories:
     favorite-tools: Deine Lieblingstools
-    crypto: Krypto
-    converter: Konverter
-    web: Web
-    images and videos: Bilder & Videos
-    development: Entwicklung
-    network: Netzwerk
-    math: Mathematik
-    measurement: Messung
-    text: Text
-    data: Daten
+    data and formats: 'Daten & Formate'
+    text and characters: 'Text & Zeichen'
+    development and web: 'Entwicklung & Web'
+    databases: 'Datenbanken'
+    network and email: 'Netzwerk & E-Mail'
+    security and crypto: 'Sicherheit & Krypto'
+    admin and devops: 'Admin & DevOps'
+    calculators and units: 'Rechner & Einheiten'
+    identifiers and codes: 'Kennungen & Codes'
   password-strength-analyser:
     title: Passwortstärken-Analysator
     inputPlaceholder: Gib ein Passwort ein ...

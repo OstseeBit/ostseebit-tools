@@ -39,16 +39,15 @@ search:
 tools:
   categories:
     favorite-tools: 'Vos outils favoris'
-    crypto: Cryptographie
-    converter: Convertisseur
-    web: Web
-    images and videos: 'Images & Vidéos'
-    development: Développement
-    network: Réseau
-    math: Math
-    measurement: Mesure
-    text: Texte
-    data: Données
+    data and formats: 'Données et formats'
+    text and characters: 'Texte et caractères'
+    development and web: 'Développement et web'
+    databases: 'Bases de données'
+    network and email: 'Réseau et e-mail'
+    security and crypto: 'Sécurité et cryptographie'
+    admin and devops: 'Admin et DevOps'
+    calculators and units: 'Calculateurs et unités'
+    identifiers and codes: 'Identifiants et codes'
 
   token-generator:
     title: Générateur de token

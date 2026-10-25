@@ -42,16 +42,15 @@ search:
 tools:
   categories:
     favorite-tools: 'Công cụ yêu thích của bạn'
-    crypto: Mã hóa
-    converter: Chuyển đổi
-    web: Web
-    images and videos: 'Hình ảnh & Video'
-    development: Phát triển
-    network: Mạng
-    math: Toán học
-    measurement: Đo lường
-    text: Văn bản
-    data: Dữ liệu
+    data and formats: 'Dữ liệu & định dạng'
+    text and characters: 'Văn bản & ký tự'
+    development and web: 'Phát triển & web'
+    databases: 'Cơ sở dữ liệu'
+    network and email: 'Mạng & email'
+    security and crypto: 'Bảo mật & mật mã'
+    admin and devops: 'Quản trị & DevOps'
+    calculators and units: 'Máy tính & đơn vị'
+    identifiers and codes: 'Định danh & mã'
 
   password-strength-analyser:
     title: Bộ phân tích độ mạnh mật khẩu

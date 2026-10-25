@@ -42,16 +42,15 @@ search:
 tools:
   categories:
     favorite-tools: 'Dine favoritt verktøy'
-    crypto: Krypto
-    converter: Konvertering
-    web: Web
-    images and videos: 'Bilder & Videoer'
-    development: Utvikling
-    network: Nettverk
-    math: Matte
-    measurement: Måling
-    text: Tekst
-    data: Data
+    data and formats: 'Data og formater'
+    text and characters: 'Tekst og tegn'
+    development and web: 'Utvikling og web'
+    databases: 'Databaser'
+    network and email: 'Nettverk og e-post'
+    security and crypto: 'Sikkerhet og krypto'
+    admin and devops: 'Admin og DevOps'
+    calculators and units: 'Kalkulatorer og enheter'
+    identifiers and codes: 'Identifikatorer og koder'
 
   password-strength-analyser:
     title: Analyseverktøy for passordstyrke

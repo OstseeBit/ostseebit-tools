@@ -73,16 +73,15 @@ common:
 tools:
   categories:
     favorite-tools: 'Your favorite tools'
-    crypto: Crypto
-    converter: Converter
-    web: Web
-    images and videos: 'Images & Videos'
-    development: Development
-    network: Network
-    math: Math
-    measurement: Measurement
-    text: Text
-    data: Data
+    data and formats: 'Data & Formats'
+    text and characters: 'Text & Characters'
+    development and web: 'Development & Web'
+    databases: 'Databases'
+    network and email: 'Network & Email'
+    security and crypto: 'Security & Crypto'
+    admin and devops: 'Admin & DevOps'
+    calculators and units: 'Calculators & Units'
+    identifiers and codes: 'Identifiers & Codes'
 
   password-strength-analyser:
     title: Password strength analyser

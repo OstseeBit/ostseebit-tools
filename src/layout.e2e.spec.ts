@@ -6,7 +6,7 @@ test.describe('Layout - sidebar and footer', () => {
     const nav = page.getByRole('navigation', { name: 'Werkzeuge' });
     await expect(nav).toBeVisible();
     // The category headers are visible, their tools are not.
-    await expect(nav.getByText('Krypto', { exact: true })).toBeVisible();
+    await expect(nav.getByText('Sicherheit & Krypto', { exact: true })).toBeVisible();
     await expect(nav.getByRole('link', { name: 'Token-Generator' })).toBeHidden();
     await expect(nav.getByRole('link', { name: 'Datum-Uhrzeit-Konverter' })).toBeHidden();
   });
@@ -21,7 +21,7 @@ test.describe('Layout - sidebar and footer', () => {
   test('a category can be opened by clicking its header', async ({ page }) => {
     await page.goto('/');
     const nav = page.getByRole('navigation', { name: 'Werkzeuge' });
-    await nav.getByText('Krypto', { exact: true }).click();
+    await nav.getByText('Sicherheit & Krypto', { exact: true }).click();
     await expect(nav.getByRole('link', { name: 'Token-Generator' })).toBeVisible();
   });
 
