@@ -2,7 +2,7 @@
 
 ## Zweck
 
-Diese Baseline dokumentiert die technische Ausgangsbasis des Repositorys. Sie dient als Referenz für Modernisierung, Recovery und spätere Vergleiche.
+Diese Baseline dokumentiert die technische Ausgangsbasis des Repositorys. Sie dient als Referenz für spätere Vergleiche mit dem Ursprungsprojekt.
 
 ## Quellidentität
 
@@ -39,52 +39,3 @@ Vorhandene Toolchain-Vorgaben:
 - Playwright: ^1.32.3
 
 Diese Angaben beschreiben den übernommenen Manifeststand und sind keine Festlegung für die zukünftige Zielplattform.
-
-## CI und Publishing
-
-Die vorhandenen CI-/Testvorlagen enthalten Lint, Unit-Tests, Typecheck, Build und E2E-Abläufe.
-
-Geerbte Nightly- und Release-Publishing-Ziele wurden nicht übernommen. CI-/Testvorlagen bleiben bis zu einer separaten Prüfung in `.github/workflows-disabled/`.
-
-## Container-Ausgangslage
-
-Ein Dockerfile für einen statischen Build mit nginx ist vorhanden.
-
-Die Containerkonfiguration ist **noch nicht als offizieller Auslieferungsweg freigegeben**. Vor einer Bereitstellung sind insbesondere erforderlich:
-
-- Basis-Images versionieren
-- Build reproduzierbar machen
-- Dockerfile härten
-- Container lokal bauen und testen
-- Laufzeit- und HTTP-Verhalten prüfen
-- Tagging- und Registry-Strategie definieren
-- offizielles Image erst nach erfolgreicher Validierung veröffentlichen
-
-Dieser Punkt ist verbindlich in [ROADMAP.md](ROADMAP.md) aufgenommen.
-
-## Aktueller Validierungsstand
-
-Lokal erfolgreich ausgeführt:
-
-- `corepack pnpm install --frozen-lockfile`
-- `corepack pnpm typecheck`
-- `corepack pnpm lint` — 0 Fehler, 6 Warnungen
-- `corepack pnpm exec vitest run --environment jsdom` — 33 Testdateien, 138 Tests erfolgreich
-- `corepack pnpm build` — erfolgreich
-
-Die lokale Validierung erfolgte mit Node.js 24.18.1.
-
-Noch offen:
-
-- Playwright-E2E
-- vollständige Browser-/PWA-Prüfung
-- Container-Build und Container-Laufzeittest
-- produktive Release-/Publishing-Pipeline
-
-## Recovery
-
-Die Snapshot- und Recovery-Branches dienen ausschließlich der Wiederherstellung und Herkunftssicherung. Sie sind keine parallelen Produktversionen.
-
-Der reguläre Weiterentwicklungsstand wird nach Abschluss eines Changes wieder nach `main` übernommen.
-
-Kein Force-Push auf `main`.
