@@ -99,8 +99,8 @@ Die App ist eine statische Webseite und wird im Container über nginx ausgeliefe
 **Selbst bauen und starten** (auf einem Rechner mit Docker):
 
 ```bash
-docker build -t ostseebit-tools:test --build-arg GIT_COMMIT_SHA=$(git rev-parse HEAD) --build-arg BUILD_DATE=$(git log -1 --format=%cs) .
-docker run --rm -p 8080:80 ostseebit-tools:test
+docker build -t ostseebit-tools:latest --build-arg GIT_COMMIT_SHA=$(git rev-parse HEAD) --build-arg BUILD_DATE=$(git log -1 --format=%cs) .
+docker run --rm -p 8080:80 ostseebit-tools:latest
 ```
 
 Danach ist die App unter `http://localhost:8080` erreichbar.

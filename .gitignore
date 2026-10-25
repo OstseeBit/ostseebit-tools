@@ -18,8 +18,7 @@ coverage
 /cypress/screenshots/
 
 # Editor directories and files
-.vscode/*
-!.vscode/extensions.json
+.vscode/
 .idea
 *.suo
 *.ntvs*
@@ -33,3 +32,11 @@ coverage
 /playwright/.cache/
 # Webkit with playwright creates a salt file
 salt
+
+# Editor and assistant tooling stays on the developer's machine
+.claude/
+.codex/
+.cursor/
+.aider*
+CLAUDE.md
+AGENTS.md
