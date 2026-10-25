@@ -25,15 +25,21 @@ const collapsedCategories = useStorage<Record<string, boolean>>(
   },
 );
 
-function toggleCategoryCollapse({ name }: { name: string }) {
-  collapsedCategories.value[name] = !collapsedCategories.value[name];
+// A category the user has not touched yet is collapsed, unless it contains the tool that is open right now.
+// Once the user opens or closes a category, that explicit choice wins.
+function isCategoryCollapsed({ name, components }: ToolCategory) {
+  return collapsedCategories.value[name] ?? !components.some(tool => tool.path === route.path);
+}
+
+function toggleCategoryCollapse(name: string, isCollapsed: boolean) {
+  collapsedCategories.value[name] = !isCollapsed;
 }
 
 const menuOptions = computed(() =>
-  toolsByCategory.value.map(({ name, components }) => ({
-    name,
-    isCollapsed: collapsedCategories.value[name],
-    tools: components.map(tool => ({
+  toolsByCategory.value.map(category => ({
+    name: category.name,
+    isCollapsed: isCategoryCollapsed(category),
+    tools: category.components.map(tool => ({
       label: makeLabel(tool),
       icon: makeIcon(tool),
       key: tool.path,
@@ -46,7 +52,7 @@ const themeVars = useThemeVars();
 
 <template>
   <div v-for="{ name, tools, isCollapsed } of menuOptions" :key="name">
-    <div ml-6px mt-12px flex cursor-pointer items-center op-60 @click="toggleCategoryCollapse({ name })">
+    <div ml-6px mt-12px flex cursor-pointer items-center op-60 @click="toggleCategoryCollapse(name, isCollapsed)">
       <span :class="{ 'rotate-0': isCollapsed, 'rotate-90': !isCollapsed }" text-16px lh-1 op-50 transition-transform>
         <icon-mdi-chevron-right />
       </span>
@@ -58,7 +64,7 @@ const themeVars = useThemeVars();
 
     <n-collapse-transition :show="!isCollapsed">
       <div class="menu-wrapper">
-        <div class="toggle-bar" @click="toggleCategoryCollapse({ name })" />
+        <div class="toggle-bar" @click="toggleCategoryCollapse(name, isCollapsed)" />
 
         <n-menu
           class="menu"

@@ -1,0 +1,16 @@
+# Runs the published image on any Docker host:
+#
+#   1. Set your Docker Hub name once, e.g. in a file ".env" next to this file:
+#        DOCKERHUB_USERNAME=dein-dockerhub-name
+#   2. docker compose up -d
+#   3. Open http://<host>:8080
+#
+# Update to the newest image:   docker compose pull && docker compose up -d
+
+services:
+  ostseebit-tools:
+    image: ${DOCKERHUB_USERNAME:?Set DOCKERHUB_USERNAME in .env}/ostseebit-tools:${OSTSEEBIT_TAG:-latest}
+    container_name: ostseebit-tools
+    restart: unless-stopped
+    ports:
+      - "${OSTSEEBIT_PORT:-8080}:80"

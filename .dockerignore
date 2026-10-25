@@ -3,3 +3,4 @@ playwright-report
 coverage
 dist
 test-results
+.git

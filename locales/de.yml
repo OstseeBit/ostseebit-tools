@@ -13,6 +13,7 @@ home:
     allTools: Alle Tools
     favoritesDndToolTip: 'Ziehen und Ablegen, um Favoriten neu zu ordnen'
   subtitle: Praktische Tools für Entwickler
+  version: Version {date}
   toggleMenu: Menü umschalten
   home: Startseite
   uiLib: UI-Bibliothek

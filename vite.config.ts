@@ -1,3 +1,4 @@
+import { execFileSync } from 'node:child_process';
 import { resolve } from 'node:path';
 import { URL, fileURLToPath } from 'node:url';
 
@@ -18,6 +19,27 @@ import { configDefaults } from 'vitest/config';
 import { brand } from './src/branding.ts';
 
 const baseUrl = process.env.BASE_URL ?? '/';
+
+function git(...args: string[]) {
+  try {
+    return execFileSync('git', args, { stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim();
+  }
+  catch {
+    return '';
+  }
+}
+
+// Shown in the footer as "Version <date> · <commit>". CI and container builds pass the values in
+// (the Docker build stage has neither git nor a .git folder); local builds read them from git.
+const gitCommitSha = process.env.VITE_GIT_COMMIT_SHA
+  || process.env.GIT_COMMIT_SHA
+  || process.env.COMMIT_REF // Netlify
+  || process.env.VERCEL_GIT_COMMIT_SHA
+  || git('rev-parse', 'HEAD');
+const buildDate = process.env.VITE_BUILD_DATE
+  || process.env.BUILD_DATE
+  || git('log', '-1', '--format=%cs')
+  || new Date().toISOString().slice(0, 10);
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -165,6 +187,8 @@ export default defineConfig({
   },
   define: {
     'import.meta.env.PACKAGE_VERSION': JSON.stringify(process.env.npm_package_version),
+    'import.meta.env.VITE_GIT_COMMIT_SHA': JSON.stringify(gitCommitSha),
+    'import.meta.env.VITE_BUILD_DATE': JSON.stringify(buildDate),
   },
   test: {
     exclude: [...configDefaults.exclude, '**/*.e2e.spec.ts'],
