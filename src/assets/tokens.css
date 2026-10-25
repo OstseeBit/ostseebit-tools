@@ -1,0 +1,82 @@
+/*
+ * Design-Tokens als CSS-Variablen.
+ * Erzeugt aus src/ui/theme/tokens.ts mit "pnpm tokens:build". Nicht von Hand ändern;
+ * ein Test (tokens.test.ts) schlägt an, wenn Datei und Quelle auseinanderlaufen.
+ */
+
+:root {
+  color-scheme: light;
+  --c-bg: #f1f8fb;
+  --c-sky: #dff1f8;
+  --c-surface: #ffffff;
+  --c-text: #0f2a36;
+  --c-muted: #46616d;
+  --c-primary: #0a6a8a;
+  --c-primary-hover: #07566f;
+  --c-primary-press: #054559;
+  --c-on-primary: #ffffff;
+  --c-amber-text: #8f4500;
+  --c-amber-fill: #ffc247;
+  --c-on-amber: #3a2200;
+  --c-field-border: #6a8794;
+  --c-line: #d7e7ee;
+  --c-tint: #e0f2f8;
+  --c-hover: #eaf5f9;
+  --c-danger: #b42318;
+  --c-ok: #0a6b3d;
+  --c-scrim: rgba(10, 30, 40, 0.5);
+  --c-category-tint: 13%;
+  --c-cat-dev: #0a6ea8;
+  --c-cat-data: #0b7a82;
+  --c-cat-net: #4a58c2;
+  --c-cat-sec: #b4472a;
+  --c-cat-ops: #3b7a28;
+  --c-cat-calc: #97570a;
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-pill: 999px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.8125rem;
+  --fs-base: 0.9375rem;
+  --fs-lg: 1rem;
+  --fs-xl: 1.125rem;
+  --fs-2xl: clamp(1.25rem, 1rem + 0.6vw, 1.5rem);
+}
+
+.dark {
+  color-scheme: dark;
+  --c-bg: #12232f;
+  --c-sky: #1a3a4b;
+  --c-surface: #1a3140;
+  --c-text: #ecf5f9;
+  --c-muted: #a9c1cc;
+  --c-primary: #52d3ee;
+  --c-primary-hover: #8be3f5;
+  --c-primary-press: #b9f0fa;
+  --c-on-primary: #0b2230;
+  --c-amber-text: #ffc857;
+  --c-amber-fill: #ffc857;
+  --c-on-amber: #0b2230;
+  --c-field-border: #7396a6;
+  --c-line: #2a4a5b;
+  --c-tint: #21424f;
+  --c-hover: #244757;
+  --c-danger: #ff9b90;
+  --c-ok: #4ade80;
+  --c-scrim: rgba(4, 14, 20, 0.65);
+  --c-category-tint: 18%;
+  --c-cat-dev: #69bff5;
+  --c-cat-data: #4fd6c8;
+  --c-cat-net: #a3aeff;
+  --c-cat-sec: #ff9f80;
+  --c-cat-ops: #93d96d;
+  --c-cat-calc: #f6c560;
+}

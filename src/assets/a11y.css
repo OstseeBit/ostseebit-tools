@@ -3,13 +3,9 @@
  */
 
 :root {
-  --focus-ring-color: #086278;
+  --focus-ring-color: var(--c-primary);
   --focus-ring-width: 3px;
   --focus-ring-offset: 2px;
-}
-
-.dark {
-  --focus-ring-color: #67e8f9;
 }
 
 a:focus-visible,
@@ -41,7 +37,7 @@ textarea:focus-visible,
   z-index: 1000;
   padding: 8px 16px;
   background: var(--focus-ring-color);
-  color: #fff;
+  color: var(--c-on-primary);
   border-radius: 6px;
   text-decoration: none;
 }

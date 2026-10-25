@@ -1,20 +1,21 @@
 import { defineThemes } from '../theme/theme.models';
+import { colorTokens } from '../theme/tokens';
 
 export const { useTheme } = defineThemes({
   dark: {
-    backgroundColor: '#333333',
-    borderColor: '#333333',
+    backgroundColor: colorTokens.dark.bg,
+    borderColor: colorTokens.dark.fieldBorder,
 
     focus: {
-      backgroundColor: '#22d3ee1a',
+      backgroundColor: `${colorTokens.dark.primary}1a`,
     },
   },
   light: {
-    backgroundColor: '#ffffff',
-    borderColor: '#e0e0e69e',
+    backgroundColor: colorTokens.light.surface,
+    borderColor: colorTokens.light.fieldBorder,
 
     focus: {
-      backgroundColor: '#ffffff',
+      backgroundColor: colorTokens.light.surface,
     },
   },
 });
