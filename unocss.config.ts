@@ -14,7 +14,7 @@ export default defineConfig({
   transformers: [transformerDirectives(), transformerVariantGroup()],
   theme: {
     colors: {
-      // Angeglichen an ostseebit-app (_neomorphic-tokens.css, --color-accent).
+      // Akzentfarbe der Marke.
       primary: '#086278',
     },
   },

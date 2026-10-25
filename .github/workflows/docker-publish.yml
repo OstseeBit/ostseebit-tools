@@ -1,7 +1,7 @@
 name: Publish Docker image
 
 # Builds the container image and publishes it to Docker Hub:
-#   - every push to main      -> tags "latest" and "sha-<commit>"
+#   - every push to main      -> tags "latest" and "sha-<commit>" (not for changes that only touch text files)
 #   - every tag like v1.2.3   -> tags "1.2.3" and "1.2"
 #   - manual run              -> from the Actions tab
 # Without the repository secrets DOCKERHUB_USERNAME and DOCKERHUB_TOKEN the run is skipped (and stays
@@ -10,6 +10,15 @@ name: Publish Docker image
 on:
   push:
     branches: [main]
+    # Documentation-only changes do not change the app, so they do not publish a new image.
+    paths-ignore:
+      - '**/*.md'
+      - 'docs/**'
+      - 'LICENSE'
+      - '.gitignore'
+      - '.gitattributes'
+      - '.github/ISSUE_TEMPLATE/**'
+      - '.github/PULL_REQUEST_TEMPLATE/**'
     tags: ['v*.*.*']
   workflow_dispatch:
 

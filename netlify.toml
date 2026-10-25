@@ -3,8 +3,7 @@
   to = "/index.html"
   status = 200
 
-# Same baseline as the Docker/nginx delivery path (nginx.conf) — not yet a
-# final production sign-off, see docs/BASELINE.md / docs/ROADMAP.md Phase 5.
+# Same baseline as the Docker/nginx delivery path (nginx.conf).
 [[headers]]
   for = "/*"
   [headers.values]

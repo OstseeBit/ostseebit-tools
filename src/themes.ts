@@ -1,7 +1,6 @@
 import type { GlobalThemeOverrides } from 'naive-ui';
 
-// Akzentfarbe aus ostseebit-app (static/css/core/_neomorphic-tokens.css, --color-accent),
-// dort bereits auf WCAG-AA-Kontrast (~5.25:1 auf #e0e0e0) geprüft.
+// Akzentfarbe der Marke (WCAG-AA-Kontrast ~5.25:1 auf #e0e0e0).
 export const lightThemeOverrides: GlobalThemeOverrides = {
   common: {
     fontFamily: 'var(--font-sans)',
@@ -24,7 +23,7 @@ export const lightThemeOverrides: GlobalThemeOverrides = {
   },
 };
 
-// Dark-Mode-Akzent aus ostseebit-app (--color-accent / --color-accent-light / --color-accent-dark).
+// Akzentfarbe im Dark-Mode.
 export const darkThemeOverrides: GlobalThemeOverrides = {
   common: {
     fontFamily: 'var(--font-sans)',

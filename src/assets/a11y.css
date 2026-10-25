@@ -1,7 +1,5 @@
 /**
- * Barrierefreiheits-Basis, angeglichen an ostseebit-app
- * (_neomorphic-tokens.css, Abschnitte "Fokus-System" und "prefers-reduced-motion").
- * Fehlte in ostseebit-tools bisher vollständig.
+ * Barrierefreiheits-Basis: sichtbarer Fokus, Skip-Link, reduzierte Bewegung.
  */
 
 :root {

@@ -40,3 +40,6 @@ salt
 .aider*
 CLAUDE.md
 AGENTS.md
+
+# Internal notes and work logs stay local
+intern/
