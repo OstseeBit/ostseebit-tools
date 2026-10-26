@@ -8,7 +8,12 @@ home:
   toggleMenu: 'Перемикання меню'
   home: Головна
   uiLib: 'UI Бібліотека'
+  statusLocal: 'Працює локально в браузері'
   nav:
+    tools: 'Інструменти'
+    showCategory: '{name}: показати інструменти'
+    toolsOf: 'Інструменти: {name}'
+    toolCount: '{count} інструментів'
     github: 'GitHub-репозиторій'
     githubRepository: 'GitHub-репозиторій OstseeBit Tools'
     about: 'Про OstseeBit Tools'

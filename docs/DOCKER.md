@@ -37,7 +37,7 @@ docker build -t ostseebit-tools:latest --build-arg GIT_COMMIT_SHA=$(git rev-pars
 docker run --rm -p 8080:80 ostseebit-tools:latest
 ```
 
-Die beiden `--build-arg` setzen die Versionsanzeige in der Fußzeile der App (Datum und Commit); ohne sie fehlt der Commit.
+Die beiden `--build-arg` setzen die Versionsanzeige in der Statusleiste der App (Datum und Commit); ohne sie fehlt der Commit.
 
 ## Hinweise
 

@@ -1,28 +1,61 @@
 import { expect, test } from '@playwright/test';
 
-test.describe('Layout - sidebar and footer', () => {
-  test('the sidebar is open and every category is collapsed on the start page', async ({ page }) => {
+const securityButton = 'Sicherheit & Krypto: Werkzeuge anzeigen';
+
+test.describe('Layout - Kopfleiste, Icon-Leiste und Statusleiste', () => {
+  test('the rail lists the categories and no category flyout is open on the start page', async ({ page }) => {
     await page.goto('/');
     const nav = page.getByRole('navigation', { name: 'Werkzeuge' });
     await expect(nav).toBeVisible();
-    // The category headers are visible, their tools are not.
-    await expect(nav.getByText('Sicherheit & Krypto', { exact: true })).toBeVisible();
+    // Every category has a button, their tools are not shown until a category is opened.
+    await expect(nav.getByRole('button', { name: securityButton })).toBeVisible();
+    await expect(nav.getByRole('button', { name: securityButton })).toHaveAttribute('aria-expanded', 'false');
     await expect(nav.getByRole('link', { name: 'Token-Generator' })).toBeHidden();
     await expect(nav.getByRole('link', { name: 'Datum-Uhrzeit-Konverter' })).toBeHidden();
   });
 
-  test('opening a tool expands only the category that contains it', async ({ page }) => {
+  test('opening a tool marks only the category that contains it', async ({ page }) => {
     await page.goto('/token-generator');
     const nav = page.getByRole('navigation', { name: 'Werkzeuge' });
-    await expect(nav.getByRole('link', { name: 'Token-Generator' })).toBeVisible();
-    await expect(nav.getByRole('link', { name: 'Datum-Uhrzeit-Konverter' })).toBeHidden();
+    await expect(nav.getByRole('button', { name: securityButton })).toHaveAttribute('aria-current', 'true');
+    await expect(nav.getByRole('button', { name: 'Rechner & Einheiten: Werkzeuge anzeigen' })).not.toHaveAttribute('aria-current', 'true');
+    await expect(nav.getByRole('link', { name: 'Token-Generator' })).toBeHidden();
   });
 
-  test('a category can be opened by clicking its header', async ({ page }) => {
+  test('a category can be opened by its button and closed with Escape', async ({ page }) => {
     await page.goto('/');
     const nav = page.getByRole('navigation', { name: 'Werkzeuge' });
-    await nav.getByText('Sicherheit & Krypto', { exact: true }).click();
+    const button = nav.getByRole('button', { name: securityButton });
+    await button.click();
+    await expect(button).toHaveAttribute('aria-expanded', 'true');
     await expect(nav.getByRole('link', { name: 'Token-Generator' })).toBeVisible();
+    // Focus moves into the flyout and returns to the button when it is closed.
+    await expect(nav.getByRole('region').getByRole('link').first()).toBeFocused();
+    await page.keyboard.press('Escape');
+    await expect(nav.getByRole('link', { name: 'Token-Generator' })).toBeHidden();
+    await expect(button).toBeFocused();
+  });
+
+  test('choosing a tool in the flyout opens it and closes the flyout', async ({ page }) => {
+    await page.goto('/');
+    const nav = page.getByRole('navigation', { name: 'Werkzeuge' });
+    await nav.getByRole('button', { name: securityButton }).click();
+    await nav.getByRole('link', { name: 'Token-Generator' }).click();
+    await expect(page).toHaveURL(/\/token-generator$/);
+    await expect(nav.getByRole('link', { name: 'Token-Generator' })).toBeHidden();
+  });
+
+  test('on a phone the rail sits below the content as a tab bar', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 800 });
+    await page.goto('/');
+    const nav = page.getByRole('navigation', { name: 'Werkzeuge' });
+    await expect(nav).toBeVisible();
+    const box = await nav.boundingBox();
+    expect(box).not.toBeNull();
+    expect(box!.y).toBeGreaterThan(600);
+    expect(box!.height).toBeLessThan(80);
+    // The page does not scroll sideways.
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   });
 
   test('the footer shows the version as date and links "Über" in the theme colour', async ({ page }) => {

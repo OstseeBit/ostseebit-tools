@@ -11,7 +11,7 @@ const { isDarkTheme } = toRefs(styleStore);
 </script>
 
 <template>
-  <c-tooltip :tooltip="$t('home.nav.github')" position="bottom">
+  <c-tooltip class="nav-optional" :tooltip="$t('home.nav.github')" position="bottom">
     <c-button
       circle
       variant="text"
@@ -24,7 +24,7 @@ const { isDarkTheme } = toRefs(styleStore);
     </c-button>
   </c-tooltip>
 
-  <c-tooltip :tooltip="$t('home.nav.about')" position="bottom">
+  <c-tooltip class="nav-optional" :tooltip="$t('home.nav.about')" position="bottom">
     <c-button circle variant="text" to="/about" :aria-label="$t('home.nav.aboutLabel')">
       <n-icon size="25" :component="InfoCircle" />
     </c-button>

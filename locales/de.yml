@@ -17,7 +17,12 @@ home:
   toggleMenu: Menü umschalten
   home: Startseite
   uiLib: UI-Bibliothek
+  statusLocal: 'Läuft lokal im Browser'
   nav:
+    tools: 'Werkzeuge'
+    showCategory: '{name}: Werkzeuge anzeigen'
+    toolsOf: 'Werkzeuge: {name}'
+    toolCount: '{count} Werkzeuge'
     github: GitHub-Repository
     githubRepository: OstseeBit Tools GitHub-Repository
     about: Über OstseeBit Tools

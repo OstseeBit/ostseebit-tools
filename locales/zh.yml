@@ -8,7 +8,12 @@ home:
   toggleMenu: '切换菜单'
   home: '主页'
   uiLib: 'UI 库'
+  statusLocal: '在浏览器中本地运行'
   nav:
+    tools: '工具'
+    showCategory: '{name}:显示工具'
+    toolsOf: '工具:{name}'
+    toolCount: '{count} 个工具'
     github: 'GitHub 仓库'
     githubRepository: 'GitHub 仓库'
     about: '关于 OstseeBit Tools'

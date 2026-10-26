@@ -8,7 +8,12 @@ home:
   toggleMenu: 'Menu'
   home: 'Início'
   uiLib: 'Biblioteca de UI'
+  statusLocal: 'Executa localmente no navegador'
   nav:
+    tools: 'Ferramentas'
+    showCategory: '{name}: mostrar ferramentas'
+    toolsOf: 'Ferramentas: {name}'
+    toolCount: '{count} ferramentas'
     github: 'Repositório no GitHub'
     githubRepository: 'repositório do OstseeBit Tools no GitHub'
     about: 'Sobre o OstseeBit Tools'
