@@ -6,7 +6,7 @@ import { colord, extend } from 'colord';
 import a11yPlugin from 'colord/plugins/a11y';
 import { describe, expect, it } from 'vitest';
 import { darkThemeOverrides, lightThemeOverrides } from '../../themes';
-import { categoryIds, colorTokens, renderTokensCss } from './tokens';
+import { categoryIds, colorTokens, radiusTokens, renderTokensCss } from './tokens';
 
 extend([a11yPlugin]);
 
@@ -137,5 +137,10 @@ describe('naive-ui-overrides', () => {
     for (const [path, value] of colorValues(overrides)) {
       expect(value, path).not.toContain('var(');
     }
+  });
+
+  it.each([['light', lightThemeOverrides], ['dark', darkThemeOverrides]] as const)('%s: Radien kommen aus den Tokens', (_mode, overrides) => {
+    expect(overrides.common?.borderRadius).toBe(`${radiusTokens.md}px`);
+    expect(overrides.common?.borderRadiusSmall).toBe(`${radiusTokens.sm}px`);
   });
 });

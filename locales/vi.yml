@@ -8,6 +8,7 @@ home:
   toggleMenu: 'Chuyển đổi menu'
   home: Trang chủ
   uiLib: 'Thư viện UI'
+  breadcrumb: 'Đường dẫn'
   filterLabel: 'Lọc theo danh mục'
   filterAll: 'Tất cả'
   statusLocal: 'Chạy cục bộ trong trình duyệt'

@@ -8,6 +8,7 @@ home:
   toggleMenu: 'Toggle menu'
   home: Home
   uiLib: 'UI Lib'
+  breadcrumb: 'Ruta de navegación'
   filterLabel: 'Filtrar por categoría'
   filterAll: 'Todas'
   statusLocal: 'Se ejecuta localmente en el navegador'

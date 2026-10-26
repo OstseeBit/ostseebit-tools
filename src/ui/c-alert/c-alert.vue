@@ -9,7 +9,7 @@ const variantTheme = computed(() => theme.value[type.value]);
 </script>
 
 <template>
-  <div class="c-alert" flex items-center b-rd-4px pa-5>
+  <div class="c-alert" flex items-center rounded-lg pa-5>
     <div class="c-alert--icon" mr-4 text-40px op-60>
       <slot name="icon">
         <component :is="variantTheme.icon" />

@@ -3,9 +3,11 @@ import type { ReactiveHead } from '@unhead/vue';
 import type { Tool } from '@/tools/tools.types';
 import { useHead } from '@unhead/vue';
 
+import { storeToRefs } from 'pinia';
 import { useRoute } from 'vue-router';
 import { brand } from '@/branding';
 import FavoriteButton from '@/components/FavoriteButton.vue';
+import { useToolStore } from '@/tools/tools.store';
 import BaseLayout from './base.layout.vue';
 
 const route = useRoute();
@@ -29,23 +31,41 @@ const { t, te } = useI18n();
 const i18nKey = computed<string>(() => route.path.trim().replace('/', ''));
 const toolTitle = computed<string>(() => te(`tools.${i18nKey.value}.title`) ? t(`tools.${i18nKey.value}.title`) : String(route.meta.name));
 const toolDescription = computed<string>(() => te(`tools.${i18nKey.value}.description`) ? t(`tools.${i18nKey.value}.description`) : String(route.meta.description));
+
+// Brotkrumen: Start / Kategorie (führt zur gefilterten Übersicht) / Werkzeug
+const { tools } = storeToRefs(useToolStore());
+const currentTool = computed(() => tools.value.find(tool => tool.path === route.path));
 </script>
 
 <template>
   <BaseLayout>
     <div class="tool-layout">
       <div class="tool-header">
-        <div flex flex-nowrap items-center justify-between>
-          <n-h1>
+        <nav class="crumbs" :aria-label="t('home.breadcrumb')">
+          <ol>
+            <li>
+              <router-link to="/">
+                {{ t('home.home') }}
+              </router-link>
+            </li>
+            <li v-if="currentTool">
+              <router-link :to="{ path: '/', query: { category: currentTool.categoryId } }">
+                {{ currentTool.category }}
+              </router-link>
+            </li>
+            <li aria-current="page">
+              {{ toolTitle }}
+            </li>
+          </ol>
+        </nav>
+
+        <div class="title-row">
+          <h1 class="title">
             {{ toolTitle }}
-          </n-h1>
+          </h1>
 
-          <div>
-            <FavoriteButton :tool="{ name: route.meta.name, path: route.path } as Tool" />
-          </div>
+          <FavoriteButton :tool="{ name: route.meta.name, path: route.path } as Tool" />
         </div>
-
-        <div class="separator" />
 
         <div class="description">
           {{ toolDescription }}
@@ -63,7 +83,7 @@ const toolDescription = computed<string>(() => te(`tools.${i18nKey.value}.descri
 .tool-content {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 16px;
@@ -74,35 +94,57 @@ const toolDescription = computed<string>(() => te(`tools.${i18nKey.value}.descri
 }
 
 .tool-layout {
-  max-width: 600px;
-  margin: 0 auto;
   box-sizing: border-box;
 
   .tool-header {
-    padding: 40px 0;
     width: 100%;
+    padding: 0 0 var(--space-4);
 
-    .n-h1 {
-      opacity: 0.9;
-      font-size: 40px;
-      font-weight: 400;
-      margin: 0;
-      line-height: 1;
+    .crumbs {
+      color: var(--c-muted);
+      font-size: var(--fs-sm);
+
+      ol {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 2px 8px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      li + li::before {
+        content: '/';
+        margin-right: 8px;
+        color: var(--c-field-border);
+      }
+
+      a {
+        color: var(--c-primary);
+      }
     }
 
-    .separator {
-      width: 200px;
-      height: 2px;
-      background: rgb(161, 161, 161);
-      opacity: 0.2;
+    .title-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-2);
+      margin-top: var(--space-2);
+    }
 
-      margin: 10px 0;
+    .title {
+      margin: 0;
+      font-size: var(--fs-2xl);
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
     }
 
     .description {
-      margin: 0;
-
-      opacity: 0.7;
+      margin: 2px 0 0;
+      max-width: 70ch;
+      color: var(--c-muted);
     }
   }
 }

@@ -8,6 +8,7 @@ home:
   toggleMenu: 'Перемикання меню'
   home: Головна
   uiLib: 'UI Бібліотека'
+  breadcrumb: 'Навігаційний ланцюжок'
   filterLabel: 'Фільтр за категорією'
   filterAll: 'Усі'
   statusLocal: 'Працює локально в браузері'

@@ -8,6 +8,7 @@ home:
   toggleMenu: 'Menu'
   home: Accueil
   uiLib: 'UI Lib'
+  breadcrumb: 'Fil d’Ariane'
   filterLabel: 'Filtrer par catégorie'
   filterAll: 'Toutes'
   statusLocal: 'Fonctionne localement dans le navigateur'

@@ -9,6 +9,7 @@ home:
   toggleMenu: 'Toggle menu'
   home: Home
   uiLib: 'UI Lib'
+  breadcrumb: 'Breadcrumb'
   filterLabel: 'Filter by category'
   filterAll: 'All'
   statusLocal: 'Runs locally in your browser'

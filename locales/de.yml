@@ -17,6 +17,7 @@ home:
   toggleMenu: Menü umschalten
   home: Startseite
   uiLib: UI-Bibliothek
+  breadcrumb: 'Brotkrumen'
   filterLabel: 'Nach Kategorie filtern'
   filterAll: 'Alle'
   statusLocal: 'Läuft lokal im Browser'

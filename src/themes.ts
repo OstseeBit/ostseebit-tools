@@ -1,5 +1,5 @@
 import type { GlobalThemeOverrides } from 'naive-ui';
-import { colorTokens } from '@/ui/theme/tokens';
+import { colorTokens, radiusTokens } from '@/ui/theme/tokens';
 
 const { light, dark } = colorTokens;
 
@@ -16,6 +16,8 @@ export const lightThemeOverrides: GlobalThemeOverrides = {
     bodyColor: light.bg,
     borderColor: light.line,
     dividerColor: light.line,
+    borderRadius: `${radiusTokens.md}px`,
+    borderRadiusSmall: `${radiusTokens.sm}px`,
   },
   Menu: {
     itemHeight: '32px',
@@ -50,6 +52,8 @@ export const darkThemeOverrides: GlobalThemeOverrides = {
     popoverColor: dark.surface,
     borderColor: dark.line,
     dividerColor: dark.line,
+    borderRadius: `${radiusTokens.md}px`,
+    borderRadiusSmall: `${radiusTokens.sm}px`,
   },
 
   Notification: {
