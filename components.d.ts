@@ -107,6 +107,7 @@ declare module 'vue' {
     IconMdiEye: typeof import('~icons/mdi/eye')['default']
     IconMdiEyeOff: typeof import('~icons/mdi/eye-off')['default']
     IconMdiHeart: typeof import('~icons/mdi/heart')['default']
+    IconMdiHeartOutline: typeof import('~icons/mdi/heart-outline')['default']
     IconMdiPause: typeof import('~icons/mdi/pause')['default']
     IconMdiPlay: typeof import('~icons/mdi/play')['default']
     IconMdiRecord: typeof import('~icons/mdi/record')['default']

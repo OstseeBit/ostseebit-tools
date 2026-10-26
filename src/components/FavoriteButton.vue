@@ -10,6 +10,7 @@ const { tool } = toRefs(props);
 
 const isFavorite = computed(() => toolStore.isToolFavorite({ tool }));
 const buttonType = computed(() => (isFavorite.value ? 'primary' : 'default'));
+const label = computed(() => (isFavorite.value ? 'favoriteButton.remove' : 'favoriteButton.add'));
 
 function toggleFavorite(event: MouseEvent) {
   event.preventDefault();
@@ -24,15 +25,18 @@ function toggleFavorite(event: MouseEvent) {
 </script>
 
 <template>
-  <c-tooltip :tooltip="isFavorite ? $t('favoriteButton.remove') : $t('favoriteButton.add') ">
+  <c-tooltip :tooltip="$t(label)">
     <c-button
       variant="text"
       circle
       :type="buttonType"
-      :style="{ opacity: isFavorite ? 1 : 0.2 }"
+      :aria-label="$t(label)"
+      :aria-pressed="isFavorite"
+      :style="{ opacity: isFavorite ? 1 : 0.75 }"
       @click="toggleFavorite"
     >
-      <icon-mdi-heart />
+      <icon-mdi-heart v-if="isFavorite" />
+      <icon-mdi-heart-outline v-else />
     </c-button>
   </c-tooltip>
 </template>

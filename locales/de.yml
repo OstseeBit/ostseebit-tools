@@ -17,11 +17,14 @@ home:
   toggleMenu: Menü umschalten
   home: Startseite
   uiLib: UI-Bibliothek
+  filterLabel: 'Nach Kategorie filtern'
+  filterAll: 'Alle'
   statusLocal: 'Läuft lokal im Browser'
   nav:
     tools: 'Werkzeuge'
     showCategory: '{name}: Werkzeuge anzeigen'
     toolsOf: 'Werkzeuge: {name}'
+    showOverview: 'Alle in der Übersicht zeigen'
     toolCount: '{count} Werkzeuge'
     github: GitHub-Repository
     githubRepository: OstseeBit Tools GitHub-Repository

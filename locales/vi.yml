@@ -8,11 +8,14 @@ home:
   toggleMenu: 'Chuyển đổi menu'
   home: Trang chủ
   uiLib: 'Thư viện UI'
+  filterLabel: 'Lọc theo danh mục'
+  filterAll: 'Tất cả'
   statusLocal: 'Chạy cục bộ trong trình duyệt'
   nav:
     tools: 'Công cụ'
     showCategory: '{name}: hiện công cụ'
     toolsOf: 'Công cụ: {name}'
+    showOverview: 'Xem tất cả trong tổng quan'
     toolCount: '{count} công cụ'
     github: 'Kho GitHub'
     githubRepository: 'Kho GitHub OstseeBit Tools'

@@ -8,11 +8,14 @@ home:
   toggleMenu: 'Vekslemenmy'
   home: Hjem
   uiLib: 'UI Bib'
+  filterLabel: 'Filtrer etter kategori'
+  filterAll: 'Alle'
   statusLocal: 'Kjører lokalt i nettleseren'
   nav:
     tools: 'Verktøy'
     showCategory: '{name}: vis verktøy'
     toolsOf: 'Verktøy: {name}'
+    showOverview: 'Vis alle i oversikten'
     toolCount: '{count} verktøy'
     github: 'GitHub-depot'
     githubRepository: 'OstseeBit Tools GitHub-depot'

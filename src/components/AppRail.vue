@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { CategoryId } from '@/ui/theme/tokens';
+import Heart from '@vicons/tabler/es/Heart';
 import Home2 from '@vicons/tabler/es/Home2';
-import Star from '@vicons/tabler/es/Star';
 import { NIcon } from 'naive-ui';
 import { storeToRefs } from 'pinia';
 import { RouterLink, useRoute } from 'vue-router';
@@ -55,7 +55,7 @@ function close(restoreFocus: boolean) {
   }
 }
 
-watch(() => route.path, () => close(false));
+watch(() => route.fullPath, () => close(false));
 onClickOutside(flyoutRef, () => close(false), { ignore: [railRef] });
 onKeyStroke('Escape', () => close(true));
 
@@ -126,7 +126,7 @@ function onRailKeydown(event: KeyboardEvent) {
           <template #trigger>
             <RouterLink :to="tool.path" class="rb" :class="`cat-${tool.categoryId}`" :aria-label="tool.name">
               <NIcon :component="tool.icon" />
-              <NIcon :component="Star" class="badge" />
+              <NIcon :component="Heart" class="badge" />
             </RouterLink>
           </template>
           {{ tool.name }}
@@ -162,6 +162,9 @@ function onRailKeydown(event: KeyboardEvent) {
           </RouterLink>
         </li>
       </ul>
+      <RouterLink :to="{ path: '/', query: { category: openCategory.id } }" class="fl-foot">
+        {{ t('home.nav.showOverview') }}
+      </RouterLink>
     </div>
   </nav>
 </template>
@@ -244,7 +247,7 @@ function onRailKeydown(event: KeyboardEvent) {
   right: 4px;
   width: 13px;
   height: 13px;
-  fill: var(--c-amber-fill);
+  fill: var(--c-primary);
   stroke: var(--c-surface);
   paint-order: stroke;
 }
@@ -325,6 +328,15 @@ function onRailKeydown(event: KeyboardEvent) {
   margin: 0;
   padding: var(--space-1);
   list-style: none;
+}
+
+.fl-foot {
+  margin-top: auto;
+  padding: var(--space-3);
+  border-top: 1px solid var(--c-line);
+  color: var(--c-primary);
+  font-size: var(--fs-sm);
+  font-weight: 500;
 }
 
 .fl-item {

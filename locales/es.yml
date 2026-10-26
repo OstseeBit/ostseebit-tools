@@ -8,11 +8,14 @@ home:
   toggleMenu: 'Toggle menu'
   home: Home
   uiLib: 'UI Lib'
+  filterLabel: 'Filtrar por categoría'
+  filterAll: 'Todas'
   statusLocal: 'Se ejecuta localmente en el navegador'
   nav:
     tools: 'Herramientas'
     showCategory: '{name}: mostrar herramientas'
     toolsOf: 'Herramientas: {name}'
+    showOverview: 'Mostrar todas en la vista general'
     toolCount: '{count} herramientas'
     github: 'Repositorio en github'
     githubRepository: 'OstseeBit Tools GitHub repository'
