@@ -2,6 +2,11 @@
 import AppRail from '../components/AppRail.vue';
 import AppStatusbar from '../components/AppStatusbar.vue';
 import AppTopbar from '../components/AppTopbar.vue';
+import { toolLoadFailed } from '../utils/load-error';
+
+function reload() {
+  window.location.reload();
+}
 </script>
 
 <template>
@@ -11,6 +16,14 @@ import AppTopbar from '../components/AppTopbar.vue';
     <AppTopbar />
     <AppRail />
     <main id="main-content" tabindex="-1">
+      <c-alert v-if="toolLoadFailed" type="error" mb-4 role="alert">
+        <div flex flex-wrap items-center gap-3>
+          <span>{{ $t('common.loadFailed') }}</span>
+          <c-button @click="reload">
+            {{ $t('common.reload') }}
+          </c-button>
+        </div>
+      </c-alert>
       <slot />
     </main>
     <AppStatusbar />

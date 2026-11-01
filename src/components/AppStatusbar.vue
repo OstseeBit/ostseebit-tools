@@ -2,6 +2,7 @@
 import { brand } from '@/branding';
 import { config } from '@/config';
 
+const online = useOnline();
 const buildDate = config.app.buildDate;
 const commitSha = config.app.lastCommitSha;
 const commitUrl = /^[a-f0-9]{7,40}$/i.test(commitSha) ? `${brand.repositoryUrl}/commit/${commitSha}` : brand.repositoryUrl;
@@ -9,9 +10,9 @@ const commitUrl = /^[a-f0-9]{7,40}$/i.test(commitSha) ? `${brand.repositoryUrl}/
 
 <template>
   <footer class="footer statusbar">
-    <span class="ok hide-small">
+    <span class="ok" :class="{ 'hide-small': online, 'offline': !online }" role="status">
       <span class="dot" aria-hidden="true" />
-      {{ $t('home.statusLocal') }}
+      {{ online ? $t('home.statusLocal') : $t('home.statusOffline') }}
     </span>
 
     <span data-test-id="build-version" class="version">
@@ -59,6 +60,10 @@ const commitUrl = /^[a-f0-9]{7,40}$/i.test(commitSha) ? `${brand.repositoryUrl}/
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
+}
+
+.offline .dot {
+  background: var(--c-amber-fill);
 }
 
 .dot {

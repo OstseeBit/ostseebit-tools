@@ -2,6 +2,8 @@
 import type { ToolWithCategory } from '@/tools/tools.types';
 import type { CategoryId } from '@/ui/theme/tokens';
 import { useHead } from '@unhead/vue';
+import ArrowLeft from '@vicons/tabler/es/ArrowLeft';
+import ArrowRight from '@vicons/tabler/es/ArrowRight';
 import DragDrop from '@vicons/tabler/es/DragDrop';
 import { NIcon } from 'naive-ui';
 import { computed } from 'vue';
@@ -49,6 +51,24 @@ function revealSelectedPill() {
 onMounted(revealSelectedPill);
 watch(filter, revealSelectedPill);
 
+// Favoriten ohne Ziehen sortieren (WCAG 2.5.7: für jede Zieh-Bedienung gibt es eine Alternative mit Einzelklick).
+const sortingFavorites = ref(false);
+const sortAnnouncement = ref('');
+
+async function moveFavorite(tool: ToolWithCategory, offset: -1 | 1) {
+  toolStore.moveFavorite(tool.path, offset);
+  const position = favoriteTools.value.findIndex(({ path }) => path === tool.path) + 1;
+  sortAnnouncement.value = t('home.favoritePosition', { name: tool.name, position, total: favoriteTools.value.length });
+  // Der Knopf wandert mit dem Eintrag; der Fokus soll bei ihm bleiben.
+  await nextTick();
+  document.querySelector<HTMLElement>(`[data-move="${tool.path}:${offset}"]`)?.focus();
+}
+
+const shownToolCount = computed(() => visibleCategories.value.reduce((sum, category) => sum + category.tools.length, 0));
+const shownDescription = computed(() => filter.value === 'all'
+  ? t('home.nav.toolCount', { count: shownToolCount.value })
+  : `${visibleCategories.value[0]?.name}: ${t('home.nav.toolCount', { count: shownToolCount.value })}`);
+
 function setFilter(id: CategoryId | 'all') {
   router.replace({ query: id === 'all' ? {} : { category: id } });
 }
@@ -95,6 +115,9 @@ function setFilter(id: CategoryId | 'all') {
           </c-tooltip>
           <span class="sr-only">{{ t('home.categories.favoritesDndToolTip') }}</span>
         </span>
+        <button v-if="favoriteTools.length > 1" type="button" class="sort-toggle" :aria-pressed="sortingFavorites" @click="sortingFavorites = !sortingFavorites">
+          {{ sortingFavorites ? t('home.sortDone') : t('home.sortFavorites') }}
+        </button>
         <Draggable
           :list="favoriteTools"
           tag="ul"
@@ -104,14 +127,39 @@ function setFilter(id: CategoryId | 'all') {
           @end="onUpdateFavoriteTools"
         >
           <template #item="{ element: tool }">
-            <li>
+            <li class="fav-item">
+              <button
+                v-if="sortingFavorites"
+                type="button"
+                class="move"
+                :data-move="`${tool.path}:-1`"
+                :disabled="favoriteTools[0]?.path === tool.path"
+                :aria-label="t('home.moveEarlier', { name: tool.name })"
+                @click="moveFavorite(tool, -1)"
+              >
+                <NIcon :component="ArrowLeft" aria-hidden="true" />
+              </button>
               <router-link :to="tool.path" class="chip" :class="`cat-${tool.categoryId}`">
                 <NIcon aria-hidden="true" :component="tool.icon" />
                 {{ tool.name }}
               </router-link>
+              <button
+                v-if="sortingFavorites"
+                type="button"
+                class="move"
+                :data-move="`${tool.path}:1`"
+                :disabled="favoriteTools[favoriteTools.length - 1]?.path === tool.path"
+                :aria-label="t('home.moveLater', { name: tool.name })"
+                @click="moveFavorite(tool, 1)"
+              >
+                <NIcon :component="ArrowRight" aria-hidden="true" />
+              </button>
             </li>
           </template>
         </Draggable>
+        <p class="sr-only" role="status">
+          {{ sortAnnouncement }}
+        </p>
       </div>
 
       <div v-if="toolStore.newTools.length > 0" class="qrow">
@@ -126,6 +174,10 @@ function setFilter(id: CategoryId | 'all') {
         </ul>
       </div>
     </section>
+
+    <p class="sr-only" role="status">
+      {{ shownDescription }}
+    </p>
 
     <section v-for="category in visibleCategories" :key="category.id" class="grp" :class="`cat-${category.id}`" :aria-labelledby="`group-${category.id}`">
       <div class="grp-head">
@@ -295,6 +347,56 @@ function setFilter(id: CategoryId | 'all') {
 
 .chip:active {
   background: var(--c-tint);
+}
+
+.sort-toggle {
+  min-height: 24px;
+  padding: 0 var(--space-2);
+  border: 1px solid var(--c-field-border);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--c-primary);
+  font: inherit;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sort-toggle:hover {
+  background: var(--c-hover);
+}
+
+.sort-toggle[aria-pressed='true'] {
+  background: var(--c-primary);
+  color: var(--c-on-primary);
+}
+
+.fav-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.move {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid var(--c-field-border);
+  border-radius: 50%;
+  background: var(--c-surface);
+  color: var(--c-text);
+  cursor: pointer;
+}
+
+.move:hover:not(:disabled) {
+  background: var(--c-hover);
+}
+
+.move:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 .ghost-chip {

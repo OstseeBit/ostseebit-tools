@@ -42,6 +42,7 @@ function close() {
   searchPrompt.value = '';
 }
 
+const hasResults = computed(() => Object.keys(filteredSearchResult.value).length > 0);
 const selectedOptionIndex = ref(0);
 
 function handleKeydown(event: KeyboardEvent) {
@@ -135,6 +136,9 @@ function activateOption(option: PaletteOption) {
           <command-palette-option v-for="option in options" :key="option.name" :option="option" :selected="selectedOptionIndex === getOptionIndex(option)" @activated="activateOption" />
         </div>
       </div>
+      <p v-if="searchPrompt && !hasResults" class="palette-empty" role="status">
+        {{ t('common.noResults') }}
+      </p>
     </c-modal>
   </div>
 </template>
@@ -188,6 +192,11 @@ function activateOption(option: PaletteOption) {
     color: var(--c-muted);
     font: 500 0.72rem/1 var(--font-mono);
   }
+}
+
+.palette-empty {
+  margin: var(--space-4) var(--space-3) var(--space-2);
+  color: var(--c-muted);
 }
 
 .palette-category {

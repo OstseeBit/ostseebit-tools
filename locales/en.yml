@@ -12,6 +12,12 @@ home:
   breadcrumb: 'Breadcrumb'
   filterLabel: 'Filter by category'
   filterAll: 'All'
+  sortFavorites: 'Change order'
+  sortDone: 'Done'
+  moveEarlier: 'Move {name} earlier'
+  moveLater: 'Move {name} later'
+  favoritePosition: '{name}: position {position} of {total}'
+  statusOffline: 'Offline, everything keeps running locally'
   statusLocal: 'Runs locally in your browser'
   nav:
     tools: 'Tools'
@@ -60,6 +66,8 @@ validation:
 copy:
   defaultMessage: Copied to the clipboard
 common:
+  reload: 'Reload'
+  loadFailed: 'The tool could not be loaded. Please check your connection and reload the page.'
   searchResults: 'Search results'
   clearInput: 'Clear input'
   showPassword: 'Show password'

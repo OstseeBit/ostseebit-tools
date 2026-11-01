@@ -20,6 +20,12 @@ home:
   breadcrumb: 'Brotkrumen'
   filterLabel: 'Nach Kategorie filtern'
   filterAll: 'Alle'
+  sortFavorites: 'Reihenfolge ändern'
+  sortDone: 'Fertig'
+  moveEarlier: '{name} nach vorn'
+  moveLater: '{name} nach hinten'
+  favoritePosition: '{name}: Position {position} von {total}'
+  statusOffline: 'Offline, alles läuft weiter lokal'
   statusLocal: 'Läuft lokal im Browser'
   nav:
     tools: 'Werkzeuge'
@@ -62,6 +68,8 @@ validation:
 copy:
   defaultMessage: In die Zwischenablage kopiert
 common:
+  reload: 'Neu laden'
+  loadFailed: 'Das Werkzeug konnte nicht geladen werden. Bitte prüfe die Verbindung und lade die Seite neu.'
   searchResults: 'Suchergebnisse'
   clearInput: 'Eingabe löschen'
   showPassword: 'Passwort anzeigen'

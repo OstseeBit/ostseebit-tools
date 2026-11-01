@@ -224,6 +224,19 @@ defineExpose({
     align-items: baseline;
   }
 
+  @media (max-width: 700px) {
+    &.label-left {
+      flex-direction: column;
+      align-items: stretch;
+
+      & > .label {
+        flex: 0 0 auto;
+        padding-right: 0;
+        text-align: left;
+      }
+    }
+  }
+
   &.error {
     & > .input {
       border-color: v-bind('appTheme.error.color');

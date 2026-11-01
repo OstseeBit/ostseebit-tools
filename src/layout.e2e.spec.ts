@@ -58,6 +58,15 @@ test.describe('Layout - Kopfleiste, Icon-Leiste und Statusleiste', () => {
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   });
 
+  test('the status bar says so when the connection is lost', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('.footer').getByText('Läuft lokal im Browser')).toBeVisible();
+    await page.context().setOffline(true);
+    await expect(page.locator('.footer').getByText('Offline, alles läuft weiter lokal')).toBeVisible();
+    await page.context().setOffline(false);
+    await expect(page.locator('.footer').getByText('Läuft lokal im Browser')).toBeVisible();
+  });
+
   test('the footer shows the version as date and links "Über" in the theme colour', async ({ page }) => {
     await page.goto('/');
     const footer = page.locator('.footer');

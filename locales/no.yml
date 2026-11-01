@@ -11,6 +11,12 @@ home:
   breadcrumb: 'Brødsmulesti'
   filterLabel: 'Filtrer etter kategori'
   filterAll: 'Alle'
+  sortFavorites: 'Endre rekkefølge'
+  sortDone: 'Ferdig'
+  moveEarlier: 'Flytt {name} tidligere'
+  moveLater: 'Flytt {name} senere'
+  favoritePosition: '{name}: posisjon {position} av {total}'
+  statusOffline: 'Frakoblet, alt fungerer fortsatt lokalt'
   statusLocal: 'Kjører lokalt i nettleseren'
   nav:
     tools: 'Verktøy'

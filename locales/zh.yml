@@ -11,6 +11,12 @@ home:
   breadcrumb: '面包屑导航'
   filterLabel: '按类别筛选'
   filterAll: '全部'
+  sortFavorites: '调整顺序'
+  sortDone: '完成'
+  moveEarlier: '将 {name} 前移'
+  moveLater: '将 {name} 后移'
+  favoritePosition: '{name}:第 {position} 位,共 {total} 个'
+  statusOffline: '离线,一切仍在本地运行'
   statusLocal: '在浏览器中本地运行'
   nav:
     tools: '工具'

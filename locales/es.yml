@@ -11,6 +11,12 @@ home:
   breadcrumb: 'Ruta de navegación'
   filterLabel: 'Filtrar por categoría'
   filterAll: 'Todas'
+  sortFavorites: 'Cambiar orden'
+  sortDone: 'Hecho'
+  moveEarlier: 'Mover {name} antes'
+  moveLater: 'Mover {name} después'
+  favoritePosition: '{name}: posición {position} de {total}'
+  statusOffline: 'Sin conexión, todo sigue funcionando localmente'
   statusLocal: 'Se ejecuta localmente en el navegador'
   nav:
     tools: 'Herramientas'

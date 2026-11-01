@@ -11,6 +11,12 @@ home:
   breadcrumb: 'Навігаційний ланцюжок'
   filterLabel: 'Фільтр за категорією'
   filterAll: 'Усі'
+  sortFavorites: 'Змінити порядок'
+  sortDone: 'Готово'
+  moveEarlier: 'Перемістити {name} раніше'
+  moveLater: 'Перемістити {name} пізніше'
+  favoritePosition: '{name}: позиція {position} з {total}'
+  statusOffline: 'Офлайн, усе й далі працює локально'
   statusLocal: 'Працює локально в браузері'
   nav:
     tools: 'Інструменти'

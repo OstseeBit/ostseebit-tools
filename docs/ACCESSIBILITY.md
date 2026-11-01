@@ -12,16 +12,19 @@ Ziel ist die Konformität mit WCAG 2.1 Stufe AA. Das ist ein Ziel und keine Konf
 - Die Einstellung **reduzierte Bewegung** des Betriebssystems wird respektiert; im **Hochkontrastmodus** (`forced-colors`) behalten aktive Elemente einen sichtbaren Rahmen.
 - **Farbkontrast:** Text erreicht mindestens 4,5:1, Ränder von Eingabefeldern und Symbole mindestens 3:1, in Hell und Dunkel. Das ist durch einen Test gesichert (`src/ui/theme/tokens.test.ts`): die Farben stehen zentral in `src/ui/theme/tokens.ts`, der Test rechnet die Paare nach WCAG 2.x. Auch die Farben der Code-Hervorhebung sind geprüft.
 - Links in der Statusleiste sind unterstrichen, damit sie nicht nur an der Farbe erkennbar sind.
+- **Reflow:** Bei 320 CSS-Pixel Breite scrollt keines der 86 Werkzeuge und keine Hauptseite seitlich (WCAG 1.4.10). Formularzeilen stapeln sich auf schmalen Fenstern, Code und Tabellen scrollen in sich. Ein Test (`src/reflow.e2e.spec.ts`) öffnet jedes Werkzeug bei 320 px und schlägt bei Überlauf an.
+- **Ziehen mit Alternative:** Die Favoriten lassen sich auch ohne Ziehen sortieren, mit Knöpfen "nach vorn" und "nach hinten" (WCAG 2.5.7); die neue Position wird angesagt.
+- **Statusmeldungen:** Ein Filterwechsel, die Favoriten-Sortierung und "keine Treffer" in der Suche werden Screenreadern gemeldet (WCAG 4.1.3). Die Statusleiste zeigt an, wenn die Verbindung fehlt.
+- **Fehlerfall:** Lässt sich ein Werkzeug nicht laden (neue Version, keine Verbindung), lädt die Seite einmal neu und zeigt sonst eine sichtbare Meldung mit "Neu laden" statt einer leeren Seite.
 
 ## Automatische Prüfung
 
-`src/a11y.e2e.spec.ts` prüft mit [axe-core](https://github.com/dequelabs/axe-core) die Startseite (auch gefiltert), die Seite „Über“, das offene Flyout, die geöffnete Suche, die Handy-Ansicht und 17 Werkzeuge jeweils in Hell und Dunkel gegen WCAG 2.x A/AA. Die Prüfung läuft mit den übrigen E2E-Tests (`pnpm test:e2e`, `pnpm test:e2e:dev`).
+`src/a11y.e2e.spec.ts` prüft mit [axe-core](https://github.com/dequelabs/axe-core) die Startseite (auch gefiltert), die Seite „Über“, die Fehlerseite (404), das offene Flyout, die geöffnete Suche, die Favoriten-Sortierung, die Handy-Ansicht und 17 Werkzeuge jeweils in Hell und Dunkel gegen WCAG 2.x A/AA. Die Prüfung läuft mit den übrigen E2E-Tests (`pnpm test:e2e`, `pnpm test:e2e:dev`).
 
 ## Bekannte Einschränkungen
 
-- Axe prüft die gemeinsame Oberfläche und eine Auswahl von 17 der 86 Werkzeuge. Die übrigen Werkzeuge sind nicht automatisch geprüft; keines der Werkzeuge wurde mit einem Screenreader getestet. Eine automatische Prüfung findet nur einen Teil der Mängel.
-- Die Sortierung der Favoriten auf der Startseite geht nur per Ziehen mit Maus oder Finger. Eine Tastatur-Alternative fehlt noch.
-- Einzelne neue Beschriftungen (zum Beispiel „Eingabe löschen“, „Erhöhen“, „Verringern“, „Suchergebnisse“) gibt es nur auf Deutsch und Englisch; in den anderen Sprachen erscheint der englische Text.
+- Axe prüft die gemeinsame Oberfläche und eine Auswahl von 17 der 86 Werkzeuge; der Reflow-Test deckt dagegen alle 86 ab, prüft aber nur das seitliche Scrollen. Die übrigen Werkzeuge sind nicht automatisch geprüft; keines der Werkzeuge wurde mit einem Screenreader getestet. Eine automatische Prüfung findet nur einen Teil der Mängel.
+- Einzelne neue Beschriftungen (zum Beispiel „Eingabe löschen“, „Erhöhen“, „Verringern“, „Suchergebnisse“, „Das Werkzeug konnte nicht geladen werden“) gibt es nur auf Deutsch und Englisch; in den anderen Sprachen erscheint der englische Text.
 - Naive UI liefert einige Bedienelemente (Schieberegler, Zahlenfeld-Knöpfe) ohne Namen aus; sie werden in der App nachträglich beschriftet (`src/utils/slider-label.directive.ts`, `src/utils/input-number-labels.directive.ts`). Neue Werkzeuge mit solchen Elementen müssen die Direktiven verwenden.
 
 Hinweise und Fehler bitte als [Issue](https://github.com/OstseeBit/ostseebit-tools/issues/new/choose) melden.

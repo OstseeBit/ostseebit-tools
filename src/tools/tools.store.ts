@@ -65,5 +65,18 @@ export const useToolStore = defineStore('tools', () => {
     updateFavoriteTools(newOrder: ToolWithCategory[]) {
       favoriteToolsName.value = newOrder.map(tool => tool.path);
     },
+
+    /** Verschiebt einen Favoriten um `offset` Plätze (Alternative zum Ziehen, WCAG 2.5.7). */
+    moveFavorite(path: string, offset: number) {
+      // Aus der aufgelösten Liste ableiten: ältere Einträge können Namen statt Pfade sein.
+      const order = favoriteTools.value.map(tool => tool.path);
+      const from = order.indexOf(path);
+      const to = from + offset;
+      if (from < 0 || to < 0 || to >= order.length) {
+        return;
+      }
+      [order[from], order[to]] = [order[to], order[from]];
+      favoriteToolsName.value = order;
+    },
   };
 });

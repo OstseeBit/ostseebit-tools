@@ -90,6 +90,9 @@ const currentTool = computed(() => tools.value.find(tool => tool.path === route.
 
   > :deep(*) {
     flex: 0 1 600px;
+    // Ohne min-width: 0 ließe der Inhalt die Karte breiter als das Fenster werden (WCAG 1.4.10 Reflow).
+    min-width: 0;
+    max-width: 100%;
   }
 }
 
@@ -146,6 +149,80 @@ const currentTool = computed(() => tools.value.find(tool => tool.path === route.
       max-width: 70ch;
       color: var(--c-muted);
     }
+  }
+}
+</style>
+
+<!-- Nicht scoped: gilt für die Naive-UI-Formulare in allen Werkzeugen. -->
+<style lang="less">
+/* Schmale Fenster (WCAG 1.4.10 Reflow, 320 CSS-Pixel): Beschriftung über das Feld stellen statt daneben,
+   damit feste Beschriftungsbreiten (label-width) nicht seitliches Scrollen erzwingen. */
+@media (max-width: 700px) {
+  .tool-content .n-form-item.n-form-item--left-labelled {
+    grid-template-areas:
+      'label'
+      'blank'
+      'feedback' !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .tool-content .n-form-item.n-form-item--left-labelled .n-form-item-label {
+    width: auto !important;
+    padding: 0 0 4px !important;
+    text-align: left !important;
+  }
+
+  /* Bausteine dürfen schmaler werden als ihr Inhalt, Knopfzeilen dürfen umbrechen. */
+  .tool-content .c-input-text,
+  .tool-content .c-select,
+  .tool-content .n-form,
+  .tool-content .n-form-item,
+  .tool-content .n-input,
+  .tool-content .n-input-number,
+  .tool-content .n-base-selection,
+  .tool-content .n-statistic {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .tool-content .n-input-number,
+  .tool-content .n-base-selection {
+    width: 100% !important;
+  }
+
+  /* Knopf- und Feldzeilen dürfen umbrechen; Code und Tabellen scrollen in sich statt die Seite zu weiten.
+     (Die Karten selbst scrollen nicht: ihre Auswahlmenüs müssen über den Rand hinausragen dürfen.) */
+  .tool-content .flex,
+  .tool-content [flex] {
+    flex-wrap: wrap;
+  }
+
+  /* Eingabegruppen (Beschriftung + Feld): Beschriftung über das Feld stellen. */
+  .tool-content .n-input-group {
+    flex-wrap: wrap;
+  }
+
+  .tool-content .n-input-group > .n-input-group-label:first-child {
+    flex: 1 1 100% !important;
+    box-sizing: border-box;
+    width: auto !important;
+    max-width: 100%;
+  }
+
+  .tool-content .n-input-group > :not(.n-input-group-label) {
+    flex: 1 1 160px !important;
+    min-width: 0;
+  }
+
+  .tool-content pre {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .tool-content .n-table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
   }
 }
 </style>

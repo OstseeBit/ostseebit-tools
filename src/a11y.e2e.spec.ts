@@ -35,7 +35,7 @@ async function violationsOf(page: Page) {
 
 async function openAndSettle(page: Page, path: string) {
   await page.goto(path);
-  if (path === '/' || path.startsWith('/?') || path === '/about') {
+  if (path === '/' || path.startsWith('/?') || path === '/about' || path === '/diese-seite-gibt-es-nicht') {
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible({ timeout: 30000 });
   }
   else {
@@ -48,6 +48,7 @@ const pages = [
   '/',
   '/?category=sec',
   '/about',
+  '/diese-seite-gibt-es-nicht',
   '/token-generator',
   '/hash-text',
   '/base64-string-converter',
@@ -84,6 +85,16 @@ for (const colorScheme of ['light', 'dark'] as const) {
       await page.keyboard.press('Control+k');
       await page.getByPlaceholder(/Tippen, um ein Tool/).fill('hash');
       await expect(page.getByRole('option').first()).toBeVisible();
+      expect(await violationsOf(page)).toEqual([]);
+    });
+
+    test('die Favoriten-Sortierung hat keine Verstöße', async ({ page }) => {
+      await openAndSettle(page, '/');
+      for (const name of ['Token-Generator', 'Text hashen']) {
+        await page.locator('.tile', { hasText: name }).getByRole('button', { name: 'Zu Favoriten hinzufügen' }).click();
+      }
+      await page.getByRole('button', { name: 'Reihenfolge ändern' }).click();
+      await expect(page.getByRole('button', { name: 'Text hashen nach vorn' })).toBeVisible();
       expect(await violationsOf(page)).toEqual([]);
     });
 
