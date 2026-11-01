@@ -74,6 +74,7 @@ common:
   hidePassword: 'Hide password'
   increase: 'Increase'
   decrease: 'Decrease'
+  refresh: Refresh
   copy: Copy
   copied: Copied!
   copyToClipboard: Copy to clipboard

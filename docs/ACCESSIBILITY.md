@@ -21,9 +21,11 @@ Ziel ist die Konformität mit WCAG 2.1 Stufe AA. Das ist ein Ziel und keine Konf
 
 `src/a11y.e2e.spec.ts` prüft mit [axe-core](https://github.com/dequelabs/axe-core) die Startseite (auch gefiltert), die Seite „Über“, die Fehlerseite (404), das offene Flyout, die geöffnete Suche, die Favoriten-Sortierung, die Handy-Ansicht und 17 Werkzeuge jeweils in Hell und Dunkel gegen WCAG 2.x A/AA. Die Prüfung läuft mit den übrigen E2E-Tests (`pnpm test:e2e`, `pnpm test:e2e:dev`).
 
+`src/a11y-tools.e2e.spec.ts` öffnet zusätzlich **alle 86 Werkzeuge** im Grundzustand (ohne Eingaben) in Hell und Dunkel und prüft sie mit axe. `src/text-spacing.e2e.spec.ts` setzt die Textabstände aus WCAG 1.4.12 (Zeilenhöhe 1,5, Buchstaben 0,12 em, Wörter 0,16 em) und sucht abgeschnittenen Text, außerdem prüft er bei 640 x 400 CSS-Pixeln (200 % Zoom auf 1280 x 800) auf seitliches Scrollen.
+
 ## Bekannte Einschränkungen
 
-- Axe prüft die gemeinsame Oberfläche und eine Auswahl von 17 der 86 Werkzeuge; der Reflow-Test deckt dagegen alle 86 ab, prüft aber nur das seitliche Scrollen. Die übrigen Werkzeuge sind nicht automatisch geprüft; keines der Werkzeuge wurde mit einem Screenreader getestet. Eine automatische Prüfung findet nur einen Teil der Mängel.
+- Axe prüft alle 86 Werkzeuge nur im Grundzustand, also ohne Eingaben, Ergebnisse, Dialoge oder Fehlermeldungen; die Oberfläche und eine Auswahl von 17 Werkzeugen prüft es zusätzlich in mehreren Zuständen. Keines der Werkzeuge wurde mit einem Screenreader getestet. Eine automatische Prüfung findet nur einen Teil der Mängel.
 - Einzelne neue Beschriftungen (zum Beispiel „Eingabe löschen“, „Erhöhen“, „Verringern“, „Suchergebnisse“, „Das Werkzeug konnte nicht geladen werden“) gibt es nur auf Deutsch und Englisch; in den anderen Sprachen erscheint der englische Text.
 - Naive UI liefert einige Bedienelemente (Schieberegler, Zahlenfeld-Knöpfe) ohne Namen aus; sie werden in der App nachträglich beschriftet (`src/utils/slider-label.directive.ts`, `src/utils/input-number-labels.directive.ts`). Neue Werkzeuge mit solchen Elementen müssen die Direktiven verwenden.
 

@@ -76,6 +76,7 @@ common:
   hidePassword: 'Passwort verbergen'
   increase: 'Erhöhen'
   decrease: 'Verringern'
+  refresh: Aktualisieren
   copy: Kopieren
   copied: Kopiert!
   copyToClipboard: In die Zwischenablage kopieren

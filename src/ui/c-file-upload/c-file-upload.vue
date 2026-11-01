@@ -84,7 +84,7 @@ function handleUpload(files: FileList | null | undefined) {
       </span>
 
       <!-- separator -->
-      <div my-4 w-full flex items-center justify-center op-70>
+      <div my-4 w-full flex items-center justify-center>
         <div class="separator-line h-1px max-w-100px flex-1 op-50" />
         <div class="separator-text mx-2">
           {{ t('common.or') }}

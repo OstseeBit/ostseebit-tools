@@ -42,7 +42,7 @@ const { copy } = useCopy({ source: obfuscatedString });
         {{ obfuscatedString }}
       </div>
 
-      <c-button @click="copy()">
+      <c-button :aria-label="$t('common.copyToClipboard')" @click="copy()">
         <icon-mdi:content-copy />
       </c-button>
     </c-card>

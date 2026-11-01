@@ -29,6 +29,12 @@ export const lightThemeOverrides: GlobalThemeOverrides = {
     primaryColorHover: light.primaryHover,
     primaryColorPressed: light.primaryPress,
     primaryColorSuppl: light.primaryHover,
+    // Beschriftungen (Statistik, Hinweise) und Erfolgsfarbe brauchen 4,5:1 auch auf getönten Flächen.
+    textColor3: light.muted,
+    successColor: light.ok,
+    successColorHover: light.ok,
+    successColorPressed: light.ok,
+    successColorSuppl: light.ok,
     bodyColor: light.bg,
     borderColor: light.line,
     dividerColor: light.line,

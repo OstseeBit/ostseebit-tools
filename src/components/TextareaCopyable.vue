@@ -56,7 +56,7 @@ const tooltipText = computed(() => isJustCopied.value ? t('common.copied') : (co
         :style="`max-height: 70vh;${height ? ` min-height: ${height - 40 /* card padding */ + 10 /* negative margin compensation */}px;` : ''}`"
       >
         <n-config-provider :hljs="hljs">
-          <n-code :code="value" :language="language" :trim="false" data-test-id="area-content" />
+          <n-code :code="value" :language="language" :trim="false" tabindex="0" data-test-id="area-content" />
         </n-config-provider>
       </n-scrollbar>
       <div absolute right-10px top-10px>

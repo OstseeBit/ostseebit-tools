@@ -103,12 +103,12 @@ const { copy: copyPassphrase } = useCopy({ source: passphrase, text: t('tools.bi
           <n-input-group>
             <c-input-text v-model:value="entropy" :placeholder="t('tools.bip39-generator.entropyPlaceholder')" />
 
-            <c-button @click="refreshEntropy()">
+            <c-button :aria-label="t('common.refresh')" @click="refreshEntropy()">
               <n-icon aria-hidden="true" size="22">
                 <Refresh />
               </n-icon>
             </c-button>
-            <c-button @click="copyEntropy()">
+            <c-button :aria-label="t('common.copyToClipboard')" @click="copyEntropy()">
               <n-icon aria-hidden="true" size="22">
                 <Copy />
               </n-icon>
@@ -128,7 +128,7 @@ const { copy: copyPassphrase } = useCopy({ source: passphrase, text: t('tools.bi
       <n-input-group>
         <c-input-text v-model:value="passphrase" :placeholder="t('tools.bip39-generator.passphrasePlaceholder')" raw-text />
 
-        <c-button @click="copyPassphrase()">
+        <c-button :aria-label="t('common.copyToClipboard')" @click="copyPassphrase()">
           <n-icon aria-hidden="true" size="22" :component="Copy" />
         </c-button>
       </n-input-group>

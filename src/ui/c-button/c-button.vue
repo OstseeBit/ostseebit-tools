@@ -57,6 +57,8 @@ const size = computed(() => theme.value.size[sizeName.value]);
     :href="href ?? to"
     class="c-button"
     :class="{ disabled, round, circle }"
+    :disabled="tag === 'button' && disabled ? true : undefined"
+    :aria-disabled="tag !== 'button' && disabled ? true : undefined"
     :to="to"
     :data-test-id="testId"
     @click="handleClick"

@@ -43,7 +43,7 @@ function onInputEnter(index: number) {
         @keydown.enter="onInputEnter(index)"
       />
       <c-tooltip :tooltip="t('tools.benchmark-builder.deleteValueTooltip')">
-        <c-button circle variant="text" @click="values.splice(index, 1)">
+        <c-button circle variant="text" :aria-label="t('tools.benchmark-builder.deleteValueTooltip')" @click="values.splice(index, 1)">
           <n-icon aria-hidden="true" :component="Trash" depth="3" size="18" />
         </c-button>
       </c-tooltip>
