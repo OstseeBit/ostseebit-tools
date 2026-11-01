@@ -29,7 +29,7 @@ const b64ValidationWatch = [decodeUrlSafe];
 <template>
   <c-card :title="t('tools.base64-string-converter.stringToBase64Title')">
     <n-form-item :label="t('tools.base64-string-converter.encodeUrlSafeLabel')" label-placement="left">
-      <n-switch v-model:value="encodeUrlSafe" />
+      <n-switch v-model:value="encodeUrlSafe" :aria-label="t('tools.base64-string-converter.encodeUrlSafeLabel')" />
     </n-form-item>
     <c-input-text
       v-model:value="textInput"
@@ -60,7 +60,7 @@ const b64ValidationWatch = [decodeUrlSafe];
 
   <c-card :title="t('tools.base64-string-converter.base64ToStringTitle')">
     <n-form-item :label="t('tools.base64-string-converter.decodeUrlSafeLabel')" label-placement="left">
-      <n-switch v-model:value="decodeUrlSafe" />
+      <n-switch v-model:value="decodeUrlSafe" :aria-label="t('tools.base64-string-converter.decodeUrlSafeLabel')" />
     </n-form-item>
     <c-input-text
       v-model:value="base64Input"

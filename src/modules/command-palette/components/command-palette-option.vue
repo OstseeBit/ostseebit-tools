@@ -14,23 +14,41 @@ const { selected } = toRefs(props);
   <div
     role="option"
     :aria-selected="selected"
-    :class="{
-      'text-white': selected,
-      'bg-primary': selected,
-    }"
-    w-full flex cursor-pointer items-center overflow-hidden rounded pa-3 transition hover:bg-primary hover:text-white
+    class="palette-option"
+    :class="{ selected }"
+    w-full flex cursor-pointer items-center overflow-hidden rounded pa-3 transition
     @click="() => emit('activated', option)"
   >
-    <component :is="option.icon" v-if="option.icon" mr-3 h-30px w-30px shrink-0 op-50 />
+    <component :is="option.icon" v-if="option.icon" aria-hidden="true" mr-3 h-30px w-30px shrink-0 class="palette-icon" />
 
     <div flex-1 overflow-hidden>
-      <div truncate font-bold lh-tight op-90>
+      <div truncate font-bold lh-tight>
         {{ option.name }}
       </div>
 
-      <div v-if="option.description" truncate lh-tight op-60>
+      <div v-if="option.description" class="palette-desc" truncate lh-tight>
         {{ option.description }}
       </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+.palette-option {
+  color: var(--c-text);
+}
+
+.palette-option:hover,
+.palette-option.selected {
+  background: var(--c-tint);
+  box-shadow: inset 3px 0 0 var(--c-primary);
+}
+
+.palette-icon {
+  color: var(--c-primary);
+}
+
+.palette-desc {
+  color: var(--c-muted);
+}
+</style>

@@ -62,6 +62,12 @@ validation:
 copy:
   defaultMessage: In die Zwischenablage kopiert
 common:
+  searchResults: 'Suchergebnisse'
+  clearInput: 'Eingabe löschen'
+  showPassword: 'Passwort anzeigen'
+  hidePassword: 'Passwort verbergen'
+  increase: 'Erhöhen'
+  decrease: 'Verringern'
   copy: Kopieren
   copied: Kopiert!
   copyToClipboard: In die Zwischenablage kopieren

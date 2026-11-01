@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useCopy } from '@/composable/copy';
+import { vInputNumberLabels } from '@/utils/input-number-labels.directive';
 import { useObfuscateString } from './string-obfuscator.service';
 
 const { t } = useI18n();
@@ -20,19 +21,19 @@ const { copy } = useCopy({ source: obfuscatedString });
     <div mt-4 flex gap-10px>
       <div>
         <div>{{ t('tools.string-obfuscator.keepFirstLabel') }}</div>
-        <n-input-number v-model:value="keepFirst" min="0" />
+        <n-input-number v-model:value="keepFirst" v-input-number-labels min="0" />
       </div>
 
       <div>
         <div>{{ t('tools.string-obfuscator.keepLastLabel') }}</div>
-        <n-input-number v-model:value="keepLast" min="0" />
+        <n-input-number v-model:value="keepLast" v-input-number-labels min="0" />
       </div>
 
       <div>
         <div mb-5px>
           {{ t('tools.string-obfuscator.keepSpacesLabel') }}
         </div>
-        <n-switch v-model:value="keepSpace" />
+        <n-switch v-model:value="keepSpace" :aria-label="t('tools.string-obfuscator.keepSpacesLabel')" />
       </div>
     </div>
 

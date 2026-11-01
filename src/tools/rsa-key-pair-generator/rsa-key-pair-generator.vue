@@ -3,6 +3,7 @@ import TextareaCopyable from '@/components/TextareaCopyable.vue';
 import { computedRefreshableAsync } from '@/composable/computedRefreshable';
 import { useValidation } from '@/composable/validation';
 import { withDefaultOnErrorAsync } from '@/utils/defaults';
+import { vInputNumberLabels } from '@/utils/input-number-labels.directive';
 import { generateKeyPair } from './rsa-key-pair-generator.service';
 
 const { t } = useI18n();
@@ -30,7 +31,7 @@ const [certs, refreshCerts] = computedRefreshableAsync(
   <div style="flex: 0 0 100%">
     <div item-style="flex: 1 1 0" style="max-width: 600px" mx-auto flex gap-3>
       <n-form-item :label="t('tools.rsa-key-pair-generator.bitsLabel')" v-bind="bitsValidationAttrs as any" label-placement="left" label-width="100">
-        <n-input-number v-model:value="bits" min="256" max="16384" step="8" />
+        <n-input-number v-model:value="bits" v-input-number-labels min="256" max="16384" step="8" />
       </n-form-item>
 
       <c-button @click="refreshCerts">

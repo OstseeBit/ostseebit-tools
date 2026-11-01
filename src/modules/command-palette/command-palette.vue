@@ -127,11 +127,13 @@ function activateOption(option: PaletteOption) {
     <c-modal v-model:open="isModalOpen" class="palette-modal" shadow-xl important:max-w-650px important:pa-12px @keydown="handleKeydown">
       <c-input-text ref="inputRef" v-model:value="searchPrompt" raw-text :placeholder="t('common.commandPalettePlaceholder')" autofocus clearable />
 
-      <div v-for="(options, category) in filteredSearchResult" :key="category">
-        <div ml-3 mt-3 text-sm text-primary font-bold op-60>
-          {{ category }}
+      <div role="listbox" :aria-label="t('common.searchResults')">
+        <div v-for="(options, category) in filteredSearchResult" :key="category" role="group" :aria-label="category">
+          <div class="palette-category" aria-hidden="true" ml-3 mt-3 text-sm font-bold>
+            {{ category }}
+          </div>
+          <command-palette-option v-for="option in options" :key="option.name" :option="option" :selected="selectedOptionIndex === getOptionIndex(option)" @activated="activateOption" />
         </div>
-        <command-palette-option v-for="option in options" :key="option.name" :option="option" :selected="selectedOptionIndex === getOptionIndex(option)" @activated="activateOption" />
       </div>
     </c-modal>
   </div>
@@ -186,6 +188,10 @@ function activateOption(option: PaletteOption) {
     color: var(--c-muted);
     font: 500 0.72rem/1 var(--font-mono);
   }
+}
+
+.palette-category {
+  color: var(--c-muted);
 }
 
 @media (max-width: 1100px) {

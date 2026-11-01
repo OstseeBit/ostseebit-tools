@@ -12,7 +12,7 @@ defineProps<{ tool: ToolWithCategory }>();
 
 <template>
   <li class="tile" :class="`cat-${tool.categoryId}`">
-    <span class="ico"><NIcon :component="tool.icon" /></span>
+    <span class="ico"><NIcon aria-hidden="true" :component="tool.icon" /></span>
 
     <div class="text">
       <h3>

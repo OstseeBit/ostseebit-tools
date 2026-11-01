@@ -2,6 +2,7 @@
 import { computedRefreshable } from '@/composable/computedRefreshable';
 import { useCopy } from '@/composable/copy';
 import { useQueryParam } from '@/composable/queryParams';
+import { vSliderLabel } from '@/utils/slider-label.directive';
 import { createToken, normalizeTokenLength } from './token-generator.service';
 
 const queryLength = useQueryParam({ name: 'length', defaultValue: 64 });
@@ -35,28 +36,28 @@ const { copy } = useCopy({ source: token, text: t('tools.token-generator.copied'
         <div flex justify-center>
           <div>
             <n-form-item :label="t('tools.token-generator.uppercase')">
-              <n-switch v-model:value="withUppercase" />
+              <n-switch v-model:value="withUppercase" :aria-label="t('tools.token-generator.uppercase')" />
             </n-form-item>
 
             <n-form-item :label="t('tools.token-generator.lowercase')">
-              <n-switch v-model:value="withLowercase" />
+              <n-switch v-model:value="withLowercase" :aria-label="t('tools.token-generator.lowercase')" />
             </n-form-item>
           </div>
 
           <div>
             <n-form-item :label="t('tools.token-generator.numbers')">
-              <n-switch v-model:value="withNumbers" />
+              <n-switch v-model:value="withNumbers" :aria-label="t('tools.token-generator.numbers')" />
             </n-form-item>
 
             <n-form-item :label="t('tools.token-generator.symbols')">
-              <n-switch v-model:value="withSymbols" />
+              <n-switch v-model:value="withSymbols" :aria-label="t('tools.token-generator.symbols')" />
             </n-form-item>
           </div>
         </div>
       </n-form>
 
       <n-form-item :label="`${t('tools.token-generator.length')} (${length})`" label-placement="left">
-        <n-slider v-model:value="length" :step="1" :min="1" :max="512" />
+        <n-slider v-model:value="length" v-slider-label="t('tools.token-generator.length')" :step="1" :min="1" :max="512" />
       </n-form-item>
 
       <c-input-text

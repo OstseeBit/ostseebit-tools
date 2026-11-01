@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { vInputNumberLabels } from '@/utils/input-number-labels.directive';
+
 const { t } = useI18n();
 
 // Example values so every calculator shows a result right away.
@@ -46,11 +48,11 @@ const percentageIncreaseDecrease = computed(() => {
           <div pt-1 hidden sm:block style="min-width: 48px;">
             {{ t('tools.percentage-calculator.whatIsLabel') }}
           </div>
-          <n-input-number v-model:value="percentageX" data-test-id="percentageX" placeholder="X" />
+          <n-input-number v-model:value="percentageX" v-input-number-labels data-test-id="percentageX" placeholder="X" />
           <div min-w-fit pt-1>
             {{ t('tools.percentage-calculator.percentOfLabel') }}
           </div>
-          <n-input-number v-model:value="percentageY" data-test-id="percentageY" placeholder="Y" />
+          <n-input-number v-model:value="percentageY" v-input-number-labels data-test-id="percentageY" placeholder="Y" />
           <input-copyable v-model:value="percentageResult" data-test-id="percentageResult" readonly :placeholder="t('tools.percentage-calculator.resultPlaceholder')" style="max-width: 150px;" />
         </div>
       </c-card>
@@ -60,11 +62,11 @@ const percentageIncreaseDecrease = computed(() => {
           X {{ t('tools.percentage-calculator.isWhatPercentLabel') }} Y
         </div>
         <div flex gap-2>
-          <n-input-number v-model:value="numberX" data-test-id="numberX" placeholder="X" />
+          <n-input-number v-model:value="numberX" v-input-number-labels data-test-id="numberX" placeholder="X" />
           <div min-w-fit pt-1 hidden sm:block>
             {{ t('tools.percentage-calculator.isWhatPercentLabel') }}
           </div>
-          <n-input-number v-model:value="numberY" data-test-id="numberY" placeholder="Y" />
+          <n-input-number v-model:value="numberY" v-input-number-labels data-test-id="numberY" placeholder="Y" />
           <input-copyable v-model:value="numberResult" data-test-id="numberResult" readonly :placeholder="t('tools.percentage-calculator.resultPlaceholder')" style="max-width: 150px;" />
         </div>
       </c-card>
@@ -74,8 +76,8 @@ const percentageIncreaseDecrease = computed(() => {
           {{ t('tools.percentage-calculator.percentageChangeLabel') }}
         </div>
         <div flex gap-2>
-          <n-input-number v-model:value="numberFrom" data-test-id="numberFrom" :placeholder="t('tools.percentage-calculator.fromPlaceholder')" />
-          <n-input-number v-model:value="numberTo" data-test-id="numberTo" :placeholder="t('tools.percentage-calculator.toPlaceholder')" />
+          <n-input-number v-model:value="numberFrom" v-input-number-labels data-test-id="numberFrom" :placeholder="t('tools.percentage-calculator.fromPlaceholder')" />
+          <n-input-number v-model:value="numberTo" v-input-number-labels data-test-id="numberTo" :placeholder="t('tools.percentage-calculator.toPlaceholder')" />
           <input-copyable v-model:value="percentageIncreaseDecrease" data-test-id="percentageIncreaseDecrease" readonly :placeholder="t('tools.percentage-calculator.resultPlaceholder')" style="max-width: 150px;" />
         </div>
       </c-card>

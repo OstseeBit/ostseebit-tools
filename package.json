@@ -112,6 +112,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "9.5.1",
+    "@axe-core/playwright": "^4.14.0",
     "@iconify-json/mdi": "^1.2.3",
     "@intlify/unplugin-vue-i18n": "11.2.5",
     "@playwright/test": "1.63.0",

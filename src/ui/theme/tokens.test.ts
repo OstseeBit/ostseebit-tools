@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { colord, extend } from 'colord';
 import a11yPlugin from 'colord/plugins/a11y';
 import { describe, expect, it } from 'vitest';
-import { darkThemeOverrides, lightThemeOverrides } from '../../themes';
+import { darkCodeColors, darkThemeOverrides, lightCodeColors, lightThemeOverrides } from '../../themes';
 import { categoryIds, colorTokens, radiusTokens, renderTokensCss } from './tokens';
 
 extend([a11yPlugin]);
@@ -142,5 +142,12 @@ describe('naive-ui-overrides', () => {
   it.each([['light', lightThemeOverrides], ['dark', darkThemeOverrides]] as const)('%s: Radien kommen aus den Tokens', (_mode, overrides) => {
     expect(overrides.common?.borderRadius).toBe(`${radiusTokens.md}px`);
     expect(overrides.common?.borderRadiusSmall).toBe(`${radiusTokens.sm}px`);
+  });
+
+  it.each([['light', lightCodeColors], ['dark', darkCodeColors]] as const)('%s: Code-Hervorhebung erreicht 4,5:1 auf den Flächen', (mode, colors) => {
+    for (const [name, color] of Object.entries(colors)) {
+      expect(contrast(color, colorTokens[mode].surface), `${mode}: ${name} auf surface`).toBeGreaterThanOrEqual(4.5);
+      expect(contrast(color, colorTokens[mode].bg), `${mode}: ${name} auf bg`).toBeGreaterThanOrEqual(4.5);
+    }
   });
 });

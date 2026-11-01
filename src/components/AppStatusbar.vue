@@ -72,6 +72,12 @@ const commitUrl = /^[a-f0-9]{7,40}$/i.test(commitSha) ? `${brand.repositoryUrl}/
   font-family: var(--font-mono);
 }
 
+/* Links in der Leiste nur durch Farbe zu erkennen reicht nicht (WCAG 1.4.1): unterstreichen. */
+.statusbar :deep(.c-link) {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 .grow {
   flex: 1;
 }

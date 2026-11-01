@@ -9,6 +9,7 @@ const props = defineProps<{ html: string }>();
 const emit = defineEmits(['update:html']);
 const themeVars = useThemeVars();
 const html = useVModel(props, 'html', emit);
+const { t } = useI18n();
 
 const editor = new Editor({
   content: html.value,
@@ -16,6 +17,8 @@ const editor = new Editor({
   // block nodes (trailingNode). The toolbar offers no links/underline and the HTML output should
   // stay free of that extra <p></p>, so keep all three off to match the Tiptap 2 behaviour.
   extensions: [StarterKit.configure({ link: false, underline: false, trailingNode: false })],
+  // Der Bearbeitungsbereich braucht einen Namen für Screenreader (WCAG 4.1.2).
+  editorProps: { attributes: { 'aria-label': t('tools.html-wysiwyg-editor.title') } },
 });
 
 editor.on('update', ({ editor }) => emit('update:html', editor.getHTML()));
@@ -88,7 +91,8 @@ tryOnBeforeUnmount(() => {
   }
 
   mark {
-    background-color: #faf594;
+    background-color: var(--c-amber-fill);
+    color: var(--c-on-amber);
   }
 
   img {

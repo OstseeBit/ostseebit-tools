@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import _ from 'lodash';
+import { vInputNumberLabels } from '@/utils/input-number-labels.directive';
 import {
   convertCelsiusToKelvin,
   convertDelisleToKelvin,
@@ -108,6 +109,7 @@ update('kelvin');
 
       <n-input-number
         v-model:value="units[key].ref"
+        v-input-number-labels
         style="flex: 1"
         @update:value="() => update(key as TemperatureScale)"
       />

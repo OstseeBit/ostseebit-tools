@@ -40,6 +40,15 @@ const filter = computed<CategoryId | 'all'>(() => {
 });
 const visibleCategories = computed(() => filter.value === 'all' ? categories.value : categories.value.filter(({ id }) => id === filter.value));
 
+const pillsRef = ref<HTMLElement>();
+
+// Auf dem Handy läuft die Pillen-Zeile waagerecht; die gewählte Pille soll im Blick bleiben.
+function revealSelectedPill() {
+  nextTick(() => pillsRef.value?.querySelector('[aria-pressed="true"]')?.scrollIntoView({ inline: 'center', block: 'nearest' }));
+}
+onMounted(revealSelectedPill);
+watch(filter, revealSelectedPill);
+
 function setFilter(id: CategoryId | 'all') {
   router.replace({ query: id === 'all' ? {} : { category: id } });
 }
@@ -55,7 +64,7 @@ function setFilter(id: CategoryId | 'all') {
         <span class="count">{{ t('home.nav.toolCount', { count: toolStore.tools.length }) }} · {{ t('home.statusLocal') }}</span>
       </div>
 
-      <div class="pills" role="group" :aria-label="t('home.filterLabel')">
+      <div ref="pillsRef" class="pills" role="group" :aria-label="t('home.filterLabel')">
         <button type="button" class="pill" :aria-pressed="filter === 'all'" @click="setFilter('all')">
           {{ t('home.filterAll') }}
           <span class="n">{{ toolStore.tools.length }}</span>
@@ -70,7 +79,7 @@ function setFilter(id: CategoryId | 'all') {
           :data-test-id="`filter-${category.id}`"
           @click="setFilter(category.id)"
         >
-          <NIcon :component="categoryIcons[category.id]" class="pill-icon" />
+          <NIcon aria-hidden="true" :component="categoryIcons[category.id]" class="pill-icon" />
           {{ category.name }}
           <span class="n">{{ category.tools.length }}</span>
         </button>
@@ -82,7 +91,7 @@ function setFilter(id: CategoryId | 'all') {
         <span class="q-lab">
           {{ t('home.categories.favoriteTools') }}
           <c-tooltip :tooltip="t('home.categories.favoritesDndToolTip')">
-            <NIcon :component="DragDrop" size="16" />
+            <NIcon aria-hidden="true" :component="DragDrop" size="16" />
           </c-tooltip>
           <span class="sr-only">{{ t('home.categories.favoritesDndToolTip') }}</span>
         </span>
@@ -97,7 +106,7 @@ function setFilter(id: CategoryId | 'all') {
           <template #item="{ element: tool }">
             <li>
               <router-link :to="tool.path" class="chip" :class="`cat-${tool.categoryId}`">
-                <NIcon :component="tool.icon" />
+                <NIcon aria-hidden="true" :component="tool.icon" />
                 {{ tool.name }}
               </router-link>
             </li>
@@ -110,7 +119,7 @@ function setFilter(id: CategoryId | 'all') {
         <ul class="chips">
           <li v-for="tool in toolStore.newTools" :key="tool.path">
             <router-link :to="tool.path" class="chip" :class="`cat-${tool.categoryId}`">
-              <NIcon :component="tool.icon" />
+              <NIcon aria-hidden="true" :component="tool.icon" />
               {{ tool.name }}
             </router-link>
           </li>
@@ -120,7 +129,7 @@ function setFilter(id: CategoryId | 'all') {
 
     <section v-for="category in visibleCategories" :key="category.id" class="grp" :class="`cat-${category.id}`" :aria-labelledby="`group-${category.id}`">
       <div class="grp-head">
-        <span class="ico"><NIcon :component="categoryIcons[category.id]" /></span>
+        <span class="ico"><NIcon aria-hidden="true" :component="categoryIcons[category.id]" /></span>
         <h2 :id="`group-${category.id}`">
           {{ category.name }}
         </h2>

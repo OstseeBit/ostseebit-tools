@@ -44,13 +44,13 @@ function onInputEnter(index: number) {
       />
       <c-tooltip :tooltip="t('tools.benchmark-builder.deleteValueTooltip')">
         <c-button circle variant="text" @click="values.splice(index, 1)">
-          <n-icon :component="Trash" depth="3" size="18" />
+          <n-icon aria-hidden="true" :component="Trash" depth="3" size="18" />
         </c-button>
       </c-tooltip>
     </div>
 
     <c-button @click="addValue">
-      <n-icon :component="Plus" depth="3" mr-2 size="18" />
+      <n-icon aria-hidden="true" :component="Plus" depth="3" mr-2 size="18" />
       {{ t('tools.benchmark-builder.addMeasure') }}
     </c-button>
   </div>

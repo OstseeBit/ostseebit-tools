@@ -198,11 +198,11 @@ defineExpose({
           :spellcheck="spellcheck ?? (rawText ? false : undefined)"
         >
 
-        <c-button v-if="clearable && value" variant="text" circle size="small" @click="value = ''">
+        <c-button v-if="clearable && value" variant="text" circle size="small" :aria-label="$t('common.clearInput')" @click="value = ''">
           <icon-mdi-close />
         </c-button>
 
-        <c-button v-if="type === 'password'" variant="text" circle size="small" @click="showPassword = !showPassword">
+        <c-button v-if="type === 'password'" variant="text" circle size="small" :aria-label="showPassword ? $t('common.hidePassword') : $t('common.showPassword')" :aria-pressed="showPassword" @click="showPassword = !showPassword">
           <icon-mdi-eye v-if="!showPassword" />
           <icon-mdi-eye-off v-if="showPassword" />
         </c-button>

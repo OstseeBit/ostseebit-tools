@@ -60,6 +60,12 @@ validation:
 copy:
   defaultMessage: Copied to the clipboard
 common:
+  searchResults: 'Search results'
+  clearInput: 'Clear input'
+  showPassword: 'Show password'
+  hidePassword: 'Hide password'
+  increase: 'Increase'
+  decrease: 'Decrease'
   copy: Copy
   copied: Copied!
   copyToClipboard: Copy to clipboard

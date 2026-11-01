@@ -92,7 +92,7 @@ function onRailKeydown(event: KeyboardEvent) {
     <n-tooltip placement="right" :disabled="isSmallScreen || !!openId">
       <template #trigger>
         <RouterLink to="/" class="rb" :aria-label="t('home.home')">
-          <NIcon :component="Home2" />
+          <NIcon aria-hidden="true" :component="Home2" />
           <span class="rl">{{ t('home.home') }}</span>
         </RouterLink>
       </template>
@@ -112,7 +112,7 @@ function onRailKeydown(event: KeyboardEvent) {
           :data-test-id="`rail-category-${category.id}`"
           @click="toggle(category.id, $event)"
         >
-          <NIcon :component="categoryIcons[category.id]" />
+          <NIcon aria-hidden="true" :component="categoryIcons[category.id]" />
           <span class="rl">{{ shortName(category.name) }}</span>
         </button>
       </template>
@@ -125,8 +125,8 @@ function onRailKeydown(event: KeyboardEvent) {
         <n-tooltip v-for="tool in favoriteTools" :key="tool.path" placement="right" :disabled="isSmallScreen || !!openId">
           <template #trigger>
             <RouterLink :to="tool.path" class="rb" :class="`cat-${tool.categoryId}`" :aria-label="tool.name">
-              <NIcon :component="tool.icon" />
-              <NIcon :component="Heart" class="badge" />
+              <NIcon aria-hidden="true" :component="tool.icon" />
+              <NIcon aria-hidden="true" :component="Heart" class="badge" />
             </RouterLink>
           </template>
           {{ tool.name }}
@@ -145,7 +145,7 @@ function onRailKeydown(event: KeyboardEvent) {
       @keydown="onFlyoutKeydown"
     >
       <div class="fl-head">
-        <span class="ico"><NIcon :component="categoryIcons[openCategory.id]" /></span>
+        <span class="ico"><NIcon aria-hidden="true" :component="categoryIcons[openCategory.id]" /></span>
         <div>
           <h2>{{ openCategory.name }}</h2>
           <p>{{ t('home.nav.toolCount', { count: openCategory.tools.length }) }}</p>
@@ -154,7 +154,7 @@ function onRailKeydown(event: KeyboardEvent) {
       <ul class="fl-list">
         <li v-for="tool in openCategory.tools" :key="tool.path">
           <RouterLink :to="tool.path" class="fl-item">
-            <span class="ico"><NIcon :component="tool.icon" /></span>
+            <span class="ico"><NIcon aria-hidden="true" :component="tool.icon" /></span>
             <span>
               <strong>{{ tool.name }}</strong>
               <small>{{ tool.description }}</small>

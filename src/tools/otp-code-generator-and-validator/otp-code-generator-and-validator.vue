@@ -64,7 +64,7 @@ const secretValidationRules = computed(() => [
     >
       <template #suffix>
         <c-tooltip :tooltip="t('tools.otp-generator.newSecretTooltip')">
-          <c-button circle variant="text" size="small" @click="refreshSecret">
+          <c-button circle variant="text" size="small" :aria-label="t('tools.otp-generator.newSecretTooltip')" @click="refreshSecret">
             <icon-mdi-refresh />
           </c-button>
         </c-tooltip>
@@ -74,13 +74,13 @@ const secretValidationRules = computed(() => [
     <div>
       <TokenDisplay :tokens="tokens" />
 
-      <n-progress :percentage="(100 * interval) / 30" :color="theme.primaryColor" :show-indicator="false" />
+      <n-progress :aria-label="t('tools.otp-generator.nextIn', { seconds: String(Math.floor(30 - interval)).padStart(2, '0') })" :percentage="(100 * interval) / 30" :color="theme.primaryColor" :show-indicator="false" />
       <div style="text-align: center">
         {{ t('tools.otp-generator.nextIn', { seconds: String(Math.floor(30 - interval)).padStart(2, '0') }) }}
       </div>
     </div>
     <div mt-4 flex flex-col items-center justify-center gap-3>
-      <n-image :src="qrcode" />
+      <n-image :src="qrcode" :alt="t('tools.otp-generator.title')" />
       <c-button :href="keyUri" target="_blank">
         {{ t('tools.otp-generator.openKeyUri') }}
       </c-button>

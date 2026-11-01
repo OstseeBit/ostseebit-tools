@@ -7,8 +7,8 @@ const { icon, title, action, isActive } = toRefs(props);
 
 <template>
   <c-tooltip :tooltip="title">
-    <c-button circle variant="text" :type="isActive?.() ? 'primary' : 'default'" @click="action">
-      <n-icon :component="icon" />
+    <c-button circle variant="text" :aria-label="title" :type="isActive?.() ? 'primary' : 'default'" @click="action">
+      <n-icon aria-hidden="true" :component="icon" />
     </c-button>
   </c-tooltip>
 </template>

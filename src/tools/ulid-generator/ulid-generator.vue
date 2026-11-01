@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { ulid } from 'ulid';
 import { computedRefreshable } from '@/composable/computedRefreshable';
 import { useCopy } from '@/composable/copy';
+import { vInputNumberLabels } from '@/utils/input-number-labels.directive';
 
 const { t } = useI18n();
 
@@ -27,7 +28,7 @@ const { copy } = useCopy({ source: ulids, text: t('tools.ulid-generator.copiedMe
   <div flex flex-col justify-center gap-2>
     <div flex items-center>
       <label w-75px> {{ t('tools.ulid-generator.quantityLabel') }}</label>
-      <n-input-number v-model:value="amount" min="1" max="100" flex-1 />
+      <n-input-number v-model:value="amount" v-input-number-labels min="1" max="100" flex-1 />
     </div>
 
     <c-buttons-select v-model:value="format" :options="formats" :label="t('tools.ulid-generator.formatLabel')" label-width="75px" />
