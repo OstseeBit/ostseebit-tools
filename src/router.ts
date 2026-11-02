@@ -51,7 +51,8 @@ router.onError((error, to) => {
   try {
     if (!sessionStorage.getItem(key)) {
       sessionStorage.setItem(key, '1');
-      window.location.assign(to.fullPath);
+      // `href` enthält den konfigurierten Basispfad (BASE_URL), `fullPath` nicht.
+      window.location.assign(router.resolve(to.fullPath).href);
       return;
     }
   }
