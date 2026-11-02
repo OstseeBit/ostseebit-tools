@@ -13,6 +13,7 @@ import { naive } from './plugins/naive.plugin';
 import router from './router';
 import './polyfills';
 import './assets/fonts.css';
+import './assets/tokens.css';
 import './assets/a11y.css';
 import 'virtual:uno.css';
 

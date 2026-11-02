@@ -1,20 +1,33 @@
 import type { GlobalThemeOverrides } from 'naive-ui';
+import { colorTokens } from '@/ui/theme/tokens';
 
-// Akzentfarbe der Marke (WCAG-AA-Kontrast ~5.25:1 auf #e0e0e0).
+const { light, dark } = colorTokens;
+
+// Alle Farben kommen aus den Design-Tokens (Hexwerte): Naive UI rechnet mit ihnen weiter und
+// verträgt keine `var(--…)`-Werte in den Overrides.
 export const lightThemeOverrides: GlobalThemeOverrides = {
   common: {
     fontFamily: 'var(--font-sans)',
     fontFamilyMono: 'var(--font-mono)',
-    primaryColor: '#086278',
-    primaryColorHover: '#0a7a94',
-    primaryColorPressed: '#054a5c',
-    primaryColorSuppl: '#0a7a94',
+    primaryColor: light.primary,
+    primaryColorHover: light.primaryHover,
+    primaryColorPressed: light.primaryPress,
+    primaryColorSuppl: light.primaryHover,
+    bodyColor: light.bg,
+    borderColor: light.line,
+    dividerColor: light.line,
   },
   Menu: {
     itemHeight: '32px',
   },
 
-  Layout: { color: '#f1f5f9' },
+  Layout: { color: light.bg },
+
+  // Eingabegrenzen brauchen mindestens 3:1 (WCAG 1.4.11).
+  Input: {
+    border: `1px solid ${light.fieldBorder}`,
+    borderHover: `1px solid ${light.primary}`,
+  },
 
   AutoComplete: {
     peers: {
@@ -23,24 +36,29 @@ export const lightThemeOverrides: GlobalThemeOverrides = {
   },
 };
 
-// Akzentfarbe im Dark-Mode.
 export const darkThemeOverrides: GlobalThemeOverrides = {
   common: {
     fontFamily: 'var(--font-sans)',
     fontFamilyMono: 'var(--font-mono)',
-    primaryColor: '#22d3ee',
-    primaryColorHover: '#67e8f9',
-    primaryColorPressed: '#0891b2',
-    primaryColorSuppl: '#67e8f9',
+    primaryColor: dark.primary,
+    primaryColorHover: dark.primaryHover,
+    primaryColorPressed: dark.primaryPress,
+    primaryColorSuppl: dark.primaryHover,
+    bodyColor: dark.bg,
+    cardColor: dark.surface,
+    modalColor: dark.surface,
+    popoverColor: dark.surface,
+    borderColor: dark.line,
+    dividerColor: dark.line,
   },
 
   Notification: {
-    color: '#333333',
+    color: dark.surface,
   },
 
   AutoComplete: {
     peers: {
-      InternalSelectMenu: { height: '500px', color: '#1e1e1e' },
+      InternalSelectMenu: { height: '500px', color: dark.surface },
     },
   },
 
@@ -49,18 +67,23 @@ export const darkThemeOverrides: GlobalThemeOverrides = {
   },
 
   Layout: {
-    color: '#1c1c1c',
-    siderColor: '#232323',
+    color: dark.bg,
+    siderColor: dark.surface,
     siderBorderColor: 'transparent',
   },
 
   Card: {
-    color: '#232323',
-    borderColor: '#282828',
+    color: dark.surface,
+    borderColor: dark.line,
+  },
+
+  Input: {
+    border: `1px solid ${dark.fieldBorder}`,
+    borderHover: `1px solid ${dark.primary}`,
   },
 
   Table: {
-    tdColor: '#232323',
-    thColor: '#353535',
+    tdColor: dark.surface,
+    thColor: dark.tint,
   },
 };

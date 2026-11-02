@@ -17,6 +17,7 @@ import markdown from 'unplugin-vue-markdown/vite';
 import svgLoader from 'vite-svg-loader';
 import { configDefaults } from 'vitest/config';
 import { brand } from './src/branding.ts';
+import { colorTokens } from './src/ui/theme/tokens.ts';
 
 const baseUrl = process.env.BASE_URL ?? '/';
 
@@ -114,8 +115,8 @@ export default defineConfig({
         lang: 'de',
         start_url: baseUrl,
         orientation: 'any',
-        theme_color: brand.themeColor,
-        background_color: '#f1f5f9',
+        theme_color: colorTokens.light.primary,
+        background_color: colorTokens.light.bg,
         icons: [
           {
             src: `${baseUrl}favicon-16x16.png`,

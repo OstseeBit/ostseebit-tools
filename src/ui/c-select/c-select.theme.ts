@@ -1,5 +1,6 @@
 import { defineThemes } from '../theme/theme.models';
 import { appThemes } from '../theme/themes';
+import { colorTokens } from '../theme/tokens';
 
 const sizes = {
   small: {
@@ -20,13 +21,13 @@ export const { useTheme } = defineThemes({
   dark: {
     sizes,
 
-    backgroundColor: '#333333',
-    borderColor: '#333333',
+    backgroundColor: colorTokens.dark.bg,
+    borderColor: colorTokens.dark.fieldBorder,
     dropdownShadow: 'rgba(0, 0, 0, 0.2) 0px 8px 24px',
 
     option: {
       hover: {
-        backgroundColor: '#444444',
+        backgroundColor: colorTokens.dark.hover,
       },
       active: {
         textColor: appThemes.dark.primary.color,
@@ -40,13 +41,13 @@ export const { useTheme } = defineThemes({
   light: {
     sizes,
 
-    backgroundColor: '#ffffff',
-    borderColor: '#e0e0e69e',
+    backgroundColor: colorTokens.light.surface,
+    borderColor: colorTokens.light.fieldBorder,
     dropdownShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px',
 
     option: {
       hover: {
-        backgroundColor: '#eee',
+        backgroundColor: colorTokens.light.hover,
       },
       active: {
         textColor: appThemes.light.primary.color,
@@ -54,7 +55,7 @@ export const { useTheme } = defineThemes({
     },
 
     focus: {
-      backgroundColor: '#ffffff',
+      backgroundColor: colorTokens.light.surface,
     },
   },
 });

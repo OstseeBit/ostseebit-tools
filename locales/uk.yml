@@ -42,13 +42,12 @@ search:
 tools:
   categories:
     favorite-tools: 'Ваші улюблені інструменти'
-    crypto: Крипта
-    converter: Конвертер
-    web: Веб
-    images and videos: 'Зображення та відео'
-    development: Розробка
-    network: Мережа
-    math: Математика
-    measurement: Вимірювання
-    text: Текст
-    data: Дані
+    data and formats: 'Дані та формати'
+    text and characters: 'Текст і символи'
+    development and web: 'Розробка та веб'
+    databases: 'Бази даних'
+    network and email: 'Мережа та пошта'
+    security and crypto: 'Безпека та криптографія'
+    admin and devops: 'Адміністрування та DevOps'
+    calculators and units: 'Калькулятори та одиниці'
+    identifiers and codes: 'Ідентифікатори та коди'

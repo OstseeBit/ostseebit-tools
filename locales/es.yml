@@ -42,13 +42,12 @@ search:
 tools:
   categories:
     favorite-tools: 'Tus herramientas favoritas'
-    crypto: Crypto
-    converter: Converter
-    web: Web
-    images and videos: 'Images & Videos'
-    development: Development
-    network: Network
-    math: Math
-    measurement: Measurement
-    text: Text
-    data: Data
+    data and formats: 'Datos y formatos'
+    text and characters: 'Texto y caracteres'
+    development and web: 'Desarrollo y web'
+    databases: 'Bases de datos'
+    network and email: 'Red y correo'
+    security and crypto: 'Seguridad y criptografía'
+    admin and devops: 'Administración y DevOps'
+    calculators and units: 'Calculadoras y unidades'
+    identifiers and codes: 'Identificadores y códigos'

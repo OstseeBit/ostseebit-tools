@@ -1,22 +1,25 @@
 import { defineThemes } from './theme.models';
+import { colorTokens } from './tokens';
+
+const { light, dark } = colorTokens;
 
 export const { themes: appThemes, useTheme: useAppTheme } = defineThemes({
   light: {
-    background: '#ffffff',
+    background: light.surface,
     text: {
-      baseColor: '#333639',
-      mutedColor: '#767c82',
+      baseColor: light.text,
+      mutedColor: light.muted,
     },
     default: {
-      color: 'rgba(46, 51, 56, 0.05)',
-      colorHover: 'rgba(46, 51, 56, 0.09)',
-      colorPressed: 'rgba(46, 51, 56, 0.22)',
+      color: light.neutral.color,
+      colorHover: light.neutral.hover,
+      colorPressed: light.neutral.pressed,
     },
     primary: {
-      color: '#086278',
-      colorHover: '#0a7a94',
-      colorPressed: '#054a5c',
-      colorFaded: '#0862781f',
+      color: light.primary,
+      colorHover: light.primaryHover,
+      colorPressed: light.primaryPress,
+      colorFaded: `${light.primary}1f`,
     },
     warning: {
       color: '#f59e0b',
@@ -38,21 +41,21 @@ export const { themes: appThemes, useTheme: useAppTheme } = defineThemes({
     },
   },
   dark: {
-    background: '#1e1e1e',
+    background: dark.surface,
     text: {
-      baseColor: '#ffffffd1',
-      mutedColor: '#ffffff80',
+      baseColor: dark.text,
+      mutedColor: dark.muted,
     },
     default: {
-      color: 'rgba(255, 255, 255, 0.08)',
-      colorHover: 'rgba(255, 255, 255, 0.12)',
-      colorPressed: 'rgba(255, 255, 255, 0.24)',
+      color: dark.neutral.color,
+      colorHover: dark.neutral.hover,
+      colorPressed: dark.neutral.pressed,
     },
     primary: {
-      color: '#22d3ee',
-      colorHover: '#67e8f9',
-      colorPressed: '#0891b2',
-      colorFaded: '#22d3ee2f',
+      color: dark.primary,
+      colorHover: dark.primaryHover,
+      colorPressed: dark.primaryPress,
+      colorFaded: `${dark.primary}2f`,
     },
     warning: {
       color: '#f59e0b',

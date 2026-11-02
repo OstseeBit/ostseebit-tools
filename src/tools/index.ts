@@ -1,4 +1,5 @@
 import type { ToolCategory } from './tools.types';
+import type { CategoryId } from '@/ui/theme/tokens';
 import { tool as asciiTextDrawer } from './ascii-text-drawer';
 import { tool as base64FileConverter } from './base64-file-converter';
 import { tool as base64StringConverter } from './base64-string-converter';
@@ -88,95 +89,41 @@ import { tool as yamlToJson } from './yaml-to-json-converter';
 import { tool as yamlToToml } from './yaml-to-toml';
 import { tool as yamlViewer } from './yaml-viewer';
 
-export const toolsByCategory: ToolCategory[] = [
+export const toolsByCategory: Array<ToolCategory & { id: CategoryId }> = [
   {
-    name: 'Crypto',
-    components: [tokenGenerator, hashText, bcrypt, uuidGenerator, ulidGenerator, cypher, bip39, hmacGenerator, rsaKeyPairGenerator, passwordStrengthAnalyser, pdfSignatureChecker],
-  },
-  {
-    name: 'Converter',
+    id: 'data',
+    name: 'Data and formats',
     components: [
-      dateTimeConverter,
-      baseConverter,
-      romanNumeralConverter,
       base64StringConverter,
       base64FileConverter,
-      colorConverter,
-      caseConverter,
-      textToNatoAlphabet,
       textToBinary,
-      textToUnicode,
       yamlToJson,
       yamlToToml,
       jsonToYaml,
       jsonToToml,
-      listConverter,
       tomlToJson,
       tomlToYaml,
       xmlToJson,
       jsonToXml,
       markdownToHtml,
-    ],
-  },
-  {
-    name: 'Web',
-    components: [
-      urlEncoder,
-      htmlEntities,
-      urlParser,
-      deviceInformation,
-      basicAuthGenerator,
-      metaTagGenerator,
-      otpCodeGeneratorAndValidator,
-      mimeTypes,
-      jwtParser,
-      keycodeInfo,
-      slugifyString,
-      htmlWysiwygEditor,
-      userAgentParser,
-      httpStatusCodes,
       jsonDiff,
-      safelinkDecoder,
-    ],
-  },
-  {
-    name: 'Images and videos',
-    components: [qrCodeGenerator, wifiQrCodeGenerator, svgPlaceholderGenerator, cameraRecorder],
-  },
-  {
-    name: 'Development',
-    components: [
-      gitMemo,
-      randomPortGenerator,
-      crontabGenerator,
       jsonViewer,
       jsonMinify,
       jsonToCsv,
-      sqlPrettify,
-      chmodCalculator,
-      dockerRunToDockerComposeConverter,
       xmlFormatter,
       yamlViewer,
-      emailNormalizer,
-      regexTester,
-      regexMemo,
     ],
   },
   {
-    name: 'Network',
-    components: [ipv4SubnetCalculator, ipv4AddressConverter, ipv4RangeExpander, macAddressLookup, macAddressGenerator, ipv6UlaGenerator],
-  },
-  {
-    name: 'Math',
-    components: [mathEvaluator, etaCalculator, percentageCalculator],
-  },
-  {
-    name: 'Measurement',
-    components: [chronometer, temperatureConverter, benchmarkBuilder],
-  },
-  {
-    name: 'Text',
+    id: 'text',
+    name: 'Text and characters',
     components: [
+      caseConverter,
+      textToNatoAlphabet,
+      textToUnicode,
+      listConverter,
+      htmlEntities,
+      slugifyString,
       loremIpsumGenerator,
       textStatistics,
       emojiPicker,
@@ -187,12 +134,105 @@ export const toolsByCategory: ToolCategory[] = [
     ],
   },
   {
-    name: 'Data',
-    components: [phoneParserAndFormatter, ibanValidatorAndParser],
+    id: 'dev',
+    name: 'Development and web',
+    components: [
+      colorConverter,
+      urlEncoder,
+      urlParser,
+      deviceInformation,
+      metaTagGenerator,
+      mimeTypes,
+      keycodeInfo,
+      htmlWysiwygEditor,
+      userAgentParser,
+      httpStatusCodes,
+      svgPlaceholderGenerator,
+      regexTester,
+      regexMemo,
+    ],
+  },
+  {
+    id: 'db',
+    name: 'Databases',
+    components: [
+      sqlPrettify,
+    ],
+  },
+  {
+    id: 'net',
+    name: 'Network and email',
+    components: [
+      safelinkDecoder,
+      randomPortGenerator,
+      emailNormalizer,
+      ipv4SubnetCalculator,
+      ipv4AddressConverter,
+      ipv4RangeExpander,
+      macAddressLookup,
+      macAddressGenerator,
+      ipv6UlaGenerator,
+    ],
+  },
+  {
+    id: 'sec',
+    name: 'Security and crypto',
+    components: [
+      tokenGenerator,
+      hashText,
+      bcrypt,
+      cypher,
+      bip39,
+      hmacGenerator,
+      rsaKeyPairGenerator,
+      passwordStrengthAnalyser,
+      pdfSignatureChecker,
+      basicAuthGenerator,
+      otpCodeGeneratorAndValidator,
+      jwtParser,
+    ],
+  },
+  {
+    id: 'ops',
+    name: 'Admin and devops',
+    components: [
+      gitMemo,
+      crontabGenerator,
+      chmodCalculator,
+      dockerRunToDockerComposeConverter,
+    ],
+  },
+  {
+    id: 'calc',
+    name: 'Calculators and units',
+    components: [
+      dateTimeConverter,
+      baseConverter,
+      romanNumeralConverter,
+      mathEvaluator,
+      etaCalculator,
+      percentageCalculator,
+      chronometer,
+      temperatureConverter,
+      benchmarkBuilder,
+    ],
+  },
+  {
+    id: 'id',
+    name: 'Identifiers and codes',
+    components: [
+      uuidGenerator,
+      ulidGenerator,
+      qrCodeGenerator,
+      wifiQrCodeGenerator,
+      cameraRecorder,
+      phoneParserAndFormatter,
+      ibanValidatorAndParser,
+    ],
   },
 ];
 
 export const tools = toolsByCategory.flatMap(({ components }) => components);
-export const toolsWithCategory = toolsByCategory.flatMap(({ components, name }) =>
-  components.map(tool => ({ category: name, ...tool })),
+export const toolsWithCategory = toolsByCategory.flatMap(({ components, name, id }) =>
+  components.map(tool => ({ category: name, categoryId: id, ...tool })),
 );

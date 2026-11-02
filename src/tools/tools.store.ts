@@ -26,6 +26,7 @@ export const useToolStore = defineStore('tools', () => {
     return _.chain(tools.value)
       .groupBy('category')
       .map((components, name, path) => ({
+        id: components[0].categoryId,
         name,
         path,
         components,

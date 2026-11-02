@@ -138,7 +138,7 @@ const tools = computed<ToolCategory[]>(() => [
 <style lang="less" scoped>
 .footer {
   text-align: center;
-  color: #838587;
+  color: var(--c-muted);
   margin-top: 20px;
   padding: 20px 0;
 }
