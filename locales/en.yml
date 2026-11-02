@@ -9,7 +9,22 @@ home:
   toggleMenu: 'Toggle menu'
   home: Home
   uiLib: 'UI Lib'
+  breadcrumb: 'Breadcrumb'
+  filterLabel: 'Filter by category'
+  filterAll: 'All'
+  sortFavorites: 'Change order'
+  sortDone: 'Done'
+  moveEarlier: 'Move {name} earlier'
+  moveLater: 'Move {name} later'
+  favoritePosition: '{name}: position {position} of {total}'
+  statusOffline: 'Offline, everything keeps running locally'
+  statusLocal: 'Runs locally in your browser'
   nav:
+    tools: 'Tools'
+    showCategory: '{name}: show tools'
+    toolsOf: 'Tools: {name}'
+    showOverview: 'Show all in the overview'
+    toolCount: '{count} tools'
     github: 'GitHub repository'
     githubRepository: 'OstseeBit Tools GitHub repository'
     about: 'About  OstseeBit Tools'
@@ -51,6 +66,15 @@ validation:
 copy:
   defaultMessage: Copied to the clipboard
 common:
+  reload: 'Reload'
+  loadFailed: 'The tool could not be loaded. Please check your connection and reload the page.'
+  searchResults: 'Search results'
+  clearInput: 'Clear input'
+  showPassword: 'Show password'
+  hidePassword: 'Hide password'
+  increase: 'Increase'
+  decrease: 'Decrease'
+  refresh: Refresh
   copy: Copy
   copied: Copied!
   copyToClipboard: Copy to clipboard

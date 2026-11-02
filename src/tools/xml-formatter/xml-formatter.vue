@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { createParseValidationRule } from '@/composable/validation';
+import { vInputNumberLabels } from '@/utils/input-number-labels.directive';
 import { formatXml, parseXml } from './xml-formatter.service';
 
 const { t } = useI18n();
@@ -26,10 +27,10 @@ const rules = computed(() => [createParseValidationRule(parseXml, 'XML', t)]);
   <div important:flex-full important:flex-shrink-0 important:flex-grow-0>
     <div flex justify-center>
       <n-form-item :label="t('tools.xml-formatter.collapseContentLabel')" label-placement="left">
-        <n-switch v-model:value="collapseContent" />
+        <n-switch v-model:value="collapseContent" :aria-label="t('tools.xml-formatter.collapseContentLabel')" />
       </n-form-item>
       <n-form-item :label="t('tools.xml-formatter.indentSizeLabel')" label-placement="left" label-width="150" :show-feedback="false">
-        <n-input-number v-model:value="indentSize" min="0" max="10" w-100px />
+        <n-input-number v-model:value="indentSize" v-input-number-labels min="0" max="10" w-100px />
       </n-form-item>
     </div>
   </div>

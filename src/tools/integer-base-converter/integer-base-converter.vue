@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { getErrorMessageIfThrows } from '@/utils/error';
+import { vInputNumberLabels } from '@/utils/input-number-labels.directive';
 import InputCopyable from '../../components/InputCopyable.vue';
 import { convertBase } from './integer-base-converter.service';
 
@@ -39,7 +40,7 @@ const error = computed(() =>
       <c-input-text v-model:value="input" :label="t('tools.base-converter.inputNumberLabel')" :placeholder="t('tools.base-converter.inputNumberPlaceholder')" label-position="left" label-width="110px" mb-2 label-align="right" />
 
       <n-form-item :label="t('tools.base-converter.inputBaseLabel')" label-placement="left" label-width="110" :show-feedback="false">
-        <n-input-number v-model:value="inputBase" max="64" min="2" :placeholder="t('tools.base-converter.inputBasePlaceholder')" w-full />
+        <n-input-number v-model:value="inputBase" v-input-number-labels max="64" min="2" :placeholder="t('tools.base-converter.inputBasePlaceholder')" w-full />
       </n-form-item>
 
       <n-alert v-if="error" style="margin-top: 25px" type="error">
@@ -85,7 +86,7 @@ const error = computed(() =>
       <div flex items-baseline>
         <n-input-group style="width: 160px; margin-right: 10px">
           <n-input-group-label> {{ t('tools.base-converter.customLabel') }} </n-input-group-label>
-          <n-input-number v-model:value="outputBase" max="64" min="2" />
+          <n-input-number v-model:value="outputBase" v-input-number-labels max="64" min="2" />
         </n-input-group>
 
         <InputCopyable

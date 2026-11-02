@@ -63,7 +63,7 @@ const { download } = useDownloadFileFromBase64({ source: qrcode, filename: 'qr-c
       </n-gi>
       <n-gi>
         <div flex flex-col items-center gap-3>
-          <n-image :src="qrcode" width="200" />
+          <n-image :src="qrcode" width="200" :alt="t('tools.qrcode-generator.title')" />
           <c-button @click="download">
             {{ t('tools.qrcode-generator.downloadButton') }}
           </c-button>

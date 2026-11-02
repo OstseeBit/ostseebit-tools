@@ -8,7 +8,22 @@ home:
   toggleMenu: 'Menu'
   home: Accueil
   uiLib: 'UI Lib'
+  breadcrumb: 'Fil d’Ariane'
+  filterLabel: 'Filtrer par catégorie'
+  filterAll: 'Toutes'
+  sortFavorites: 'Modifier l’ordre'
+  sortDone: 'Terminé'
+  moveEarlier: 'Déplacer {name} avant'
+  moveLater: 'Déplacer {name} après'
+  favoritePosition: '{name} : position {position} sur {total}'
+  statusOffline: 'Hors ligne, tout continue de fonctionner localement'
+  statusLocal: 'Fonctionne localement dans le navigateur'
   nav:
+    tools: 'Outils'
+    showCategory: '{name} : afficher les outils'
+    toolsOf: 'Outils : {name}'
+    showOverview: 'Tout afficher dans l’aperçu'
+    toolCount: '{count} outils'
     github: 'Dépôt GitHub'
     githubRepository: "Dépôt GitHub d'OstseeBit Tools"
     about: "À propos d'OstseeBit Tools"

@@ -5,6 +5,7 @@ import { addMilliseconds, formatRelative } from 'date-fns';
 
 import { de, enGB } from 'date-fns/locale';
 
+import { vInputNumberLabels } from '@/utils/input-number-labels.directive';
 import { formatMsDuration } from './eta-calculator.service';
 
 const { t, locale } = useI18n();
@@ -43,7 +44,7 @@ const endAt = computed(() =>
     <n-divider />
     <div flex gap-2>
       <n-form-item :label="t('tools.eta-calculator.amountToConsumeLabel')" flex-1>
-        <n-input-number v-model:value="unitCount" :min="1" />
+        <n-input-number v-model:value="unitCount" v-input-number-labels :min="1" />
       </n-form-item>
       <n-form-item :label="t('tools.eta-calculator.consumptionStartedAtLabel')" flex-1>
         <n-date-picker v-model:value="startedAt" type="datetime" />
@@ -52,10 +53,10 @@ const endAt = computed(() =>
 
     <p>{{ t('tools.eta-calculator.amountPerTimeSpanLabel') }}</p>
     <div flex flex-col items-baseline gap-y-2 md:flex-row>
-      <n-input-number v-model:value="unitPerTimeSpan" :min="1" />
+      <n-input-number v-model:value="unitPerTimeSpan" v-input-number-labels :min="1" />
       <div flex items-baseline gap-2>
         <span ml-2>{{ t('tools.eta-calculator.inLabel') }}</span>
-        <n-input-number v-model:value="timeSpan" min-w-130px :min="1" />
+        <n-input-number v-model:value="timeSpan" v-input-number-labels min-w-130px :min="1" />
         <c-select
           v-model:value="timeSpanUnitMultiplier"
           min-w-130px

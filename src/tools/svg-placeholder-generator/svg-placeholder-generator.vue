@@ -3,6 +3,7 @@ import TextareaCopyable from '@/components/TextareaCopyable.vue';
 import { useCopy } from '@/composable/copy';
 import { useDownloadFileFromBase64 } from '@/composable/downloadBase64';
 import { textToBase64 } from '@/utils/base64';
+import { vInputNumberLabels } from '@/utils/input-number-labels.directive';
 
 const { t } = useI18n();
 
@@ -38,7 +39,7 @@ const { download } = useDownloadFileFromBase64({ source: base64 });
     <n-form label-placement="left" label-width="100">
       <div flex gap-3>
         <n-form-item :label="t('tools.svg-placeholder-generator.widthLabel')" flex-1>
-          <n-input-number v-model:value="width" :placeholder="t('tools.svg-placeholder-generator.widthPlaceholder')" min="1" />
+          <n-input-number v-model:value="width" v-input-number-labels :placeholder="t('tools.svg-placeholder-generator.widthPlaceholder')" min="1" />
         </n-form-item>
         <n-form-item :label="t('tools.svg-placeholder-generator.backgroundLabel')" flex-1>
           <n-color-picker v-model:value="bgColor" :modes="['hex']" />
@@ -46,7 +47,7 @@ const { download } = useDownloadFileFromBase64({ source: base64 });
       </div>
       <div flex gap-3>
         <n-form-item :label="t('tools.svg-placeholder-generator.heightLabel')" flex-1>
-          <n-input-number v-model:value="height" :placeholder="t('tools.svg-placeholder-generator.heightPlaceholder')" min="1" />
+          <n-input-number v-model:value="height" v-input-number-labels :placeholder="t('tools.svg-placeholder-generator.heightPlaceholder')" min="1" />
         </n-form-item>
         <n-form-item :label="t('tools.svg-placeholder-generator.textColorLabel')" flex-1>
           <n-color-picker v-model:value="fgColor" :modes="['hex']" />
@@ -54,7 +55,7 @@ const { download } = useDownloadFileFromBase64({ source: base64 });
       </div>
       <div flex gap-3>
         <n-form-item :label="t('tools.svg-placeholder-generator.fontSizeLabel')" flex-1>
-          <n-input-number v-model:value="fontSize" :placeholder="t('tools.svg-placeholder-generator.fontSizePlaceholder')" min="1" />
+          <n-input-number v-model:value="fontSize" v-input-number-labels :placeholder="t('tools.svg-placeholder-generator.fontSizePlaceholder')" min="1" />
         </n-form-item>
 
         <c-input-text
@@ -68,7 +69,7 @@ const { download } = useDownloadFileFromBase64({ source: base64 });
         />
       </div>
       <n-form-item :label="t('tools.svg-placeholder-generator.exactSizeLabel')" label-placement="left">
-        <n-switch v-model:value="useExactSize" />
+        <n-switch v-model:value="useExactSize" :aria-label="t('tools.svg-placeholder-generator.exactSizeLabel')" />
       </n-form-item>
     </n-form>
 

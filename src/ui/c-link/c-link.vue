@@ -38,10 +38,8 @@ const tag = computed(() => {
   text-decoration: none;
   font-weight: 400;
   color: v-bind('theme.default.textColor');
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   transition: color cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
-
-  outline-offset: 1px;
 
   &:hover {
     color: v-bind('theme.default.hover.textColor');
@@ -49,10 +47,6 @@ const tag = computed(() => {
 
   &:active {
     color: v-bind('theme.default.textColor');
-  }
-
-  &:focus {
-    color: v-bind('theme.default.outline.color');
   }
 }
 </style>

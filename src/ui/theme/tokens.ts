@@ -173,6 +173,8 @@ export function renderTokensCss(): string {
   const radius = Object.entries(radiusTokens).map(([k, v]) => `  --radius-${k}: ${v}px;`).join('\n');
   const space = Object.entries(spaceTokens).map(([k, v]) => `  --space-${k}: ${v}px;`).join('\n');
   const fontSize = Object.entries(fontSizeTokens).map(([k, v]) => `  --fs-${k}: ${v};`).join('\n');
+  // Hilfsklassen: `class="cat-sec"` setzt `--cat` auf die Kategoriefarbe des aktuellen Modus.
+  const categoryClasses = categoryIds.map(id => `.cat-${id} {\n  --cat: var(--c-cat-${id});\n}`).join('\n');
 
   return `/*
  * Design-Tokens als CSS-Variablen.
@@ -192,5 +194,7 @@ ${fontSize}
   color-scheme: dark;
 ${colorBlock('dark')}
 }
+
+${categoryClasses}
 `;
 }

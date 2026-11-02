@@ -56,13 +56,13 @@ const tooltipText = computed(() => isJustCopied.value ? t('common.copied') : (co
         :style="`max-height: 70vh;${height ? ` min-height: ${height - 40 /* card padding */ + 10 /* negative margin compensation */}px;` : ''}`"
       >
         <n-config-provider :hljs="hljs">
-          <n-code :code="value" :language="language" :trim="false" data-test-id="area-content" />
+          <n-code :code="value" :language="language" :trim="false" tabindex="0" data-test-id="area-content" />
         </n-config-provider>
       </n-scrollbar>
       <div absolute right-10px top-10px>
         <c-tooltip v-if="value" :tooltip="tooltipText" position="left">
-          <c-button circle important:h-10 important:w-10 @click="copy()">
-            <n-icon size="22" :component="Copy" />
+          <c-button circle important:h-10 important:w-10 :aria-label="tooltipText" @click="copy()">
+            <n-icon aria-hidden="true" size="22" :component="Copy" />
           </c-button>
         </c-tooltip>
       </div>

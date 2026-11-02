@@ -104,14 +104,14 @@ function copyAsBulletList() {
 
         <div flex justify-center>
           <c-button v-if="suites.length > 1" variant="text" @click="suites.splice(index, 1)">
-            <n-icon :component="Trash" depth="3" mr-2 size="18" />
+            <n-icon aria-hidden="true" :component="Trash" depth="3" mr-2 size="18" />
             {{ t('tools.benchmark-builder.deleteSuite') }}
           </c-button>
           <c-button
             variant="text"
             @click="suites.splice(index + 1, 0, { data: [0], title: defaultSuiteTitle(suites.length + 1) })"
           >
-            <n-icon :component="Plus" depth="3" mr-2 size="18" />
+            <n-icon aria-hidden="true" :component="Plus" depth="3" mr-2 size="18" />
             {{ t('tools.benchmark-builder.addSuite') }}
           </c-button>
         </div>

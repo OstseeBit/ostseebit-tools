@@ -39,7 +39,7 @@ const details = computed(() => [
     />
 
     <c-card text-center>
-      <div op-60>
+      <div text-muted>
         {{ t('tools.password-strength-analyser.crackDurationLabel') }}
       </div>
       <div text-2xl data-test-id="crack-duration">
@@ -48,7 +48,7 @@ const details = computed(() => [
     </c-card>
     <c-card>
       <div v-for="({ label, value }) of details" :key="label" flex gap-3>
-        <div flex-1 text-right op-60>
+        <div flex-1 text-right text-muted>
           {{ label }}
         </div>
         <div flex-1 text-left>

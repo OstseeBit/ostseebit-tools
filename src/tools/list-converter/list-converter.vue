@@ -47,10 +47,10 @@ function transformer(value: string) {
         <div flex>
           <div>
             <n-form-item :label="t('tools.list-converter.trimItemsLabel')" label-placement="left" label-width="150" :show-feedback="false" mb-2>
-              <n-switch v-model:value="conversionConfig.trimItems" />
+              <n-switch v-model:value="conversionConfig.trimItems" :aria-label="t('tools.list-converter.trimItemsLabel')" />
             </n-form-item>
             <n-form-item :label="t('tools.list-converter.removeDuplicatesLabel')" label-placement="left" label-width="150" :show-feedback="false" mb-2>
-              <n-switch v-model:value="conversionConfig.removeDuplicates" data-test-id="removeDuplicates" />
+              <n-switch v-model:value="conversionConfig.removeDuplicates" :aria-label="t('tools.list-converter.removeDuplicatesLabel')" data-test-id="removeDuplicates" />
             </n-form-item>
             <n-form-item
               :label="t('tools.list-converter.lowercaseLabel')"
@@ -59,10 +59,10 @@ function transformer(value: string) {
               :show-feedback="false"
               mb-2
             >
-              <n-switch v-model:value="conversionConfig.lowerCase" />
+              <n-switch v-model:value="conversionConfig.lowerCase" :aria-label="t('tools.list-converter.lowercaseLabel')" />
             </n-form-item>
             <n-form-item :label="t('tools.list-converter.keepLineBreaksLabel')" label-placement="left" label-width="150" :show-feedback="false" mb-2>
-              <n-switch v-model:value="conversionConfig.keepLineBreaks" />
+              <n-switch v-model:value="conversionConfig.keepLineBreaks" :aria-label="t('tools.list-converter.keepLineBreaksLabel')" />
             </n-form-item>
           </div>
           <div flex-1>

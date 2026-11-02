@@ -3,6 +3,7 @@ import { v1 as generateUuidV1, v3 as generateUuidV3, v4 as generateUuidV4, v5 as
 import { computedRefreshable } from '@/composable/computedRefreshable';
 import { useCopy } from '@/composable/copy';
 import { withDefaultOnError } from '@/utils/defaults';
+import { vInputNumberLabels } from '@/utils/input-number-labels.directive';
 
 const { t } = useI18n();
 
@@ -53,7 +54,7 @@ const { copy } = useCopy({ source: uuids, text: t('tools.uuid-generator.copiedMe
 
     <div mb-2 flex items-center>
       <span w-100px>{{ t('tools.uuid-generator.quantityLabel') }}</span>
-      <n-input-number v-model:value="count" flex-1 :min="1" :max="50" :placeholder="t('tools.uuid-generator.quantityPlaceholder')" />
+      <n-input-number v-model:value="count" v-input-number-labels flex-1 :min="1" :max="50" :placeholder="t('tools.uuid-generator.quantityPlaceholder')" />
     </div>
 
     <div v-if="version === 'v3' || version === 'v5'">

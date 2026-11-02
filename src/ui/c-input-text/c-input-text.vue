@@ -198,11 +198,11 @@ defineExpose({
           :spellcheck="spellcheck ?? (rawText ? false : undefined)"
         >
 
-        <c-button v-if="clearable && value" variant="text" circle size="small" @click="value = ''">
+        <c-button v-if="clearable && value" variant="text" circle size="small" :aria-label="$t('common.clearInput')" @click="value = ''">
           <icon-mdi-close />
         </c-button>
 
-        <c-button v-if="type === 'password'" variant="text" circle size="small" @click="showPassword = !showPassword">
+        <c-button v-if="type === 'password'" variant="text" circle size="small" :aria-label="showPassword ? $t('common.hidePassword') : $t('common.showPassword')" :aria-pressed="showPassword" @click="showPassword = !showPassword">
           <icon-mdi-eye v-if="!showPassword" />
           <icon-mdi-eye-off v-if="showPassword" />
         </c-button>
@@ -222,6 +222,19 @@ defineExpose({
   &.label-left {
     flex-direction: row;
     align-items: baseline;
+  }
+
+  @media (max-width: 700px) {
+    &.label-left {
+      flex-direction: column;
+      align-items: stretch;
+
+      & > .label {
+        flex: 0 0 auto;
+        padding-right: 0;
+        text-align: left;
+      }
+    }
   }
 
   &.error {
@@ -260,7 +273,7 @@ defineExpose({
     background-color: v-bind('theme.backgroundColor');
     color: transparent;
     border: 1px solid v-bind('theme.borderColor');
-    border-radius: 4px;
+    border-radius: var(--radius-md);
     padding: 0 4px 0 12px;
     transition: border-color 0.2s ease-in-out;
 
@@ -316,6 +329,8 @@ defineExpose({
 
     &:focus-within {
       border-color: v-bind('appTheme.primary.color');
+      outline: var(--focus-ring-width) solid var(--focus-ring-color);
+      outline-offset: 1px;
 
       background-color: v-bind('theme.focus.backgroundColor');
     }

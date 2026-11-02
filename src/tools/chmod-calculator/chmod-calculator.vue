@@ -15,6 +15,11 @@ const scopes = computed<{ scope: Scope, title: string }[]>(() => [
   { scope: 'execute', title: t('tools.chmod-calculator.executeLabel') },
 ]);
 const groups: Group[] = ['owner', 'group', 'public'];
+const groupTitles = computed<Record<Group, string>>(() => ({
+  owner: t('tools.chmod-calculator.ownerHeader'),
+  group: t('tools.chmod-calculator.groupHeader'),
+  public: t('tools.chmod-calculator.publicHeader'),
+}));
 
 const permissions = ref({
   owner: { read: false, write: false, execute: false },
@@ -49,7 +54,9 @@ const symbolic = computed(() => computeChmodSymbolicRepresentation({ permissions
             {{ title }}
           </td>
           <td v-for="group of groups" :key="group" class="text-center">
-            <n-checkbox v-model:checked="permissions[group][scope]" size="large" />
+            <n-checkbox v-model:checked="permissions[group][scope]" size="large">
+              <span class="sr-only">{{ groupTitles[group] }}: {{ title }}</span>
+            </n-checkbox>
           </td>
         </tr>
       </tbody>
@@ -75,6 +82,10 @@ const symbolic = computed(() => computeChmodSymbolicRepresentation({ permissions
   margin: 20px 0;
 }
 .permission-table {
+  // Die Tabelle scrollt auf schmalen Fenstern selbst. Als Bezugspunkt für die versteckten Texte
+  // der Kontrollkästchen verhindert sie, dass diese die Seite verbreitern.
+  position: relative;
+
   td,
   th {
     padding: 15px;
@@ -83,6 +94,10 @@ const symbolic = computed(() => computeChmodSymbolicRepresentation({ permissions
       padding: 5px;
     }
   }
+}
+// Der Text der Kontrollkästchen ist nur für Screenreader da und soll die Zelle nicht verschieben.
+.permission-table :deep(.n-checkbox__label) {
+  padding: 0;
 }
 .line-header {
   font-weight: bold;

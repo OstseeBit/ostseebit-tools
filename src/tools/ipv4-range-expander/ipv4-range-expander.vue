@@ -121,7 +121,7 @@ function onSwitchStartEndClicked() {
       </div>
 
       <c-button @click="onSwitchStartEndClicked">
-        <n-icon mr-2 :component="Exchange" depth="3" size="22" />
+        <n-icon aria-hidden="true" mr-2 :component="Exchange" depth="3" size="22" />
         {{ t('tools.ipv4-range-expander.switchButton') }}
       </c-button>
     </n-alert>

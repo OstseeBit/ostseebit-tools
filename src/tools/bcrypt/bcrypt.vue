@@ -2,6 +2,7 @@
 import { compareSync, hashSync } from 'bcryptjs';
 import { useThemeVars } from 'naive-ui';
 import { useCopy } from '@/composable/copy';
+import { vInputNumberLabels } from '@/utils/input-number-labels.directive';
 
 const themeVars = useThemeVars();
 const { t } = useI18n();
@@ -29,7 +30,7 @@ const compareMatch = computed(() => compareSync(compareString.value, compareHash
       mb-2
     />
     <n-form-item :label="t('tools.bcrypt.saltCountLabel')" label-placement="left" label-width="120">
-      <n-input-number v-model:value="saltCount" :placeholder="t('tools.bcrypt.saltCountPlaceholder')" :max="17" :min="0" w-full />
+      <n-input-number v-model:value="saltCount" v-input-number-labels :placeholder="t('tools.bcrypt.saltCountPlaceholder')" :max="17" :min="0" w-full />
     </n-form-item>
 
     <c-input-text :value="hashed" readonly text-center />

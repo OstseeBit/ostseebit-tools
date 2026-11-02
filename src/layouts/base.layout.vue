@@ -1,189 +1,78 @@
 <script lang="ts" setup>
-import type { ToolCategory } from '@/tools/tools.types';
+import AppRail from '../components/AppRail.vue';
+import AppStatusbar from '../components/AppStatusbar.vue';
+import AppTopbar from '../components/AppTopbar.vue';
+import { toolLoadFailed } from '../utils/load-error';
 
-import Home2 from '@vicons/tabler/es/Home2';
-import Menu2 from '@vicons/tabler/es/Menu2';
-import { NIcon, useThemeVars } from 'naive-ui';
-
-import { storeToRefs } from 'pinia';
-import { RouterLink } from 'vue-router';
-import { brand } from '@/branding';
-import CollapsibleToolMenu from '@/components/CollapsibleToolMenu.vue';
-import { config } from '@/config';
-import { useStyleStore } from '@/stores/style.store';
-import { useToolStore } from '@/tools/tools.store';
-import HeroGradient from '../assets/hero-gradient.svg?component';
-import MenuLayout from '../components/MenuLayout.vue';
-import NavbarButtons from '../components/NavbarButtons.vue';
-
-const themeVars = useThemeVars();
-const styleStore = useStyleStore();
-const buildDate = config.app.buildDate;
-const commitSha = config.app.lastCommitSha;
-const commitUrl = /^[a-f0-9]{7,40}$/i.test(commitSha) ? `${brand.repositoryUrl}/commit/${commitSha}` : brand.repositoryUrl;
-
-const { t } = useI18n();
-
-const toolStore = useToolStore();
-const { favoriteTools, toolsByCategory } = storeToRefs(toolStore);
-
-const tools = computed<ToolCategory[]>(() => [
-  ...(favoriteTools.value.length > 0 ? [{ name: t('tools.categories.favorite-tools'), components: favoriteTools.value }] : []),
-  ...toolsByCategory.value,
-]);
+function reload() {
+  window.location.reload();
+}
 </script>
 
 <template>
   <a href="#main-content" class="skip-link">Zum Hauptinhalt springen</a>
 
-  <MenuLayout class="menu-layout" :class="{ isSmallScreen: styleStore.isSmallScreen }">
-    <template #sider>
-      <RouterLink to="/" class="hero-wrapper">
-        <HeroGradient class="gradient" />
-        <div class="text-wrapper">
-          <div class="title">
-            {{ brand.name }}
-          </div>
-          <div class="divider" />
-          <div class="subtitle">
-            {{ $t('home.subtitle') }}
-          </div>
-        </div>
-      </RouterLink>
-
-      <div class="sider-content">
-        <div v-if="styleStore.isSmallScreen" flex flex-col items-center>
-          <locale-selector w="90%" />
-
-          <div flex justify-center>
-            <NavbarButtons />
-          </div>
-        </div>
-
-        <nav aria-label="Werkzeuge">
-          <CollapsibleToolMenu :tools-by-category="tools" />
-        </nav>
-
-        <div class="footer">
-          <div>
-            {{ brand.name }}
-          </div>
-          <div data-test-id="build-version">
-            {{ $t('home.version', { date: buildDate }) }}
-
-            <template v-if="commitSha && commitSha.length > 0">
-              ·
-              <c-link
-                target="_blank"
-                rel="noopener"
-                :href="commitUrl"
-              >
-                {{ commitSha.slice(0, 7) }}
-              </c-link>
-            </template>
-          </div>
-          <div>
-            © {{ new Date().getFullYear() }}
-            <c-link target="_blank" rel="noopener" :href="brand.maintainerUrl">
-              OstseeBit
-            </c-link>
-          </div>
-          <div>
-            <c-link to="/about">
-              {{ $t('home.nav.aboutLabel') }}
-            </c-link>
-          </div>
-        </div>
-      </div>
-    </template>
-
-    <template #content>
-      <div flex items-center justify-center gap-2 role="toolbar" aria-label="Werkzeugleiste">
-        <c-button
-          circle
-          variant="text"
-          :aria-label="$t('home.toggleMenu')"
-          @click="styleStore.isMenuCollapsed = !styleStore.isMenuCollapsed"
-        >
-          <NIcon size="25" :component="Menu2" />
-        </c-button>
-
-        <c-tooltip :tooltip="$t('home.home')" position="bottom">
-          <c-button to="/" circle variant="text" :aria-label="$t('home.home')">
-            <NIcon size="25" :component="Home2" />
+  <div class="shell">
+    <AppTopbar />
+    <AppRail />
+    <main id="main-content" tabindex="-1">
+      <c-alert v-if="toolLoadFailed" type="error" mb-4 role="alert">
+        <div flex flex-wrap items-center gap-3>
+          <span>{{ $t('common.loadFailed') }}</span>
+          <c-button @click="reload">
+            {{ $t('common.reload') }}
           </c-button>
-        </c-tooltip>
-
-        <c-tooltip :tooltip="$t('home.uiLib')" position="bottom">
-          <c-button v-if="config.app.env === 'development'" to="/c-lib" circle variant="text" :aria-label="$t('home.uiLib')">
-            <icon-mdi:brush-variant text-20px />
-          </c-button>
-        </c-tooltip>
-
-        <command-palette />
-
-        <locale-selector v-if="!styleStore.isSmallScreen" />
-
-        <div>
-          <NavbarButtons v-if="!styleStore.isSmallScreen" />
         </div>
-      </div>
-      <main id="main-content">
-        <slot />
-      </main>
-    </template>
-  </MenuLayout>
+      </c-alert>
+      <slot />
+    </main>
+    <AppStatusbar />
+  </div>
 </template>
 
-<style lang="less" scoped>
-.footer {
-  text-align: center;
-  color: var(--c-muted);
-  margin-top: 20px;
-  padding: 20px 0;
-}
+<style scoped>
+.shell {
+  --top-h: 48px;
+  --rail-w: 52px;
+  --stat-h: 26px;
+  --tab-h: 54px;
+  --fly-w: 300px;
 
-.sider-content {
-  padding-top: 160px;
-  padding-bottom: 200px;
-}
-
-.hero-wrapper {
-  position: absolute;
-  display: block;
-  left: 0;
-  width: 100%;
-  z-index: 10;
+  display: grid;
+  grid-template-areas:
+    'top top'
+    'rail main'
+    'stat stat';
+  grid-template-columns: var(--rail-w) minmax(0, 1fr);
+  grid-template-rows: var(--top-h) minmax(0, 1fr) var(--stat-h);
+  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
+  background: var(--c-bg);
+  color: var(--c-text);
+}
 
-  .gradient {
-    margin-top: -65px;
+main {
+  grid-area: main;
+  padding: var(--space-5) clamp(14px, 2vw, 28px);
+  overflow: auto;
+  background: linear-gradient(180deg, var(--c-sky) 0, var(--c-bg) 240px) no-repeat;
+  outline: none;
+}
+
+@media (max-width: 700px) {
+  .shell {
+    grid-template-areas:
+      'top'
+      'main'
+      'rail'
+      'stat';
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: var(--top-h) minmax(0, 1fr) var(--tab-h) var(--stat-h);
   }
 
-  .text-wrapper {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    top: 16px;
-    color: #fff;
-
-    .title {
-      font-size: 25px;
-      font-weight: 600;
-    }
-
-    .divider {
-      width: 50px;
-      height: 2px;
-      border-radius: 4px;
-      background-color: v-bind('themeVars.primaryColor');
-      margin: 0 auto 5px;
-    }
-
-    .subtitle {
-      font-size: 16px;
-    }
+  main {
+    padding: var(--space-4) var(--space-3);
   }
 }
 </style>

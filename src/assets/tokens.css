@@ -86,3 +86,31 @@
   --c-cat-calc: #f6c560;
   --c-cat-id: #f59ac0;
 }
+
+.cat-data {
+  --cat: var(--c-cat-data);
+}
+.cat-text {
+  --cat: var(--c-cat-text);
+}
+.cat-dev {
+  --cat: var(--c-cat-dev);
+}
+.cat-db {
+  --cat: var(--c-cat-db);
+}
+.cat-net {
+  --cat: var(--c-cat-net);
+}
+.cat-sec {
+  --cat: var(--c-cat-sec);
+}
+.cat-ops {
+  --cat: var(--c-cat-ops);
+}
+.cat-calc {
+  --cat: var(--c-cat-calc);
+}
+.cat-id {
+  --cat: var(--c-cat-id);
+}

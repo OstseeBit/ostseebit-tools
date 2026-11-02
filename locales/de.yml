@@ -17,7 +17,22 @@ home:
   toggleMenu: Menü umschalten
   home: Startseite
   uiLib: UI-Bibliothek
+  breadcrumb: 'Brotkrumen'
+  filterLabel: 'Nach Kategorie filtern'
+  filterAll: 'Alle'
+  sortFavorites: 'Reihenfolge ändern'
+  sortDone: 'Fertig'
+  moveEarlier: '{name} nach vorn'
+  moveLater: '{name} nach hinten'
+  favoritePosition: '{name}: Position {position} von {total}'
+  statusOffline: 'Offline, alles läuft weiter lokal'
+  statusLocal: 'Läuft lokal im Browser'
   nav:
+    tools: 'Werkzeuge'
+    showCategory: '{name}: Werkzeuge anzeigen'
+    toolsOf: 'Werkzeuge: {name}'
+    showOverview: 'Alle in der Übersicht zeigen'
+    toolCount: '{count} Werkzeuge'
     github: GitHub-Repository
     githubRepository: OstseeBit Tools GitHub-Repository
     about: Über OstseeBit Tools
@@ -53,6 +68,15 @@ validation:
 copy:
   defaultMessage: In die Zwischenablage kopiert
 common:
+  reload: 'Neu laden'
+  loadFailed: 'Das Werkzeug konnte nicht geladen werden. Bitte prüfe die Verbindung und lade die Seite neu.'
+  searchResults: 'Suchergebnisse'
+  clearInput: 'Eingabe löschen'
+  showPassword: 'Passwort anzeigen'
+  hidePassword: 'Passwort verbergen'
+  increase: 'Erhöhen'
+  decrease: 'Verringern'
+  refresh: Aktualisieren
   copy: Kopieren
   copied: Kopiert!
   copyToClipboard: In die Zwischenablage kopieren

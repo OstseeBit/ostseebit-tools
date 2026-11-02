@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import type { RouteLocationRaw } from 'vue-router';
-import { useAppTheme } from '../theme/themes';
 import { useTheme } from './c-button.theme';
 
 const props = withDefaults(
@@ -48,7 +47,6 @@ const tag = computed(() => {
   }
   return 'button';
 });
-const appTheme = useAppTheme();
 
 const size = computed(() => theme.value.size[sizeName.value]);
 </script>
@@ -59,6 +57,8 @@ const size = computed(() => theme.value.size[sizeName.value]);
     :href="href ?? to"
     class="c-button"
     :class="{ disabled, round, circle }"
+    :disabled="tag === 'button' && disabled ? true : undefined"
+    :aria-disabled="tag !== 'button' && disabled ? true : undefined"
     :to="to"
     :data-test-id="testId"
     @click="handleClick"
@@ -80,7 +80,7 @@ const size = computed(() => theme.value.size[sizeName.value]);
   font-weight: 400;
   color: v-bind('variantTheme.textColor');
   padding: 0 14px;
-  border-radius: 4px;
+  border-radius: var(--radius-md);
   transition: background-color cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
 
   background-color: v-bind('variantTheme.backgroundColor');
@@ -109,10 +109,6 @@ const size = computed(() => theme.value.size[sizeName.value]);
     &:active {
       background-color: v-bind('variantTheme.pressed.backgroundColor');
     }
-  }
-
-  &:focus {
-    outline: 1px solid v-bind('appTheme.primary.color');
   }
 
   &.disabled {

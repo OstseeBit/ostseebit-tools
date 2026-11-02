@@ -113,12 +113,12 @@ function switchToBlock({ count = 1 }: { count?: number }) {
 
       <div mt-3 flex items-center justify-between>
         <c-button @click="switchToBlock({ count: -1 })">
-          <n-icon :component="ArrowLeft" />
+          <n-icon aria-hidden="true" :component="ArrowLeft" />
           {{ t('tools.ipv4-subnet-calculator.previousBlockButton') }}
         </c-button>
         <c-button @click="switchToBlock({ count: 1 })">
           {{ t('tools.ipv4-subnet-calculator.nextBlockButton') }}
-          <n-icon :component="ArrowRight" />
+          <n-icon aria-hidden="true" :component="ArrowRight" />
         </c-button>
       </div>
     </div>

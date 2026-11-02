@@ -42,6 +42,7 @@ function close() {
   searchPrompt.value = '';
 }
 
+const hasResults = computed(() => Object.keys(filteredSearchResult.value).length > 0);
 const selectedOptionIndex = ref(0);
 
 function handleKeydown(event: KeyboardEvent) {
@@ -116,32 +117,98 @@ function activateOption(option: PaletteOption) {
 
 <template>
   <div flex-1>
-    <c-button w-full important:justify-start @click="isModalOpen = true">
-      <span flex items-center gap-3 op-40>
-
-        <icon-mdi-search />
-        {{ $t('search.label') }}
-
-        <span flex-1 border border-current border-op-40 rounded border-solid px-5px py-3px hidden sm:inline>
-          {{ isMac ? 'Cmd' : 'Ctrl' }}&nbsp;+&nbsp;K
-        </span>
+    <button type="button" class="palette-trigger" aria-haspopup="dialog" :aria-keyshortcuts="isMac ? 'Meta+K' : 'Control+K'" @click="isModalOpen = true">
+      <icon-mdi-search class="palette-icon" />
+      <span class="palette-label">{{ $t('search.label') }}</span>
+      <span class="palette-keys" aria-hidden="true">
+        <kbd>{{ isMac ? 'Cmd' : 'Ctrl' }}</kbd><kbd>K</kbd>
       </span>
-    </c-button>
+    </button>
 
     <c-modal v-model:open="isModalOpen" class="palette-modal" shadow-xl important:max-w-650px important:pa-12px @keydown="handleKeydown">
       <c-input-text ref="inputRef" v-model:value="searchPrompt" raw-text :placeholder="t('common.commandPalettePlaceholder')" autofocus clearable />
 
-      <div v-for="(options, category) in filteredSearchResult" :key="category">
-        <div ml-3 mt-3 text-sm text-primary font-bold op-60>
-          {{ category }}
+      <div role="listbox" :aria-label="t('common.searchResults')">
+        <div v-for="(options, category) in filteredSearchResult" :key="category" role="group" :aria-label="category">
+          <div class="palette-category" aria-hidden="true" ml-3 mt-3 text-sm font-bold>
+            {{ category }}
+          </div>
+          <command-palette-option v-for="option in options" :key="option.name" :option="option" :selected="selectedOptionIndex === getOptionIndex(option)" @activated="activateOption" />
         </div>
-        <command-palette-option v-for="option in options" :key="option.name" :option="option" :selected="selectedOptionIndex === getOptionIndex(option)" @activated="activateOption" />
       </div>
+      <p v-if="searchPrompt && !hasResults" class="palette-empty" role="status">
+        {{ t('common.noResults') }}
+      </p>
     </c-modal>
   </div>
 </template>
 
 <style scoped lang="less">
+.palette-trigger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 34px;
+  padding: 0 8px 0 12px;
+  border: 1px solid var(--c-field-border);
+  border-radius: var(--radius-pill);
+  background: var(--c-bg);
+  color: var(--c-muted);
+  font-size: var(--fs-sm);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 150ms ease, background 150ms ease;
+
+  &:hover {
+    border-color: var(--c-primary);
+    background: var(--c-surface);
+  }
+}
+
+.palette-icon {
+  flex: none;
+  color: var(--c-primary);
+  font-size: 18px;
+}
+
+.palette-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.palette-keys {
+  display: inline-flex;
+  gap: 3px;
+
+  kbd {
+    padding: 3px 6px;
+    border: 1px solid var(--c-field-border);
+    border-radius: 6px;
+    background: var(--c-surface);
+    color: var(--c-muted);
+    font: 500 0.72rem/1 var(--font-mono);
+  }
+}
+
+.palette-empty {
+  margin: var(--space-4) var(--space-3) var(--space-2);
+  color: var(--c-muted);
+}
+
+.palette-category {
+  color: var(--c-muted);
+}
+
+@media (max-width: 1100px) {
+  .palette-keys {
+    display: none;
+  }
+}
+
 .c-input-text {
   font-size: 18px;
 

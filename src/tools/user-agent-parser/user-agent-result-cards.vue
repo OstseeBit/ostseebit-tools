@@ -15,7 +15,7 @@ const { userAgentInfo, sections } = toRefs(props);
       <n-gi v-for="{ heading, icon, content } in sections" :key="heading">
         <c-card h-full>
           <div flex items-center gap-3>
-            <n-icon size="30" :component="icon" :depth="3" />
+            <n-icon aria-hidden="true" size="30" :component="icon" :depth="3" />
             <span text-lg>{{ heading }}</span>
           </div>
 

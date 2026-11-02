@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import figlet from 'figlet';
 import TextareaCopyable from '@/components/TextareaCopyable.vue';
+import { vInputNumberLabels } from '@/utils/input-number-labels.directive';
 
 const { t } = useI18n();
 
@@ -83,7 +84,7 @@ watch([input, font, width], async ([text, fontName, lineWidth], _previous, onCle
       </n-gi>
       <n-gi span="2">
         <n-form-item :label="t('tools.ascii-text-drawer.widthLabel')" label-placement="top" label-width="100" :show-feedback="false">
-          <n-input-number v-model:value="width" :min="0" :max="10000" w-full :placeholder="t('tools.ascii-text-drawer.widthPlaceholder')" />
+          <n-input-number v-model:value="width" v-input-number-labels :min="0" :max="10000" w-full :placeholder="t('tools.ascii-text-drawer.widthPlaceholder')" />
         </n-form-item>
       </n-gi>
     </n-grid>
